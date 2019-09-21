@@ -22,7 +22,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="col-md-4">
 					<div class="featured-box"> 
 						<div class="text">
-							<h3>Ingles para maestristas</h3>
+							<h3><a href="courses/ingles_maestria_191/index.php">Ingles para maestristas</a></h3>
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 						</div>
 					</div>
