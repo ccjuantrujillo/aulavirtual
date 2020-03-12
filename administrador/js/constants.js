@@ -1,4 +1,4 @@
-var base_url  = "http://localhost/administrador/";
+var base_url  = "http://localhost/aulavirtual/administrador/";
 jQuery(document).ready(function(){
    $("#cerrar").click(function(){
        url = base_url+"index.php/inicio/salir";

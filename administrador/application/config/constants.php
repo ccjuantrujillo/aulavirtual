@@ -86,10 +86,10 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 define('titulo','::: Sistema Cepre-Administrativo :::');
 define('pie','2016 Administrador del sistema Administrativo');
-define('css',"http://localhost/administrador/css/");
-define('img',"http://localhost/administrador/img/");
-define('files',"http://localhost/administrador/files/");
-define('js',"http://localhost/administrador/js/");
+define('css',"http://localhost/aulavirtual/administrador/css/");
+define('img',"http://localhost/aulavirtual/administrador/img/");
+define('files',"http://localhost/aulavirtual/administrador/files/");
+define('js',"http://localhost/aulavirtual/administrador/js/");
 define('almacen',"almacen/");
 define('compras',"compras/");
 define('finanzas',"finanzas/");
