@@ -1,0 +1,5 @@
+[15-Dec-2014 15:28:17 America/Lima] PHP Parse error:  syntax error, unexpected T_ECHO in /home/puertosa/public_html/administracion/application/views/ventas/orden_nuevo.php on line 9
+[15-Dec-2014 15:28:30 America/Lima] PHP Parse error:  syntax error, unexpected T_ECHO in /home/puertosa/public_html/administracion/application/views/ventas/orden_nuevo.php on line 9
+[15-Dec-2014 15:28:54 America/Lima] PHP Parse error:  syntax error, unexpected T_ECHO in /home/puertosa/public_html/administracion/application/views/ventas/orden_nuevo.php on line 9
+[15-Dec-2014 15:30:54 America/Lima] PHP Parse error:  syntax error, unexpected T_ECHO in /home/puertosa/public_html/administracion/application/views/ventas/orden_nuevo.php on line 9
+[15-Dec-2014 15:35:08 America/Lima] PHP Parse error:  syntax error, unexpected T_ECHO in /home/puertosa/public_html/administracion/application/views/ventas/orden_nuevo.php on line 22
