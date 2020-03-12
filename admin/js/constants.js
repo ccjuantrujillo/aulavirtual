@@ -1,4 +1,4 @@
-var base_url  = "http://localhost/administracion/";
+var base_url  = "http://localhost/aulavirtual/admin/";
 
 function numbersonly(myfield, e, dec){
 	var key;

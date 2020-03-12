@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/puertosaber/administracion/';
+$config['base_url']	= 'http://localhost/aulavirtual/admin/';
 /*
 |--------------------------------------------------------------------------
 | Index File
