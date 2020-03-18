@@ -4,6 +4,11 @@
 	<?php
 	include_once "header.php";
 	?>
+    <style type="text/css">
+<!--
+.style1 {font-style: italic}
+-->
+    </style>
 </head>
 <body>
 	<?php
@@ -44,13 +49,40 @@
 		<!-- HEADER -->
 		<!-- PREVIEW -->
 		
-        <p><em>SEMANA 1 - FUNDAMENTOS DE PHP </em></p>
-        <ul>
-          <li>Variables
-            y constantes
-            <ul>
-              <li>Ejercicios sobre variables</li>
-              <li><a href="https://www.youtube.com/watch?v=IOdmCo_7U6s&list=PLU8oAlHdN5BkinrODGXToK9oPAlnJxmW_&index=4">Video1 - Variables y comentarios</a></li>
+        <ol class="style1">
+          <li>Fundamentos del lenguajes          </li>
+          
+          <ul>
+            <li>Estructuras de control</li>
+            <li>Funciones y matrices </li>
+          </ul>
+          <li>Programaci&oacute;n Orientada a objetos           </li>
+          <ul>
+            <li>Caracter&iacute;sticas de la POO</li>
+            <li>Herencia y clases abstractas</li>
+            <li>M&eacute;todos de acceso  </li>
+          </ul>
+          <li>Manejo de base de datos utilizando PDO          </li>
+          <ul>
+            <li>Instalaci&oacute;n y manejo de MySQL Workbench</li>
+            <li>Procedimientos almacenados</li>
+            <li>Conexi&oacute;n a BD utilizando PDO.  </li>
+          </ul>
+          <li>Mantenimiento con PDO</li>
+          <li>Uso del patr&oacute;n MVC</li>
+          <li>Ajax con MVC          </li>
+          <ul>
+            <li>Usando Ajax y Bootstrap</li>
+            <li>Manejo de templates</li>
+            <li>Uso de sesiones y cookies   </li>
+          </ul>
+          <li>Proyecto final.  </li>
+        </ol>
+        <p>Variables
+          y constantes </p>
+        <ul><li><ul>
+          <li>Ejercicios sobre variables</li>
+          <li><a href="https://www.youtube.com/watch?v=IOdmCo_7U6s&list=PLU8oAlHdN5BkinrODGXToK9oPAlnJxmW_&index=4">Video1 - Variables y comentarios</a></li>
             </ul>
           </li>
           <li>Operadores

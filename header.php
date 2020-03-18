@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/font-awesome.min.css"> 
 	<link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen"> 
-	<link rel="stylesheet" href="assets/css/style.css">
+
     <link rel='stylesheet' id='camera-css'  href='assets/css/camera.css' type='text/css' media='all'> 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
@@ -27,27 +27,7 @@
     <script type='text/javascript' src='assets/js/camera.min.js'></script> 
     <script src="assets/js/bootstrap.min.js"></script> 
 	<script src="assets/js/custom.js"></script>
-    <script>
-		jQuery(function(){
-			
-			jQuery('#camera_wrap_4').camera({
-                transPeriod: 500,
-                time: 3000,
-				height: '600',
-				loader: 'false',
-				pagination: true,
-				thumbnails: false,
-				hover: false,
-                playPause: false,
-                navigation: false,
-				opacityOnGrid: false,
-				imagePath: 'assets/images/'
-			});
-
-		});
-      
-	</script>
 	
-		<!-- Google Maps -->
+	<!-- Google Maps -->
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<script src="assets/js/google-map.js"></script>

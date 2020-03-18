@@ -1,0 +1,53 @@
+/*
+SQLyog Community v12.4.3 (64 bit)
+MySQL - 10.1.28-MariaDB : Database - prueba
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`ferreteria` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `ferreteria`;
+
+/*Table structure for table `persona` */
+
+DROP TABLE IF EXISTS `persona`;
+
+CREATE TABLE `persona` (
+  `Codigo` INT(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(150) DEFAULT NULL,
+  `ApellidoPaterno` VARCHAR(150) DEFAULT NULL,
+  `ApellidoMaterno` VARCHAR(150) DEFAULT NULL,
+  `NumeroDocIdentidad` VARCHAR(50) DEFAULT NULL,
+  `Direccion` VARCHAR(250) DEFAULT NULL,
+  `Telefono` VARCHAR(20) DEFAULT NULL,
+  `Movil` VARCHAR(20) DEFAULT NULL,
+  `Email` VARCHAR(200) DEFAULT NULL,
+  `Web` VARCHAR(250) DEFAULT NULL,
+  `Sexo` CHAR(2) DEFAULT NULL,
+  `FechaNacimiento` DATE DEFAULT NULL,
+  PRIMARY KEY (`Codigo`)
+) ENGINE=INNODB AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
+
+/*Data for the table `persona` */
+
+INSERT  INTO `persona`(`Codigo`,`Nombre`,`ApellidoPaterno`,`ApellidoMaterno`,`NumeroDocIdentidad`,`Direccion`,`Telefono`,`Movil`,`Email`,`Web`,`Sexo`,`FechaNacimiento`) VALUES 
+(21,'JOSE','PEREZ','PEREZ','40015289',' 345435345','345345','543',' 345345345',' ewtn4545','','1950-03-01'),
+(23,'MARLENE','MORANTE','MEDINA','40258696','','3360025','','','','','2014-09-29'),
+(25,'PATRICIA','ECHEVARRIA','PAZ','06067861','AV. NICOLAS DUEï¿½AS NRO. 277 P.J. MIRONES ALTO','1234567','','','fffff','0','2014-09-29'),
+(26,'MARIA','CHAPARRO','CALLIï¿½AUPA ','08125134','AV. PROLONG TOMAS VALLE NRO. 120','3816298 ','998328104 ','','','1','0000-00-00'),
+(27,'CARMEN','GONZALES','TRUJILLO','45645645','','234234','234234432','','','','2014-09-26'),
+(33,'LUIS','AYLAS','CABANILLAS','50012587',' WQR EWREWREWREWREWR','5747859','4234234','fqwrwqer eqweqwewq','qwewqeqweqweqwe','2','2010-08-04'),
+(57,'JORGE','MARTINES','PAREDES','87897979','','3360032','','','','1','2014-09-28');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
