@@ -58,9 +58,8 @@ class Leccion_model extends CI_Model{
         $this->db->update($this->table,(array)$filter);
     }
 	
-    public function eliminar($filter){
-        if(isset($filter->leccion) && $filter->leccion!='')  $this->db->where(array("LECCIONP_Codigo"=>$filter->leccion));        
-        $this->db->delete($this->table);
+    public function eliminar($codigo){
+        $this->db->delete($this->table,array("LECCIONP_Codigo"=>$codigo));
     }
 }
 ?>

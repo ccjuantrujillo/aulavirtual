@@ -31,7 +31,11 @@
                 <tr>
                   <td bgcolor="#d5e2f2">Fecha de Fin</td>
                   <td class="formss"><input type="text" class="cajaReducida" name="ffin" id="ffin" value="<?php echo $lista->ffin;?>" readonly="readonly" maxlength="8"></td>
-                </tr>                            
+                </tr>   
+                <tr>
+                  <td bgcolor="#d5e2f2">Estado</td>
+                  <td class="formss"><?php echo $selestado;?></td>
+                </tr>  				                         
             </table>
         <?php echo $oculto?>     
         <?php echo $form_close;?>        

@@ -1,0 +1,58 @@
+<p><strong>INSTALACI&Oacute;N DE MYSQL EN CENTOS 5.4<br>
+  </strong>1.- Archivos a instalar:<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mysql<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; mysql-server<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;perl-DBD-Mysql<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Es frecuente utilizar la base de  
+  datos mysql con el lenguaje de programaci&oacute;n &rdquo;php&rdquo; por lo cual este 
+  tambi&eacute;n &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lo  instalaremos:<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php-cli<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;php-common<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mysql-php<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(*) Notar que estamos instalando  
+  php 5.1, es la versi&oacute;n que viene con CentOS 5.4. Actualmente est&aacute; en la 
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;versi&oacute;n  5.2.<br>
+            <br>
+  2.- Instalados los archivos mencionados en el orden a  continuaci&oacute;n:<br>
+  &nbsp;&nbsp;<img src="img_files/mysql_clip_image002.jpg" width="566" height="79"></p>
+<p><img src="img_files/mysql_clip_image004.jpg" width="567" height="68"></p>
+<p><img src="img_files/mysql_clip_image006.jpg" width="566" height="71"></p>
+<p><img src="img_files/mysql_clip_image008.jpg" width="566" height="65"></p>
+<p><img src="img_files/mysql_clip_image010.jpg" width="566" height="60"></p>
+<p><img src="img_files/mysql_clip_image012.jpg" width="566" height="64"></p>
+<p><img src="img_files/mysql_clip_image014.jpg" width="566" height="63"></p>
+<p>3.- Reinicializamos el servicio de base de datos mysql:<br>
+    <img src="img_files/mysql_clip_image002_0000.jpg" width="566" height="23"><br>
+    <br>
+    <img src="img_files/mysql_clip_image004_0000.jpg" width="566" height="63"></p>
+<p>4.- Ingresamos al servidor de base de datos digitando: mysql<br>
+    <img src="img_files/mysql_clip_image006_0000.jpg" width="567" height="80"></p>
+<p>5.- A continuaci&oacute;n lo que vamos a ingresar son sentencias  SQL. Veamos cuantas bases de datos existen en nuestro servidor.<br>
+    <img src="img_files/mysql_clip_image008_0000.jpg" width="567" height="116"></p>
+<p>6.- Creamos una base de datos de nombre &ldquo;latino&rdquo;.<br>
+    <img src="img_files/mysql_clip_image010_0000.jpg" width="566" height="42"></p>
+<p>7.- Volvemos a ver cuantas bases de datos creadas tenemos.<br>
+    <img src="img_files/mysql_clip_image012_0000.jpg" width="567" height="127"></p>
+<p>8.- Crearemos una tabla alumnos dentro de nuestra base de  datos &ldquo;latino&rdquo;<br>
+    <img src="img_files/mysql_clip_image014_0000.jpg" width="567" height="35"></p>
+<p><img src="img_files/mysql_clip_image016.jpg" width="566" height="46"></p>
+<p>9.- Insertamos datos a nuestra tabla &ldquo;alumnos&rdquo;.<br>
+    <img src="img_files/mysql_clip_image018.jpg" width="566" height="237"></p>
+<p>10.- Mostramos los datos ingresados a la tabla alumnos.<br>
+    <img src="img_files/mysql_clip_image020.jpg" width="567" height="164"></p>
+<p>11.- Si queremos una interfaz grafica, tenemos que reiniciar  el servicio apache e instalar el phpmyadmin.<br>
+  /etc/init.d/httpd restart</p>
+<p>12.- El programa phpmyadmin lo descargamos desde 
+  Internet  una version compatible con php5.1, dos versiones anteriores a 
+  la actual.</p>
+<p>13.- Descomprimos el archivo tar y lo copiamos a la ruta de  publicaci&oacute;n del apache /var/www/html.<br>
+    <img src="img_files/mysql_clip_image022.jpg" width="566" height="22"></p>
+<p>14.- En un navegador web, escribimos localhost/phpmyadmin.  Esta es la interfaz grafica del servidor de base de datos mysql.<br>
+    <img src="img_files/mysql_clip_image024.jpg" width="567" height="425"></p>
+<p>15.- Si queremos visualizar los datos ingresados en el  ejemplo. Abrimos la base de datos latino.<br>
+    <img src="img_files/mysql_clip_image026.jpg" width="567" height="425"></p>
+<p>16.- Damos clic a la tabla alumnos y presionamos Browse.<br>
+    <img src="img_files/mysql_clip_image028.jpg" width="567" height="425"></p>
+<p><br>
+</p>

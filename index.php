@@ -61,7 +61,7 @@
 			<span class="play-button"></span>
 			<span class="duration">03:15</span>
 		</a>
-		<h3><a href="courses/musica_20201/index.php">Musica</a></h3>
+		<h3><a href="courses/flauta_20201/index.php">Musica</a></h3>
 		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 	</li>
 	<li class="col-lg-3 col-sm-4 col-xs-6">

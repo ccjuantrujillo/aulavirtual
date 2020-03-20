@@ -26,27 +26,27 @@
     <div class="tabla">
         <table>
           <tr class="list1">
-            <td width="43">No</td>
-            <td width="20">Orden</td>
-            <td width="135">Descripcion</td>
-            <td width="86">Curso</td>
-            <td width="80">Desde</td>
-            <td width="80">Hasta</td>
-            <td width="62">Editar</td>
-            <td width="77">Eliminar</td>
+            <td width="29%">Descripcion</td>
+            <td width="30%">Curso</td>
+            <td width="12%">F.Inicio</td>
+            <td width="12%">F.Fin</td>	
+            <td width="7%">Estado</td>								
+            <td width="5%">Editar</td>
+            <td width="5%">Eliminar</td>
           </tr>
           <?php
           if(count($lista)>0){
             foreach($lista as $item => $value){
+                $flgestado = $value->estado;
+                $estado = $flgestado==1?"Activo":"Inactivo";			
                 $clase = ($item%2)==0?"list_a":"list_b";
                ?>
               <tr class="<?php echo $clase;?>">
-                <td><?php echo ++$j;?></td>
-                <td align="center"><?php echo $value->orden;?></td>
-                <td align="center" style="text-align: center;"><?php echo $value->descripcion;?></td>
+                <td align="center" style="text-align:left;"><?php echo $value->orden." ".$value->descripcion;?></td>
                 <td align="left"><?php echo $value->curso;?></td>
-                <td align="center"><?php echo $value->finicio;?></td>
-                <td align="center"><?php echo $value->ffin;?></td>
+                <td align="left"><?php echo $value->finicio;?></td>
+                <td align="left"><?php echo $value->ffin;?></td>		
+                <td><img src="<?php echo img.($flgestado==1?"check.jpg":"uncheck.jpg");?>" width="20px" height="20px"/><?php echo $estado;?></td>										
                 <td><a href="#" onclick='editar("<?php echo $value->codigo;?>")'><img src="<?php echo img;?>editar.jpg"/></a></td>
                 <td><a href="#" onclick='eliminar("<?php echo $value->codigo;?>")'><img src="<?php echo img;?>eliminar.jpg"/></a></td>
               </tr>  

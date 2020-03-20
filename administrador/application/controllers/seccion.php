@@ -27,7 +27,7 @@ class Seccion extends CI_Controller {
         $menu       = get_menu($filter);     
         $filter     = new stdClass();
         $filter_not = new stdClass(); 
-        $filter->order_by    = array("c.SECCIONC_Orden"=>"asc");
+        $filter->order_by    = array("p.CURSOC_Nombre"=>"asc","c.SECCIONC_Orden"=>"asc");
         $registros = count($this->seccion_model->listar($filter,$filter_not));
         $productoatrib = $this->seccion_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
@@ -39,6 +39,7 @@ class Seccion extends CI_Controller {
                 $lista[$indice]->curso        = $valor->CURSOC_Nombre;
                 $lista[$indice]->descripcion  = $valor->SECCIONC_Descripcion;
                 $lista[$indice]->orden        = $valor->SECCIONC_Orden;
+                $lista[$indice]->estado       = $valor->SECCIONC_FlagEstado;
                 $lista[$indice]->finicio      = date_sql($valor->SECCIONC_FechaInicio);
                 $lista[$indice]->ffin         = date_sql($valor->SECCIONC_FechaFin);   
             }
@@ -65,6 +66,7 @@ class Seccion extends CI_Controller {
         $orden       = $this->input->get_post('orden'); 
         $finicio     = $this->input->get_post('finicio'); 
         $ffin        = $this->input->get_post('ffin'); 
+        $estado      = $this->input->get_post('estado'); 
         $lista = new stdClass();
         if($accion == "e"){   
             $filter             = new stdClass();
@@ -75,6 +77,7 @@ class Seccion extends CI_Controller {
             $lista->finicio     = $finicio!=""?$finicio:date_sql($secciones->SECCIONC_FechaInicio);
             $lista->ffin        = $ffin!=""?$ffin:date_sql($secciones->SECCIONC_FechaFin);
             $lista->curso       = $curso!=""?$curso:$secciones->CURSOP_Codigo; 
+            $lista->estado      = $estado!=""?$estado:$secciones->SECCIONC_FlagEstado; 			
         }
         elseif($accion == "n"){
             $lista->descripcion  = $descripcion;
@@ -82,10 +85,13 @@ class Seccion extends CI_Controller {
             $lista->finicio      = $finicio;
             $lista->ffin         = $ffin;
             $lista->curso        = 0;
+            $lista->estado       = 1;			
         }
+		$arrEstado           = array("0"=>"::Seleccione::","1"=>"ACTIVO","2"=>"INACTIVO");
         $data['titulo']      = $accion=="e"?"Modificar Seccion":"Nuevo Seccion"; ;        
         $data['form_open']   = form_open('',array("name"=>"frmPersona","id"=>"frmPersona","onsubmit"=>"","method"=>"post","enctype"=>"multipart/form-data"));
         $data['form_close']  = form_close();
+		$data['selestado']   = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
         $data['lista']	     = $lista;
         $filter = new stdClass();
         $filter->estado = 1;
@@ -102,7 +108,8 @@ class Seccion extends CI_Controller {
                         "SECCIONC_Orden"     => $this->input->post('orden'),
                         "CURSOP_Codigo"      => $this->input->post('curso'),
                         "SECCIONC_FechaInicio" => date_sql_ret($this->input->post('finicio')),
-                        "SECCIONC_FechaFin"    => date_sql_ret($this->input->post('ffin'))
+                        "SECCIONC_FechaFin"    => date_sql_ret($this->input->post('ffin')),
+                        "SECCIONC_FlagEstado"  => $this->input->post('estado')						
                        );
         if($accion == "n"){
             $codigo = $this->seccion_model->insertar($data);            
