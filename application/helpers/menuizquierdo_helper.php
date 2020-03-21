@@ -18,7 +18,7 @@ if ( ! function_exists('menu_izq'))
 		$menu.= "<div id='sidebar' class='nav-collapse'>";
 		$menu.= "<ul class='sidebar-menu' id='nav-accordion'>";
 		$menu.= "<li class='mt'>";
-		$menu.= "<a href='".base_url()."curso/inicio/".$curso."'>";
+		$menu.= "<a href='".base_url()."leccion/inicio/".$curso."'>";
 		$menu.= "<i class='fa fa-dashboard'></i>";
 		$menu.= "<span>Inicio</span>";
 		$menu.= "</a>";
