@@ -19,14 +19,6 @@
     <div class="titulo">     	            
         <input name="" type="button" class="aceptarlog2" alt="Aceptar" title="Aceptar" value="Crear nuevo curso" id="nuevo"/>
         <h1>Listado de cursos</h1>            
-<!--            <ul class="lista_busqueda">
-            <select><option>::Seleccione::</option></select>
-            <input type="text" id="busqueda" name="busqueda">
-            <span id="buscar">Buscar</span>
-        </ul>   -->
-<!--            <ul class="lista_botones"><li id="nuevo">Crear un nuevo curso</li></ul>   
-        <ul class="lista_botones"><li id="pdf">Ver pdf</li></ul>            
-        <ul class="lista_botones"><li id="excel">Ver Excel</li></ul>            -->
     </div>    
     <div class="mensaje">Se han encontrado (<?php echo $registros;?>) registro(s)</div>
     <div class="tabla">

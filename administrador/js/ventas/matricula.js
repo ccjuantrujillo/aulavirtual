@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
     
     $("body").on("click","#nuevo",function(){
         dataString = "";
-        url = base_url+"index.php/ventas/matricula/editar/n";
+        url = base_url+"index.php/matricula/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -24,7 +24,7 @@ jQuery(document).ready(function(){
     });    
     
     $("body").on('click',"#ver_aula",function(){
-        url = base_url+"index.php/ventas/apertura/buscar/";
+        url = base_url+"index.php/apertura/buscar/";
         mywin = window.open("","wmatricula","width=700,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");          
         $("#frmPersona").attr("action",url);
         $("#frmPersona").attr("target","wmatricula");
@@ -35,7 +35,7 @@ jQuery(document).ready(function(){
        accion      = $("#accion").val();
        codigo      = $("#codigo").val();
        dataString  = $('#frmPersona').serialize();
-       url = base_url+"index.php/ventas/matricula/editar/"+accion+"/"+codigo;
+       url = base_url+"index.php/matricula/editar/"+accion+"/"+codigo;
        $.post(url,dataString,function(data){
            $('#mensaje').html(data);
        });             
@@ -45,7 +45,7 @@ jQuery(document).ready(function(){
        accion      = $("#accion").val();
        codigo      = $("#codigo").val();
        dataString  = $('#frmPersona').serialize();
-       url = base_url+"index.php/ventas/matricula/editar/"+accion+"/"+codigo;
+       url = base_url+"index.php/matricula/editar/"+accion+"/"+codigo;
        $.post(url,dataString,function(data){
            $('#mensaje').html(data);
        });             
@@ -61,12 +61,12 @@ jQuery(document).ready(function(){
        
     $("body").on('click',"#imprimir",function(){
         codigo   = $("#codigo").val();
-        url = base_url+"index.php/ventas/matricula/ver/"+codigo;
+        url = base_url+"index.php/matricula/ver/"+codigo;
         window.open(url, this.target, 'width=800,height=400,top=150,left=200');
     });    
     
     $("body").on('click',"#cancelar",function(){
-        url = base_url+"index.php/ventas/matricula/listar";
+        url = base_url+"index.php/matricula/listar";
         location.href = url;
     });
     
@@ -76,14 +76,14 @@ jQuery(document).ready(function(){
 //    });          
     
     $("body").on('click',"#grabar",function(){
-        url        = base_url+"index.php/ventas/matricula/grabar";
+        url        = base_url+"index.php/matricula/grabar";
         clave      = $("#clave").val();
         dataString = $('#frmPersona').serialize();
         if(clave != ""){
             $.post(url,dataString,function(data){
                 if(data=="true"){
                     alert('Operacion realizada con exito');    
-                    location.href = base_url+"index.php/ventas/matricula/listar";
+                    location.href = base_url+"index.php/matricula/listar";
                 }
                 else if(data=="false"){
                     alert('El usuario ya esta matriculado en el curso');
@@ -106,7 +106,7 @@ jQuery(document).ready(function(){
 
 function editar(codigo){
     dataString = "codigo="+codigo;    
-    url = base_url+"index.php/ventas/matricula/editar/e/"+codigo;
+    url = base_url+"index.php/matricula/editar/e/"+codigo;
     $.post(url,dataString,function(data){
         $('#basic-modal-content').modal();
         $('#mensaje').html(data);
@@ -116,11 +116,11 @@ function editar(codigo){
 function eliminar(codigo){
     if(confirm('Esta seguro desea eliminar este registro?')){
         dataString = "codigo="+codigo;
-        url = base_url+"index.php/ventas/matricula/eliminar";
+        url = base_url+"index.php/matricula/eliminar";
         $.post(url,dataString,function(data){
             if(data=="true"){
                 alert('Operacion realizada con exito');  
-                url = base_url+"index.php/ventas/matricula/listar";
+                url = base_url+"index.php/matricula/listar";
                 location.href = url;
             }
             else if(data=="false"){
@@ -134,7 +134,7 @@ function selecciona_aula(codigo){
     objRes = new Object();
     objRes.apertura = codigo;
     dataString   = {objeto: JSON.stringify(objRes)};
-    url    = base_url+"index.php/ventas/apertura/obtener/";
+    url    = base_url+"index.php/apertura/obtener/";
     $.post(url,dataString,function(data){
         nomper  = data.AULAC_Nombre+' '+data.TURNOC_Descripcion;
         apertura = data.APERTUP_Codigo;
