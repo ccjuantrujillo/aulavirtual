@@ -5,10 +5,9 @@
 <div id="Cuerpo">
     <section id="main-content">
         <section class="wrapper site-min-height">
-          <h3 class="mt-4"><?php echo $curso->CURSOC_Nombre;?>/<?php echo $curso->SECCIONC_Orden.'. '.$curso->SECCIONC_Descripcion;?></h3>
-          <p class="lead"><?php echo $filalecciones;?></p>
-          <hr>
-          <p><?php echo $leccion->SECCIONC_Orden.".".$indice." ".$leccion->LECCIONC_Nombre;?></p>
+          <h3><?php echo $leccion->SECCIONC_Orden.'. '.$leccion->SECCIONC_Descripcion;?></h3>
+          <p><?php echo $menulecc;?></p>
+          <h3><?php echo $leccion->SECCIONC_Orden.".".$indice." ".$leccion->LECCIONC_Nombre;?></h3>
             <?php
             if(trim($leccion->LECCIONC_Video)!=""){
             ?>
@@ -18,10 +17,10 @@
             <?php
             }
             ?>
-          <hr>
+          <?php echo $menuhorz;?>          
+          <hr style="margin-top: 0px;">
           <!-- Contenido de Leccion -->
           <?php echo $descripcion;?>
-          <hr>
         </section>
     </section>
 </div>

@@ -1,13 +1,12 @@
 <?php header("Content-type: text/html; charset=utf-8"); 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require_once APPPATH.'controllers/maestros/persona.php';
-class Usuario extends Persona{
+
+class Usuario extends CI_Controller{
     var $configuracion;       
     public function __construct(){
         parent::__construct();
         $this->load->model('usuario_model');          
-        $this->load->model(seguridad.'rol_model');    
-        $this->load->model('profesor_model');    
+        $this->load->model(seguridad.'rol_model');     
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
     }
@@ -123,14 +122,6 @@ class Usuario extends Persona{
 
     public function eliminar(){
         $codigo = $this->input->post('codigo');
-        /*Cambio el flgCoordinador en la tabla profesor*/
-        $filter = new stdClass();
-        $filter->usuario = $codigo;
-        $usuarioprofesor = $this->usuario_model->listar_usuarioprofesor($filter);
-        $profesor = $usuarioprofesor[0]->PROP_Codigo;
-        $data = array("PROC_FlagCoordinador"=>0);
-        $this->profesor_model->modificar($profesor,$data);    
-        /*Elimino el registro de la tabla usuario*/
         $resultado   = true;
         $this->usuario_model->eliminar($codigo);    
         echo json_encode($resultado);

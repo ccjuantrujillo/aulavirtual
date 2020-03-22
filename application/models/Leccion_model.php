@@ -12,6 +12,7 @@ class Leccion_model extends CI_Model {
         public function __construct(){
                 $this->tabla   = "leccion";
                 $this->tabla_seccion = "seccion";
+                $this->tabla_curso   = "curso";
                 $this->empresa = $this->config->item('empresa');
         }
 
@@ -20,6 +21,7 @@ class Leccion_model extends CI_Model {
                 $this->db->select('*',FALSE);
                 $this->db->from($this->tabla." as c");
                 $this->db->join($this->tabla_seccion.' as d','d.SECCIONP_Codigo=c.SECCIONP_Codigo','inner');
+                $this->db->join($this->tabla_curso.' as e','e.CURSOP_Codigo=d.CURSOP_Codigo','inner');
                 $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
                 if(isset($filter->curso))    $this->db->where(array("d.CURSOP_Codigo"=>$filter->curso));
                 if(isset($filter->seccion))  $this->db->where(array("c.SECCIONP_Codigo"=>$filter->seccion));

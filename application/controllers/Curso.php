@@ -1,21 +1,25 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require_once 'Layout.php';
+require_once 'LayoutAdmin.php';
 
-class Curso extends Layout{
+class Curso extends LayoutAdmin{
 	var $datosCurso;
 	var $menu;
 
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('Curso_model');
-		$this->load->model('Seccion_model');
 		$this->load->model('Leccion_model');
-		$this->load->helper('menuizquierdo_helper');
+		$this->load->helper('menu_helper');
 	}
 
-	public function read(){
-		$data["cursos"] = $this->Curso_model->read();
-		$this->load_layout('curso/read',$data);
-	}
+	public function inicio($curso)
+	{
+		$data['menuizq']   = menu_izq($curso);
+		$data['curso']     = $this->Curso_model->get($curso);
+		$filter = new stdClass();
+		$filter->curso = $curso;
+		$data['lecciones'] = $this->Leccion_model->read($filter);
+		$this->load_layout('curso/inicio',$data);
+	}		
 }

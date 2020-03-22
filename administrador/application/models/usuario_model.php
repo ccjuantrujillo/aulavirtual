@@ -62,7 +62,7 @@ class Usuario_model extends CI_Model{
         $this->db->select('*');
         $this->db->from($this->table." as c");
         $this->db->join($this->table_rol.' as e','e.ROL_Codigo=c.ROL_Codigo','inner');
-        if(isset($filter->usuario) && $filter->usuario!='')            $this->db->where(array("c.USUA_Codigo"=>$filter->usuario));    
+        if(isset($filter->usuario) && $filter->usuario!='')            $this->db->where(array("c.USUAP_Codigo"=>$filter->usuario));    
         if(isset($filter->rol) && $filter->rol!='')                    $this->db->where(array("c.ROL_Codigo"=>$filter->rol));          
         if(isset($filter->order_by) && count($filter->order_by)>0){
             foreach($filter->order_by as $indice=>$value){
@@ -72,9 +72,9 @@ class Usuario_model extends CI_Model{
         $this->db->limit($number_items, $offset);         
         $query = $this->db->get();
         $resultado = array();
-        if($query->num_rows > 0){
+        //if($query->num_rows > 0){
             $resultado = $query->result();
-        }
+        //}
         return $resultado; 
     }    
     
@@ -94,12 +94,12 @@ class Usuario_model extends CI_Model{
     }
 
     public function modificar($codigo,$data){
-        $this->db->where("USUA_Codigo",$codigo);
+        $this->db->where("USUAP_Codigo",$codigo);
         $this->db->update($this->table,$data);
     }
 
     public function eliminar($codigo){
-        $this->db->delete($this->table,array('USUA_Codigo' => $codigo));     
+        $this->db->delete($this->table,array('USUAP_Codigo' => $codigo));     
     }
 }
 ?>

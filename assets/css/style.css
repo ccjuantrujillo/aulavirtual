@@ -21,7 +21,7 @@ body {
     font-family: 'Ruda', sans-serif;
     padding: 0px !important;
     margin: 0px !important;
-    font-size:13px;
+    font-size:15px;
 }
 
 ul li {
@@ -189,7 +189,7 @@ hr {
 }
 
 .mt {
-	margin-top: 25px;
+	margin-top: 5px;
 }
 
 .mb {
@@ -356,7 +356,7 @@ ul.sidebar-menu li a{
     text-decoration: none;
     display: block;
     padding: 15px 0 15px 10px;
-    font-size: 12px;
+    font-size: 16px;
     outline: none;
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
@@ -422,8 +422,8 @@ ul.sidebar-menu li a.active i {
 .wrapper {
     display: inline-block;
     margin-top: 60px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
     padding-bottom: 15px;
     padding-top: 0px;
     width: 100%;
@@ -1035,8 +1035,28 @@ PANELS CONFIGURATIONS
   background: white;
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
   margin-bottom: 1em;
-  height: 250px;
+  height: 235px;
 }
+
+.card-title {
+  margin-bottom: 5px;
+  color: blue;
+}
+
+.card-body {
+  // Enable `flex-grow: 1` for decks and groups so that card blocks take up
+  // as much space as possible, ensuring footers are aligned to the bottom.
+  flex: 1 1 auto;
+  padding-top: 1px;
+  padding-left: 25px;
+}
+
+.card-footer {
+  padding-left: 25px;
+  //background-color: #ccc;
+  border-top: 1 solid #000;
+}
+
 .stock .stock-chart {
   background: #00c5de;
 }

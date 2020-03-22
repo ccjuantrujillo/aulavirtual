@@ -1,6 +1,5 @@
 <?php header("Content-type: text/html; charset=utf-8"); 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-//require_once "Spreadsheet/Excel/Writer.php";
 
 class Curso extends CI_Controller {
     var $compania;

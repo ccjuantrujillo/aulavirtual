@@ -112,6 +112,14 @@ class Leccion extends CI_Controller
             $this->leccion_model->modificar($codigo,$data);
         }
     }
+
+    public function obtener(){
+        $obj    = $this->input->post('objeto');
+        $filter = json_decode($obj);
+        $lecciones  = $this->leccion_model->listar($filter);
+        $resultado = json_encode($lecciones);
+        echo $resultado;
+    }       
     
     public function eliminar()
     {
