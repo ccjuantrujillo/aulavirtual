@@ -6,10 +6,11 @@ class Ciclo_model extends CI_Model{
     public function __construct(){
         parent::__construct();
         $this->table   = "ant_ciclo";
-        $this->empresa = $this->session->userdata('empresa');
+        $this->empresa     = $this->config->item('empresa');  
     }
 	
     public function seleccionar($default="",$filter="",$filter_not='',$number_items='',$offset=''){
+        $arreglo = array();
         if($default!="") $arreglo = array($default=>':: Seleccione ::');
         foreach($this->listar($filter,$filter_not,$number_items,$offset) as $indice=>$valor)
         {

@@ -2,11 +2,13 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Usuario extends CI_Controller{
-    var $configuracion;       
+    var $configuracion;     
+      
     public function __construct(){
         parent::__construct();
-        $this->load->model('usuario_model');          
-        $this->load->model(seguridad.'rol_model');     
+        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");          
+        $this->load->model('Usuario_model');          
+        $this->load->model('Rol_model');     
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
     }
@@ -23,8 +25,8 @@ class Usuario extends CI_Controller{
         $filter     = new stdClass();
         $filter_not  = new stdClass();
         //$filter->order_by    = array("d.PERSC_ApellidoPaterno"=>"asc","d.PERSC_ApellidoMaterno"=>"asc","d.PERSC_Nombre"=>"asc");
-        $registros = count($this->usuario_model->listar($filter));
-        $usuarios  = $this->usuario_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Usuario_model->listar($filter));
+        $usuarios  = $this->Usuario_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
         $lista     = array();
         if(count($usuarios)>0){
@@ -62,7 +64,7 @@ class Usuario extends CI_Controller{
         if($accion == "e"){
             $filter             = new stdClass();
             $filter->usuario    = $codigo;
-            $usuario            = $this->usuario_model->obtener($filter);
+            $usuario            = $this->Usuario_model->obtener($filter);
             $lista->login       = $usuario->USUAC_usuario;
             $lista->clave       = $usuario->USUAC_Password;
             $lista->nombres     = $usuario->USUAC_Nombres;
@@ -90,7 +92,7 @@ class Usuario extends CI_Controller{
         $data['accion']	    = $accion;  
         $data['onload']     = "onload=\"$('#paterno').focus();\"";   
         $data['selestado']  = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
-        $data['selrol']     = form_dropdown('rol',$this->rol_model->seleccionar("0"),$lista->rol,"id='rol' class='comboMedio'");
+        $data['selrol']     = form_dropdown('rol',$this->Rol_model->seleccionar("0"),$lista->rol,"id='rol' class='comboMedio'");
         $filter             = new stdClass();
         $filter->order_by   = array("p.PROD_Nombre"=>"asc");
         $data['oculto']     = form_hidden(array('accion'=>$accion,'codigo'=>$codigo));
@@ -112,9 +114,9 @@ class Usuario extends CI_Controller{
                         
                        ); 
         if($accion == "n")
-            $this->usuario_model->insertar($data);            
+            $this->Usuario_model->insertar($data);            
         elseif($accion == "e")
-            $this->usuario_model->modificar($codigo,$data);
+            $this->Usuario_model->modificar($codigo,$data);
         $resultado = true;
         $mensaje = "Se grabo exitosamente";  
         echo json_encode(array($resultado,$mensaje));
@@ -123,7 +125,7 @@ class Usuario extends CI_Controller{
     public function eliminar(){
         $codigo = $this->input->post('codigo');
         $resultado   = true;
-        $this->usuario_model->eliminar($codigo);    
+        $this->Usuario_model->eliminar($codigo);    
         echo json_encode($resultado);
     }
 

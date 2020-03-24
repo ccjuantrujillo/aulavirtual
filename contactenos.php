@@ -1,16 +1,21 @@
 <?php
 require_once 'conexion.php';
-$query = "select * from ant_curso";
+$query = "select * from ant_empresa where EMPRP_Codigo='".$empresa."'";
 $rs = mysqli_query($link,$query);
+$datosempresa = mysqli_fetch_array($rs);
+//Configuramos menu
+$inicio      = "";
+$contactenos = "class='active'";
 ?>
 <!DOCTYPE html>
 <html>
-	<?php require_once 'header.php';?>
+    <head>
+		<?php require_once 'header.php';?>		
+    </head>
     <body>
-	    <!-- Navigation -->
-		<?php require_once 'menu.php';?>
+    	<?php require_once 'menu.php';?>
 
-	    <!--Content-->
+		<!-- container -->
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8">
@@ -49,24 +54,23 @@ $rs = mysqli_query($link,$query);
 				<div class="col-md-4">
 					<div class="row">
 						<div class="col-md-6">
-							<h3 class="section-title">Office Address</h3>
+							<h3 class="section-title">Datos Empresa</h3>
 							<div class="contact-info">
 								<h5>Direccion</h5>
-								<p>Mz R Lote 50 Los Nisperos - San Martin de Porres</p>
+								<p><?php echo $datosempresa['EMPRC_Direccion'];?></p>
 								
 								<h5>Email</h5>
-								<p>ceccos.lima@gmail.com</p>
+								<p><?php echo $datosempresa['EMPRC_Email'];?></p>
 								
 								<h5>Telefono</h5>
-								<p>952 465 968</p>
+								<p><?php echo $datosempresa['EMPRC_Movil'];?></p>
 							</div>
 						</div> 
 					</div> 						
 				</div>
 			</div>
 		</div>
-	    <!--footer start-->   
-		<?php require_once 'footer.php';?>
-		
+		<!-- /container -->
+	<?php require_once 'footer.php';?>
     </body>
 </html>

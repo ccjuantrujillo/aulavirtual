@@ -10,4 +10,4 @@
 	  <i class="fa fa-angle-up"></i>
 	  </a>
   </div>
-</footer>  
+</footer> 

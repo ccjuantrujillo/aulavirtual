@@ -13,6 +13,10 @@ class Curso extends LayoutAdmin{
 		$this->load->helper('menu_helper');
 	}
 
+	public function index(){
+		echo "chau";
+	}
+
 	public function inicio($curso)
 	{
 		$data['menuizq']   = menu_izq($curso);
@@ -21,5 +25,11 @@ class Curso extends LayoutAdmin{
 		$filter->curso = $curso;
 		$data['lecciones'] = $this->Leccion_model->read($filter);
 		$this->load_layout('curso/inicio',$data);
-	}		
+	}	
+
+	public function read(){
+		$data['menuizq']   = menu_izq();
+		$data['cursos']    = $this->Curso_model->read();
+		$this->load_layout('curso/read',$data);
+	}	
 }

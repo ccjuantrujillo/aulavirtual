@@ -520,13 +520,14 @@ $config['rewrite_short_tags'] = FALSE;
 | Comma-separated:	'10.0.1.200,192.168.5.0/24'
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
-$config['proxy_ips'] = '';
-$config['conf_pagina']         = array(
-                                "per_page"    => 25,
-                                "num_links"   => 3,
-                                "next_link"   => "&gt;",
-                                "prev_link"   => "&lt;",
-                                "first_link"  => "&lt;&lt;",
-                                "last_link"   => "&gt;&gt;",    
-                                "uri_segment" => 4
-                                );
+$config['empresa']     = 2;
+$config['proxy_ips']   = '';
+$config['conf_pagina'] = array(
+	                    "per_page"    => 25,
+	                    "num_links"   => 3,
+	                    "next_link"   => "&gt;",
+	                    "prev_link"   => "&lt;",
+	                    "first_link"  => "&lt;&lt;",
+	                    "last_link"   => "&gt;&gt;",    
+	                    "uri_segment" => 4
+	                    );

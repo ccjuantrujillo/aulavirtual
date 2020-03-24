@@ -1,40 +1,51 @@
 <?php
 require_once 'conexion.php';
-$query = "select * from ant_curso";
+$query = "select * from ant_curso where EMPRP_Codigo='".$empresa."'";
 $rs = mysqli_query($link,$query);
+$listacursos = mysqli_fetch_all($rs,MYSQLI_ASSOC);
+//Recuperamos datos de la empresa
+$query = "select * from ant_empresa where EMPRP_Codigo='".$empresa."'";
+$rs    = mysqli_query($link,$query);
+$datosempresa = mysqli_fetch_array($rs,MYSQLI_ASSOC);
+//Configuramos menu
+$inicio      = "class='active'";
+$contactenos = "";
 ?>
 <!DOCTYPE html>
 <html>
-	<?php require_once 'header.php';?>
+    <head>
+		<?php require_once 'header.php';?>	
+    </head>
     <body>
-	    <!-- Navigation -->
-		<?php require_once 'menu.php';?>
+ 	<?php require_once 'menu.php';?>
 
-	    <!--Content-->
-		<div class="container">
-			<h3>Cursos</h3>
-			<ul class="list-unstyled video-list-thumbs row">
-				<?php
-				while($row = mysqli_fetch_array($rs)){
-					?>
-					<li class="col-lg-3 col-sm-4 col-xs-6">
-						<a href="#" title="Claudio Bravo, antes su debut con el Barça en la Liga">
-							<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg" alt="Barca" class="img-responsive" height="130px" />
-							<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-							<span class="play-button"></span>
-							<span class="duration">03:15</span>
-						</a>
-						<h3><a href="./wp-campus/curso/inicio/<?php echo $row['CURSOP_Codigo'];?>"><?php echo $row['CURSOC_Nombre'];?></a></h3>
-						<?php echo $row['CURSOC_DescripcionBreve'];?>
-					</li>
-					<?php
-				}
+	<!--content start--> 
+    <div class="container" style="padding-bottom:30px;">
+		<h3><a href="">Cursos</a></h3>
+		<!--p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+		</p>
+		<br/-->
+		<ul class="list-unstyled video-list-thumbs row">
+			<?php
+			foreach($listacursos as $value){
 				?>
-			</ul>
-		</div>
-
-	    <!--footer start-->   
-		<?php require_once 'footer.php';?>
+				<li class="col-lg-3 col-sm-4 col-xs-6">
+					<a href="#" title="Claudio Bravo, antes su debut con el Barça en la Liga">
+						<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg" alt="Barca" class="img-responsive" height="130px"/>
+						<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
+						<span class="play-button"></span>
+						<span class="duration">03:15</span>
+					</a>
+					<h3><a href="./wp-campus/inicio/index/<?php echo $value['CURSOP_Codigo'];?>"><?php echo $value['CURSOC_Nombre'];?></a></h3>
+					<?php echo $value['CURSOC_DescripcionBreve'];?>
+				</li>
+				<?php
+			}
+			?>
+		</ul>		
 		
+	</div>
+	<?php require_once 'footer.php';?>
     </body>
 </html>

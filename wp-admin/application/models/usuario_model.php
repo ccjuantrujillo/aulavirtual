@@ -7,7 +7,7 @@ class Usuario_model extends CI_Model{
         parent::__construct();
         $this->table     = "ant_usuario";
         $this->table_rol = "ant_rol";
-        $this->empresa   = $this->session->userdata('empresa');
+        $this->empresa     = $this->config->item('empresa');  
     }
 
     public function ingresar($user,$clave)
@@ -16,6 +16,7 @@ class Usuario_model extends CI_Model{
         $this->db->select('*');
         $this->db->from($this->table." as u");
         $this->db->join($this->table_rol.' as r','r.ROL_Codigo=u.ROL_Codigo','inner');
+        $this->db->where(array("u.EMPRP_Codigo"=>$this->empresa));
         $this->db->where($where);
         $query = $this->db->get();
         $resultado = new stdClass();

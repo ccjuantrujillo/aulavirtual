@@ -2,14 +2,12 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Matricula extends CI_Controller {
+    
     public function __construct(){
         parent::__construct(); 
-        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");   
-        $this->load->model('empresa_model');
-        $this->load->model(seguridad.'permiso_model');                 
-        $this->load->model('matricula_model');
-        $this->load->model('alumno_model');         
-        $this->load->model('curso_model');   
+        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");            
+        $this->load->model('Matricula_model');      
+        $this->load->model('Curso_model');   
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
         $this->login   = $this->session->userdata('login');
@@ -28,8 +26,8 @@ class Matricula extends CI_Controller {
         $filter     = new stdClass();
         //$filter->order_by = array("f.PROD_Nombre"=>"asc","e.PERSC_ApellidoPaterno"=>"asc","e.PERSC_ApellidoMaterno"=>"asc");
         $filter_not = new stdClass(); 
-        $registros = count($this->matricula_model->listar($filter,$filter_not));
-        $ordenes   = $this->matricula_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Matricula_model->listar($filter,$filter_not));
+        $ordenes   = $this->Matricula_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
         $lista     = array();
         if(count($ordenes)>0){
@@ -67,7 +65,7 @@ class Matricula extends CI_Controller {
         if($accion == "e"){
             $filter            = new stdClass();
             $filter->matricula = $codigo;
-            $matricula         = $this->matricula_model->obtener($filter);
+            $matricula         = $this->Matricula_model->obtener($filter);
             $lista->paterno    = $matricula->ALUMC_ApellidoPaterno;  
             $lista->materno    = $matricula->ALUMC_ApellidoMaterno;  
             $lista->nombres    = $matricula->ALUMC_Nombres;  
@@ -90,7 +88,7 @@ class Matricula extends CI_Controller {
         $arrEstado          = array("0"=>"::Seleccione::","1"=>"ACTIVO","2"=>"INACTIVO");
         $filter   = new stdClass();
         $filter->curso = $lista->curso;
-        $curso    = $this->curso_model->obtener($filter);
+        $curso    = $this->Curso_model->obtener($filter);
         $lista->cantidad   = 0;
         $lista->intentos   = 0;
         $data['titulo']     = $accion=="e"?"Editar Matricula":"Nueva Matricula"; 
@@ -98,7 +96,7 @@ class Matricula extends CI_Controller {
         $data['form_close'] = form_close();         
         $data['lista']	    = $lista;  
         $data['accion']	    = $accion;  
-        $data['selcurso']   = form_dropdown('curso',$this->curso_model->seleccionar('0'),$lista->curso,"id='curso' class='comboMedio'");         
+        $data['selcurso']   = form_dropdown('curso',$this->Curso_model->seleccionar('0'),$lista->curso,"id='curso' class='comboMedio'");         
         $data['selestado']  = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
         $data['oculto']     = form_hidden(array("accion"=>$accion,"codigo"=>$codigo));
 	   $this->load->view("matricula/matricula_nuevo",$data);

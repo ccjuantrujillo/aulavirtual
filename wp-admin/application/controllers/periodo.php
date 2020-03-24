@@ -8,9 +8,10 @@ class Periodo extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('periodo_model');
-        $this->load->model('ciclo_model');
-        $this->load->model('seguridad/permiso_model');
+        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");          
+        $this->load->model('Periodo_model');
+        $this->load->model('Ciclo_model');
+        $this->load->model('Permiso_model');
         $this->load->helper('menu');
         $this->somevar['compania'] = $this->session->userdata('compania');
 		$this->configuracion = $this->config->item('conf_pagina');
@@ -23,8 +24,8 @@ class Periodo extends CI_Controller
         $filter     = new stdClass();
         $filter_not = new stdClass();
         $filter_not->persona = "0";
-        $registros = count($this->periodo_model->listar($filter,$filter_not));
-        $personas  = $this->periodo_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Periodo_model->listar($filter,$filter_not));
+        $personas  = $this->Periodo_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
         $lista     = array();
         if(count($personas)>0){
@@ -53,7 +54,7 @@ class Periodo extends CI_Controller
          if($accion == "e"){
              $filter             = new stdClass();
              $filter->periodo    = $codigo;
-             $periodos           = $this->periodo_model->obtener($filter);
+             $periodos           = $this->Periodo_model->obtener($filter);
              $lista->descripcion = $periodos->PERIODC_DESCRIPCION;
              $lista->codigo      = $periodos->PERIODP_Codigo;
              $lista->ciclo       = $periodos->CICLOP_Codigo;
@@ -68,7 +69,7 @@ class Periodo extends CI_Controller
          $data['form_close']   = form_close();
          $filter = new stdClass();
          $filter->estado = 1;
-         $data['selciclo']     = form_dropdown('ciclo',$this->ciclo_model->seleccionar("",$filter),$lista->ciclo,"id='ciclo' class='comboMedio'");         
+         $data['selciclo']     = form_dropdown('ciclo',$this->Ciclo_model->seleccionar("",$filter),$lista->ciclo,"id='ciclo' class='comboMedio'");         
          $data['lista']	       = $lista;
          $data['oculto']       = form_hidden(array("accion"=>$accion));
          $this->load->view("periodo/periodo_nuevo",$data);
@@ -82,23 +83,23 @@ class Periodo extends CI_Controller
                         "PERIODC_DESCRIPCION"  => strtoupper($this->input->post('descripcion'))
                        );
         if($accion == "n"){
-            $codigo = $this->periodo_model->insertar($data);
+            $codigo = $this->Periodo_model->insertar($data);
         }
         elseif($accion == "e"){
-            $this->periodo_model->modificar($codigo,$data);
+            $this->Periodo_model->modificar($codigo,$data);
         }
     }
     
     public function eliminar()
     {
         $codigo  = $this->input->post('codigo');
-        $this->periodo_model->eliminar($codigo);
+        $this->Periodo_model->eliminar($codigo);
     }
   
     public function obtener(){
         $obj    = $this->input->post('objeto');
         $filter = json_decode($obj);
-        $periodos  = $this->periodo_model->listar($filter);
+        $periodos  = $this->Periodo_model->listar($filter);
         $resultado = json_encode($periodos);
         echo $resultado;
     }     

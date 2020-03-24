@@ -18,7 +18,11 @@
         <?php echo $form_open;?>
         <div class="frmlogin">
             <div class="frmlog">
+              <p style="text-align: center;font-size: 15px;font-weight:bold;margin-bottom:5px;padding-left: 25px;">
+                <?php echo strtoupper($empresa->EMPRC_RazonSocial);?>
+              </p>
               <form>
+
                 <p class="frmcamp">
                     <span>Usuario</span> 
                     <input name="txtUsuario" type="text" id="txtUsuario" class="cajaMedia minus"/>

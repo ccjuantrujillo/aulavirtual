@@ -8,7 +8,7 @@ class Alumno_model extends CI_Model{
         $this->table_persona = "ant_persona";
         $this->table_ciclo = "ant_ciclo";
         $this->table       = "ant_alumno";
-        $this->empresa     = $this->session->userdata('empresa');
+        $this->empresa     = $this->config->item('empresa');        
     }
 
     public function seleccionar($default='',$filter='',$filter_not='',$number_items='',$offset=''){

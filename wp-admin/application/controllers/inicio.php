@@ -2,20 +2,27 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Inicio extends CI_Controller {
     var $entidad;
+    var $empresa;
+
     public function __construct(){
-        parent::__construct(); 
-        $this->load->model('usuario_model');
-        $this->load->model(personal.'persona_model');    
-        $this->load->model(seguridad.'permiso_model');  
-        $this->load->model(seguridad.'menu_model');
-        $this->load->model(seguridad.'acceso_model');
-        $this->load->model('ciclo_model');
-        $this->load->model('profesor_model');
+        parent::__construct();          
+        $this->load->model('Usuario_model');
+        $this->load->model('Persona_model');    
+        $this->load->model('Permiso_model');  
+        $this->load->model('Menu_model');
+        $this->load->model('Acceso_model');
+        $this->load->model('Ciclo_model');
+        $this->load->model('Profesor_model');
+        $this->load->model('Empresa_model');
         $this->load->helper('menu');
+        $this->empresa  = $this->config->item('empresa');          
     }
 
     public function index(){
         $data['form_open']  = form_open(base_url().'index.php/inicio/ingresar',array("name"=>"frmInicio","id"=>"frmInicio"));
+        $filter = new stdClass();
+        $filter->empresa    = $this->empresa;
+        $data['empresa']    = $this->Empresa_model->obtener($filter);
         $data['form_close'] = form_close(); 
         $data['onload']     = "onload=\"$('#txtUsuario').focus();\"";   
         $data['header']     = get_header();
@@ -31,7 +38,7 @@ class Inicio extends CI_Controller {
         else{
             $txtUsuario = $this->input->post('txtUsuario');
             $txtClave   = $this->input->post('txtClave');
-            $usuarios   = $this->usuario_model->ingresar(trim($txtUsuario),md5(trim($txtClave)));
+            $usuarios   = $this->Usuario_model->ingresar(trim($txtUsuario),md5(trim($txtClave)));
 			if(count((array)$usuarios)>0){
                 $data = array(
                             'login'    => $usuarios->USUAC_usuario,
@@ -56,7 +63,7 @@ class Inicio extends CI_Controller {
     }
     
     public function principal(){
-        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");                
+        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");             
         $arrmes = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
         $mes    = date("m",time());
         $ano    = date("Y",time());
@@ -77,7 +84,7 @@ class Inicio extends CI_Controller {
         $data['menu']    = $menu;
         $filter          = new stdClass();
         $filter->order_by = array("ACCESOP_Codigo"=>"desc");
-        $data['accesos'] = $this->acceso_model->listar($filter);
+        $data['accesos'] = $this->Acceso_model->listar($filter);
         $data['header']  = get_header();
         $data['oculto']  = form_hidden(array("serie"=>"","numero"=>"","codot"=>""));
         $this->load->view("seguridad/principal",$data);    

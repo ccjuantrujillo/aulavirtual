@@ -8,7 +8,7 @@ class Curso_model extends CI_Model{
         $this->table       = "ant_curso";
         $this->table_ciclo = "ant_ciclo";
         $this->table_profesor = "ant_profesor";
-        $this->empresa     = $this->session->userdata('empresa');
+        $this->empresa     = $this->config->item('empresa');  
     }
 	
     public function seleccionar($default='',$filter='',$filter_not='',$number_items='',$offset=''){

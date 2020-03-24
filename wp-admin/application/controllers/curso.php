@@ -8,12 +8,10 @@ class Curso extends CI_Controller {
     public function __construct(){
         parent::__construct();
         if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");        
-        $this->load->model('empresa_model');
-        $this->load->model(seguridad.'permiso_model'); 
-        $this->load->model('curso_model');
-        $this->load->model('periodo_model');		 
-        $this->load->model('ciclo_model');            
-        $this->load->model('profesor_model');  
+        $this->load->model('Empresa_model');
+        $this->load->model('Curso_model');	 
+        $this->load->model('Ciclo_model');            
+        $this->load->model('Profesor_model');  
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
         $this->login   = $this->session->userdata('login');
@@ -31,8 +29,8 @@ class Curso extends CI_Controller {
         $filter     = new stdClass();   
         $filter_not = new stdClass(); 
         $filter->order_by = array("e.CICLOC_DESCRIPCION"=>"asc","c.CURSOC_Nombre"=>"asc");
-        $registros = count($this->curso_model->listar($filter,$filter_not));
-        $productos = $this->curso_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Curso_model->listar($filter,$filter_not));
+        $productos = $this->Curso_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
         $lista     = array();
         if(count($productos)>0){
@@ -67,7 +65,7 @@ class Curso extends CI_Controller {
         if($accion == "e"){
             $filter                = new stdClass();
             $filter->curso         = $codigo;
-            $productos             = $this->curso_model->obtener($filter);
+            $productos             = $this->Curso_model->obtener($filter);
             $filter                = new stdClass();
             $filter->curso         = $codigo;
             $lista->producto       = $codigo;
@@ -117,8 +115,8 @@ class Curso extends CI_Controller {
         $data['form_close'] = form_close();    
         $data['lista']	    = $lista;
         $data['selestado']  = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
-        $data['selciclo']    = form_dropdown('ciclo',$this->ciclo_model->seleccionar(),$lista->ciclo,"id='ciclo' class='comboMedio'");
-        $data['selprofesor']    = form_dropdown('profesor',$this->profesor_model->seleccionar(),$lista->profesor,"id='profesor' class='comboMedio'");        
+        $data['selciclo']    = form_dropdown('ciclo',$this->Ciclo_model->seleccionar(),$lista->ciclo,"id='ciclo' class='comboMedio'");
+        $data['selprofesor']    = form_dropdown('profesor',$this->Profesor_model->seleccionar(),$lista->profesor,"id='profesor' class='comboMedio'");        
         $data['oculto']     = form_hidden(array('accion'=>$lista->accion,'codigo'=>$lista->codigo));
         $data['links']     = array("urlprod"=>base_url()."index.php/almacen/curso/editar/".$lista->accion."/".$lista->codigo,"urlatrib"=>base_url()."index.php/almacen/semana/listar/".$lista->accion."/".$lista->codigo,"urlcomp"=>"");
         return $this->load->view('curso/curso_nuevo_principal',$data,true);
@@ -179,11 +177,11 @@ class Curso extends CI_Controller {
             $data["CURSOC_Silabus"] = $nombre_archivo;
         }
         if($accion == "n"){
-            $this->curso_model->insertar($data);
+            $this->Curso_model->insertar($data);
         }
         elseif($accion == "e"){
             $data['CURSOC_FechaModificacion'] = date("Y-m-d H:i:s",time());
-            $this->curso_model->modificar($codigo,$data);
+            $this->Curso_model->modificar($codigo,$data);
         }
         //echo json_encode($mensaje);
 		echo "<script>alert('Operacion realizada con exito.');location.href='".base_url()."index.php/curso/listar';</script>";
@@ -197,7 +195,7 @@ class Curso extends CI_Controller {
         $resultado = false;
         //if(count($videos)==0){
             $resultado = true;
-            $this->curso_model->eliminar($codigo);
+            $this->Curso_model->eliminar($codigo);
         //}
         echo json_encode($resultado);
     } 
@@ -205,7 +203,7 @@ class Curso extends CI_Controller {
     public function obtener(){
         $obj    = $this->input->post('objeto');
         $filter = json_decode($obj);
-        $cursos  = $this->curso_model->listar($filter);
+        $cursos  = $this->Curso_model->listar($filter);
         $resultado = json_encode($cursos);
         echo $resultado;
     }    

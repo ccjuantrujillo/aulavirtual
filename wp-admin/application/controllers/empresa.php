@@ -8,11 +8,10 @@ class Empresa extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('empresa_model');
-        $this->load->model('maestros/sector_model');
-        $this->load->model('seguridad/permiso_model');
+        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");          
+        $this->load->model('Empresa_model');
+        $this->load->model('Sector_model');
         $this->load->helper('menu');
-        $this->somevar['compania'] = $this->session->userdata('compania');
         $this->configuracion = $this->config->item('conf_pagina');        
     }
     public function listar($j=0){
@@ -22,8 +21,8 @@ class Empresa extends CI_Controller
         $menu       = get_menu($filter);  
         $filter     = new stdClass();
         $filter_not = new stdClass();
-        $registros = count($this->empresa_model->listar($filter));
-        $empresas  = $this->empresa_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Empresa_model->listar($filter));
+        $empresas  = $this->Empresa_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
         $lista     = array();
         if(count($empresas)>0){
@@ -60,7 +59,7 @@ class Empresa extends CI_Controller
          if($accion == "e"){
              $filter             = new stdClass();
              $filter->empresa    = $codigo;
-             $empresas           = $this->empresa_model->obtener($filter);
+             $empresas           = $this->Empresa_model->obtener($filter);
              $lista->codigo      = $empresas->EMPRP_Codigo;
              $lista->sector      = $empresas->SECTORP_Codigo;
              $lista->ruc         = $empresas->EMPRC_Ruc;
@@ -92,7 +91,7 @@ class Empresa extends CI_Controller
          $data['form_close'] = form_close();
          $data['lista']	     = $lista;
          $data['selestado']  = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
-         $data['selsector']  = form_dropdown('sector',$this->sector_model->seleccionar('0'),$lista->sector,"id='sector' class='comboMedio'");
+         $data['selsector']  = form_dropdown('sector',$this->Sector_model->seleccionar('0'),$lista->sector,"id='sector' class='comboMedio'");
          $data['oculto']     = form_hidden(array("accion"=>$accion,"codigo_padre"=>$codigo,"codigo"=>$lista->codigo));
          $this->load->view("empresa/empresa_nueva",$data);
      }
@@ -113,10 +112,10 @@ class Empresa extends CI_Controller
                         "EMPRC_FlagEstado"  => $this->input->post('estado')
                        );
         if($accion == "n"){
-            $this->codigo = $this->empresa_model->insertar($data);
+            $this->codigo = $this->Empresa_model->insertar($data);
         }
         elseif($accion == "e"){
-            $this->empresa_model->modificar($codigo,$data);
+            $this->Empresa_model->modificar($codigo,$data);
         }
     }     
      
@@ -132,7 +131,7 @@ class Empresa extends CI_Controller
     {
         $obj    = $this->input->post('objeto');
         $filter = json_decode($obj);        
-        $this->empresa_model->eliminar($filter);
+        $this->Empresa_model->eliminar($filter);
         $resultado = true;
         echo json_encode($resultado);  
     }

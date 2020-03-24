@@ -7,7 +7,7 @@ class Periodo_model extends CI_Model{
         parent::__construct();
         $this->table       = "ant_periodo";
         $this->table_ciclo = "ant_ciclo";
-        $this->empresa = $this->session->userdata('empresa');
+        $this->empresa     = $this->config->item('empresa');  
     }
 	
     public function seleccionar($default="",$filter="",$filter_not='',$number_items='',$offset=''){

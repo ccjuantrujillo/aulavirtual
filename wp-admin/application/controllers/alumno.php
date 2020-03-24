@@ -5,9 +5,8 @@ class Alumno extends Persona
 {
     public function __construct(){
         parent::__construct();
-        $this->load->model(ventas.'matricula_model');
-        $this->load->model('alumno_model');
-        $this->load->model('ciclo_model');
+        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");          
+        $this->load->model('Alumno_model');
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
     }
@@ -25,8 +24,8 @@ class Alumno extends Persona
         $filter_not = new stdClass();
         $filter->status = 5;
         $filter->order_by    = array("ALUMC_ApellidoPaterno"=>"asc","ALUMC_ApellidoMaterno"=>"asc","ALUMC_Nombres"=>"asc");
-        $registros = count($this->alumno_model->listar($filter,$filter_not));
-        $clientes  = $this->alumno_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Alumno_model->listar($filter,$filter_not));
+        $clientes  = $this->Alumno_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
         $lista     = array();
         if(count($clientes)>0){
@@ -63,7 +62,7 @@ class Alumno extends Persona
          if($accion == "e"){
              $filter            = new stdClass();
              $filter->alumno     = $codigo;
-             $alumnos            = $this->alumno_model->obtener($filter);
+             $alumnos            = $this->Alumno_model->obtener($filter);
              $lista->dni         = $alumnos->ALUMC_NumeroDoc;
              $lista->identificador = $alumnos->ALUMC_Identificador;
              $lista->direccion   = $alumnos->ALUMC_Direccion;
@@ -117,10 +116,10 @@ class Alumno extends Persona
                         "user_id"          => 7
                        );
         if($accion == "n"){
-            $this->alumno_model->insertar($data);
+            $this->Alumno_model->insertar($data);
         }
         elseif($accion == "e"){
-            $this->alumno_model->modificar($codigo,$data);
+            $this->Alumno_model->modificar($codigo,$data);
         }
         echo json_encode($resultado);
     }
@@ -128,7 +127,7 @@ class Alumno extends Persona
     public function eliminar(){
         $resultado = true;
         $codigo    = $this->input->post('codigo');
-        $this->alumno_model->eliminar($codigo);
+        $this->Alumno_model->eliminar($codigo);
         echo json_encode($resultado);
     }
     
@@ -171,7 +170,7 @@ class Alumno extends Persona
     public function obtener($codigo){
         $filter    = new stdClass();
         $filter->alumno = $codigo;
-        $clientes  = $this->alumno_model->obtener($filter);
+        $clientes  = $this->Alumno_model->obtener($filter);
         $resultado = json_encode($clientes);
         echo $resultado;
     }

@@ -1,7 +1,7 @@
-<div class="container">
+<!--div class="container">
 	<h3>Cursos</h3>
 	<ul class="list-unstyled video-list-thumbs row">
-		<?php
+		< ?php
 		foreach($cursos as $value){
 			?>
 			<li class="col-lg-3 col-sm-4 col-xs-6">
@@ -18,4 +18,4 @@
 		}
 		?>
 	</ul>
-</div>
+</div-->

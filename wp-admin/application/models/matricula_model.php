@@ -8,7 +8,7 @@ class Matricula_model extends CI_Model{
         $this->table       = "ant_matricula";
         $this->table_alu   = "ant_alumno";
         $this->table_curso = "ant_curso";
-        $this->empresa     = $this->session->userdata('empresa');        
+        $this->empresa     = $this->config->item('empresa');       
     }
     
     public function listar($filter,$filter_not='',$number_items='',$offset=''){

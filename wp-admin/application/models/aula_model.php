@@ -7,7 +7,7 @@ class Aula_model extends CI_Model{
         parent::__construct();
         $this->table     = "ant_aula";
         $this->table_det = "ant_local";
-        $this->empresa   = $this->session->userdata('empresa');            
+        $this->empresa     = $this->config->item('empresa');           
     }
     
     public function seleccionar($default='',$filter="",$filter_not='',$number_items='',$offset=''){   

@@ -5,12 +5,8 @@ class Profesor extends Persona
 {
     public function __construct(){
         parent::__construct();
-        $this->load->model(ventas.'matricula_model');
-        $this->load->model('profesor_model');
-        $this->load->model(ventas.'profesorsociedad_model');
-        $this->load->model(seguridad.'rol_model');
-        $this->load->model(maestros.'tipodocumento_model');
-        $this->load->model(maestros.'grado_model');
+        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");          
+        $this->load->model('Profesor_model');
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
     }
@@ -28,8 +24,8 @@ class Profesor extends Persona
         $filter_not = new stdClass();
         $filter_not->profesor = "0";
         $filter->order_by    = array("c.PROC_ApellidoPaterno"=>"asc","c.PROC_ApellidoMaterno"=>"asc","c.PROC_Nombre"=>"asc");	
-        $registros = count($this->profesor_model->listar($filter,$filter_not));
-        $profesores  = $this->profesor_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Profesor_model->listar($filter,$filter_not));
+        $profesores  = $this->Profesor_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
         $lista     = array();
         if(count($profesores)>0){
@@ -77,7 +73,7 @@ class Profesor extends Persona
          if($accion == "e"){
              $filter            = new stdClass();
              $filter->profesor  = $codigo;
-             $profesores        = $this->profesor_model->obtener($filter);
+             $profesores        = $this->Profesor_model->obtener($filter);
              $lista->numerodoc  = $numero!=""?$numero:$profesores->PROC_NumeroDocIdentidad;
              $lista->sexo       = $sexo!=""?$sexo:$profesores->PROC_Sexo;
              $lista->direccion  = $direccion!=""?$direccion:$profesores->PROC_Direccion;
@@ -166,10 +162,10 @@ class Profesor extends Persona
 						"user_id"                => $user_id
 					   );
 		if($accion == "n"){
-			$profesor = $this->profesor_model->insertar($data);
+			$profesor = $this->Profesor_model->insertar($data);
 		}
 		elseif($accion == "e"){
-			$this->profesor_model->modificar($codigo,$data);
+			$this->Profesor_model->modificar($codigo,$data);
 		}            
     }
 
@@ -178,14 +174,14 @@ class Profesor extends Persona
         $resultado = true;
         $filter = new stdClass();
         $filter->profesor = $codigo;
-        $profesor = $this->profesor_model->obtener($filter);
+        $profesor = $this->Profesor_model->obtener($filter);
         $persona = $profesor->PERSP_Codigo;
         $user_id = $profesor->user_id;
         $filter = new stdClass();
         $filter->user_id = $user_id;
         $this->user_model->eliminar($filter);
-        $this->profesor_model->eliminar($codigo);
-        $this->persona_model->eliminar($persona);
+        $this->Profesor_model->eliminar($codigo);
+        //$this->Persona_model->eliminar($persona);
         echo json_encode($resultado);
     }
     
@@ -193,7 +189,7 @@ class Profesor extends Persona
         $codigo    = $this->input->post('codigo');
         $resultado = true;
         $data      = array("PROC_FlagBorrado" => 0);
-        $this->profesor_model->modificar($codigo,$data);   
+        $this->Profesor_model->modificar($codigo,$data);   
          echo json_encode($resultado);
     }
 
@@ -204,8 +200,8 @@ class Profesor extends Persona
         $filter_not->profesor   = "0";
         $filter_not->rol        = 7;
         $filter->order_by       = array("e.CURSOC_Nombre"=>"asc","d.PERSC_ApellidoPaterno"=>"asc","d.PERSC_ApellidoMaterno"=>"asc","d.PERSC_Nombre"=>"asc");
-        $registros = count($this->profesor_model->listar($filter,$filter_not));
-        $profesores = $this->profesor_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Profesor_model->listar($filter,$filter_not));
+        $profesores = $this->Profesor_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item       = 1;
         $lista      = array();
         if(count($profesores)>0){
@@ -242,8 +238,8 @@ class Profesor extends Persona
         $filter_not = new stdClass();
         $filter_not->profesor = "0";
         $filter->order_by    = array("d.PERSC_ApellidoPaterno"=>"asc","d.PERSC_ApellidoMaterno"=>"asc","d.PERSC_Nombre"=>"asc");
-        $registros = count($this->profesor_model->listar($filter,$filter_not));
-        $profesores = $this->profesor_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Profesor_model->listar($filter,$filter_not));
+        $profesores = $this->Profesor_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item       = 1;
         $lista      = array();
         if(count($profesores)>0){
@@ -277,7 +273,7 @@ class Profesor extends Persona
     public function obtener(){
         $obj    = $this->input->post('objeto');
         $filter = json_decode($obj);
-        $profesores  = $this->profesor_model->listar($filter);
+        $profesores  = $this->Profesor_model->listar($filter);
         $resultado = json_encode($profesores);
         echo $resultado;
     }

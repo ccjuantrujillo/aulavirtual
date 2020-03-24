@@ -3530,7 +3530,7 @@ ul.chat-available-user li a:hover {
 	height: 33px;
 	margin: 8px 0 0;
 }
-.video-list-thumbs .play-button{
+/*.video-list-thumbs .play-button{
     font-size: 60px;
     opacity: 0.6;
     position: absolute;
@@ -3540,6 +3540,7 @@ ul.chat-available-user li a:hover {
     width: 36px;
     height: 36px;
 }
+*/
 .video-list-thumbs > li > a:hover .play-button{
 	color:#fff;
 	opacity:1; 

@@ -53,7 +53,7 @@
           }
           else{
               ?>
-                <tr class="list_a" colspan='5'>::NO EXISTEN REGISTROS::</tr>
+                <tr class="list_a"><td colspan='7'>::NO EXISTEN REGISTROS::</td></tr>
               <?php
           }
           ?>

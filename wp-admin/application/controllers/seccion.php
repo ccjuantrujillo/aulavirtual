@@ -7,10 +7,8 @@ class Seccion extends CI_Controller {
     public function __construct(){
         parent::__construct();
         if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");        
-        $this->load->model('seccion_model');
-        $this->load->model(seguridad.'permiso_model');  
-        $this->load->model('curso_model'); 
-        $this->load->model('permiso_model'); 
+        $this->load->model('Seccion_model'); 
+        $this->load->model('Curso_model'); 
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
         $this->login   = $this->session->userdata('login');
@@ -28,8 +26,8 @@ class Seccion extends CI_Controller {
         $filter     = new stdClass();
         $filter_not = new stdClass(); 
         $filter->order_by    = array("p.CURSOC_Nombre"=>"asc","c.SECCIONC_Orden"=>"asc");
-        $registros = count($this->seccion_model->listar($filter,$filter_not));
-        $productoatrib = $this->seccion_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Seccion_model->listar($filter,$filter_not));
+        $productoatrib = $this->Seccion_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
         $lista     = array();
         if(count($productoatrib)>0){
@@ -71,7 +69,7 @@ class Seccion extends CI_Controller {
         if($accion == "e"){   
             $filter             = new stdClass();
             $filter->seccion    = $codigo;
-            $secciones          = $this->seccion_model->obtener($filter);
+            $secciones          = $this->Seccion_model->obtener($filter);
             $lista->descripcion = $descripcion!=""?$descripcion:$secciones->SECCIONC_Descripcion;
             $lista->orden       = $orden!=""?$orden:$secciones->SECCIONC_Orden;
             $lista->finicio     = $finicio!=""?$finicio:date_sql($secciones->SECCIONC_FechaInicio);
@@ -95,7 +93,7 @@ class Seccion extends CI_Controller {
         $data['lista']	     = $lista;
         $filter = new stdClass();
         $filter->estado = 1;
-        $data['selcurso']    = form_dropdown('curso',$this->curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");     
+        $data['selcurso']    = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");     
         $data['oculto']         = form_hidden(array('accion'=>$accion,'codigo'=>$codigo));
         $this->load->view('seccion/seccion_nuevo',$data);
     }  
@@ -112,17 +110,17 @@ class Seccion extends CI_Controller {
                         "SECCIONC_FlagEstado"  => $this->input->post('estado')						
                        );
         if($accion == "n"){
-            $codigo = $this->seccion_model->insertar($data);            
+            $codigo = $this->Seccion_model->insertar($data);            
         }
         elseif($accion == "e"){
-            $this->seccion_model->modificar($codigo,$data);
+            $this->Seccion_model->modificar($codigo,$data);
         }
     }   
     
     public function obtener(){
         $obj    = $this->input->post('objeto');
         $filter = json_decode($obj);
-        $cursos  = $this->seccion_model->listar($filter);
+        $cursos  = $this->Seccion_model->listar($filter);
         $resultado = json_encode($cursos);
         echo $resultado;
     }    
@@ -130,7 +128,7 @@ class Seccion extends CI_Controller {
     public function eliminar(){
         $resultado = true;        
         $codigo = $this->input->post('codigo');
-        $this->seccion_model->eliminar($codigo);
+        $this->Seccion_model->eliminar($codigo);
         echo json_encode($resultado);
     } 
 }

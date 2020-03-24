@@ -1,11 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Empresa_model extends CI_Model
 {
-    var $compania;
+    var $empresa;
     var $table;  
+    
     public function __construct(){
         parent::__construct();
-        $this->compania = $this->session->userdata('compania');
+        $this->empresa     = $this->config->item('empresa');  
         $this->table    = "ant_empresa";
         $this->table_sector = "ant_sector";
     }

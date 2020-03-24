@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-include_once(APPPATH.'models/seguridad/permiso_model.php');
-include_once(APPPATH.'models/seguridad/menu_model.php');
+include_once(APPPATH.'models/Permiso_model.php');
+include_once(APPPATH.'models/Menu_model.php');
+
 function get_menu($filter)
 {
     $permisos = new Permiso_model();

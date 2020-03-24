@@ -5,14 +5,14 @@ class Archivos extends CI_Controller {
     var $compania;
     var $configuracion;
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::__construct();
         if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");        
-        $this->load->model('curso_model');
-        $this->load->model('seccion_model');
-        $this->load->model('leccion_model');
-        $this->load->model('archivos_model');
-        $this->load->model(seguridad.'permiso_model');  
+        $this->load->model('Curso_model');
+        $this->load->model('Seccion_model');
+        $this->load->model('Leccion_model');
+        $this->load->model('Archivos_model');
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
         $this->login   = $this->session->userdata('login');
@@ -30,8 +30,8 @@ class Archivos extends CI_Controller {
         $filter     = new stdClass();     
         $filter_not = new stdClass(); 
         $filter->order_by    = array("j.CURSOC_Nombre"=>"asc");
-        $registros = count($this->archivos_model->listar($filter,$filter_not));
-        $archivos     = $this->archivos_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Archivos_model->listar($filter,$filter_not));
+        $archivos     = $this->Archivos_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
         $lista     = array();
         if(count($archivos)>0){
@@ -73,7 +73,7 @@ class Archivos extends CI_Controller {
             $titulo             = "Editar Archivo";      
             $filter             = new stdClass();
             $filter->archivo    = $codigo;
-            $archivos = $this->archivos_model->obtener($filter);
+            $archivos = $this->Archivos_model->obtener($filter);
             $lista->curso       = $curso!=""?$curso:$archivos->CURSOP_Codigo;
             $lista->seccion     = $seccion!=""?$seccion:$archivos->SECCIONP_Codigo;
             $lista->leccion     = $leccion!=""?$leccion:$archivos->LECCIONP_Codigo;
@@ -98,13 +98,13 @@ class Archivos extends CI_Controller {
         $data['lista']	    = $lista;
         $filter = new stdClass();
         $filter->estado = 1; 
-        $data['selcurso']    = form_dropdown('curso',$this->curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");  
+        $data['selcurso']    = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");  
         $filter = new stdClass();
         $filter->curso  = $lista->curso;  
-        $data['selseccion']  = form_dropdown('seccion',$this->seccion_model->seleccionar('0',$filter),$lista->seccion,"id='seccion' class='comboGrande'"); 
+        $data['selseccion']  = form_dropdown('seccion',$this->Seccion_model->seleccionar('0',$filter),$lista->seccion,"id='seccion' class='comboGrande'"); 
         $filter = new stdClass();
         $filter->seccion  = $lista->seccion;  
-        $data['selleccion']    = form_dropdown('leccion',$this->leccion_model->seleccionar('0',$filter),$lista->leccion,"id='leccion' class='comboGrande'");          
+        $data['selleccion']    = form_dropdown('leccion',$this->Leccion_model->seleccionar('0',$filter),$lista->leccion,"id='leccion' class='comboGrande'");          
         $data['oculto']      = form_hidden(array('accion'=>$accion,'codigo'=>$codigo));
         $this->load->view('archivos/archivo_nuevo',$data);
     }  
@@ -133,17 +133,17 @@ class Archivos extends CI_Controller {
         }
         //Grabamos o actualizamos el registro        
         if($accion == "n"){
-            $codigo = $this->archivos_model->insertar($data);
+            $codigo = $this->Archivos_model->insertar($data);
         }
         elseif($accion == "e"){
-            $this->archivos_model->modificar($codigo,$data);
+            $this->Archivos_model->modificar($codigo,$data);
         }
         redirect('./archivos/listar');
     }   
     
     public function eliminar(){
         $codigo = $this->input->post('codigo');
-        $this->archivos_model->eliminar($codigo);
+        $this->Archivos_model->eliminar($codigo);
     } 
     
     public function obtener(){
