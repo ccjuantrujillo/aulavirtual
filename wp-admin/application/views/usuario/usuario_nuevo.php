@@ -23,9 +23,7 @@
                       <td width="50%" bgcolor="#d5e2f2">Codigo</td>
                       <td class="formss">
                           <input type="text" class="cajaMinima" name="usuario" id="usuario" value="<?php echo $lista->usuario;?>" style="background-color: #E6E6E6" readonly="readonly">
-                          <?php if($accion=='x'):;?> 
-                              &nbsp;<input id="ver_profesor" name="ver_profesor" type="button" class="aceptarlog2" alt="Importar profesor" title="Importar profesor" value="Importar"/>                              
-                          <?php endif;?>    
+                          &nbsp;<input id="ver_profesor" name="ver_profesor" type="button" class="aceptarlog2" alt="Importar profesor" title="Importar profesor" value="Importar"/>                              
                       </td>
                     </tr>                    
                     <tr>

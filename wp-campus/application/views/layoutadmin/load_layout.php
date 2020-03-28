@@ -31,7 +31,7 @@
 				<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
 			  </div>
 			  <!--logo start-->
-			  <a href="#" class="logo"><b>CECCOS<span> Circulo de Estudios</span></b></a>
+			  <a href="#" class="logo"><b><span><?php echo $empresa->EMPRC_RazonSocial;?></span></b></a>
 			  <!--logo end-->
 			  <div class="nav notify-row" id="top_menu">
 				<!--  notification start -->
@@ -39,7 +39,7 @@
 			  </div>
 			  <div class="top-menu">
 				<ul class="nav pull-right top-menu">
-				  <li><a class="logout" href="<?php echo dirname(base_url());?>">Logout</a></li>
+				  <li><a class="logout" href="<?php echo base_url();?>inicio/salir">Logout</a></li>
 				</ul>
 			  </div>
 			</header>
@@ -53,7 +53,7 @@
 			<footer class="site-footer">
 			  <div class="text-center">
 				<p>
-				  &copy; Copyrights <strong>Dashio</strong>. All Rights Reserved
+				  &copy; Copyrights <strong>Dashio</strong>. Todos los derechos reservados
 				</p>
 				<div class="credits">
 				  Created with Dashio template by <a href="#">TemplateMag</a>

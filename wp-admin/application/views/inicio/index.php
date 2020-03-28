@@ -13,7 +13,6 @@
     <body <?php echo $onload;?>>
 <div class="contenido" > 
     <div align='center' class='error' id='divMayus' style='display: none'>Recuerde Colocar Usuario y Clave en MAYUSCULAS .</div>
-    <div class="header"><?php echo $header;?></div>
     <div class="zonelogin">
         <?php echo $form_open;?>
         <div class="frmlogin">
@@ -43,7 +42,6 @@
         </div>       
         <?php echo $form_close;?>
     </div>
-<div class="footer"><h2><?php echo pie;?></h2></div>
 </div>
  <div id="basic-modal-content"><div id="mensaje">&nbsp;</div></div>      
 </body>

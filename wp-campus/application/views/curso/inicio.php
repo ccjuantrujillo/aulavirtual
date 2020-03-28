@@ -26,20 +26,21 @@
 		        <?php
 		        $nomseccion_ant = "";
 		        foreach($lecciones as $value){
-		        	if($nomseccion_ant!=$value->SECCIONC_Descripcion){
-		        		?>
-						<li class='mt'><a href='#'><?php echo $value->SECCIONC_Orden.". ".$value->SECCIONC_Descripcion;?></a></li>
-		        		<?php
-		        		$i = 1;
-		        	}
-		        	else{
-		        		?>
-		        		<ul>
-							<li class='mt'><a href='#'><?php echo $value->SECCIONC_Orden.".".$i++." ".$value->LECCIONC_Nombre;?></a></li>
-		        		</ul>
-		        		<?php
-		        	}
-					$nomseccion_ant=$value->SECCIONC_Descripcion;
+                            $enlace = $value->SECCIONC_FlagEstado==1?base_url()."leccion/inicio/".$value->LECCIONP_Codigo."/1":"#";
+                            if($nomseccion_ant!=$value->SECCIONC_Descripcion){
+                                ?>
+                                  <li class='mt'><a href='#'><?php echo $value->SECCIONC_Orden.". ".$value->SECCIONC_Descripcion;?></a></li>
+                                <?php
+                                $i = 1;
+                            }
+                            else{
+                                ?>
+                                <ul>
+                                    <li class='mt'><a href="<?php echo $enlace;?>"><?php echo $value->SECCIONC_Orden.".".$i++." ".$value->LECCIONC_Nombre;?></a></li>
+                                </ul>
+                                <?php
+                            }
+                            $nomseccion_ant=$value->SECCIONC_Descripcion;
 		    	}
 		        ?>
 	        </ul>

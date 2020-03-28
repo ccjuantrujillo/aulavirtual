@@ -1,7 +1,8 @@
 <?php header("Content-type: text/html; charset=utf-8");
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require_once APPPATH.'controllers/maestros/persona.php';
-class Alumno extends Persona
+//require_once APPPATH.'controllers/maestros/Persona.php';
+
+class Alumno extends CI_Controller
 {
     public function __construct(){
         parent::__construct();

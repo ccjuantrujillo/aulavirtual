@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://www.ceccos.org/wp-campus/';
+$config['base_url'] = 'http://localhost/aulavirtual/wp-campus/';
 
 /*
 |--------------------------------------------------------------------------
@@ -522,5 +522,5 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-$config['empresa'] = 2;
+$config['empresa'] = 1;
 

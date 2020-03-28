@@ -26,7 +26,7 @@ class Inicio extends CI_Controller {
         $data['form_close'] = form_close(); 
         $data['onload']     = "onload=\"$('#txtUsuario').focus();\"";   
         $data['header']     = get_header();
-        $this->load->view("inicio",$data);
+        $this->load->view("inicio/index",$data);
     }
     
     public function ingresar(){

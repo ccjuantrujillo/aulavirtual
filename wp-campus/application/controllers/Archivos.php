@@ -3,13 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require_once 'LayoutAdmin.php';
 
 class Archivos extends LayoutAdmin{
-	public function __construct(){
-		parent::__construct();
-		$this->load->model('Archivos_model');
-		$this->load->model('Leccion_model');
-		$this->load->helper('menu_helper');
-		$this->load->helper('lecciones_helper');
-	}
+    public function __construct(){
+        parent::__construct();                       
+        $this->load->model('Archivos_model');
+        $this->load->model('Leccion_model');
+        $this->load->helper('menu_helper');
+        $this->load->helper('lecciones_helper');
+    }
 
 	public function inicio($lec,$indice="")
 	{
