@@ -62,4 +62,7 @@ function abrir_formulario_ubigeo(){
 }
 
 
-
+function selecciona_persona(codigo){
+    window.opener.selecciona_persona(codigo); 
+    window.close();
+}

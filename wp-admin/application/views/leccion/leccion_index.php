@@ -26,7 +26,6 @@
     <div class="tabla">
         <table>
           <tr class="list1">
-            <td width="5%">No</td>
             <td width="25%">Nombre</td>
             <td width="23%">Seccion</td>            
             <td width="23%">Curso</td>
@@ -40,8 +39,7 @@
                 $clase = ($item%2)==0?"list_a":"list_b";
                ?>
               <tr class="<?php echo $clase;?>">
-                <td><?php echo ++$j;?></td>
-                <td align="center" style="text-align: left;"><?php echo $value->nombre;?></td>
+                <td align="center" style="text-align: left;"><?php echo $value->orden." ".$value->nombre;?></td>
                 <td align="left"><?php echo $value->seccion;?></td>
                 <td align="left"><?php echo $value->curso;?></td>                
                 <td align="center"><?php echo $value->video;?></td>  

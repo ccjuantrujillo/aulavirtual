@@ -57,4 +57,8 @@
     </tr>
 </table>
 <?php echo $oculto;?>
+<div class="frmboton">
+    <input class="botones" id="cancelar" type="button" alt="Cancelar" title="Cancelar" value="Cancelar"/>        
+    <input class="botones" id="grabar" type="button" alt="Aceptar" title="Aceptar" value="Aceptar"/>
+</div>    
 <?php echo $form_close;?>  

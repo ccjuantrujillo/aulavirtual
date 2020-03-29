@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+$config['empresa']     = 3;
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -520,7 +520,7 @@ $config['rewrite_short_tags'] = FALSE;
 | Comma-separated:	'10.0.1.200,192.168.5.0/24'
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
-$config['empresa']     = 1;
+
 $config['proxy_ips']   = '';
 $config['conf_pagina'] = array(
 	                    "per_page"    => 25,

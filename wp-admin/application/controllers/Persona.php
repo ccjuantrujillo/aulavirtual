@@ -2,17 +2,18 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Persona extends CI_Controller{
-    public $configuracion;    
-    public $codigo;
+    private $configuracion;    
+    protected $codigo;
+    
     public function __construct()
     {
         parent::__construct(); 
-        $this->load->model(maestros.'persona_model');
-        $this->load->model(maestros.'ubigeo_model');
-        $this->load->model(maestros.'tipodocumento_model');
-        $this->load->model(maestros.'estadocivil_model');
-        $this->load->model(maestros.'nacionalidad_model');
-        $this->load->model(seguridad.'permiso_model');          
+        $this->load->model('Persona_model');
+        $this->load->model('Ubigeo_model');
+        $this->load->model('Tipodocumento_model');
+        $this->load->model('Estadocivil_model');
+        $this->load->model('Nacionalidad_model');
+        $this->load->model('Permiso_model');          
         $this->configuracion = $this->config->item('conf_pagina');
     }
     
@@ -25,13 +26,13 @@ class Persona extends CI_Controller{
         $filter->codigo   = 1; 
         $filter->rol      = 4; 
         $filter->order_by = array("p.MENU_Codigo"=>"asc");
-        $menu       = $this->permiso_model->listar($filter);            
+        $menu       = $this->Permiso_model->listar($filter);            
         $filter     = new stdClass();
         $filter_not = new stdClass(); 
         $filter_not->persona = "0";
         $filter->order_by    = array("p.PERSC_ApellidoPaterno"=>"asc","p.PERSC_ApellidoMaterno"=>"asc","p.PERSC_Nombre"=>"asc");
-        $registros = count($this->persona_model->listar($filter,$filter_not));
-        $personas  = $this->persona_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Persona_model->listar($filter,$filter_not));
+        $personas  = $this->Persona_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
         $lista     = array();
         if(count($personas)>0){
@@ -66,7 +67,7 @@ class Persona extends CI_Controller{
         $filter->codigo   = 1; 
         $filter->rol      = 4; 
         $filter->order_by = array("p.MENU_Codigo"=>"asc");
-        $menu             = $this->permiso_model->listar($filter); 
+        $menu             = $this->Permiso_model->listar($filter); 
         $departamento     = "";
         $provincia        = "";
         $distrito         = ""; 
@@ -74,7 +75,7 @@ class Persona extends CI_Controller{
         if($accion == "e"){
             $filter            = new stdClass();
             $filter->persona   = $codigo;
-            $personas          = $this->persona_model->obtener($filter);
+            $personas          = $this->Persona_model->obtener($filter);
             $ubigeo_domicilio  = $personas->UBIGP_Domicilio;
             $departamento      = substr($ubigeo_domicilio,0,2);
             $provincia         = substr($ubigeo_domicilio,2,2);
@@ -126,28 +127,28 @@ class Persona extends CI_Controller{
         } 
         $filter            = new stdClass();
         $filter->ubigeo    = $lista->ubinac;
-        $selnacimieno      = form_dropdown('nacimiento',$this->ubigeo_model->seleccionar('',$filter),"","id='nacimiento' class='comboMedio'"); 
+        $selnacimieno      = form_dropdown('nacimiento',$this->Ubigeo_model->seleccionar('',$filter),"","id='nacimiento' class='comboMedio'"); 
         $filter            = new stdClass();
         $filter->provincia = "00";
         $filter->distrito  = "00";
-        $seldpto           = form_dropdown('departamento',$this->ubigeo_model->seleccionar('',$filter),$departamento."0000","id='departamento' class='comboMedio'"); 
+        $seldpto           = form_dropdown('departamento',$this->Ubigeo_model->seleccionar('',$filter),$departamento."0000","id='departamento' class='comboMedio'"); 
         $filter            = new stdClass();
         $filter->departamento = $departamento;
         $filter->distrito  = "00";
-        $selprov           = form_dropdown('provincia',$this->ubigeo_model->seleccionar('',$filter),$departamento.$provincia."00","id='provincia' class='comboMedio'"); 
+        $selprov           = form_dropdown('provincia',$this->Ubigeo_model->seleccionar('',$filter),$departamento.$provincia."00","id='provincia' class='comboMedio'"); 
         $filter            = new stdClass();
         $filter->departamento = $departamento;
         $filter->provincia = $provincia;
-        $seldist              = form_dropdown('distrito',$this->ubigeo_model->seleccionar('',$filter),$departamento.$provincia.$distrito,"id='distrito' class='comboMedio'"); 
+        $seldist              = form_dropdown('distrito',$this->Ubigeo_model->seleccionar('',$filter),$departamento.$provincia.$distrito,"id='distrito' class='comboMedio'"); 
         $arrSexo              = array("0"=>"::Seleccione::","1"=>"MASCULINO","2"=>"FEMENINO");
         $data['titulo']       = "EDITAR PERSONA"; 
         $data['menu']         = $menu;
         $data['form_open']    = form_open('',array("name"=>"frmPersona","id"=>"frmPersona","onsubmit"=>"return valida_guiain();"));     
         $data['form_close']   = form_close();         
         $data['lista']	      = $lista;  
-        $data['seltipodoc']   = form_dropdown('tipodoc',$this->tipodocumento_model->seleccionar(),$lista->tipodoc,"id='tipodoc' class='comboMedio'"); ;
-        $data['selestadoc']   = form_dropdown('estadocivil',$this->estadocivil_model->seleccionar(),$lista->ecivil,"id='estadocivil' class='comboMedio'");
-        $data['selnacion']    = form_dropdown('nacionalidad',$this->nacionalidad_model->seleccionar(),$lista->fnac,"id='nacinalidad' class='comboMedio'");
+        $data['seltipodoc']   = form_dropdown('tipodoc',$this->Tipodocumento_model->seleccionar(),$lista->tipodoc,"id='tipodoc' class='comboMedio'"); ;
+        $data['selestadoc']   = form_dropdown('estadocivil',$this->Estadocivil_model->seleccionar(),$lista->ecivil,"id='estadocivil' class='comboMedio'");
+        $data['selnacion']    = form_dropdown('nacionalidad',$this->Nacionalidad_model->seleccionar(),$lista->fnac,"id='nacinalidad' class='comboMedio'");
         $data['selnacimieno'] = $selnacimieno;
         $data['seldpto']      = $seldpto;
         $data['selprov']      = $selprov;        
@@ -160,10 +161,6 @@ class Persona extends CI_Controller{
     public function grabar(){  
         $accion      = $this->input->get_post('accion');
         $codigo      = $this->input->get_post('codigo_padre');
-        $nacimiento  = $this->input->get_post('distrito');
-        $domicilio   = $this->input->get_post('distrito');
-        $nacion      = $this->input->get_post('nacionalidad');
-        $tipodoc     = $this->input->get_post('tipodoc');
         $fnacimiento = $this->input->get_post('fnacimiento');
         $arrfnacimiento = $fnacimiento!=""?explode("/",trim($fnacimiento)):"00/00/0000";
         $fnacimiento = $arrfnacimiento[2]."-".$arrfnacimiento[1]."-".$arrfnacimiento[0];
@@ -185,17 +182,16 @@ class Persona extends CI_Controller{
                         "PERSC_FechaNacimiento"    => ($fnacimiento!=""?$fnacimiento:"")
                        );
         if($accion == "n"){
-            $this->codigo = $codigo==""?$this->persona_model->insertar($data):$codigo;            
+            $this->codigo = $codigo==""?$this->Persona_model->insertar($data):$codigo;            
         }
         elseif($accion == "e"){
-            $this->persona_model->modificar($codigo,$data);     
+            $this->Persona_model->modificar($codigo,$data);     
             $this->codigo = $codigo;
         }
     }
 
     public function eliminar(){
-        $codigo = $this->input->post('codigo');
-        $this->persona_model->eliminar($codigo);
+        return $this->Persona_model->eliminar($this->codigo);
     }
 
     public function ver($codigo){
@@ -219,37 +215,30 @@ class Persona extends CI_Controller{
         $CI->pdf->Output();        
     }
     
-    /*Busca a las personas que son profesores*/
-    public function buscar_profesor($j=0){
-        $filter     = new stdClass();
+   public function buscar($j=0){
+        $filter = new stdClass();
         $filter_not = new stdClass();
-        $filter->order_by    = array("PERSC_ApellidoPaterno"=>"asc","PERSC_ApellidoMaterno"=>"asc","PERSC_Nombre"=>"asc");
-        $registros  = count($this->persona_model->listar_profesor($filter,$filter_not));
-        $profesores = $this->persona_model->listar_profesor($filter,$filter_not,$this->configuracion['per_page'],$j);
-        $usuarios   = $this->persona_model->listar_usuario($filter,$filter_not,$this->configuracion['per_page'],$j);
-        $diferencia = array_udiff($profesores,$usuarios, create_function(
-                '$a,$b','return ($a->PERSP_Codigo - $b->PERSP_Codigo);'
-        ));    
+       // $filter->order_by       = array("e.CURSOC_Nombre"=>"asc","d.PERSC_ApellidoPaterno"=>"asc","d.PERSC_ApellidoMaterno"=>"asc","d.PERSC_Nombre"=>"asc");
+        $registros = count($this->Persona_model->listar($filter,$filter_not));
+        $personas  = $this->Persona_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item       = 1;
-        $lista      = array(); 
-        if(count($diferencia)>0){
-            foreach($diferencia as $indice => $value){
-                $lista[$indice]           = new stdClass();
-                $lista[$indice]->profesor = $value->PROP_Codigo;
+        $lista      = array();
+        if(count($personas)>0){
+            foreach($personas as $indice => $value){
+                $lista[$indice]             = new stdClass();
                 $lista[$indice]->numero   = $value->PERSC_NumeroDocIdentidad;
                 $lista[$indice]->nombres  = $value->PERSC_Nombre;
                 $lista[$indice]->paterno  = $value->PERSC_ApellidoPaterno;
                 $lista[$indice]->materno  = $value->PERSC_ApellidoMaterno;
                 $lista[$indice]->telefono = $value->PERSC_Telefono;
                 $lista[$indice]->movil    = $value->PERSC_Movil;
-                $lista[$indice]->codigo   = $value->PROP_Codigo;
-                $lista[$indice]->estado   = $value->PROC_FlagEstado;
+                $lista[$indice]->codigo   = $value->PERSP_Codigo;
+                $lista[$indice]->estado   = $value->PERSC_FlagEstado;
                 $lista[$indice]->fechareg = $value->PERSC_FechaRegistro;
-                $lista[$indice]->curso    = $value->PROD_Codigo;
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/maestros/persona/buscar_profesor";
+        $configuracion['base_url']    = base_url()."index.php/persona/buscar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/
@@ -257,7 +246,15 @@ class Persona extends CI_Controller{
         $data['j']               = $j;
         $data['registros']       = $registros;
         $data['paginacion']      = $this->pagination->create_links();
-        $this->load->view("ventas/profesor_buscar",$data);        
+        $this->load->view("persona/persona_buscar",$data);
     }
+    
+    public function obtener(){
+        $obj    = $this->input->post('objeto');
+        $filter = json_decode($obj);
+        $persona = $this->Persona_model->obtener($filter);
+        $resultado = json_encode($persona);
+        echo $resultado;
+    }    
 }
 ?>

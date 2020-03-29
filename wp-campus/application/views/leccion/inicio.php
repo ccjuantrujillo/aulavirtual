@@ -20,7 +20,18 @@
           <?php echo $menuhorz;?>          
           <hr style="margin-top: 0px;">
           <!-- Contenido de Leccion -->
-          <?php echo $descripcion;?>
+          <?php 
+          if($descripcion!=""){
+            echo $descripcion;    
+          }
+          else{
+              ?>
+                <div class="embed-responsive embed-responsive-16by9">
+                    <h4>NO EXISTEN CONTENIDO PARA ESTA LECCION</h4>
+                </div>
+              <?php
+          }
+          ?>
         </section>
     </section>
 </div>

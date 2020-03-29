@@ -7,16 +7,17 @@ class Usuario_model extends CI_Model{
         parent::__construct();
         $this->table     = "ant_usuario";
         $this->table_rol = "ant_rol";
+        $this->table_persona = "ant_persona";
         $this->empresa     = $this->config->item('empresa');  
     }
 
     public function ingresar($user,$clave)
     {
-        $where = array("u.USUAC_usuario"=>$user,"u.USUAC_Password"=>$clave);
+        $where = array("c.USUAC_usuario"=>$user,"c.USUAC_Password"=>$clave);
         $this->db->select('*');
-        $this->db->from($this->table." as u");
-        $this->db->join($this->table_rol.' as r','r.ROL_Codigo=u.ROL_Codigo','inner');
-        $this->db->where(array("u.EMPRP_Codigo"=>$this->empresa));
+        $this->db->from($this->table." as c");
+        $this->db->join($this->table_rol.' as r','r.ROL_Codigo=c.ROL_Codigo','inner');
+        $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
         $this->db->where($where);
         $query = $this->db->get();
         $resultado = new stdClass();
@@ -41,6 +42,7 @@ class Usuario_model extends CI_Model{
     public function listar($filter='',$filter_not='',$number_items='',$offset=''){
         $this->db->select('*');
         $this->db->from($this->table." as c");
+        $this->db->join($this->table_persona.' as p','p.PERSP_Codigo=c.PERSP_Codigo','inner');        
         $this->db->join($this->table_rol.' as e','e.ROL_Codigo=c.ROL_Codigo','inner');
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
         if(isset($filter->usuario))            $this->db->where(array("c.USUAP_Codigo"=>$filter->usuario));  

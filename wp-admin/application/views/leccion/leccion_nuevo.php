@@ -21,6 +21,10 @@
                   <td class="formss"><?php echo $selseccion;?></td>
                 </tr>  
                 <tr>
+                  <td bgcolor="#d5e2f2">Orden</td>
+                  <td class="formss"><input type="text" class="cajaGrande" name="orden" id="orden" value="<?php echo $lista->orden;?>"></td>
+                </tr>                 
+                <tr>
                   <td bgcolor="#d5e2f2">Nombre</td>
                   <td class="formss"><input type="text" class="cajaGrande" name="nombre" id="nombre" value="<?php echo $lista->nombre;?>"></td>
                 </tr>    

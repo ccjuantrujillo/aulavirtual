@@ -55,6 +55,15 @@
                 //Ultima fila
                 //
               }
+              else{
+                  ?>
+                    <div class="row">
+                      <div class="col-lg-10 col-md-9 col-sm-8">
+                          <p class="card-text"><H3>NO EXISTEN ARCHIVOS PARA ESTA LECCION</h3></p>
+                      </div>                  
+                    </div>
+                  <?php
+              }
              ?>       
           </div>
         </section>

@@ -17,6 +17,10 @@
                   <td class="formss"><?php echo $selcurso;?></td>
                 </tr>  
                 <tr>
+                  <td width="50%" bgcolor="#d5e2f2">Periodo</td>
+                  <td class="formss"><?php echo $selperiodo;?></td>
+                </tr>                 
+                <tr>
                   <td bgcolor="#d5e2f2">Orden</td>
                   <td class="formss"><input type="text" class="cajaGrande" name="orden" id="orden" value="<?php echo $lista->orden;?>"></td>
                 </tr>                         

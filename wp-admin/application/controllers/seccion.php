@@ -8,6 +8,7 @@ class Seccion extends CI_Controller {
         parent::__construct();
         if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");        
         $this->load->model('Seccion_model'); 
+        $this->load->model('Periodo_model'); 
         $this->load->model('Curso_model'); 
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
@@ -36,6 +37,7 @@ class Seccion extends CI_Controller {
                 $lista[$indice]->codigo       = $valor->SECCIONP_Codigo;
                 $lista[$indice]->curso        = $valor->CURSOC_Nombre;
                 $lista[$indice]->descripcion  = $valor->SECCIONC_Descripcion;
+                $lista[$indice]->periodo      = $valor->PERIODC_DESCRIPCION;
                 $lista[$indice]->orden        = $valor->SECCIONC_Orden;
                 $lista[$indice]->estado       = $valor->SECCIONC_FlagEstado;
                 $lista[$indice]->finicio      = date_sql($valor->SECCIONC_FechaInicio);
@@ -58,43 +60,39 @@ class Seccion extends CI_Controller {
     }
 
     public function editar($accion,$codigo=""){
-        $curso       = $this->input->get_post('curso'); 
-        $periodo     = $this->input->get_post('periodo'); 
-        $descripcion = $this->input->get_post('descripcion'); 
-        $orden       = $this->input->get_post('orden'); 
-        $finicio     = $this->input->get_post('finicio'); 
-        $ffin        = $this->input->get_post('ffin'); 
-        $estado      = $this->input->get_post('estado'); 
         $lista = new stdClass();
         if($accion == "e"){   
             $filter             = new stdClass();
             $filter->seccion    = $codigo;
             $secciones          = $this->Seccion_model->obtener($filter);
-            $lista->descripcion = $descripcion!=""?$descripcion:$secciones->SECCIONC_Descripcion;
-            $lista->orden       = $orden!=""?$orden:$secciones->SECCIONC_Orden;
-            $lista->finicio     = $finicio!=""?$finicio:date_sql($secciones->SECCIONC_FechaInicio);
-            $lista->ffin        = $ffin!=""?$ffin:date_sql($secciones->SECCIONC_FechaFin);
-            $lista->curso       = $curso!=""?$curso:$secciones->CURSOP_Codigo; 
-            $lista->estado      = $estado!=""?$estado:$secciones->SECCIONC_FlagEstado; 			
+            $lista->descripcion = $secciones->SECCIONC_Descripcion;
+            $lista->orden       = $secciones->SECCIONC_Orden;
+            $lista->finicio     = date_sql($secciones->SECCIONC_FechaInicio);
+            $lista->ffin        = date_sql($secciones->SECCIONC_FechaFin);
+            $lista->curso       = $secciones->CURSOP_Codigo; 
+            $lista->estado      = $secciones->SECCIONC_FlagEstado; 	
+            $lista->periodo     = $secciones->PERIODP_Codigo; 
         }
         elseif($accion == "n"){
-            $lista->descripcion  = $descripcion;
-            $lista->orden        = $orden;
-            $lista->finicio      = $finicio;
-            $lista->ffin         = $ffin;
+            $lista->descripcion  = "";
+            $lista->orden        = "";
+            $lista->finicio      = "";
+            $lista->ffin         = "";
             $lista->curso        = 0;
             $lista->estado       = 1;			
+            $lista->periodo      = 0;	
         }
-		$arrEstado           = array("0"=>"::Seleccione::","1"=>"ACTIVO","2"=>"INACTIVO");
+        $arrEstado           = array("0"=>"::Seleccione::","1"=>"ACTIVO","2"=>"INACTIVO");
         $data['titulo']      = $accion=="e"?"Modificar Seccion":"Nuevo Seccion"; ;        
         $data['form_open']   = form_open('',array("name"=>"frmPersona","id"=>"frmPersona","onsubmit"=>"","method"=>"post","enctype"=>"multipart/form-data"));
         $data['form_close']  = form_close();
-		$data['selestado']   = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
+	$data['selestado']   = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
         $data['lista']	     = $lista;
         $filter = new stdClass();
         $filter->estado = 1;
         $data['selcurso']    = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");     
-        $data['oculto']         = form_hidden(array('accion'=>$accion,'codigo'=>$codigo));
+        $filter = new stdClass();
+        $data['selperiodo']  = form_dropdown('periodo',$this->Periodo_model->seleccionar('0',$filter),$lista->periodo,"id='periodo' class='comboGrande'");          $data['oculto']      = form_hidden(array('accion'=>$accion,'codigo'=>$codigo));
         $this->load->view('seccion/seccion_nuevo',$data);
     }  
     
@@ -106,8 +104,9 @@ class Seccion extends CI_Controller {
                         "SECCIONC_Orden"     => $this->input->post('orden'),
                         "CURSOP_Codigo"      => $this->input->post('curso'),
                         "SECCIONC_FechaInicio" => date_sql_ret($this->input->post('finicio')),
-                        "SECCIONC_FechaFin"    => date_sql_ret($this->input->post('ffin')),
-                        "SECCIONC_FlagEstado"  => $this->input->post('estado')						
+                        "SECCIONC_FechaFin"   => date_sql_ret($this->input->post('ffin')),
+                        "SECCIONC_FlagEstado" => $this->input->post('estado'),						
+                        "PERIODP_Codigo"      => $this->input->post('periodo')
                        );
         if($accion == "n"){
             $codigo = $this->Seccion_model->insertar($data);            

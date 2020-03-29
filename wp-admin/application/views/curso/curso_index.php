@@ -25,12 +25,13 @@
         <table>
           <tr class="list1">
             <td width="5%">No</td>
-            <td width="30%">Curso</td>
+            <td width="20%">Curso</td>
+            <td width="10%">Area</td>
             <td width="15%">Ciclo</td>			
             <td width="25%">Profesor</td>  
-            <td width="10%">Estado</td>
-            <td width="10%">Editar</td>
-            <td width="10%">Eliminar</td>
+            <td width="8%">Estado</td>
+            <td width="8%">Editar</td>
+            <td width="8%">Eliminar</td>
           </tr>
           <?php
           if(count($lista)>0){
@@ -42,7 +43,8 @@
               <tr class="<?php echo $clase;?>">
                 <td><?php echo ++$j;?></td>
                 <td class="formss" style="text-align:left;"><?php echo $value->nombre;?></td>
-                <td class="formss"><?php echo $value->ciclo;?></td>				
+                <td class="formss"><?php echo $value->area;?></td>				
+                <td class="formss"><?php echo $value->ciclo;?></td>	
                 <td class="formss"><?php echo $value->profesor;?></td>   
                 <td><img src="<?php echo img.($flgestado==1?"check.jpg":"uncheck.jpg");?>" width="20px" height="20px"/><?php echo $estado;?></td>
                 <td><a href="#" onclick='editar("<?php echo $value->codigo;?>")'><img src="<?php echo img;?>editar.jpg"/></a></td>

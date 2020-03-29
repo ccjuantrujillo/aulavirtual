@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+$config['empresa'] = 3;
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -522,5 +522,5 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-$config['empresa'] = 1;
+
 

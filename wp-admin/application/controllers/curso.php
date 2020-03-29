@@ -12,6 +12,7 @@ class Curso extends CI_Controller {
         $this->load->model('Curso_model');	 
         $this->load->model('Ciclo_model');            
         $this->load->model('Profesor_model');  
+        $this->load->model('Area_model');  
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
         $this->login   = $this->session->userdata('login');
@@ -35,13 +36,15 @@ class Curso extends CI_Controller {
         $lista     = array();
         if(count($productos)>0){
             foreach($productos as $indice=>$valor){ 
-                $lista[$indice]             = new stdClass();
-                $lista[$indice]->codigo     = $valor->CURSOP_Codigo;
-                $lista[$indice]->nombre     = $valor->CURSOC_Nombre;
-                $lista[$indice]->profesor   = $valor->PROC_Nombre." ".$valor->PROC_ApellidoPaterno;
-                $lista[$indice]->estado     = $valor->CURSOC_FlagEstado;
-                $lista[$indice]->fechareg   = $valor->CURSOC_FechaRegistro;
+                $lista[$indice]           = new stdClass();
+                $lista[$indice]->codigo   = $valor->CURSOP_Codigo;
+                $lista[$indice]->nombre   = $valor->CURSOC_Nombre;
+                $lista[$indice]->profesor = $valor->PERSC_Nombre." ".$valor->PERSC_ApellidoPaterno;
+                $lista[$indice]->estado   = $valor->CURSOC_FlagEstado;
+                $lista[$indice]->fechareg = $valor->CURSOC_FechaRegistro;
                 $lista[$indice]->ciclo    = $valor->CICLOC_DESCRIPCION;
+                $lista[$indice]->video    = $valor->CURSOC_Video;
+                $lista[$indice]->area     = $valor->AREAC_Descripcion;
             }
         }
         $configuracion = $this->configuracion;
@@ -60,8 +63,8 @@ class Curso extends CI_Controller {
 
     public function editar($accion,$codigo=""){
         $lista = new stdClass();
-		$lista->accion = $accion;
-		$lista->codigo = $codigo;
+        $lista->accion = $accion;
+        $lista->codigo = $codigo;
         if($accion == "e"){
             $filter                = new stdClass();
             $filter->curso         = $codigo;
@@ -84,6 +87,8 @@ class Curso extends CI_Controller {
             $lista->puntaje        = $productos->CURSOC_Puntaje;  
             $lista->estado         = $productos->CURSOC_FlagEstado; 
             $lista->profesor       = $productos->PROP_Codigo; 
+            $lista->video          = $productos->CURSOC_Video; 
+            $lista->area           = $productos->AREAP_Codigo; 
         }
         elseif($accion == "n"){
             $lista->producto       = "";
@@ -102,23 +107,27 @@ class Curso extends CI_Controller {
             $lista->puntaje        = 14;
             $lista->estado         = 1; 
             $lista->profesor       = "";  
+            $lista->video          = "";  
+            $lista->area           = "";
         }
-		$data["principal"] = $this->editar_principal($lista);
-		$data["archivos"]  = $this->editar_archivo($lista);
+        $data["principal"] = $this->editar_principal($lista);
+        $data["archivos"]  = $this->editar_archivo($lista);
         $this->load->view('curso/curso_nuevo',$data);
     }  
     
-	public function editar_principal($lista){
+    public function editar_principal($lista){
         $arrEstado          = array("0"=>"::Seleccione::","1"=>"ACTIVO","2"=>"INACTIVO");
         $data['titulo']     = $lista->accion=="e"?"Modificar Curso":"Nuevo Curso";
         $data['form_open']  = form_open(base_url()."index.php/curso/grabar",array("name"=>"frmBusqueda","id"=>"frmBusqueda","class"=>"formulario","enctype"=>"multipart/form-data"));
-        $data['form_close'] = form_close();    
-        $data['lista']	    = $lista;
-        $data['selestado']  = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
+        $data['form_close']  = form_close();    
+        $data['lista']	     = $lista;
+        $data['selestado']   = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
+        $filter = new stdClass();
+        $data['selarea']     = form_dropdown('area',$this->Area_model->seleccionar($filter),$lista->area,"id='area' class='comboMedio'");
         $data['selciclo']    = form_dropdown('ciclo',$this->Ciclo_model->seleccionar(),$lista->ciclo,"id='ciclo' class='comboMedio'");
-        $data['selprofesor']    = form_dropdown('profesor',$this->Profesor_model->seleccionar(),$lista->profesor,"id='profesor' class='comboMedio'");        
-        $data['oculto']     = form_hidden(array('accion'=>$lista->accion,'codigo'=>$lista->codigo));
-        $data['links']     = array("urlprod"=>base_url()."index.php/almacen/curso/editar/".$lista->accion."/".$lista->codigo,"urlatrib"=>base_url()."index.php/almacen/semana/listar/".$lista->accion."/".$lista->codigo,"urlcomp"=>"");
+        $data['selprofesor'] = form_dropdown('profesor',$this->Profesor_model->seleccionar(),$lista->profesor,"id='profesor' class='comboMedio'");        
+        $data['oculto']      = form_hidden(array('accion'=>$lista->accion,'codigo'=>$lista->codigo));
+        $data['links']       = array("urlprod"=>base_url()."index.php/almacen/curso/editar/".$lista->accion."/".$lista->codigo,"urlatrib"=>base_url()."index.php/almacen/semana/listar/".$lista->accion."/".$lista->codigo,"urlcomp"=>"");
         return $this->load->view('curso/curso_nuevo_principal',$data,true);
 	}
 	
@@ -149,7 +158,9 @@ class Curso extends CI_Controller {
                         "CICLOP_Codigo"            => $this->input->post('ciclo'),
                         "CURSOC_FlagEstado"        => $this->input->post('estado'),
                         "CURSOC_TiempoExamen"      => trim($this->input->post('tiempoprueba')),
-                        "PROP_Codigo"              => $this->input->post('profesor')
+                        "PROP_Codigo"              => $this->input->post('profesor'),
+                        "CURSOC_Video"             => $this->input->post('video'),
+                        "AREAP_Codigo"             => $this->input->post('area')
                        );     
         /*Subimos imagen*/
         if(isset($_FILES['imagen']['name']) && trim($_FILES['imagen']['name'])!=""){

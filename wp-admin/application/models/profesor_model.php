@@ -5,16 +5,16 @@ class Profesor_model extends CI_Model{
 
     public function __construct(){
         parent::__construct();
-        $this->table      = "ant_profesor";
-        $this->table_rol  = "ant_rol";
-        $this->empresa     = $this->config->item('empresa');  
+        $this->table         = "ant_profesor";
+        $this->table_persona = "ant_persona";
+        $this->empresa       = $this->config->item('empresa');  
     }
 
     public function seleccionar($default='',$filter='',$filter_not='',$number_items='',$offset=''){
         if($default!="") $arreglo = array($default=>':: Seleccione ::');
         foreach($this->listar($filter,$filter_not,$number_items,$offset) as $indice=>$valor){
             $indice1   = $valor->PROP_Codigo;
-            $valor1    = $valor->PROC_Nombre." ".$valor->PROC_ApellidoPaterno;
+            $valor1    = $valor->PERSC_Nombre." ".$valor->PERSC_ApellidoPaterno;
             $arreglo[$indice1] = $valor1;
         }
         return $arreglo;
@@ -23,6 +23,7 @@ class Profesor_model extends CI_Model{
     public function listar($filter,$filter_not='',$number_items='',$offset=''){
         $this->db->select('*,DATE_FORMAT(c.PROC_FechaRegistro,"%d/%m/%Y") AS fechareg',FALSE);
         $this->db->from($this->table." as c",$number_items,$offset);
+        $this->db->join($this->table_persona.' as d','d.PERSP_Codigo=c.PERSP_Codigo','inner');
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
         if(isset($filter->profesor))        $this->db->where(array("c.PROP_Codigo"=>$filter->profesor));
         if(isset($filter->borrado))         $this->db->where(array("c.PROC_FlagBorrado"=>$filter->borrado));

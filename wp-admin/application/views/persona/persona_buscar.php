@@ -8,12 +8,12 @@
     <script type="text/javascript" src="<?php echo js;?>jquery.js"></script>   
     <script type="text/javascript" src="<?php echo js;?>jquery.simplemodal.js"></script>      
     <script type="text/javascript" src="<?php echo js;?>constants.js"></script>     
-    <script type="text/javascript" src="<?php echo js;?>ventas/profesor.js"></script>    
+    <script type="text/javascript" src="<?php echo js;?>maestros/persona.js"></script>    
 </head>
 <body>
 <div class="contenido">  
     <div class="titulo">
-        <h1>Buscar profesores</h1>
+        <h1>Buscar personas</h1>
     </div>
     <div class="tabla">
         <table  border="1"  cellspacing="0" cellpadding="0">
@@ -30,9 +30,9 @@
                 $estado = $flgestado==1?"Activo":"Inactivo";
                 $clase = ($item%2)==0?"list_a":"list_b";
                ?>
-            <tr class="<?php echo $clase;?>" id="<?php echo $value->codigo;?>" onclick="selecciona_profesor(<?php echo $value->codigo;?>);">
+            <tr class="<?php echo $clase;?>" id="<?php echo $value->codigo;?>" onclick="selecciona_persona(<?php echo $value->codigo;?>);">
                 <td><?php echo ++$j;?></td>
-                <td><?php echo $value->curso;?></td>
+                <td></td>
                 <td><?php echo $value->paterno." ".$value->materno." ".$value->nombres;?></td>
                 <td><?php echo $value->fechareg;?></td>
               </tr>  

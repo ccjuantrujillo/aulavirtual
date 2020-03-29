@@ -41,6 +41,7 @@ class Leccion extends CI_Controller
                 $lista[$indice]->nombre       = $valor->LECCIONC_Nombre;
                 $lista[$indice]->descripcion  = $valor->LECCIONC_Descripcion;
                 $lista[$indice]->curso        = $valor->CURSOC_Nombre;
+                $lista[$indice]->orden        = $valor->LECCIONC_Orden;
                 $lista[$indice]->video        = trim($valor->LECCIONC_Video)!=""?"Si":"<span style='color:#FF0000'>No</span>";
             }
         }
@@ -60,21 +61,17 @@ class Leccion extends CI_Controller
     }
     
      public function editar($accion,$codigo=""){
-        $seccion     = $this->input->get_post('seccion'); 
-        $video       = $this->input->get_post('video'); 
-        $descripcion = $this->input->get_post('descripcion'); 
-        $nombre      = $this->input->get_post('nombre');
-        $curso       = $this->input->get_post('curso');
         $lista = new stdClass();
         if($accion == "e"){   
             $filter             = new stdClass();
             $filter->leccion    = $codigo;
             $lecciones          = $this->Leccion_model->obtener($filter);
-            $lista->descripcion = $descripcion!=""?$descripcion:$lecciones->LECCIONC_Descripcion;
-            $lista->nombre      = $nombre!=""?$nombre:$lecciones->LECCIONC_Nombre;
-            $lista->video       = $video!=""?$video:$lecciones->LECCIONC_Video;
-            $lista->seccion     = $seccion!=""?$seccion:$lecciones->SECCIONP_Codigo;
-            $lista->curso       = $curso!=""?$curso:$lecciones->CURSOP_Codigo;
+            $lista->descripcion = $lecciones->LECCIONC_Descripcion;
+            $lista->nombre      = $lecciones->LECCIONC_Nombre;
+            $lista->video       = $lecciones->LECCIONC_Video;
+            $lista->seccion     = $lecciones->SECCIONP_Codigo;
+            $lista->curso       = $lecciones->CURSOP_Codigo;
+            $lista->orden       = $lecciones->LECCIONC_Orden;
         }
         elseif($accion == "n"){
             $lista->descripcion  = "";
@@ -82,6 +79,7 @@ class Leccion extends CI_Controller
             $lista->video        = "";
             $lista->seccion      = 0;
             $lista->curso        = 0;
+            $lista->orden        = "";
         }
         $data['titulo']      = $accion=="e"?"Modificar Leccion":"Nuevo Leccion"; ;        
         $data['form_open']   = form_open('',array("name"=>"frmPersona","id"=>"frmPersona","onsubmit"=>"","method"=>"post","enctype"=>"multipart/form-data"));
@@ -89,10 +87,11 @@ class Leccion extends CI_Controller
         $data['lista']       = $lista;
         $filter = new stdClass();
         $filter->estado = 1;
-        $filter->curso  = $lista->curso;        
-        $data['selseccion']  = form_dropdown('seccion',$this->Seccion_model->seleccionar('0',$filter),$lista->seccion,"id='seccion' class='comboGrande'"); 
-        $data['selcurso']    = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");             
-        $data['oculto']      = form_hidden(array('accion'=>$accion,'codigo'=>$codigo));
+        $filter->curso  = $lista->curso;    
+        $filter->order_by = array("c.SECCIONC_Orden"=>"asc","c.SECCIONC_Descripcion"=>"asc");
+        $data['selseccion']  = form_dropdown('seccion',$this->Seccion_model->seleccionar('0',$filter),$lista->seccion,"id='seccion' class='comboGrande'");          $filter->estado   = 1;
+        $filter->curso    = $lista->curso;  
+        $data['selcurso'] = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");                     $data['oculto']   = form_hidden(array('accion'=>$accion,'codigo'=>$codigo));
         $this->load->view('leccion/leccion_nuevo',$data);
     }
      
@@ -103,7 +102,8 @@ class Leccion extends CI_Controller
                         "LECCIONC_Nombre"      => $this->input->post('nombre'),
                         "LECCIONC_Descripcion" => $this->input->post('descripcion'),
                         "SECCIONP_Codigo"      => $this->input->post('seccion'),
-                        "LECCIONC_Video"       => $this->input->post('video')
+                        "LECCIONC_Video"       => $this->input->post('video'),
+                        "LECCIONC_Orden"       => $this->input->post('orden'),
                        );
         if($accion == "n"){
             $codigo = $this->Leccion_model->insertar($data);            

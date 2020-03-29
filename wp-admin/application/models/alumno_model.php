@@ -6,7 +6,6 @@ class Alumno_model extends CI_Model{
     public function __construct(){
         parent::__construct();
         $this->table_persona = "ant_persona";
-        $this->table_ciclo = "ant_ciclo";
         $this->table       = "ant_alumno";
         $this->empresa     = $this->config->item('empresa');        
     }
@@ -24,6 +23,7 @@ class Alumno_model extends CI_Model{
     public function listar($filter,$filter_not='',$number_items='',$offset=''){
         $this->db->select('*',FALSE);
         $this->db->from($this->table." as c",$number_items,$offset);
+        $this->db->join($this->table_persona.' as d','d.PERSP_Codigo=c.PERSP_Codigo','inner');
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
         if(isset($filter->alumno) && $filter->alumno!='')  $this->db->where(array("c.ALUMP_Codigo"=>$filter->alumno));
         if(isset($filter->order_by) && count($filter->order_by)>0){
@@ -62,7 +62,7 @@ class Alumno_model extends CI_Model{
     }
 
     public function eliminar($codigo){
-        $this->db->delete($this->table,array('ALUMP_Codigo' => $codigo));
+        return $this->db->delete($this->table,array('ALUMP_Codigo' => $codigo));
     }
 }
 ?>

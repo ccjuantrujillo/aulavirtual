@@ -9,14 +9,15 @@ if ( ! function_exists('menu_izq'))
     function menu_izq($curso="")
    {
         if($curso!=""){
-            $objCurso        = new Curso_model();		   	
-            $cursos          = $objCurso->get($curso);
+            $objCurso         = new Curso_model();		   	
+            $cursos           = $objCurso->get($curso);
             //Obtenemos las leccioes
-            $filter          = new stdClass();
-            $filter->curso   = $curso;
+            $filter           = new stdClass();
+            $filter->curso    = $curso;
             $filter->estadoseccion  = 1;
-            $objLeccion      = new Leccion_model();		
-            $lecciones       = $objLeccion->read($filter);	
+            $filter->order_by = array("c.LECCIONC_Orden"=>"asc");
+            $objLeccion       = new Leccion_model();		
+            $lecciones        = $objLeccion->read($filter);	
             //Construimos el menu
             $menu = "<div id='Menu'>";
             $menu.= "<aside>";
@@ -80,7 +81,7 @@ if ( ! function_exists('menu_izq'))
                 $menu.= "<div id='sidebar' class='nav-collapse'>";
                 $menu.= "<ul class='sidebar-menu' id='nav-accordion'>";
                 $menu.= "<p class='centered'><a href='#'><img src='".base_url()."assets/img/ui-sam.jpg' class='img-circle' width='80'></a></p>";
-                $menu.= "<h5 class='centered'>STEVE VALMER</h5>";
+                $menu.= "<h5 class='centered'>".$_SESSION['nomper']."</h5>";
                 $menu.= "<li class='mt'>";
                 $menu.= "<a href='".base_url()."curso/read'>";
                 $menu.= "<i class='fa fa-dashboard'></i>";

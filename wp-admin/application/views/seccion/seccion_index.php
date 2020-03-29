@@ -27,9 +27,10 @@
         <table>
           <tr class="list1">
             <td width="29%">Descripcion</td>
+            <td width="12%">Periodo</td>            
             <td width="30%">Curso</td>
-            <td width="12%">F.Inicio</td>
-            <td width="12%">F.Fin</td>	
+            <td width="6%">F.Inicio</td>
+            <td width="6%">F.Fin</td>	
             <td width="7%">Estado</td>								
             <td width="5%">Editar</td>
             <td width="5%">Eliminar</td>
@@ -43,6 +44,7 @@
                ?>
               <tr class="<?php echo $clase;?>">
                 <td align="center" style="text-align:left;"><?php echo $value->orden." ".$value->descripcion;?></td>
+                <td align="left"><?php echo $value->periodo;?></td>
                 <td align="left"><?php echo $value->curso;?></td>
                 <td align="left"><?php echo $value->finicio;?></td>
                 <td align="left"><?php echo $value->ffin;?></td>		

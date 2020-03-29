@@ -10,11 +10,7 @@
     <h1><?php echo $datosempresa->EMPRC_RazonSocial;?></h1>
         <form action="<?php echo base_url();?>inicio/ingresar" method="POST">
             <p>Perfil</p>
-            <select name="rol" id="rol">
-                <option value="0">- Seleccione perfil -</option>
-                <option value="1">Alumno</option>                
-                <option value="2">Profesor</option>
-            </select>
+            <?php echo $selrol;?>
             <p>Usuario</p>
             <input type="text" name="usuario" placeholder="- Ingresa tu usuario -">
             <p>Password</p>

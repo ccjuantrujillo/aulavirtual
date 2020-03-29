@@ -501,12 +501,7 @@ function abrir_formulario_ubigeo(){
 	window.open(url,'Formulario Ubigeo','menubar=no,resizable=no,width=200,height=180');
 }
 
-function selecciona_profesor(codigo){
-    window.opener.selecciona_profesor(codigo); 
-    window.close();
-}
-
 function selecciona_profesor2(codigo){
-    window.opener.selecciona_profesor2(codigo); 
-    window.close();
+    //window.opener.selecciona_profesor2(codigo); 
+    //window.close();
 }

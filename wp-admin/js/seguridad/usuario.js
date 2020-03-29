@@ -85,7 +85,7 @@ jQuery(document).ready(function(){
    
     $("body").on('click',"#ver_profesor",function(){
         dataString = "flgcoordinador=1";
-        url = base_url+"index.php/profesor/buscar/";   
+        url = base_url+"index.php/persona/buscar/";   
         window.open("","popup","width=700,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");          
         $("#form1").attr("target","popup");
         $("#form1").attr("method","post");
@@ -94,23 +94,17 @@ jQuery(document).ready(function(){
     });      
 });
 
-function selecciona_profesor(codigo){
-    url    = base_url+"index.php/profesor/obtener/";
+function selecciona_persona(codigo){
+    url    = base_url+"index.php/persona/obtener/";
     objRes = new Object();
-    objRes.profesor = codigo;
+    objRes.persona = codigo;
     dataString   = {objeto: JSON.stringify(objRes)};
     $.post(url,dataString,function(data){
-        $.each(data, function(item,value){
-            $("#paterno").val(value.PERSC_ApellidoPaterno);
-            $("#materno").val(value.PERSC_ApellidoMaterno);
-            $("#nombres").val(value.PERSC_Nombre);            
-            $("#codigo_padre").val(value.PERSP_Codigo); 
-            $("#curso").val(value.PROD_Codigo); 
-            $("#profesor").val(value.PROP_Codigo); 
-            $("#login").val('');  
-            $("#clave").val('');  
-            $("#rol").val(6); 
-            
-        });
+        $("#paterno").val(data.PERSC_ApellidoPaterno);
+        $("#materno").val(data.PERSC_ApellidoMaterno);
+        $("#nombres").val(data.PERSC_Nombre);            
+        $("#login").val('');  
+        $("#clave").val('');  
+        $("#codigo_padre").val(data.PERSP_Codigo);  
     },"json");
 }

@@ -6,16 +6,32 @@ class Inicio extends Layout{
 	var $empresa;
 
 	public function __construct(){
-		parent::__construct();
-		$this->load->model('Curso_model');
-		$this->load->model('Empresa_model');
-        $this->empresa = $this->config->item('empresa');
+            parent::__construct();
+            $this->load->model('Curso_model');
+            $this->load->model('Empresa_model');
+            $this->load->model('Usuario_model');
+            $this->load->model('Rol_model');
+            $this->empresa = $this->config->item('empresa');
 	}
 
+        public function directo($curso){
+            $datos = array(
+                        'nomper'   => "Martin Trujillo",
+                        'login'    => "demo",
+                        'codusu'   => "demo",
+                        'rolusu'   => 4,
+                        'acceso'   => 1
+                         );
+            $this->session->set_userdata($datos);
+            redirect(base_url()."curso/inicio/".$curso); 
+        }
+        
 	public function index()
 	{
-		$data['datosempresa'] = $this->Empresa_model->get($this->empresa);
-		$this->load->view('inicio/index',$data);
+            $filter = new stdClass();
+            $data['selrol'] = form_dropdown('rol',$this->Rol_model->seleccionar($filter),0,"id='rol' class='comboMedio'");
+            $data['datosempresa'] = $this->Empresa_model->get($this->empresa);
+            $this->load->view('inicio/index',$data);
 	}
 
 	public function ingresar(){
@@ -27,16 +43,22 @@ class Inicio extends Layout{
             else{
                 $usuario = $this->input->post('usuario');
                 $clave   = $this->input->post('clave');
-                if($usuario=="demo" && $clave=="123456"){
+                $rol     = $this->input->post('rol');
+                $filter  = new stdClass();
+                $filter->usuario = $usuario;
+                $filter->clave   = md5($clave);
+                $filter->rol     = $rol;
+                $usuario = $this->Usuario_model->get($filter);
+                if(is_object($usuario) && isset($usuario->USUAP_Codigo)){
                     $datos = array(
-                                'nomper'   => "Martin Trujillo",
-                                'login'    => "demo",
-                                'codusu'   => "demo",
-                                'rolusu'   => 4,
+                                'nomper'   => $usuario->PERSC_Nombre." ".$usuario->PERSC_ApellidoPaterno,
+                                'login'    => $usuario->USUAC_usuario,
+                                'codusu'   => $usuario->USUAP_Codigo,
+                                'rolusu'   => $usuario->ROL_Codigo,
                                 'acceso'   => 1
                                  );
                     $this->session->set_userdata($datos);
-                    redirect(base_url()."curso/read");        
+                    redirect(base_url()."curso/read");  
                 }
                 else{
                     $msgError = "<br><div align='center' class='error'>Usuario y/o contrasena no valido para esta empresa.</div>";
@@ -47,6 +69,7 @@ class Inicio extends Layout{
         
         public function salir(){
             session_destroy();
-            redirect('inicio/index');            
+            //redirect('inicio/index');  Original
+            redirect(dirname(base_url()));
         }
 }
