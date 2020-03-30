@@ -21,7 +21,10 @@
                 <?php echo strtoupper($empresa->EMPRC_RazonSocial);?>
               </p>
               <form>
-
+                <p class="frmcamp">
+                    <span>Rol</span> 
+                    <?php echo $selrol;?>
+                </p>
                 <p class="frmcamp">
                     <span>Usuario</span> 
                     <input name="txtUsuario" type="text" id="txtUsuario" class="cajaMedia minus"/>

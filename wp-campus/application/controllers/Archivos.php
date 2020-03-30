@@ -16,10 +16,11 @@ class Archivos extends LayoutAdmin{
         $leccion = $this->Leccion_model->get($lec);		
         $curso   = $leccion->CURSOP_Codigo;
         $seccion = $leccion->SECCIONP_Codigo;
+        $data['sgtelec']  = sgte_leccion($lec);        
         $data['leccion']  = $leccion;
         $data['indice']   = $indice;
         $data['menulecc'] = menu_lecciones($seccion);
-        $data['menuizq']  = menu_izq($curso);
+        $data['menuizq']  = menu_izq($curso,$seccion);
         $data['menuhorz'] = menu_horiz_lecc($lec,$indice);
         //Obtenemos los archivos de la leccion
         $filter = new stdClass();

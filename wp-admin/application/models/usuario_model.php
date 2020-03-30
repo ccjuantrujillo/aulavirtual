@@ -11,9 +11,9 @@ class Usuario_model extends CI_Model{
         $this->empresa     = $this->config->item('empresa');  
     }
 
-    public function ingresar($user,$clave)
+    public function ingresar($user,$clave,$rol)
     {
-        $where = array("c.USUAC_usuario"=>$user,"c.USUAC_Password"=>$clave);
+        $where = array("c.USUAC_usuario"=>$user,"c.USUAC_Password"=>$clave,"c.ROL_Codigo"=>$rol);
         $this->db->select('*');
         $this->db->from($this->table." as c");
         $this->db->join($this->table_rol.' as r','r.ROL_Codigo=c.ROL_Codigo','inner');

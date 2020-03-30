@@ -7,7 +7,7 @@ class Curso extends CI_Controller {
 
     public function __construct(){
         parent::__construct();
-        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");        
+        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");
         $this->load->model('Empresa_model');
         $this->load->model('Curso_model');	 
         $this->load->model('Ciclo_model');            

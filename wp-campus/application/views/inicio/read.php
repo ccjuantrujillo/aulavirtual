@@ -12,10 +12,10 @@
 					<span class="duration">03:15</span>
 				</a>
 				<h3><a href="<?php echo base_url();?>curso/inicio/<?php echo $value->CURSOP_Codigo?>"><?php echo $value->CURSOC_Nombre?></a></h3>
-				<?php echo $value->CURSOC_DescripcionBreve?>
+				< ?php echo $value->CURSOC_DescripcionBreve?>
 			</li>
 			<?php
-		}
+		//}
 		?>
 	</ul>
 </div-->

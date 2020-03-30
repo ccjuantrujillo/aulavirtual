@@ -14,6 +14,7 @@ class Inicio extends CI_Controller {
         $this->load->model('Ciclo_model');
         $this->load->model('Profesor_model');
         $this->load->model('Empresa_model');
+        $this->load->model('Rol_model');
         $this->load->helper('menu');
         $this->empresa  = $this->config->item('empresa');          
     }
@@ -26,6 +27,7 @@ class Inicio extends CI_Controller {
         $data['form_close'] = form_close(); 
         $data['onload']     = "onload=\"$('#txtUsuario').focus();\"";   
         $data['header']     = get_header();
+        $data['selrol']     = form_dropdown('rol',$this->Rol_model->seleccionar('',$filter),"","id='rol' class='comboMedio'");        
         $this->load->view("inicio/index",$data);
     }
     
@@ -38,8 +40,9 @@ class Inicio extends CI_Controller {
         else{
             $txtUsuario = $this->input->post('txtUsuario');
             $txtClave   = $this->input->post('txtClave');
-            $usuarios   = $this->Usuario_model->ingresar(trim($txtUsuario),md5(trim($txtClave)));
-			if(count((array)$usuarios)>0){
+            $rol        = $this->input->post('rol');
+            $usuarios   = $this->Usuario_model->ingresar(trim($txtUsuario),md5(trim($txtClave)),$rol);
+            if(count((array)$usuarios)>0){
                 $data = array(
                             'login'    => $usuarios->USUAC_usuario,
                             'codusu'   => $usuarios->USUAP_Codigo,
