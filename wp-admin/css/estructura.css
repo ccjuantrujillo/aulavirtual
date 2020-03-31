@@ -36,7 +36,7 @@ blockquote, q {quotes: "" "";}
 .contenido{width: 98%;margin:0 auto;border:0px solid #000;height: 545px;}
 .contenido #tab-acceso{float: right;margin-top: 50px;overflow:scroll;height:200px;}
 .contenido #tab-acceso table{border:1px solid #000;width: 250px;text-align: center;}
-//.contenido ul{width: 750px;border: 1px solid #000;margin:0 auto;}
+/*.contenido ul{width: 750px;border: 1px solid #000;margin:0 auto;}
 /*.contenido #tab-acceso table tr,td{border:1px solid #000;}*/
 .header{float:left;width: 100%;}
 .header a:hover{font-weight: bold;}

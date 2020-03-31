@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$config['empresa']     = 2;
+$config['empresa']     = 3;
 /*
 |--------------------------------------------------------------------------
 | Base Site URL

@@ -30,6 +30,11 @@ class Leccion_model extends CI_Model{
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa)); 
         if(isset($filter->leccion))  $this->db->where(array("c.LECCIONP_Codigo"=>$filter->leccion));    
         if(isset($filter->seccion))  $this->db->where(array("c.SECCIONP_Codigo"=>$filter->seccion));   
+        if(isset($filter->order_by) && count($filter->order_by)>0){
+            foreach($filter->order_by as $indice=>$value){
+                $this->db->order_by($indice,$value);
+            }
+        }           
         $query = $this->db->get();
         $resultado = array();
         //if($query->num_rows>0){

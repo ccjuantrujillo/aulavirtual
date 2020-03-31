@@ -13,7 +13,9 @@ class Archivos extends LayoutAdmin{
 
     public function inicio($lec,$indice="")
     {
-        $leccion = $this->Leccion_model->get($lec);		
+        $filter = new stdClass();
+        $filter->leccion = $lec;
+        $leccion = $this->Leccion_model->get($filter);		
         $curso   = $leccion->CURSOP_Codigo;
         $seccion = $leccion->SECCIONP_Codigo;
         $data['sgtelec']  = sgte_leccion($lec);        

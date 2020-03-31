@@ -22,15 +22,17 @@ class Curso extends LayoutAdmin{
     {
         $filter = new stdClass();
         $filter->curso = $curso;
+        $filter->order_by = array("c.SECCIONC_Orden"=>"asc");
         $secciones = $this->Seccion_model->read($filter);
         $menu = "";
         if(count($secciones)>0){
             foreach ($secciones as $value){
                 $menu .= "<li class='mt'>".$value->SECCIONC_Descripcion."</li>";
-                $filter = new stdClass();
-                $filter->curso = $curso;
-                $filter->seccion = $value->SECCIONP_Codigo;
-                $lecciones = $this->Leccion_model->read($filter);        
+                $filter2 = new stdClass();
+                $filter2->curso = $curso;
+                $filter2->seccion = $value->SECCIONP_Codigo;
+                $filter2->order_by = array("c.LECCIONC_Orden"=>"asc");
+                $lecciones = $this->Leccion_model->read($filter2);        
                 if(count($lecciones)>0){
                     foreach ($lecciones as $val){
                         $menu .= "<ul>";

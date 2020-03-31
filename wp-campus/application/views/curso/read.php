@@ -1,6 +1,6 @@
 <!--Contenido-->
 <div class="container-fluid">
-    <h1 class="mt-4">MIS CURSOS</h1>
+    <h3 class="mt-4">MIS CURSOS</h3>
     <div class="row">
         <?php
         foreach($cursos as $value){
@@ -16,7 +16,9 @@
                         
                     </div>                    
                 </div>
-                <h3><a href="<?php echo base_url();?>curso/inicio/<?php echo $value->CURSOP_Codigo;?>"><?php echo $value->CURSOC_Nombre;?></a></h3>
+                <h4>
+                    <a href="<?php echo base_url();?>curso/inicio/<?php echo $value->CURSOP_Codigo;?>"><?php echo $value->CURSOC_Nombre;?></a>
+                </h4>
             </div>
         <?php
         }

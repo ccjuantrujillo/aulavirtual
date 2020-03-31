@@ -21,6 +21,7 @@ class Usuario_model extends CI_Model {
             if(isset($filter->usuario))    $this->db->where(array("c.USUAC_usuario"=>$filter->usuario));
             if(isset($filter->clave))      $this->db->where(array("c.USUAC_Password"=>$filter->clave));
             if(isset($filter->rol))        $this->db->where(array("c.ROL_Codigo"=>$filter->rol));
+            echo $this->db->last_query();
             $query = $this->db->get();
             return $query->result();
         }

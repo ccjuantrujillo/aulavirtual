@@ -58,7 +58,7 @@ class Inicio extends CI_Controller {
                 redirect("inicio/principal");                
             }
             else{
-                $msgError = "<br><div align='center' class='error'>Usuario y/o contrasena no valido para esta empresa.</div>";
+                $msgError = "<br><div align='center' class='error'>Usuario99 y/o contrasena no valido para esta empresa.</div>";
                 echo $msgError;
                 $this->index();
             }

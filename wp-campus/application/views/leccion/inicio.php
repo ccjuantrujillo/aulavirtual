@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <h3 class="mt-4">
-        <?php echo $leccion->SECCIONC_Descripcion;?>/<?php echo $leccion->LECCIONC_Nombre;?>
+        <a href="<?php echo base_url();?>curso/inicio/<?php echo $leccion->CURSOP_Codigo;?>"><?php echo $leccion->CURSOC_Nombre;?></a>
+        /<?php echo $leccion->LECCIONC_Orden." ".$leccion->LECCIONC_Nombre;?>
     </h3>
     <?php
     if(trim($leccion->LECCIONC_Video)!=""){
@@ -12,14 +13,14 @@
     }
     ?>
     <?php echo $menuhorz;?>          
-    <hr style="margin-top: 0px;">
+    <hr style="margin-top: 0px;background: #337aff;">
     <?php 
     if($descripcion!=""){
       echo $descripcion;    
     }
     else{
         ?>
-          <div class="embed-responsive embed-responsive-16by9">
+          <div class="row">
               <h4>NO EXISTEN CONTENIDO PARA ESTA LECCION</h4>
           </div>
         <?php

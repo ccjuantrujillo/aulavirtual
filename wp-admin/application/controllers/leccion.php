@@ -28,7 +28,7 @@ class Leccion extends CI_Controller
         $menu       = get_menu($filter);     
         $filter     = new stdClass();
         $filter_not = new stdClass(); 
-        //$filter->order_by    = array("c.SECCIONC_Orden"=>"asc");
+        $filter->order_by    = array("e.CURSOC_Nombre"=>"asc","d.SECCIONC_Orden"=>"asc","c.LECCIONC_Orden"=>"asc");
         $registros = count($this->Leccion_model->listar($filter,$filter_not));
         $productoatrib = $this->Leccion_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;

@@ -70,7 +70,6 @@ function return_bytes($val) {
         case 'k':
             $val *= 1024;
     }
-
     return $val;
 }
 ?>

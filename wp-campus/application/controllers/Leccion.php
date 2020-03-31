@@ -12,7 +12,9 @@ class Leccion extends LayoutAdmin{
 
     public function inicio($lec,$indice="")
     {
-        $leccion = $this->Leccion_model->get($lec);		
+        $filter = new stdClass();
+        $filter->leccion = $lec;
+        $leccion = $this->Leccion_model->get($filter);
         $curso   = $leccion->CURSOP_Codigo;
         $seccion = $leccion->SECCIONP_Codigo;
         $data['descripcion'] = str_replace("images",base_url()."assets/img",$leccion->LECCIONC_Descripcion);
