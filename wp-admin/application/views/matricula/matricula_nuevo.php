@@ -24,20 +24,24 @@
           <tr>
             <td width="20%">Curso:</td>
             <td class="formss" width="30%"><?php echo $selcurso;?></td>
-            <td>Estado:</td>
-            <td class="formss"><?php echo $selestado;?></td>                         
+            <td>Aula:</td>
+            <td class="formss"><?php echo $selaula;?></td>                         
           </tr>                       
           <tr>
             <td>Codigo de alumno:</td>
             <td class="formss">
                 <input name="alumno" id="alumno" type="text" value="<?php echo $lista->alumno;?>" readonly="readonly" class="cajaMinima" style="background-color: #E6E6E6"/>
                 <?php if($accion=='n'):;?>
-                    <input id="ver_cliente" name="ver_cliente" type="button" class="aceptarlog2" alt="Buscar alumno" title="Buscar alumno" value="Buscar" />
+                    <input id="ver_alumno" name="ver_cliente" type="button" class="aceptarlog2" alt="Buscar alumno" title="Buscar alumno" value="Buscar" />
                 <?php endif;?>
             </td>
             <td>Apellidos y Nombres:</td>
             <td class="formss" align="left"><input name="nombres" id="nombres" type="text" value="<?php echo $lista->paterno.' '.$lista->materno.' '.$lista->nombres;?>" class="cajaGrande" readonly="readonly" style="background-color: #E6E6E6"/></td>            
-          </tr>                           
+          </tr>   
+          <tr>
+              <td width="20%" valign="top">Observacion:</td>
+            <td class="formss" width="30%" colspan="3"><?php echo $txtobservacion;?></td>                      
+          </tr>             
           <tr>
             <td colspan="4" class="formss">
                 <div class="frmboton">

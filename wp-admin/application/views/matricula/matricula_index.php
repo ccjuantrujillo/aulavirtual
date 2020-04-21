@@ -25,27 +25,24 @@
       <table>
         <tr class="list1">
           <td width="43">No</td>
-          <td width="193">Curso</td>
           <td width="193">Apellidos y Nombres</td>
-          <td width="86">Fecha registro</td>
-          <td width="63">Estado</td>
+          <td width="193">Curso</td>
+          <td width="63">Aula</td>          
+          <td width="86">Fecha</td>
           <td width="62">Editar</td>
           <td width="77">Eliminar</td>
         </tr>
         <?php
         if(count($lista)>0){
           foreach($lista as $item => $value){
-              $flgestado = $value->estado;
-              $estado = $flgestado==1?"Activo":"Inactivo";
               $clase = ($item%2)==0?"list_a":"list_b";
              ?>
             <tr class="<?php echo $clase;?>">
               <td><?php echo ++$j;?></td>
-              <td align="left"><?php echo $value->curso;?></td>
               <td align="left"><?php echo $value->paterno." ".$value->materno." ".$value->nombres;?></td>
+              <td align="left"><?php echo $value->curso;?></td>     
+              <td align="center"><?php echo $value->aula;?></td>              
               <td align="center"><?php echo $value->fechareg;?></td>
-              
-              <td align="center"><img src="<?php echo img.($flgestado==1?"check.jpg":"uncheck.jpg");?>" height="20px" width="20px"/><?php echo $estado;?></td>
               <td><a href="#" onclick='editar("<?php echo $value->codigo;?>")'><img src="<?php echo img;?>editar.jpg"/></a></td>
               <td><a href="#" onclick='eliminar("<?php echo $value->codigo;?>")'><img src="<?php echo img;?>eliminar.jpg"/></a></td>
             </tr>  

@@ -1,8 +1,5 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
 class Archivos_model extends CI_Model {
-
     var $title;
     var $content;
     var $date;

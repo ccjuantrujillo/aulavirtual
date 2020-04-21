@@ -44,7 +44,7 @@ class Local extends CI_Controller
         $data['j']               = $j;
         $data['registros']       = $registros;
         $data['paginacion']      = $this->pagination->create_links();
-        $this->load->view("maestros/local_index",$data);
+        $this->load->view("local/local_index",$data);
     }
     
     public function grabar(){
@@ -95,7 +95,7 @@ class Local extends CI_Controller
 //         $data['selcurso']   = form_dropdown('curso',$this->curso_model->seleccionar(),$lista->curso,"id='curso' class='comboMedio'");
 //         $data['selrol']     = form_dropdown('rol',$this->rol_model->seleccionar(),$lista->rol,"id='rol' class='comboMedio'");
          $data['oculto']     = form_hidden(array("accion"=>$accion,"codigo_padre"=>$codigo,"codigo"=>$lista->codigo));
-         $this->load->view("maestros/local_nuevo",$data);
+         $this->load->view("local/local_nuevo",$data);
      }
 
     public function obtener($codigo=""){
@@ -156,7 +156,7 @@ class Local extends CI_Controller
         $data['oculto']          = form_hidden(array('base_url'=>base_url()));
         $this->pagination->initialize($conf);
         $data['paginacion'] = $this->pagination->create_links();
-        $this->load->view('maestros/local_index',$data);
+        $this->load->view('local/local_index',$data);
     }
 }
 ?>

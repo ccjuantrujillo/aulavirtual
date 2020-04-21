@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
 
     $("#nuevo").click(function(){
         dataString = "";
-        url = base_url+"index.php/maestros/aula/editar/n";
+        url = base_url+"index.php/aula/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -23,7 +23,7 @@ jQuery(document).ready(function(){
 //    });
 
     $('body').on('click',"#cancelar",function(){
-        url = base_url+"index.php/maestros/aula/listar";
+        url = base_url+"index.php/aula/listar";
         location.href = url;
     });
 
@@ -33,11 +33,11 @@ jQuery(document).ready(function(){
 //    });
 
     $("body").on('click',"#grabar",function(){
-        url = base_url+"index.php/maestros/aula/grabar";
+        url = base_url+"index.php/aula/grabar";
         dataString  = $('#frmPersona').serialize();
         $.post(url,dataString,function(data){
             alert('Operacion realizada con exito');
-            location.href = base_url+"index.php/maestros/aula/listar";
+            location.href = base_url+"index.php/aula/listar";
         });
     });
 
@@ -57,7 +57,7 @@ jQuery(document).ready(function(){
 
 function editar(codigo){
     dataString = "codigo="+codigo;
-    url = base_url+"index.php/maestros/aula/editar/e/"+codigo;
+    url = base_url+"index.php/aula/editar/e/"+codigo;
     $.post(url,dataString,function(data){
         $('#basic-modal-content').modal();
         $('#mensaje').html(data);
@@ -67,11 +67,11 @@ function editar(codigo){
 function eliminar(codigo){
     if(confirm('Esta seguro desea eliminar esta aula?')){
         dataString = "codigo="+codigo;
-        url = base_url+"index.php/maestros/aula/eliminar";
+        url = base_url+"index.php/aula/eliminar";
         $.post(url,dataString,function(data){
 //            if(data=="true"){
                 alert("El aula se borro correctamente");
-                url = base_url+"index.php/maestros/aula/listar";
+                url = base_url+"index.php/aula/listar";
                 location.href = url;
 //            }
 //            else{
@@ -83,7 +83,7 @@ function eliminar(codigo){
 
 function abrir_formulario_ubigeo(){
 	ubigeo = $("#cboNacimiento").val();
-	url = base_url+"index.php/maestros/ubigeo/formulario_ubigeo/"+ubigeo;
+	url = base_url+"index.php/ubigeo/formulario_ubigeo/"+ubigeo;
 	window.open(url,'Formulario Ubigeo','menubar=no,resizable=no,width=200,height=180');
 }
 

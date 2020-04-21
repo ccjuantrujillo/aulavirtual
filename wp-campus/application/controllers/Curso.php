@@ -27,7 +27,7 @@ class Curso extends LayoutAdmin{
         $menu = "";
         if(count($secciones)>0){
             foreach ($secciones as $value){
-                $menu .= "<li class='mt'>".$value->SECCIONC_Descripcion."</li>";
+                $menu .= "<li class='mt'>".$value->SECCIONC_Descripcion;
                 $filter2 = new stdClass();
                 $filter2->curso = $curso;
                 $filter2->seccion = $value->SECCIONP_Codigo;
@@ -41,6 +41,7 @@ class Curso extends LayoutAdmin{
                         $menu .= "</ul>";                        
                     }
                 }
+                $menu .= "</li>";
             }
         }
         $data['menu']      = $menu;

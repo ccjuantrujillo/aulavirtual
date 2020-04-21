@@ -5,8 +5,8 @@ class Aula_model extends CI_Model{
 
     public function __construct(){
         parent::__construct();
-        $this->table     = "ant_aula";
-        $this->table_det = "ant_local";
+        $this->table       = "ant_aula";
+        $this->table_local = "ant_local";
         $this->empresa     = $this->config->item('empresa');           
     }
     
@@ -15,7 +15,7 @@ class Aula_model extends CI_Model{
         foreach($this->listar($filter,$filter_not='',$number_items='',$offset='') as $indice=>$valor)
         {
             $indice1   = $valor->AULAP_Codigo;
-            $valor1    = $valor->AULAC_Nombre;
+            $valor1    = $valor->AULAC_Descripcion;
             $arreglo[$indice1] = $valor1;
         }
         return $arreglo;
@@ -24,7 +24,7 @@ class Aula_model extends CI_Model{
     public function listar($filter="",$filter_not='',$number_items='',$offset=''){
         $this->db->select('*');
         $this->db->from($this->table." as c",$number_items,$offset);
-        $this->db->join($this->table_det.' as l','l.LOCP_Codigo=c.LOCP_Codigo','inner');
+        $this->db->join($this->table_local.' as l','l.LOCP_Codigo=c.LOCP_Codigo','inner');
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));          
         if(isset($filter->aula) && $filter->aula!='')    $this->db->where(array("c.AULAP_Codigo"=>$filter->aula));
 	if(isset($filter->local))  $this->db->where(array("c.LOCP_Codigo"=>$filter->local));

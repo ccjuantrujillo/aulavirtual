@@ -12,20 +12,58 @@
         <?php
     }
     ?>
-    <?php echo $menuhorz;?>          
+    <?php echo $menuhorz;?>   
     <hr style="margin-top: 0px;background: #337aff;">
     <?php 
     if($descripcion!=""){
-      echo $descripcion;    
+      ?>
+        <!--h3 class="mt-4" style="color:#007bff;">CONTENIDO</h3-->    
+      <?php
+      echo $descripcion;   
+      ?>
+        <hr style="margin-top: 0px;background: #337aff;">   
+      <?php
     }
     else{
         ?>
-          <div class="row">
+          <!--div class="row">
               <h4>NO EXISTEN CONTENIDO PARA ESTA LECCION</h4>
-          </div>
+          </div-->
         <?php
     }
-    ?> 
+    ?>  
+    <!--h3 class="mt-4" style="color:#007bff;">ARCHIVOS</h3-->    
+    <div>
+        <?php
+        if(count($archivos)>0){
+            foreach($archivos as $value){
+            ?>
+              <div class="card">
+                <div class="card-body">
+                  <h3 class="card-title"><?php echo $value->ARCHIVC_Nombre;?></h3>
+                  <div class="row">
+                    <div class="col-lg-2 col-md-3 col-sm-4">
+                      <a href="<?php echo dirname(base_url())."/wp-admin/files/".$value->ARCHIVC_Adjunto;?>" target="blank"><img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg" alt="Barca" class="img-responsive" height="200px" width="350px"/></a>
+                      </div>
+                    <div class="col-lg-10 col-md-9 col-sm-8"><p class="card-text"><?php echo $value->ARCHIVC_Descripcion;?></p></div>                  
+                  </div>
+                </div>
+                <div class="card-footer text-muted">
+                  Publicado el 01 Enero 2018 
+                </div>
+              </div>     
+             <?php
+             }
+        }
+        else{
+            ?>
+            <div class="row">
+                <h4>NO EXISTEN ARCHIVOS PARA ESTA LECCION</h4>
+            </div>
+            <?php
+        }
+        ?>  
+    </div>
     <?php
     if($sgtelec!=""){
     ?>

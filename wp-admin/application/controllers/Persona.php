@@ -174,6 +174,7 @@ class Persona extends CI_Controller{
                         "TIPDOCP_Codigo"           => $this->input->post('tipodoc'),
                         "PERSC_Movil"              => $this->input->post('movil'),
                         "PERSC_Email"              => strtolower($this->input->post('email')),
+                        "PERSC_EmailInstitucional" => strtolower($this->input->post('emailinst')),
                         "PERSC_Domicilio"          => ($this->input->post('direccion')),
                         "PERSC_Sexo"               => $this->input->post('sexo'),
                         "PERSC_Fax"                => $this->input->post('fax'),

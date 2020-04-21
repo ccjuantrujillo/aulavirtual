@@ -10,6 +10,7 @@ class Local_model extends CI_Model{
     }
     
     public function seleccionar($default='',$filter="",$filter_not='',$number_items='',$offset=''){   
+        $arreglo = array();
         if($default!="") $arreglo = array($default=>':: Seleccione ::');
         foreach($this->listar($filter,$filter_not='',$number_items='',$offset='') as $indice=>$valor)
         {

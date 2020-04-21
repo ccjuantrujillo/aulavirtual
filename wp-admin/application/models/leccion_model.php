@@ -16,7 +16,7 @@ class Leccion_model extends CI_Model{
         foreach($this->listar($filter,$filter_not,$number_items,$offset) as $indice=>$valor)
         {
             $indice1   = $valor->LECCIONP_Codigo;
-            $valor1    = $valor->LECCIONC_Descripcion;
+            $valor1    = $valor->LECCIONC_Orden." ".$valor->LECCIONC_Nombre;
             $arreglo[$indice1] = $valor1;
         }
         return $arreglo;

@@ -23,6 +23,8 @@
         <tr>
           <td bgcolor="#d5e2f2">Email:</td>
           <td class="formss"><input name="email" id="email" type="text" value="<?php echo $lista->email;?>" class="cajaGrande minus" onblur="return ValidateEmail(this,event)"/></td>
+          <td bgcolor="#d5e2f2">Email Inst:</td>
+          <td class="formss"><input name="emailinst" id="emailinst" type="text" value="<?php echo $lista->emailinst;?>" class="cajaGrande minus" onblur="return ValidateEmail(this,event)"/></td>          
         </tr>  
         <tr>
           <td bgcolor="#d5e2f2">Telefono:</td>

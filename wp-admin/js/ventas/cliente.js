@@ -16,6 +16,8 @@ jQuery(document).ready(function(){
         
     });
     
+    
+    
 //    $("#imprimir").click(function(){
 //        codigo   = $("#codigo").val();
 //        url = base_url+"index.php/ventas/cliente/ver/"+codigo;

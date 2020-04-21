@@ -37,7 +37,7 @@ class Aula extends CI_Controller
                 $lista[$indice]             = new stdClass();
                 $lista[$indice]->codigo   = $value->AULAP_Codigo;
                 $lista[$indice]->local   = $value->LOCC_Nombre;
-                $lista[$indice]->nombres  = $value->AULAC_Nombre;
+                $lista[$indice]->nombres  = $value->AULAC_Descripcion;
             }
         }
         $configuracion = $this->configuracion;
@@ -50,7 +50,7 @@ class Aula extends CI_Controller
         $data['j']               = $j;
         $data['registros']       = $registros;
         $data['paginacion']      = $this->pagination->create_links();
-        $this->load->view("maestros/aula_index",$data);
+        $this->load->view("aula/aula_index",$data);
     }
     
    public function editar($accion,$codigo=""){
@@ -60,7 +60,7 @@ class Aula extends CI_Controller
              $filter->aula      = $codigo;
              $aulas             = $this->Aula_model->obtener($filter);
              $lista->codigo     = $codigo;
-             $lista->nombre     = $aulas->AULAC_Nombre;
+             $lista->nombre     = $aulas->AULAC_Descripcion;
              $lista->local      = $aulas->LOCP_Codigo;
          }
          elseif($accion == "n"){
@@ -74,7 +74,7 @@ class Aula extends CI_Controller
          $data['lista']	     = $lista;
          $data['sellocal']   = form_dropdown('local',$this->Local_model->seleccionar(),$lista->local,"id='local' class='comboMedio'");
          $data['oculto']     = form_hidden(array("accion"=>$accion,"codigo_padre"=>$codigo,"codigo"=>$lista->codigo));
-         $this->load->view("maestros/aula_nuevo",$data);
+         $this->load->view("aula/aula_nuevo",$data);
      }
     
     public function grabar()
@@ -88,7 +88,7 @@ class Aula extends CI_Controller
             $codigo = $this->input->post("codigo");
             $local  = $this->input->post("local");
             $filter = new stdClass();
-            $filter->AULAC_Nombre = strtoupper($nombre);
+            $filter->AULAC_Descripcion = strtoupper($nombre);
             $filter->LOCP_Codigo  = $local;
             if(isset($codigo) && $codigo>0){
               $this->Aula_model->modificar($codigo,$filter);
@@ -148,7 +148,7 @@ class Aula extends CI_Controller
         $data['oculto']          = form_hidden(array('base_url'=>base_url()));
         $this->pagination->initialize($conf);
         $data['paginacion'] = $this->pagination->create_links();
-        $this->load->view('maestros/aula_index',$data);
+        $this->load->view('aula/aula_index',$data);
     }
     
     public function obtener($codigo=""){

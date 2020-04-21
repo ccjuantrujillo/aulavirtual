@@ -101,7 +101,12 @@ jQuery(document).ready(function(){
           changeYear: true,
           yearRange: "1945:2025"
          });
-    });   
+    }); 
+	
+    $("body").on('click',"#ver_alumno",function(){
+        url = base_url+"index.php/alumno/buscar";
+        window.open(url,"_blank","width=700,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");          
+    });   	
 });
 
 function editar(codigo){
@@ -140,5 +145,18 @@ function selecciona_aula(codigo){
         apertura = data.APERTUP_Codigo;
         $("#nombres").val(nomper);
         $("#apertura").val(apertura);
+    },"json");
+}
+
+function selecciona_alumno(codigo){
+    objRes = new Object();
+    objRes.alumno = codigo;
+    dataString   = {objeto: JSON.stringify(objRes)};
+    url    = base_url+"index.php/alumno/obtener/";
+    $.post(url,dataString,function(data){
+        nomper  = data.PERSC_Nombre+' '+data.PERSC_ApellidoPaterno;
+        apertura = data.ALUMP_Codigo;
+        $("#nombres").val(nomper);
+        $("#alumno").val(apertura);
     },"json");
 }

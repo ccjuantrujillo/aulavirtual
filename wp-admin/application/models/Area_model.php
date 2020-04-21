@@ -9,6 +9,7 @@ class Area_model extends CI_Model{
     }
     
     public function seleccionar($filter,$default="",$value=''){
+        $arreglo = array();
         foreach($this->listar($filter) as $indice=>$valor){
             $indice1   = $valor->AREAP_Codigo;
             $valor1    = $valor->AREAC_Descripcion;

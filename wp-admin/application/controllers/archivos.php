@@ -98,13 +98,14 @@ class Archivos extends CI_Controller {
         $data['lista']	    = $lista;
         $filter = new stdClass();
         $filter->estado = 1; 
-        $data['selcurso']    = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");  
+        $data['selcurso']    = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboSuperGrande'");  
         $filter = new stdClass();
         $filter->curso  = $lista->curso;  
-        $data['selseccion']  = form_dropdown('seccion',$this->Seccion_model->seleccionar('0',$filter),$lista->seccion,"id='seccion' class='comboGrande'"); 
+        $data['selseccion']  = form_dropdown('seccion',$this->Seccion_model->seleccionar('0',$filter),$lista->seccion,"id='seccion' class='comboSuperGrande'"); 
         $filter = new stdClass();
         $filter->seccion  = $lista->seccion;  
-        $data['selleccion']    = form_dropdown('leccion',$this->Leccion_model->seleccionar('0',$filter),$lista->leccion,"id='leccion' class='comboGrande'");          
+        //print_r($this->Leccion_model->seleccionar('0',$filter));
+        $data['selleccion']    = form_dropdown('leccion',$this->Leccion_model->seleccionar('0',$filter),$lista->leccion,"id='leccion' class='comboSuperGrande'");          
         $data['oculto']      = form_hidden(array('accion'=>$accion,'codigo'=>$codigo));
         $this->load->view('archivos/archivo_nuevo',$data);
     }  

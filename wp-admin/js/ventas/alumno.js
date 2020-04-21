@@ -92,7 +92,7 @@ function abrir_formulario_ubigeo(){
 	window.open(url,'Formulario Ubigeo','menubar=no,resizable=no,width=200,height=180');
 }
 
-function selecciona_familia(codigo){
-    window.opener.selecciona_familia(codigo); 
+function selecciona_alumno(codigo){
+    window.opener.selecciona_alumno(codigo); 
     window.close();
 }

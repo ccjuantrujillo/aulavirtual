@@ -37,6 +37,7 @@ class Alumno extends Persona
                 $lista[$indice]->paterno   = $value->PERSC_ApellidoPaterno;
                 $lista[$indice]->materno   = $value->PERSC_ApellidoMaterno;
                 $lista[$indice]->email     = $value->PERSC_Email;
+                $lista[$indice]->emailinst = $value->PERSC_EmailInstitucional;
                 $lista[$indice]->telefono  = $value->PERSC_Telefono;
                 $lista[$indice]->codigo    = $value->ALUMP_Codigo;
                 $lista[$indice]->identificador = $value->ALUMC_Identificador;
@@ -69,6 +70,7 @@ class Alumno extends Persona
              $lista->direccion    = $alumnos->PERSC_Direccion;
              $lista->telefono     = $alumnos->PERSC_Telefono;
              $lista->email        = $alumnos->PERSC_Email;
+             $lista->emailinst    = $alumnos->PERSC_EmailInstitucional;
              $lista->fnacimiento  = date_sql($alumnos->PERSC_FechaNacimiento);
              $lista->paterno      = $alumnos->PERSC_ApellidoPaterno;
              $lista->materno      = $alumnos->PERSC_ApellidoMaterno;
@@ -83,6 +85,7 @@ class Alumno extends Persona
              $lista->direccion    = "";
              $lista->telefono     = "";
              $lista->email        = "";
+             $lista->emailinst    = "";
              $lista->fnacimiento  = "";
              $lista->paterno      = "";
              $lista->materno      = "";
@@ -137,27 +140,26 @@ class Alumno extends Persona
         $filter_not = new stdClass();
         $filter->status = 5;
         //$filter->order_by    = array("d.PERSC_ApellidoPaterno"=>"asc","d.PERSC_ApellidoMaterno"=>"asc","d.PERSC_Nombre"=>"asc");
-        $registros = count($this->user_model->listar($filter,$filter_not));
-        $alumnos  = $this->user_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Alumno_model->listar($filter,$filter_not));
+        $alumnos  = $this->Alumno_model->listar($filter,$filter_not);
         $item      = 1;
         $lista     = array();
         if(count($alumnos)>0){
             foreach($alumnos as $indice => $value){
-                $arrFecha = explode(" ",$value->registration_date);
-                $lista[$indice]             = new stdClass();
-                $lista[$indice]->numero   = $value->ant_dni;
-                $lista[$indice]->nombres  = $value->firstname;
-                $lista[$indice]->paterno  = $value->lastname;
-                $lista[$indice]->materno  = $value->lastname;
-                $lista[$indice]->telefono = $value->phone;
-                $lista[$indice]->movil    = "";
-                $lista[$indice]->codigo   = $value->user_id;
-                $lista[$indice]->estado   = $value->status;
-                $lista[$indice]->fechareg = $arrFecha[0];
+                $lista[$indice]            = new stdClass();
+                $lista[$indice]->nombres   = $value->PERSC_Nombre;
+                $lista[$indice]->paterno   = $value->PERSC_ApellidoPaterno;
+                $lista[$indice]->materno   = $value->PERSC_ApellidoMaterno;
+                $lista[$indice]->email     = $value->PERSC_Email;
+                $lista[$indice]->emailinst = $value->PERSC_EmailInstitucional;
+                $lista[$indice]->telefono  = $value->PERSC_Telefono;
+                $lista[$indice]->codigo    = $value->ALUMP_Codigo;
+                $lista[$indice]->identificador = $value->ALUMC_Identificador;
+                $lista[$indice]->estado    = $value->ALUMC_FlagEstado;
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/ventas/alumno/buscar";
+        $configuracion['base_url']    = base_url()."index.php/alumno/buscar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/
@@ -169,11 +171,11 @@ class Alumno extends Persona
     }
 
     public function obtener(){
-        $filter    = new stdClass();
-        $filter->alumno = $codigo;
+        $obj    = $this->input->post('objeto');
+        $filter = json_decode($obj);
         $clientes  = $this->Alumno_model->obtener($filter);
         $resultado = json_encode($clientes);
-        echo $resultado;
+        echo $resultado;        
     }
 }
 ?>

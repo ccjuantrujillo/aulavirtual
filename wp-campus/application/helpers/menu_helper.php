@@ -59,8 +59,12 @@ if ( ! function_exists('menu_izq'))
             $menu .= "<a class='nav-link' href='".base_url()."archivos/index/".$cursos->CURSOP_Codigo."'>";
             $menu .= "<div class='sb-nav-link-icon'><i class='fas fa-chart-area'></i></div>ARCHIVOS";
             $menu .= "</a>";
-            $menu .= "<a class='nav-link' href='#'>";
-            $menu .= "<div class='sb-nav-link-icon'><i class='fas fa-table'></i></div>TAREAS";
+            $menu .= "<a class='nav-link' href='".base_url()."alumno/inicio/".$cursos->CURSOP_Codigo."'>";
+            $menu .= "<div class='sb-nav-link-icon'><i class='fas fa-table'></i></div>PARTICIPANTES";
+            $menu .= "</a>";            
+            $menu .= "</a>";
+            $menu .= "<a class='nav-link' href='".base_url()."asistencia/inicio/".$cursos->CURSOP_Codigo."'>";
+            $menu .= "<div class='sb-nav-link-icon'><i class='fas fa-table'></i></div>ASISTENCIA";
             $menu .= "</a>";
             $menu .= "</div>";
         }
