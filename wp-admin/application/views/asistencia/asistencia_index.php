@@ -24,10 +24,10 @@
     <div class="tabla">
         <table>
           <tr class="list1">
-            <td width="100">Codigo</td>
-            <td width="100">Fecha</td>
+            <td width="50">Codigo</td>
+            <td width="50">Fecha</td>
             <td width="100">Curso</td>                  
-            <td width="100">Alumno</td>                
+            <td width="200">Alumno</td>                
             <td width="100">Marcacion</td>    
             <td width="50">Editar</td>
             <td width="50">Eliminar</td>
@@ -41,7 +41,7 @@
                 <td align="center"><?php echo $value->codigo;?></td>
                 <td align="center"><?php echo date_sql($value->cabasistencia);?></td>
                 <td align="center"><?php echo $value->curso;?></td>
-                <td align="center"><?php echo $value->alumno;?></td>
+                <td align="left"><?php echo $value->alumno;?></td>
                 <td align="center"><?php echo $arrMarca[$value->marcacion];?></td>
                 <td align="center"><a href="#" class="editar"><img src="<?php echo img;?>editar.jpg"/></a></td>
                 <td align="center"><a href="#" class="eliminar"><img src="<?php echo img;?>eliminar.jpg"/></a></td>

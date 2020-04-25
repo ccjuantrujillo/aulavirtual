@@ -20,15 +20,6 @@ class Alumno extends LayoutAdmin{
 
     public function inicio($curso)
     {
-        //Creamos un arreglo de asistencias        
-        $columna  = "";
-        $columna .= "<th>No</th>";
-        $columna .= "<th>Codigo</th>";
-        $columna .= "<th>Identificador</th>";
-        $columna .= "<th>Apellidos</th>";
-        $columna .= "<th>Nombres</th>";
-        $columna .= "<th>Correo</th>";
-        $columna .= "<th>Correo Inst.</th>";
         $fila   = "";
         $filter = new stdClass();
         $filter->curso = $curso;        
@@ -46,8 +37,8 @@ class Alumno extends LayoutAdmin{
                 $fila.="</tr>";                
             }
         }
+        $data["alumnos"]    = $alumnos;
         $data["fila"]       = $fila;
-        $data["columna"]    = $columna;
         $data['menuizq']    = menu_izq($curso);
         $data['curso']      = $this->Curso_model->get($curso);        
         $this->load_layout('alumno/inicio',$data);
