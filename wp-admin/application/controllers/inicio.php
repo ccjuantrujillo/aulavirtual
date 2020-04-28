@@ -27,21 +27,24 @@ class Inicio extends CI_Controller {
         $data['form_close'] = form_close(); 
         $data['onload']     = "onload=\"$('#txtUsuario').focus();\"";   
         $data['header']     = get_header();
-        $data['selrol']     = form_dropdown('rol',$this->Rol_model->seleccionar('',$filter),"","id='rol' class='comboMedio'");        
+        $filter = new stdClass();
+        $data['selempresa'] = form_dropdown('empresa',$this->Empresa_model->seleccionar('',$filter),"","id='empresa' class='comboMedio'");        
+        //$data['selrol']     = form_dropdown('rol',$this->Rol_model->seleccionar('',$filter),"","id='rol' class='comboMedio'");        
         $this->load->view("inicio/index",$data);
     }
     
     public function ingresar(){
-        $this->form_validation->set_rules('txtUsuario','Nombre Usuario','required|max_length[20]');
-        $this->form_validation->set_rules('txtClave','Clave de Usuario','required|max_length[15]'); 
-        if($this->form_validation->run() == FALSE){
-            redirect('inicio/index');
-        }
-        else{
+        //$this->form_validation->set_rules('txtUsuario','Nombre Usuario','required|max_length[20]');
+        //$this->form_validation->set_rules('txtClave','Clave de Usuario','required|max_length[15]'); 
+        //if($this->form_validation->run() == FALSE){
+         //   redirect('inicio/index');
+        //}
+        //else{
             $txtUsuario = $this->input->post('txtUsuario');
             $txtClave   = $this->input->post('txtClave');
-            $rol        = $this->input->post('rol');
-            $usuarios   = $this->Usuario_model->ingresar(trim($txtUsuario),md5(trim($txtClave)),$rol);
+            $rol        = 4;
+            $empresa    = $this->input->post('empresa');
+            $usuarios   = $this->Usuario_model->ingresar(trim($txtUsuario),md5(trim($txtClave)),$rol,$empresa);
             if(count((array)$usuarios)>0){
                 $data = array(
                             'login'    => $usuarios->USUAC_usuario,
@@ -62,7 +65,7 @@ class Inicio extends CI_Controller {
                 echo $msgError;
                 $this->index();
             }
-        }
+        //}
     }
     
     public function principal(){

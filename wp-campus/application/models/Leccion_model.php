@@ -13,7 +13,7 @@ class Leccion_model extends CI_Model {
             $this->tabla   = "leccion";
             $this->tabla_seccion = "seccion";
             $this->tabla_curso   = "curso";
-            $this->empresa = $this->config->item('empresa');
+            $this->empresa =  $_SESSION["empresa"];
         }
 
         public function read($filter="")

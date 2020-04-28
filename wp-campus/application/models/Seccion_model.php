@@ -11,7 +11,7 @@ class Seccion_model extends CI_Model {
     public function __construct(){
         $this->tabla = "seccion";
         $this->tabla_curso = "curso";
-        $this->empresa = $this->config->item('empresa');
+        $this->empresa =  $_SESSION["empresa"];
     }
 
     public function read($filter="")

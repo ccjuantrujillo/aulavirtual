@@ -8,7 +8,7 @@ class Permiso_model extends CI_Model{
         parent::__construct();
         $this->table    = "ant_permiso";
         $this->tableref = "ant_menu";
-        $this->empresa     = $this->config->item('empresa');          
+        $this->empresa     = $this->session->userdata('empresa');       
     }
     
     public function listar($filter,$filter_not='',$number_items='',$offset='')

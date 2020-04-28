@@ -6,7 +6,7 @@ class Persona_model extends CI_Model
     public function __construct(){
         parent::__construct();
         $this->table   = "ant_persona";    
-        $this->empresa = $this->config->item('empresa');          
+        $this->empresa     = $this->session->userdata('empresa');      
     }
     
     public function seleccionar($default='',$filter='',$filter_not='',$number_items='',$offset=''){

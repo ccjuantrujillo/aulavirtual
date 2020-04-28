@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title><?php echo $datosempresa->EMPRC_RazonSocial;?></title>
+        <title>Ingreso al campus</title>
         <link href="<?php echo base_url();?>css/styles.css" rel="stylesheet" />
         <script src="<?php echo base_url();?>js/all.min.js" crossorigin="anonymous"></script>
         <script src="<?php echo base_url();?>js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
@@ -22,10 +22,14 @@
                             <div class="col-lg-5">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header">
-                                        <h3 class="text-center font-weight-light my-4"><?php echo $datosempresa->EMPRC_RazonSocial;?></h3>
+                                        <h3 class="text-center font-weight-light my-4">Ingreso al campus</h3>
                                     </div>
                                     <div class="card-body">
                                         <form action="<?php echo base_url();?>inicio/ingresar" method="POST">
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="Empresa">Empresa: </label>
+                                                <?php echo $selempresa;?>
+                                            </div>                                            
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputEmailAddress">Usuario</label>
                                                 <input class="form-control py-4" name="usuario" id="usuario" type="text" placeholder="Ingrese su usuario" />

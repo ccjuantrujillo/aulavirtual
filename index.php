@@ -1,10 +1,10 @@
 <?php
 require_once 'conexion.php';
-$query = "select * from ant_curso where EMPRP_Codigo='".$empresa."'";
+$query = "select * from ant_curso";
 $rs = mysqli_query($link,$query);
 $listacursos = mysqli_fetch_all($rs,MYSQLI_ASSOC);
 //Recuperamos datos de la empresa
-$query = "select * from ant_empresa where EMPRP_Codigo='".$empresa."'";
+$query = "select * from ant_empresa";
 $rs    = mysqli_query($link,$query);
 $datosempresa = mysqli_fetch_array($rs,MYSQLI_ASSOC);
 //Configuramos menu

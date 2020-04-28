@@ -8,7 +8,7 @@ class Leccion_model extends CI_Model{
         $this->table   = "ant_leccion";
         $this->table_seccion = "ant_seccion";
         $this->table_curso   = "ant_curso";
-        $this->empresa     = $this->config->item('empresa');  
+        $this->empresa     = $this->session->userdata('empresa'); 
     }
 	
     public function seleccionar($default="",$filter="",$filter_not='',$number_items='',$offset=''){

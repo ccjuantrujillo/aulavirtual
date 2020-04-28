@@ -12,7 +12,7 @@ class Asistencia_model extends CI_Model{
         $this->table_alu   = "alumno";
         $this->table_pers  = "persona";
         $this->table_curs  = "curso";
-        $this->empresa   = $this->config->item('empresa');
+        $this->empresa     =  $_SESSION["empresa"];
     }
 	
     public function seleccionar($default='',$filter='',$filter_not='',$number_items='',$offset=''){

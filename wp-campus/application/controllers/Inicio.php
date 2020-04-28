@@ -7,7 +7,6 @@ class Inicio extends Layout{
 
 	public function __construct(){
             parent::__construct();
-            $this->load->model('Curso_model');
             $this->load->model('Empresa_model');
             $this->load->model('Usuario_model');
             $this->load->model('Rol_model');
@@ -29,33 +28,35 @@ class Inicio extends Layout{
 	public function index()
 	{
             $filter = new stdClass();
-            $data['selrol'] = form_dropdown('rol',$this->Rol_model->seleccionar($filter),0,"id='rol' class='comboMedio'");
-            $data['datosempresa'] = $this->Empresa_model->get($this->empresa);
+            $data['selrol'] = form_dropdown('rol',$this->Rol_model->seleccionar($filter),0,"id='rol' class='form-control'");
+            $data['selempresa'] = form_dropdown('empresa',$this->Empresa_model->seleccionar($filter),0,"id='empresa' class='form-control'");
+            //$data['datosempresa'] = $this->Empresa_model->get($this->empresa);
             $this->load->view('inicio/index',$data);
 	}
 
 	public function ingresar(){
             $this->form_validation->set_rules('usuario','Nombre de Usuario','required|max_length[20]');
             $this->form_validation->set_rules('clave','Clave de Usuario','required|max_length[15]'); 
+            $this->form_validation->set_rules('empresa','Empresa','required'); 
             if($this->form_validation->run() == FALSE){
                 redirect('inicio/index');
             }            
             else{
                 $usuario = $this->input->post('usuario');
                 $clave   = $this->input->post('clave');
-                $rol     = $this->input->post('rol');
+                $empresa = $this->input->post('empresa');
                 $filter  = new stdClass();
                 $filter->usuario = $usuario;
                 $filter->clave   = md5($clave);
-                $filter->rol     = $rol;
-                $usuario = $this->Usuario_model->get($filter);
+                $filter->empresa = $empresa;
+                $usuario = $this->Usuario_model->ingresar($filter);
                 if(is_object($usuario) && isset($usuario->USUAP_Codigo)){
                     $datos = array(
                                 'nomper'   => $usuario->PERSC_Nombre." ".$usuario->PERSC_ApellidoPaterno,
                                 'login'    => $usuario->USUAC_usuario,
                                 'codusu'   => $usuario->USUAP_Codigo,
                                 'rolusu'   => $usuario->ROL_Codigo,
-                                'acceso'   => 1
+                                'empresa'  => $empresa
                                  );
                     $this->session->set_userdata($datos);
                     redirect(base_url()."curso/read");  

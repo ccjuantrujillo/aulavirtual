@@ -8,7 +8,7 @@ class Cabasistencia_model extends CI_Model{
         $this->usuario     = $this->session->userdata('codusu');
         $this->table       = "cabasistencia";
         $this->table_curs  = "curso";
-        $this->empresa     = $this->config->item('empresa');  
+        $this->empresa     =  $_SESSION["empresa"];
     }
     
     public function seleccionar($filter,$default="",$value=''){

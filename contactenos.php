@@ -1,6 +1,6 @@
 <?php
 require_once 'conexion.php';
-$query = "select * from ant_empresa where EMPRP_Codigo='".$empresa."'";
+$query = "select * from ant_empresa where EMPRP_Codigo='1";
 $rs = mysqli_query($link,$query);
 $datosempresa = mysqli_fetch_array($rs);
 //Configuramos menu

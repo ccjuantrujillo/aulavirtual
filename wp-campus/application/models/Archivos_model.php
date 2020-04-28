@@ -10,7 +10,7 @@ class Archivos_model extends CI_Model {
             $this->tabla     = "archivos";
             $this->tabla_lec = "leccion";
             $this->tabla_sec = "seccion";
-            $this->empresa   = $this->config->item('empresa');
+            $this->empresa   =  $_SESSION["empresa"];
     }
 
 	public function read($filter="")

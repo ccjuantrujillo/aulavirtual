@@ -10,7 +10,7 @@ class Curso_model extends CI_Model{
         $this->table_profesor = "ant_profesor";
         $this->table_persona  = "ant_persona";
         $this->table_area     = "ant_area";
-        $this->empresa     = $this->config->item('empresa');  
+        $this->empresa     = $this->session->userdata('empresa');
     }
 	
     public function seleccionar($default='',$filter='',$filter_not='',$number_items='',$offset=''){

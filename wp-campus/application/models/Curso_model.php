@@ -9,7 +9,7 @@ class Curso_model extends CI_Model {
         var $empresa;
 
         public function __construct(){
-                $this->empresa = $this->config->item('empresa');
+                $this->empresa = $_SESSION["empresa"];
         }
 
         public function read()

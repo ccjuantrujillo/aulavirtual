@@ -10,7 +10,7 @@ class Matricula_model extends CI_Model{
         $this->table_curso = "ant_curso";
         $this->table_aula  = "ant_aula";
         $this->table_pers  = "ant_persona";
-        $this->empresa     = $this->config->item('empresa');       
+        $this->empresa     = $this->session->userdata('empresa');     
     }
     
     public function seleccionar($filter,$default="",$value=''){

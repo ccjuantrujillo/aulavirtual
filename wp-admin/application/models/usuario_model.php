@@ -8,16 +8,16 @@ class Usuario_model extends CI_Model{
         $this->table     = "ant_usuario";
         $this->table_rol = "ant_rol";
         $this->table_persona = "ant_persona";
-        $this->empresa     = $this->config->item('empresa');  
+        $this->empresa     = $this->session->userdata('empresa');
     }
 
-    public function ingresar($user,$clave,$rol)
+    public function ingresar($user,$clave,$rol,$empresa)
     {
-        $where = array("c.USUAC_usuario"=>$user,"c.USUAC_Password"=>$clave,"c.ROL_Codigo"=>$rol);
+        $where = array("c.USUAC_usuario"=>$user,"c.USUAC_Password"=>$clave,"c.ROL_Codigo"=>$rol,"c.EMPRP_Codigo"=>$empresa);
         $this->db->select('*');
         $this->db->from($this->table." as c");
         $this->db->join($this->table_rol.' as r','r.ROL_Codigo=c.ROL_Codigo','inner');
-        $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
+        //$this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
         $this->db->where($where);
         $query = $this->db->get();
         $resultado = new stdClass();

@@ -12,11 +12,20 @@ class Empresa_model extends CI_Model {
                 $this->empresa = $this->config->item('empresa');
         }
 
-        public function read()
+        public function seleccionar($filter=''){
+           $arreglo = array(""=>':: Seleccione ::');
+           foreach($this->read($filter) as $indice=>$valor){
+                $arreglo[$valor->EMPRP_Codigo] = $valor->EMPRC_RazonSocial;
+           }
+           return $arreglo;
+        }        
+        
+        public function read($filter="")
         {
                 $this->db->select('*',FALSE);
                 $this->db->from('empresa');
-                $this->db->where(array("EMPRP_Codigo"=>$this->empresa));
+                //$this->db->where(array("EMPRP_Codigo"=>$this->empresa));
+                if(isset($filter->empresa))        $this->db->where(array("c.EMPRP_Codigo"=>$filter->empresa));
                 $query = $this->db->get();
                 return $query->result();
         }
