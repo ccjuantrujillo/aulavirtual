@@ -68,12 +68,7 @@ jQuery(document).ready(function(){
     $("body").on('click',"#cancelar",function(){
         url = base_url+"index.php/matricula/listar";
         location.href = url;
-    });
-    
-//    $("body").on("click","#cerrar",function(){
-//        url = base_url+"index.php/inicio/index";
-//        location.href = url;
-//    });          
+    });      
     
     $("body").on('click',"#grabar",function(){
         url        = base_url+"index.php/matricula/grabar";

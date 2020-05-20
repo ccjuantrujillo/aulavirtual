@@ -21,7 +21,7 @@ class Cabasistencia extends CI_Controller
         $filter->order_by = array("m.MENU_Orden"=>"asc");
         $menu       = get_menu($filter);    
         $filter     = new stdClass();
-        $filter->order_by = array("d.CURSOC_Nombre"=>"asc","c.CABASISTC_Fecha"=>"asc");
+        $filter->order_by = array("c.CABASISTC_Fecha"=>"desc");
         $registros = count($this->Cabasistencia_model->listar($filter));
         $asistencias = $this->Cabasistencia_model->listar($filter,"",$this->configuracion['per_page'],$j);
         $item      = 1;

@@ -46,7 +46,7 @@ jQuery(document).ready(function(){
             $.each(data, function(item,value){
                opt       = document.createElement('option');
                opt.value = value.MATRICP_Codigo;
-               opt.appendChild(document.createTextNode(value.PERSC_ApellidoPaterno+' '+value.PERSC_Nombre));
+               opt.appendChild(document.createTextNode(value.PERSC_ApellidoPaterno+' '+value.PERSC_ApellidoMaterno+' '+value.PERSC_Nombre));
                $('#matricula').append(opt);
            });
        },"json");             

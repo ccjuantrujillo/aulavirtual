@@ -1,12 +1,12 @@
 <?php header("Content-type: text/html; charset=utf-8"); 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-//require_once "Spreadsheet/Excel/Writer.php";
+
 class Seccion extends CI_Controller {
     var $configuracion;
 
     public function __construct(){
         parent::__construct();
-        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");        
+        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");
         $this->load->model('Seccion_model'); 
         $this->load->model('Periodo_model'); 
         $this->load->model('Curso_model'); 

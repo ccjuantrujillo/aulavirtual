@@ -5,6 +5,7 @@ class Tipotarea_model extends CI_Model{
     public function __construct(){
 	parent::__construct();
         $this->table = "ant_tipotarea";
+        $this->empresa     = $this->session->userdata('empresa');        
     }
     
     public function seleccionar($default='',$filter='',$filter_not='',$number_items='',$offset=''){
@@ -21,6 +22,7 @@ class Tipotarea_model extends CI_Model{
     public function listar($filter,$filter_not='',$number_items='',$offset=''){
         $this->db->select('*');
         $this->db->from($this->table." as c",$number_items,$offset);
+        $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
         if(isset($filter->tipotarea) && $filter->tipotarea!='')     $this->db->where(array("c.TIPOTAREAP_Codigo"=>$filter->tipotarea));
         if(isset($filter->order_by) && count($filter->order_by)>0){
             foreach($filter->order_by as $indice=>$value){
@@ -29,9 +31,9 @@ class Tipotarea_model extends CI_Model{
         } 
         $query = $this->db->get();
         $resultado = array();
-        if($query->num_rows>0){
+        //if($query->num_rows>0){
             $resultado = $query->result();
-        }
+        //}
         return $resultado;
     }
     

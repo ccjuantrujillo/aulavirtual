@@ -9,6 +9,8 @@ class Inicio extends Layout{
             parent::__construct();
             $this->load->model('Empresa_model');
             $this->load->model('Usuario_model');
+            $this->load->model('Profesor_model');
+            $this->load->model('Alumno_model');
             $this->load->model('Rol_model');
             $this->empresa = $this->config->item('empresa');
 	}
@@ -28,7 +30,8 @@ class Inicio extends Layout{
 	public function index()
 	{
             $filter = new stdClass();
-            $data['selrol'] = form_dropdown('rol',$this->Rol_model->seleccionar($filter),0,"id='rol' class='form-control'");
+            $arrRol = array("0"=>"::Seleccione::","1"=>"Alumno","2"=>"Profesor"); 
+            $data['selrol']     = form_dropdown('rol',$arrRol,0,"id='rol' class='form-control'");
             $data['selempresa'] = form_dropdown('empresa',$this->Empresa_model->seleccionar($filter),0,"id='empresa' class='form-control'");
             //$data['datosempresa'] = $this->Empresa_model->get($this->empresa);
             $this->load->view('inicio/index',$data);
@@ -45,32 +48,46 @@ class Inicio extends Layout{
                 $usuario = $this->input->post('usuario');
                 $clave   = $this->input->post('clave');
                 $empresa = $this->input->post('empresa');
+                $rol     = $this->input->post('rol');
                 $filter  = new stdClass();
                 $filter->usuario = $usuario;
                 $filter->clave   = md5($clave);
-                $filter->empresa = $empresa;
-                $usuario = $this->Usuario_model->ingresar($filter);
-                if(is_object($usuario) && isset($usuario->USUAP_Codigo)){
-                    $datos = array(
-                                'nomper'   => $usuario->PERSC_Nombre." ".$usuario->PERSC_ApellidoPaterno,
-                                'login'    => $usuario->USUAC_usuario,
-                                'codusu'   => $usuario->USUAP_Codigo,
-                                'rolusu'   => $usuario->ROL_Codigo,
-                                'empresa'  => $empresa
-                                 );
-                    $this->session->set_userdata($datos);
-                    redirect(base_url()."curso/read");  
+                $filter->empresa = $empresa;                
+                if($rol=="1"){//Alumno
+                    $datos = $this->Alumno_model->login($filter);
+                }
+                elseif($rol=="2"){//Profesor
+                    $datos = $this->Profesor_model->login($filter);
+                }
+                if(!empty($datos)){
+                    if(count($datos)==1){
+                        $usuario = $datos[0];
+                        $dataSession = array(
+                                    'nomper'   => $usuario->PERSC_Nombre." ".$usuario->PERSC_ApellidoPaterno,
+                                    'login'    => isset($usuario->ALUMC_Usuario)?$usuario->ALUMC_Usuario:$usuario->PROC_Usuario,
+                                    'codper'   => $usuario->PERSP_Codigo,
+                                    'codalu'   => isset($usuario->ALUMP_Codigo)?$usuario->ALUMP_Codigo:0,
+                                    'codprofe' => isset($usuario->PROP_Codigo)?$usuario->PROP_Codigo:0,
+                                    'rolusu'   => isset($usuario->ALUMP_Codigo)?1:2,
+                                    'empresa'  => $usuario->EMPRP_Codigo
+                                     );
+                        $this->session->set_userdata($dataSession);
+                        redirect(base_url()."curso/read");  
+                    }
+                    else{
+                        $msgError = "<br><div align='center' class='error'>Existen 2 registros para el usuario, favor contactarse con el administrador</div>";
+                    }
                 }
                 else{
                     $msgError = "<br><div align='center' class='error'>Usuario y/o contrasena no valido para esta empresa.</div>";
-                    echo $msgError;
                 }
+                echo $msgError;
             }
 	}
         
         public function salir(){
             session_destroy();
-            //redirect('inicio/index');  Original
-            redirect(dirname(base_url()));
+            redirect('inicio/index');  
+            //redirect(dirname(base_url()));
         }
 }

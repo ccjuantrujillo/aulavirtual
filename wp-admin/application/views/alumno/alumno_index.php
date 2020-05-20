@@ -30,6 +30,7 @@
                 <td width="86">Telefono</td>
                 <td width="86">Email</td>
                 <td width="86">Email Inst.</td>
+                <td width="86">Usuario</td>
                 <td width="63">Estado</td>             
                 <td width="50">Editar</td>
                 <td width="50">Eliminar</td>
@@ -48,6 +49,7 @@
                     <td style="text-align: left;"><?php echo $value->telefono;?></td>
                     <td style="text-align: left;"><?php echo $value->email;?></td>
                     <td style="text-align: left;"><?php echo $value->emailinst;?></td>
+                    <td style="text-align: left;"><?php echo $value->usuario;?></td>
                     <td align="center"><img src="<?php echo img.($flgestado==1?"check.jpg":"uncheck.jpg");?>" height="20px" width="20px"/><?php echo $estado;?></td>
                     <td><a href="#" class="editar"><img src="<?php echo img;?>editar.jpg"/></a></td>
                     <td><a href="#" class="eliminar"><img src="<?php echo img;?>eliminar.jpg"/></a></td>

@@ -41,6 +41,7 @@ class Profesor extends Persona
                 $lista[$indice]->codigo   = $value->PROP_Codigo;
                 $lista[$indice]->estado   = $value->PROC_FlagEstado;
                 $lista[$indice]->fechareg = $value->fechareg;
+                $lista[$indice]->usuario  = $value->PROC_Usuario;
             }
         }
         $configuracion = $this->configuracion;
@@ -77,7 +78,9 @@ class Profesor extends Persona
              $lista->codigo_padre = $profesores->PERSP_Codigo;
              $lista->estado     = $profesores->PROC_FlagEstado;
              $lista->tipodoc    = $profesores->TIPDOCP_Codigo;    
-             $lista->user_id    = $profesores->user_id;    
+             $lista->user_id    = $profesores->user_id;   
+             $lista->usuario    = $profesores->PROC_Usuario;  
+             $lista->clave      = $profesores->PROC_Password;  
          }
          elseif($accion == "n"){
              $lista->numerodoc  = "";
@@ -95,6 +98,8 @@ class Profesor extends Persona
              $lista->estado     = 1;
              $lista->tipodoc    = 1;  
              $lista->user_id    = 0;
+             $lista->usuario    = "";
+             $lista->clave      = "";
          }
         $arrSexo            = array("0"=>"::Seleccione::","1"=>"MASCULINO","2"=>"FEMENINO");
          $arrEstado          = array("0"=>"::Seleccione::","1"=>"ACTIVO","2"=>"INACTIVO");
@@ -108,6 +113,8 @@ class Profesor extends Persona
          $data['selsexo']     = form_dropdown('sexo',$arrSexo,$lista->sexo,"id='sexo' class='comboMedio'");
          $data['selestado']   = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
          $data['seltipodoc']  = form_dropdown('tipodoc',$this->Tipodocumento_model->seleccionar(),$lista->tipodoc,"id='tipodoc' class='comboMedio'"); 
+         $data['txtusuario']  = form_input(["name"=>"usuario","id"=>"usuario","class"=>"cajaMedia"],$lista->usuario);
+         $data['txtclave']    = form_password(["name"=>"clave","id"=>"clave","class"=>"cajaMedia"],$lista->clave);
          $data['oculto']      = form_hidden(array("accion"=>$accion,"codigo"=>$lista->codigo,"codigo_padre"=>$lista->codigo_padre));
          $this->load->view("profesor/profesor_nuevo_principal",$data);
      }    
@@ -116,8 +123,11 @@ class Profesor extends Persona
         parent::grabar();
         $accion    = $this->input->get_post('accion');
         $codigo    = $this->input->get_post('codigo');
+        $clave     = $this->input->get_post('clave');
         $resultado = true;		
         $data    = array(	
+                    "PROC_Usuario"           => $this->input->post('usuario'),	
+                    "PROC_Password"          => $clave!=""?md5($clave):"",   
                     "PROC_FlagEstado"        => $this->input->post('estado'),	
                     "PROC_FechaModificacion" => date('Y-m-d H:i:s',time())
                 );

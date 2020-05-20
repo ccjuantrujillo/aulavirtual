@@ -10,6 +10,7 @@ class Matricula_model extends CI_Model{
         $this->table_curso = "curso";
         $this->table_aula  = "aula";
         $this->table_pers  = "persona";
+        $this->table_prof  = "profesor";
         $this->empresa     = $_SESSION["empresa"];
     }
     

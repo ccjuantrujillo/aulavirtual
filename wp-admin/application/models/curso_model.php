@@ -32,6 +32,7 @@ class Curso_model extends CI_Model{
         $this->db->join($this->table_persona.' as g','g.PERSP_Codigo=f.PERSP_Codigo','inner');
         $this->db->join($this->table_area.' as h','h.AREAP_Codigo=c.AREAP_Codigo','inner');
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
+        if(isset($_SESSION["ciclo"]))     $this->db->where(array("c.CICLOP_Codigo"=>$_SESSION["ciclo"]));//(**)       
         if(isset($filter->ciclo) && $filter->ciclo!='')    $this->db->where(array("c.CICLOP_Codigo"=>$filter->ciclo));
         if(isset($filter->estado) && $filter->estado!='')  $this->db->where(array("c.CURSOC_FlagEstado"=>$filter->estado));
         if(isset($filter->curso) && $filter->curso!='')    $this->db->where(array("c.CURSOP_Codigo"=>$filter->curso));

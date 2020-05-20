@@ -44,7 +44,14 @@
       <td bgcolor="#d5e2f2">Estado:</td>
       <td class="formss"><?php echo $selestado;?></td>
       <td bgcolor="#d5e2f2">&nbsp;</td>
-    </tr>       
+    </tr>      
+    <tr>
+      <td bgcolor="#d5e2f2">Usuario:</td>
+      <td class="formss"><?php echo $txtusuario;?></td>
+      <td bgcolor="#d5e2f2">Password:</td>
+      <td class="formss"><?php echo $txtclave;?></td>
+      <td bgcolor="#d5e2f2">&nbsp;</td>
+    </tr>      
     <tr>
       <td bgcolor="#d5e2f2">Email:</td>
       <td class="formss" colspan="3"><input name="email" id="email" type="text" value="<?php echo $lista->email;?>" class="cajaSuperGrande minus" onblur="return ValidateEmail(this,event)"/></td>

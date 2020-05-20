@@ -68,7 +68,7 @@ class Asistencia extends CI_Controller
              $lista->curso      = "";
              $lista->codigo     = "";
              $lista->matricula  = "";
-             $lista->marcacion  = "";
+             $lista->marcacion  = 1;
              $lista->cabasistencia = "";
          }
          $arrMarcacion = array("0"=>"Falto","1"=>"Asistio","2"=>"Tardanza");

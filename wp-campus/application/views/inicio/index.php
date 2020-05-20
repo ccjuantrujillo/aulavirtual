@@ -29,6 +29,10 @@
                                             <div class="form-group">
                                                 <label class="small mb-1" for="Empresa">Empresa: </label>
                                                 <?php echo $selempresa;?>
+                                            </div>     
+                                            <div class="form-group">
+                                                <label class="small mb-1" for="inputEmailAddress">Rol</label>
+                                                <?php echo $selrol;?>
                                             </div>                                            
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputEmailAddress">Usuario</label>
@@ -40,7 +44,6 @@
                                             </div>
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="#"></a>
-                                                <input type="hidden" name="rol" id="rol" value="6">
                                                 <input class="btn btn-primary" type="submit" name="Ingresar" value="Ingresar">
                                         </form>
                                     </div>
@@ -49,20 +52,6 @@
                         </div>
                     </div>
                 </main>
-            </div>
-            <div id="layoutAuthentication_footer">
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2019</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
             </div>
         </div>
     </body>

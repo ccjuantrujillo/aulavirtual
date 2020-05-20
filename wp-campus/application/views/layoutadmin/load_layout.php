@@ -9,6 +9,7 @@
         <title><?php echo $empresa->EMPRC_RazonSocial;?></title>
         <link href="<?php echo base_url();?>css/styles.css" rel="stylesheet" />
         <link href="<?php echo base_url();?>css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script>var base_url = '<?php echo base_url() ?>';</script>
         <script src="<?php echo base_url();?>js/all.min.js" crossorigin="anonymous"></script>
         <script src="<?php echo base_url();?>js/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
         <script src="<?php echo base_url();?>js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
@@ -18,7 +19,8 @@
         <!--script src="< ?php echo base_url();?>assets/demo/chart-bar-demo.js"></script-->
         <script src="<?php echo base_url();?>js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
         <script src="<?php echo base_url();?>js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-        <script src="<?php echo base_url();?>assets/demo/datatables-demo.js"></script>        
+        <script src="<?php echo base_url();?>assets/demo/datatables-demo.js"></script>   
+        <?php echo $script;?>
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">

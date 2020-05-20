@@ -42,6 +42,7 @@ class Alumno extends Persona
                 $lista[$indice]->codigo    = $value->ALUMP_Codigo;
                 $lista[$indice]->identificador = $value->ALUMC_Identificador;
                 $lista[$indice]->estado    = $value->ALUMC_FlagEstado;
+                $lista[$indice]->usuario   = $value->ALUMC_Usuario;
                 $lista[$indice]->fechareg  = $arrFecha[0];
             }
         }
@@ -78,6 +79,8 @@ class Alumno extends Persona
              $lista->estado       = $alumnos->ALUMC_FlagEstado;
              $lista->codigo       = $alumnos->ALUMP_Codigo;
              $lista->codigo_padre = $alumnos->PERSP_Codigo;
+             $lista->usuario      = $alumnos->ALUMC_Usuario;
+             $lista->clave        = $alumnos->ALUMC_Password;             
          }
          elseif($accion == "n"){
              $lista->dni          = "";
@@ -93,6 +96,8 @@ class Alumno extends Persona
              $lista->estado       = 1;
              $lista->codigo       = "";
              $lista->codigo_padre = "";
+             $lista->usuario      = "";
+             $lista->clave        = "";
          }
          $arrEstado          = array("0"=>"::Seleccione::","1"=>"ACTIVO","2"=>"INACTIVO");
          $data['titulo']     = $accion=="e"?"Editar Alumno":"Crear Alumno";
@@ -100,6 +105,8 @@ class Alumno extends Persona
          $data['form_close'] = form_close();
          $data['lista']	     = $lista;
          $data['selestado']  = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
+         $data['txtusuario'] = form_input(["name"=>"usuario","id"=>"usuario","class"=>"cajaMedia"],$lista->usuario);
+         $data['txtclave']   = form_password(["name"=>"clave","id"=>"clave","class"=>"cajaMedia"],$lista->clave);
          $data['oculto']     = form_hidden(array("accion"=>$accion,"codigo"=>$lista->codigo,"codigo_padre"=>$lista->codigo_padre,"tipodoc"=>1));
          $this->load->view("alumno/alumno_nuevo",$data);
      }
@@ -108,8 +115,11 @@ class Alumno extends Persona
         parent::grabar();
         $accion    = $this->input->get_post('accion');
         $codigo    = $this->input->get_post('codigo');
+        $clave     = $this->input->get_post('clave');
         $resultado = true;
         $data      = array(
+                        "ALUMC_Usuario"    => $this->input->post('usuario'),
+                        "ALUMC_Password"   => $clave!=""?md5($clave):"",
                         "ALUMC_FlagEstado" => $this->input->post('estado'),
                         "ALUMC_Identificador" => $this->input->post('identificador'),
                         "user_id"          => 7

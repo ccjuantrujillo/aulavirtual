@@ -18,7 +18,7 @@ class Matricula_model extends CI_Model{
         if($default!="") $arreglo = array($default=>':: Seleccione ::');
         foreach($this->listar($filter) as $indice=>$valor){
             $indice1   = $valor->MATRICP_Codigo;
-            $valor1    = $valor->PERSC_ApellidoPaterno." ".$valor->PERSC_Nombre;
+            $valor1    = $valor->PERSC_ApellidoPaterno." ".$valor->PERSC_ApellidoPaterno." ".$valor->PERSC_Nombre;
             $arreglo[$indice1] = $valor1;
         }
         return $arreglo;
@@ -32,6 +32,7 @@ class Matricula_model extends CI_Model{
         $this->db->join($this->table_curso.' as e','e.CURSOP_Codigo=c.CURSOP_Codigo','inner');
         $this->db->join($this->table_aula.' as f','f.AULAP_Codigo=c.AULAP_Codigo','inner');
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
+        if(isset($_SESSION["ciclo"]))     $this->db->where(array("e.CICLOP_Codigo"=>$_SESSION["ciclo"]));//(**)       
         if(isset($filter->alumno))    $this->db->where(array("c.ALUMP_Codigo"=>$filter->alumno));   
         if(isset($filter->matricula)) $this->db->where(array("c.MATRICP_Codigo"=>$filter->matricula));  
         if(isset($filter->curso))     $this->db->where(array("c.CURSOP_Codigo"=>$filter->curso));    
@@ -53,8 +54,10 @@ class Matricula_model extends CI_Model{
         $listado = $this->listar($filter,$filter_not='',$number_items='',$offset='');
         if(count($listado)>1)
             $resultado = $listado;
-        else
+        elseif(count($listado)==1)
             $resultado = (object)$listado[0];
+        else
+            $resultado = new stdClass ();
         return $resultado;
     }
 

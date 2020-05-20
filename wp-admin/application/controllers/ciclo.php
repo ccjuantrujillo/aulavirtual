@@ -114,7 +114,6 @@ class Ciclo extends CI_Controller
 
     public function buscar($j=0)
     {
-
         $nombre_fabricante = $this->input->post('nombre_fabricante');
         $filter = new stdClass();
         $filter->FABRIC_Descripcion = $nombre_fabricante;
@@ -148,6 +147,14 @@ class Ciclo extends CI_Controller
         $this->pagination->initialize($conf);
         $data['paginacion'] = $this->pagination->create_links();
         $this->load->view('ciclo/aula_index',$data);
+    }
+    
+    public function seleccionar(){
+        $filter = (Object)$_REQUEST;
+        $data = array('ciclo'=>$filter->ciclo);
+        $this->session->set_userdata($data);
+        $resultado = true;
+        echo json_encode($resultado);
     }
 }
 ?>

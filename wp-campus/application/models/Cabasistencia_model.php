@@ -16,7 +16,7 @@ class Cabasistencia_model extends CI_Model{
         if($default!="") $arreglo = array($default=>':: Seleccione ::');
         foreach($this->listar($filter) as $indice=>$valor){
             $indice1   = $valor->CABASISTP_Codigo;
-            $valor1    = $valor->CABASISTC_Fecha;
+            $valor1    = date_sql($valor->CABASISTC_Fecha);
             $arreglo[$indice1] = $valor1;
         }
         return $arreglo;

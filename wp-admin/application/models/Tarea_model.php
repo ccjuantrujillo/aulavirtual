@@ -2,16 +2,18 @@
 class Tarea_model extends CI_Model{
     var $usuario;
     var $table;
+    var $empresa;
     
     public function __construct(){
         parent::__construct();
         $this->usuario     = $this->session->userdata('codusu');
         $this->table       = "ant_tarea";
-        $this->table_profe = "ant_profesor";
-        $this->table_pers  = "ant_persona";
+        $this->table_tipotarea = "ant_tipotarea";        
+        $this->table_leccion   = "ant_leccion";    
+        $this->table_seccion   = "ant_seccion";    
         $this->table_ciclo = "ant_ciclo";
-        $this->table_tipotarea = "ant_tipotarea";
         $this->table_curso = "ant_curso";
+        $this->empresa     = $this->session->userdata('empresa');
     }
 	
     public function seleccionar($default='',$filter='',$filter_not='',$number_items='',$offset=''){
@@ -26,15 +28,14 @@ class Tarea_model extends CI_Model{
     
     public function listar($filter,$filter_not="",$number_items='',$offset=''){
         $this->db->select('*');
-        $this->db->from($this->table." as p");
-        $this->db->join($this->table_profe.' as e','e.PROP_Codigo=p.PROP_Codigo','inner');
-        $this->db->join($this->table_pers.' as f','f.PERSP_Codigo=e.PERSP_Codigo','inner');
-        $this->db->join($this->table_ciclo.' as g','g.CICLOP_Codigo=p.CICLOP_Codigo','inner');
-        $this->db->join($this->table_tipotarea.' as h','h.TIPOTAREAP_Codigo=p.TIPOTAREAP_Codigo','inner');
-        $this->db->join($this->table_curso.' as i','i.PROD_Codigo=e.PROD_Codigo','inner');
-        if(isset($filter->tarea) && $filter->tarea!='')       $this->db->where(array("p.TAREAP_Codigo"=>$filter->tarea));
-        if(isset($filter->profesor) && $filter->profesor!='') $this->db->where(array("p.PROP_Codigo"=>$filter->profesor));
-        if(isset($filter->curso) && $filter->curso!='')       $this->db->where(array("e.PROD_Codigo"=>$filter->curso));
+        $this->db->from($this->table." as c");
+        $this->db->join($this->table_tipotarea.' as d','d.TIPOTAREAP_Codigo=c.TIPOTAREAP_Codigo','inner');    
+        $this->db->join($this->table_leccion.' as e','e.LECCIONP_Codigo=c.LECCIONP_Codigo','inner'); 
+        $this->db->join($this->table_seccion.' as f','f.SECCIONP_Codigo=e.SECCIONP_Codigo','inner'); 
+        $this->db->join($this->table_curso.' as g','g.CURSOP_Codigo=f.CURSOP_Codigo','inner'); 
+        $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));   
+        if(isset($filter->tarea) && $filter->tarea!='')       $this->db->where(array("c.TAREAP_Codigo"=>$filter->tarea));
+        if(isset($filter->curso) && $filter->curso!='')       $this->db->where(array("g.CURSOP_Codigo"=>$filter->curso));
         if(isset($filter->order_by) && count($filter->order_by)>0){
             foreach($filter->order_by as $indice=>$value){
                 $this->db->order_by($indice,$value);
@@ -43,23 +44,25 @@ class Tarea_model extends CI_Model{
         $this->db->limit($number_items, $offset); 
         $query = $this->db->get();
         $resultado = array();
-        if($query->num_rows>0){
+        //if($query->num_rows>0){
             $resultado = $query->result();
-        }
+        //}
         return $resultado;
     }
     
     public function obtener($filter,$filter_not='',$number_items='',$offset=''){
         $listado = $this->listar($filter,$filter_not='',$number_items='',$offset='');
         if(count($listado)>1)
-            $resultado = "Existe mas de un resultado";
-        else
+            $resultado = $listado;
+        else if(count($listado)==1)
             $resultado = (object)$listado[0];
+        else
+            $resultado = new stdClass ();
         return $resultado;
     }
 
     public function insertar($data){
-       $data['USUA_Codigo'] = $this->usuario; 
+       $data["EMPRP_Codigo"] = $this->empresa;
        $this->db->insert($this->table,$data);
        return $this->db->insert_id();
     }    

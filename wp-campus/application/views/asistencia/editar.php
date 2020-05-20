@@ -16,7 +16,11 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr style="text-align:center;">
-                                <?php echo $columna;?>
+                                <th>No</th>
+                                <th>Codigo</th>
+                                <th>Apellidos</th>
+                                <th>Nombres</th>
+                                <th>Asistencia</th>
                             </tr>
                         </thead>
                         <tbody>

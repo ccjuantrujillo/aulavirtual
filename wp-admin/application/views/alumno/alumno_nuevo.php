@@ -27,6 +27,12 @@
           <td class="formss"><input name="emailinst" id="emailinst" type="text" value="<?php echo $lista->emailinst;?>" class="cajaGrande minus" onblur="return ValidateEmail(this,event)"/></td>          
         </tr>  
         <tr>
+          <td bgcolor="#d5e2f2">Usuario:</td>
+          <td class="formss"><?php echo $txtusuario;?></td>
+          <td bgcolor="#d5e2f2">Clave:</td>
+          <td class="formss"><?php echo $txtclave;?></td>          
+        </tr>         
+        <tr>
           <td bgcolor="#d5e2f2">Telefono:</td>
           <td class="formss"><input name="telefono" id="telefono" type="text" value="<?php echo $lista->telefono;?>" class="cajaMinima"/></td>
         </tr>  

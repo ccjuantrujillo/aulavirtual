@@ -1,5 +1,5 @@
 jQuery(document).ready(function(){
-
+    //NUEVO
     $("#nuevo").click(function(){
         dataString = "";
         url = base_url+"index.php/ciclo/editar/n";
@@ -10,28 +10,41 @@ jQuery(document).ready(function(){
 
     });
 
-//    $("#imprimir").click(function(){
-//        codigo   = $("#codigo").val();
-//        url = base_url+"index.php/ventas/cliente/ver/"+codigo;
-//        window.open(url, this.target, 'width=800,height=400,top=150,left=200');
-//    });
-
+    //CANCELAR
     $('body').on('click',"#cancelar",function(){
         url = base_url+"index.php/ciclo/listar";
         location.href = url;
     });
 
-//    $("#cerrar").click(function(){
-//        url = base_url+"index.php/inicio/index";
-//        location.href = url;
-//    });
-
+    //GRABAR
     $("body").on('click',"#grabar",function(){
         url = base_url+"index.php/ciclo/grabar";
         dataString  = $('#frmPersona').serialize();
         $.post(url,dataString,function(data){
             alert('Operacion realizada con exito');
             location.href = base_url+"index.php/ciclo/listar";
+        });
+    });
+
+    //CAMBIAR CICLO
+    $(".seleccionar").click(function(){
+        var id = $(this).parent().parent().attr("id");
+        var datos = new FormData();
+        datos.append("ciclo",id);
+        $.ajax({
+            url:base_url+"index.php/ciclo/seleccionar",
+            method:"post",
+            data:datos,
+            contentType:false,
+            processData:false,
+            success:function(data){
+                if(data){
+                    location.href=base_url+"index.php/ciclo/listar";
+                }
+            },
+            error:function(){
+                alert("Ocurrio un error");
+            }
         });
     });
 

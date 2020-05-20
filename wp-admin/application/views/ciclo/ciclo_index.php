@@ -29,6 +29,7 @@
             <td width="30">Fecha de Inicio</td>
             <td width="30">Fecha de Fin</td>
             <td width="100">Situacion</td>
+            <td width="20">Accion</td>
             <td width="10">Editar</td>
             <td width="10">Eliminar</td>
           </tr>
@@ -39,12 +40,13 @@
                 $estado = $flgestado==1?"<font style='color:#009900'>Abierto</font>":"<font style='color:#ff0033'>Cerrado</font>";                
                 $clase = ($item%2)==0?"list_a":"list_b";
                ?>
-              <tr class="<?php echo $clase;?>">
+              <tr class="<?php echo $clase;?>" id="<?php echo $value->codigo;?>">
                 <td><?php echo ++$j;?></td>
                 <td align="center"><?php echo $value->descripcion;?></td>
                 <td align="center"><?php echo $value->fecha_inicio;?></td>
                 <td align="center"><?php echo $value->fecha_fin;?></td>
                 <td><?php echo $estado;?></td>
+                <td><button class="btn btn-default seleccionar">Seleccionar</button></td>
                 <td><a href="#" onclick='editar("<?php echo $value->codigo;?>")'><img src="<?php echo img;?>editar.jpg"/></a></td>
                 <td><a href="#" onclick='eliminar("<?php echo $value->codigo;?>")'><img src="<?php echo img;?>eliminar.jpg"/></a></td>
               </tr>

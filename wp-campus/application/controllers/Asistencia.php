@@ -14,6 +14,7 @@ class Asistencia extends LayoutAdmin{
         $this->load->model('Curso_model');
         $this->load->helper('menu_helper');
         $this->load->helper('date_helper');
+        $this->script = "<script src='".base_url()."js/asistencia.js'></script>";
     }
 
     public function index(){
@@ -35,16 +36,18 @@ class Asistencia extends LayoutAdmin{
         $columna  = "";
         $columna .= "<th>No</th>";
         $columna .= "<th>Codigo</th>";
-        $columna .= "<th>Identificador</th>";
+        //$columna .= "<th>Identificador</th>";
         $columna .= "<th>Apellidos</th>";
         $columna .= "<th>Nombres</th>";
         $filter = new stdClass();
         $filter->curso = $curso;
         $filter->order_by = array("c.CABASISTC_Fecha"=>"asc");
         $cabAsistencia = $this->Cabasistencia_model->listar($filter);
+        $arrAsistencia = array("0"=>"::Seleccione::");
         if(count($cabAsistencia)>0){
             foreach($cabAsistencia as $value){
                 $columna .= "<th>".str_replace("/2020","", date_sql($value->CABASISTC_Fecha))."</th>";
+                $arrAsistencia[$value->CABASISTP_Codigo]=date_sql($value->CABASISTC_Fecha);
             }
         }
         //Lista de alumnos matriculados - detalle
@@ -59,7 +62,7 @@ class Asistencia extends LayoutAdmin{
                 $fila.="<tr>";
                 $fila.="<td>".($indice+1)."</td>";
                 $fila.="<td>".$value->ALUMP_Codigo."</td>";
-                $fila.="<td>".$value->ALUMC_Identificador."</td>";
+                //$fila.="<td>".$value->ALUMC_Identificador."</td>";
                 $fila.="<td>".$value->PERSC_ApellidoPaterno." ".$value->PERSC_ApellidoMaterno."</td>";
                 $fila.="<td>".$value->PERSC_Nombre."</td>";
                 $filter = new stdClass();
@@ -83,11 +86,40 @@ class Asistencia extends LayoutAdmin{
         $filter = new stdClass();
         $filter->curso = $curso;          
         $data['asistencia'] = $this->Asistencia_model->listar($filter); 
+        $filter = new stdClass();
+        $filter->curso = $curso;          
+        $data['selcabasis'] = form_dropdown("selcabasistencia",$arrAsistencia,0,"id='selcabasistencia' class='form-control'");
         $data['menuizq']    = menu_izq($curso);
         $data['curso']      = $this->Curso_model->get($curso);        
         $this->load_layout('asistencia/inicio',$data);
     }	
 
+    public function editar($curso){    
+        //Lista de asistencia
+        $filter = new stdClass();
+        $filter->cabasistencia = $this->input->post("selcabasistencia");
+        $asistencia = $this->Asistencia_model->listar($filter);
+        $fila = "";
+        foreach ($asistencia as $item=>$value){
+            $fila.="<tr>";
+            $fila.="<td>".($item+1)."</td>";
+            $fila.="<td>".$value->ASISTP_Codigo."</td>";
+            $fila.="<td>".$value->PERSC_ApellidoPaterno." ".$value->PERSC_ApellidoMaterno."</td>";
+            $fila.="<td>".$value->PERSC_Nombre."</td>";
+            $fila.="<td><input type='text' name='marcacion[]' id='marcacion[]' value='".$value->ASISTC_Marcacion."' class='form-control-sm'></td>";
+            $fila.="</tr>";
+        }
+        $filter = new stdClass();
+        $filter->curso = $curso;
+        $filter->order_by = array("c.CABASISTC_Fecha"=>"asc");
+        $cabAsistencia = $this->Cabasistencia_model->seleccionar($filter,"0");           
+        $data["fila"]  = $fila;
+        $data['selcabasis'] = form_dropdown("selcabasistencia",$cabAsistencia,$_POST["selcabasistencia"],"id='selcabasistencia' class='form-control'");
+        $data['menuizq']    = menu_izq($curso);        
+        $data['curso']      = $this->Curso_model->get($curso);  
+        $this->load_layout('asistencia/editar',$data);
+    }
+    
     public function read(){
         $data['cursos']    = $this->Curso_model->read();
         $data['menuizq']   = menu_izq();
