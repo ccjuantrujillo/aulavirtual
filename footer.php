@@ -1,13 +1,11 @@
-<footer class="site-footer">
-  <div class="text-center">
-	<p>
-	  &copy; Copyrights <strong>Dashio</strong>. Derechos reservados
-	</p>
-	<div class="credits">
-	  Creado por <a href="#">Kallpahost</a>
-	</div>
-	<a href="blank.html#" class="go-top">
-	  <i class="fa fa-angle-up"></i>
-	  </a>
+<div class="footer-wrapper">
+  <div class="container">
+    <p>&copy; Copyright 
+	<script type="text/javascript">
+	var d=new Date();
+	document.write(d.getFullYear());
+	</script> 
+      CeCCos | Todos los derechos reservados.</p>
   </div>
-</footer> 
+  <a id="scrool-top" href="javascript:void(0)"><i class="fa fa-long-arrow-up" aria-hidden="true"></i></a> 
+</div>

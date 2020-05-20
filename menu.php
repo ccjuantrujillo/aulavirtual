@@ -1,31 +1,63 @@
-<?php
-if(!isset($inicio))      $inicio="";
-if(!isset($contactenos)) $contactenos="";
-?>
-
-<!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-dark bg-dark fixed-top" style="margin-bottom:0px">
-	<div class="container">
-		<div class="navbar-collapse collapse" id="navbarResponsive">
-			<ul class="nav navbar-nav pull-right mainNav">
-				<li <?php echo $inicio;?>><a href="index.php">INICIO</a></li>
-				<li <?php echo $contactenos;?>><a href="contactenos.php">CONTACTENOS</a></li>
-			</ul>
-		</div>
-	</div>
-</nav>
-
-<!-- Page Header -->
-<header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
-  <div class="overlay"></div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <div class="site-heading">
-          <h1><?php echo $datosempresa['EMPRC_RazonSocial'];?></h1>
-          <span class="subheading"><?php echo $datosempresa['EMPRC_DescripcionBreve'];?></span>
+<!-- Header Start -->
+<header>
+  <div class="wow fadeInDown navigation" data-offset-top="197" data-spy="affix">
+    <div class="container">
+      <nav class="navbar navbar-default">
+        <div class="row">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <a class="navbar-brand" href="index.php"><img src="images/logo.png" alt="Education World"/></a> </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="index.php">Inicio</a></li>
+              <li><a href="cursos.php" class="dropdown-toggle">Cursos</a></li>
+              <li><a href="contactenos.php">Contactenos</a></li>
+            </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+<!-- Header End -->
+<!-- Inner Banner Wrapper Start -->
+<div class="banner-wrapper">
+  <div class="carousel fade-carousel slide" data-ride="carousel" data-interval="4000" id="bs-carousel">
+    <!-- Overlay -->
+    <div class="overlay"></div>
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
+      <li data-target="#bs-carousel" data-slide-to="1"></li>
+      <li data-target="#bs-carousel" data-slide-to="2"></li>
+    </ol>
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item slides active">
+        <div class="slide-1"></div>
+        <div class="hero">
+          <h1 class="animated1">CECCOS</h1>
+          <h3 class="animated2">Circulo de Estudios, capacitacion y comunicacion social</h3>
+        </div>
+      </div>
+      <div class="item slides">
+        <div class="slide-2"></div>
+        <div class="hero">
+          <h1 class="animated1">CECCOS</h1>
+          <h3 class="animated2">Circulo de Estudios, capacitacion y comunicacion social</h3>
+        </div>
+      </div>
+      <div class="item slides">
+        <div class="slide-3"></div>
+        <div class="hero">
+          <h1 class="animated1">CECCOS</h1>
+          <h3 class="animated2">Circulo de Estudios, capacitacion y comunicacion social</h3>
         </div>
       </div>
     </div>
   </div>
-</header>
+</div>
+<!-- Inner Banner Wrapper End -->
