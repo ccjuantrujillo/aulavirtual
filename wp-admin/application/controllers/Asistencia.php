@@ -47,7 +47,7 @@ class Asistencia extends CI_Controller
         $data['header']          = get_header();
         $data['j']               = $j;
         $data['registros']       = $registros;
-        $data['arrMarca']        = array("0"=>"Falto","1"=>"Asistio","2"=>"Tardanza");
+        $data['arrMarca']        = array(""=>"--","0"=>"Falto","1"=>"Asistio","2"=>"Tardanza");
         $data['paginacion']      = $this->pagination->create_links();
         $this->load->view("asistencia/asistencia_index",$data);
     }
