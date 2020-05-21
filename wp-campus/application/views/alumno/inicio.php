@@ -10,7 +10,7 @@
                     if($value->PERSC_Email!="")  $correos.=$value->PERSC_Email.";";
                     if($value->PERSC_EmailInstitucional!="")  $correos.=$value->PERSC_EmailInstitucional.";";
                 }
-                echo $correos;
+                //echo $correos;
                 ?>
             </div>            
             <div class="card-body">
@@ -24,7 +24,7 @@
                                 <th>Apellidos</th>
                                 <th>Nombres</th>
                                 <th>Correo</th>
-                                <th>Correo Inst.</th>
+                                <!--th>Correo Inst.</th-->
                             </tr>
                         </thead>
                         <tbody>

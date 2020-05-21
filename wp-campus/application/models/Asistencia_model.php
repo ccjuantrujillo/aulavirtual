@@ -34,7 +34,7 @@ class Asistencia_model extends CI_Model{
         $this->db->join($this->table_curs.' as g','g.CURSOP_Codigo=d.CURSOP_Codigo','inner');
         $this->db->join($this->table_cab.' as h','h.CABASISTP_Codigo=c.CABASISTP_Codigo','inner');
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
-
+        if(isset($filter->cabasistencia))    $this->db->where(array("h.CABASISTP_Codigo"=>$filter->cabasistencia));
         if(isset($filter->asistencia))    $this->db->where(array("c.ASISTP_Codigo"=>$filter->asistencia));
         if(isset($filter->curso))         $this->db->where(array("d.CURSOP_Codigo"=>$filter->curso));
         if(isset($filter->order_by) && count($filter->order_by)>0){
@@ -71,7 +71,7 @@ class Asistencia_model extends CI_Model{
     
     public function modificar($codigo,$data){
         $this->db->where("ASISTP_Codigo",$codigo);
-        $this->db->update($this->table,$data);
+        return $this->db->update($this->table,$data);
     }
 	
     public function eliminar($codigo){

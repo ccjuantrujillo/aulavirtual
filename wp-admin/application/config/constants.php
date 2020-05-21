@@ -86,7 +86,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 include_once(APPPATH.'config/config.php');
 $url = $config['base_url'];
 define('titulo','::: Sistema Cepre-Administrativo :::');
-define('pie','2016 Administrador del sistema Administrativo');
+define('pie','2020 Administrador del sistema Administrativo');
 define('css',$url."css/");
 define('img',$url."img/");
 define('files',$url."files/");

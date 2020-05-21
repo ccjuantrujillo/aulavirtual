@@ -33,7 +33,7 @@ class Alumno extends LayoutAdmin{
                 $fila.="<td>".$value->PERSC_ApellidoPaterno." ".$value->PERSC_ApellidoMaterno."</td>";
                 $fila.="<td>".$value->PERSC_Nombre."</td>";
                 $fila.="<td>".$value->PERSC_Email."</td>";
-                $fila.="<td>".$value->PERSC_EmailInstitucional."</td>";
+                //$fila.="<td>".$value->PERSC_EmailInstitucional."</td>";
                 $fila.="</tr>";                
             }
         }

@@ -27,11 +27,11 @@ class Leccion_model extends CI_Model {
             if(isset($filter->seccion))  $this->db->where(array("c.SECCIONP_Codigo"=>$filter->seccion));
             if(isset($filter->leccion))  $this->db->where(array("c.LECCIONP_Codigo"=>$filter->leccion));
             if(isset($filter->estadoseccion))  $this->db->where(array("d.SECCIONC_FlagEstado"=>$filter->estadoseccion));
-            /*if(isset($filter->order_by) && count($filter->order_by)>0){
+            if(isset($filter->order_by) && count($filter->order_by)>0){
                 foreach($filter->order_by as $indice=>$value){
                     $this->db->order_by($indice,$value);
                 }
-            } */              
+            }               
             $query = $this->db->get();
             return $query->result();
         }

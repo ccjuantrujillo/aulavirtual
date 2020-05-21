@@ -21,6 +21,12 @@ class Asistencia extends LayoutAdmin{
             echo "chau";
     }
 
+    public function read(){
+        $data['cursos']    = $this->Curso_model->read();
+        $data['menuizq']   = menu_izq();
+        $this->load_layout('curso/read',$data);
+    }	    
+    
     public function inicio($curso)
     {
         //Creamos un arreglo de asistencias        
@@ -60,8 +66,8 @@ class Asistencia extends LayoutAdmin{
         if(count($alumnos)>0){
             foreach($alumnos as $indice=>$value){
                 $fila.="<tr>";
-                $fila.="<td>".($indice+1)."</td>";
-                $fila.="<td>".$value->ALUMP_Codigo."</td>";
+                $fila.="<td class='text-center'>".($indice+1)."</td>";
+                $fila.="<td class='text-center'>".$value->ALUMP_Codigo."</td>";
                 //$fila.="<td>".$value->ALUMC_Identificador."</td>";
                 $fila.="<td>".$value->PERSC_ApellidoPaterno." ".$value->PERSC_ApellidoMaterno."</td>";
                 $fila.="<td>".$value->PERSC_Nombre."</td>";
@@ -98,15 +104,24 @@ class Asistencia extends LayoutAdmin{
         //Lista de asistencia
         $filter = new stdClass();
         $filter->cabasistencia = $this->input->post("selcabasistencia");
+        $filter->order_by = array("f.PERSC_ApellidoPaterno"=>"asc","f.PERSC_ApellidoMaterno"=>"asc","f.PERSC_Nombre"=>"asc");
         $asistencia = $this->Asistencia_model->listar($filter);
         $fila = "";
         foreach ($asistencia as $item=>$value){
-            $fila.="<tr>";
-            $fila.="<td>".($item+1)."</td>";
-            $fila.="<td>".$value->ASISTP_Codigo."</td>";
+            $fila.="<tr id='".$value->ASISTP_Codigo."'>";
+            $fila.="<td class='text-center'>".($item+1)."</td>";
+            $fila.="<td class='text-center'>".$value->ALUMP_Codigo."</td>";
             $fila.="<td>".$value->PERSC_ApellidoPaterno." ".$value->PERSC_ApellidoMaterno."</td>";
             $fila.="<td>".$value->PERSC_Nombre."</td>";
-            $fila.="<td><input type='text' name='marcacion[]' id='marcacion[]' value='".$value->ASISTC_Marcacion."' class='form-control-sm'></td>";
+            $fila.="<td>";
+            $fila.="<div class='onoffswitch'>
+                    <input type='checkbox' name='onoffswitch[".$item."]' class='onoffswitch-checkbox' id='myonoffswitch[".$item."]' ".($value->ASISTC_Marcacion==1?'checked':'').">
+                    <label class='onoffswitch-label' for='myonoffswitch[".$item."]'>
+                        <span class='onoffswitch-inner'></span>
+                        <span class='onoffswitch-switch'></span>
+                    </label>";
+            $fila.="</div>";
+            $fila.="</td>";
             $fila.="</tr>";
         }
         $filter = new stdClass();
@@ -120,9 +135,13 @@ class Asistencia extends LayoutAdmin{
         $this->load_layout('asistencia/editar',$data);
     }
     
-    public function read(){
-        $data['cursos']    = $this->Curso_model->read();
-        $data['menuizq']   = menu_izq();
-        $this->load_layout('curso/read',$data);
-    }	
+    public function grabar(){
+        $datos  = (object)$_REQUEST;
+        $codigo = $datos->id;
+        //0-Falto,1-Asistio,2-Tardanza
+        $marcacion = $datos->value=="true"?1:0;
+        $data   = array("ASISTC_Marcacion"=>$marcacion);
+        $resultado = $this->Asistencia_model->modificar($codigo,$data);
+        echo json_encode($resultado);
+    }
 }

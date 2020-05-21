@@ -1,6 +1,6 @@
 <?php
 require_once 'conexion.php';
-$query = "select * from ant_curso where CURSOC_FlagEstado=1";
+$query = "select * from ant_curso where CURSOC_FlagEstado=1 and EMPRP_Codigo in (2,3) order by EMPRP_Codigo";
 $rs = mysqli_query($link,$query);
 $listacursos = mysqli_fetch_all($rs,MYSQLI_ASSOC);
 //Recuperamos datos de la empresa
@@ -34,9 +34,10 @@ $contactenos = "";
             ?>
             <div class="col-sm-4">
               <div class="courses">
-                <div class="course-thumb"><a href="./wp-campus/inicio/index/<?php echo $value['CURSOP_Codigo'];?>"><img src="images/class-img1.jpg" alt="Course Image"></a></div>
+                <div class="course-thumb">
+                    <a href="./wp-campus/inicio/valida/<?php echo $value['CURSOP_Codigo'];?>" target="blank"><img src="images/class-img1.jpg" alt="Course Image"></a></div>
                 <div class="course-cnt">
-                  <h3><a href="./wp-campus/inicio/index/<?php echo $value['CURSOP_Codigo'];?>"><?php echo $value['CURSOC_Nombre'];?></a></h3>
+                  <h3><a href="./wp-campus/inicio/valida/<?php echo $value['CURSOP_Codigo'];?>" target="blank"><?php echo $value['CURSOC_Nombre'];?></a></h3>
                   <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
                 </div>
               </div>

@@ -16,31 +16,31 @@
         <div class="contact-address">
           <div class="col-sm-12 col-md-6 no-space-right">
             <div class="col-sm-6 contact"> <i class="fa fa-map-marker"></i>
-              <p><span>Address</span><br>
-                Department of State, USA</p>
+              <p><span>Direccion</span><br>
+                Mz.R Lote 50 S.M.P, Peru</p>
             </div>
             <div class="col-sm-6 contact white"> <i class="fa fa-phone"></i>
-              <p><span>Phone Number</span><br>
-                0800 123 46 0000</p>
+              <p><span>Telefono</span><br>
+                992425057</p>
             </div>
             <div class="col-sm-6 contact white"> <i class="fa fa-volume-control-phone"></i>
               <p><span>Customer Care</span><br>
                 0800 123 46 0000</p>
             </div>
             <div class="col-sm-6 contact"> <i class="fa fa-envelope"></i>
-              <p><span>Email</span><br>
-                <a href="mailto:support@yourdomain.com">support@yourdomain.com</a></p>
+              <p><span>Correo</span><br>
+                <a href="mailto:ceccos.lima@gmail.com">ceccos.lima@gmail.com</a></p>
             </div>
           </div>
           <div class="col-sm-12 col-md-6 no-space-left">
             <div class="form">
               <form action="http://sbtechnosoft.com/education-world/multiple-pages/contact_send_mail.php" method="post" id="contactFrm" name="contactFrm">
-                <input type="text" required placeholder="First Name" value="" name="firstname" class="txt">
-                <input type="text" required placeholder="Last Name" value="" name="lastname" class="txt">
-                <input type="text" required placeholder="Mobile No" value="" name="mob" class="txt">
-                <input type="text" required placeholder="Email" value="" name="email" class="txt">
+                <input type="text" required placeholder="Nombres" value="" name="firstname" class="txt">
+                <input type="text" required placeholder="Apellidos" value="" name="lastname" class="txt">
+                <input type="text" required placeholder="Celular" value="" name="mob" class="txt">
+                <input type="text" required placeholder="Correo Electronico" value="" name="email" class="txt">
                 <textarea placeholder="Message" name="mess" type="text" class="txt_3"></textarea>
-                <input type="submit" value="submit" name="submit" class="txt2">
+                <input type="submit" value="Enviar" name="submit" class="txt2">
               </form>
             </div>
           </div>

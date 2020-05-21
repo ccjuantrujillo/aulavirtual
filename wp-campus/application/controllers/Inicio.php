@@ -85,6 +85,32 @@ class Inicio extends Layout{
             }
 	}
         
+        public function valida($curso){
+            $usuario = $datos[0];
+            $dataSession = array(
+                        'nomper'   => "anonymous",
+                        'login'    => "anonymous",
+                        'codper'   => 1,
+                        'codalu'   => 5,
+                        'codprofe' => 0,
+                        'rolusu'   => 3,//anonimo
+                        'empresa'  => 2
+                         );
+            if($curso==108 || $curso==122){
+                 $dataSession = array(
+                        'nomper'   => "anonymous",
+                        'login'    => "anonymous",
+                        'codper'   => 521,
+                        'codalu'   => 123,
+                        'codprofe' => 0,
+                        'rolusu'   => 1,//alumno
+                        'empresa'  => 3
+                         );
+            }
+            $this->session->set_userdata($dataSession);
+            redirect(base_url()."curso/read");  
+        }
+        
         public function salir(){
             session_destroy();
             redirect('inicio/index');  

@@ -32,26 +32,43 @@ if ( ! function_exists('menu_izq'))
             $menu .= "<div class='collapse ".($secc!=""?"show":"")."' id='collapsePages' aria-labelledby='headingTwo' data-parent='#sidenavAccordion'>";
             $menu .= "<nav class='sb-sidenav-menu-nested nav accordion' id='sidenavAccordionPages'>";
             $valor_ant = "";
-            foreach($secciones as $indice=>$value){
-                $menu.= "<a class='nav-link ' href='#' data-toggle='collapse' accesskey='' data-target='#pagesCollapseAuth".$indice."' "
-                        . "aria-expanded='false' aria-controls='pagesCollapseAuth".$indice."'>".
-                        $value->SECCIONC_Orden.'. '.$value->SECCIONC_Descripcion;
-                $menu.= "<div class='sb-sidenav-collapse-arrow'><i class='fas fa-angle-down'></i></div>";
-                $menu.= "</a>";
+            $tipo = 2;
+            if($tipo==1){
+                foreach($secciones as $indice=>$value){
+                     $menu.= "<a class='nav-link ' href='#' data-toggle='collapse' accesskey='' data-target='#pagesCollapseAuth".$indice."' "
+                             . "aria-expanded='false' aria-controls='pagesCollapseAuth".$indice."'>".
+                             $value->SECCIONC_Orden.'. '.$value->SECCIONC_Descripcion;
+                     $menu.= "<div class='sb-sidenav-collapse-arrow'><i class='fas fa-angle-down'></i></div>";
+                     $menu.= "</a>";
+                     $filter2           = new stdClass();
+                     $filter2->curso    = $curso;
+                     $filter2->seccion  = $value->SECCIONP_Codigo;
+                     $objLeccion       = new Leccion_model();
+                     $lecciones        = $objLeccion->read($filter2);
+                     if(count($lecciones)>0){
+                         $menu .= "<div class='collapse ".($secc==$value->SECCIONP_Codigo?"show":"")."' id='pagesCollapseAuth".$indice."' aria-labelledby='headingOne' "
+                                 . "data-parent='#sidenavAccordionPages'>";
+                         $menu .= "<nav class='sb-sidenav-menu-nested nav'>";
+                         foreach($lecciones as $ind=>$val){
+                             $menu .= "<a class='nav-link' href='".base_url()."leccion/inicio/".$val->LECCIONP_Codigo."'>".$val->LECCIONC_Orden." ".$val->LECCIONC_Nombre."</a>";
+                         }
+                         $menu .= "</nav>";
+                         $menu .= "</div>";                    
+                     }
+                 }
+            }
+            elseif($tipo==2){
                 $filter2           = new stdClass();
                 $filter2->curso    = $curso;
-                $filter2->seccion  = $value->SECCIONP_Codigo;
-                $objLeccion       = new Leccion_model();
-                $lecciones        = $objLeccion->read($filter2);
+                $filter2->order_by = array("c.LECCIONC_Orden"=>"asc");
+                $objLeccion        = new Leccion_model();
+                $lecciones         = $objLeccion->read($filter2);                
                 if(count($lecciones)>0){
-                    $menu .= "<div class='collapse ".($secc==$value->SECCIONP_Codigo?"show":"")."' id='pagesCollapseAuth".$indice."' aria-labelledby='headingOne' "
-                            . "data-parent='#sidenavAccordionPages'>";
-                    $menu .= "<nav class='sb-sidenav-menu-nested nav'>";
                     foreach($lecciones as $ind=>$val){
-                        $menu .= "<a class='nav-link' href='".base_url()."leccion/inicio/".$val->LECCIONP_Codigo."'>".$val->LECCIONC_Orden." ".$val->LECCIONC_Nombre."</a>";
+                        $menu.= "<a class='nav-link ' href='".base_url()."leccion/inicio/".$val->LECCIONP_Codigo."'>".
+                                $val->LECCIONC_Orden.'. '.$val->LECCIONC_Nombre;
+                        $menu.= "</a>";
                     }
-                    $menu .= "</nav>";
-                    $menu .= "</div>";                    
                 }
             }
             $menu .= "</nav>";

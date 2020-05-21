@@ -13,12 +13,12 @@ class Curso_model extends CI_Model {
         $this->empresa = $_SESSION["empresa"];
     }
 
-    public function read()
+    public function read($filter)
     {
         $this->db->select('*',FALSE);
         $this->db->from($this->table." as c");
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa,"c.CURSOC_FlagEstado"=>1));
-        if(isset($filter->profesor))   $this->db->where(array("c.PROP_Codigo"=>$this->profesor)); 
+        if(isset($filter->profesor))   $this->db->where(array("c.PROP_Codigo"=>$filter->profesor)); 
         if(isset($filter->order_by) && count($filter->order_by)>0){
             foreach($filter->order_by as $indice=>$value){
                 $this->db->order_by($indice,$value);

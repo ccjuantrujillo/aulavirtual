@@ -11,6 +11,7 @@ class Cabasistencia extends CI_Controller
         if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");
         $this->load->model('Cabasistencia_model');
         $this->load->model('Asistencia_model');
+        $this->load->model('Matricula_model');
         $this->load->model('Curso_model');
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
@@ -77,25 +78,43 @@ class Cabasistencia extends CI_Controller
     }
      
     public function grabar(){
-        $accion      = $this->input->get_post('accion');
-        $codigo      = $this->input->get_post('codigo');
+        $accion = $this->input->get_post('accion');
+        $codigo = $this->input->get_post('codigo');
+        $curso  = $this->input->get_post('curso');
+        $fecha  = date_sql_ret($this->input->post('fecha'));
         $data   = array(
-                        "CURSOP_Codigo"    => $this->input->post('curso'),
-                        "CABASISTC_Fecha"  => date_sql_ret($this->input->post('fecha')),
+                        "CURSOP_Codigo"    => $curso,
+                        "CABASISTC_Fecha"  => $fecha,
                         "CABASISTC_Descripcion"  => $this->input->post('descripcion')
                        );
         if($accion == "n"){
             $this->codigo = $this->Cabasistencia_model->insertar($data);
+            $resultado = $this->codigo;
+            //Creamos el detalle con marcacion falta
+            $filter = new stdClass();
+            $filter->curso = $curso;
+            $alumnos = $this->Matricula_model->listar($filter);
+            foreach($alumnos as $value){
+                $data2 = array(
+                    "CABASISTP_Codigo" => $this->codigo,
+                    "MATRICP_Codigo"   => $value->MATRICP_Codigo,
+                    "ASISTC_Marcacion" => NULL,//falto
+                    "ASISTC_Fecha"     => $fecha
+                );
+                $this->Asistencia_model->insertar($data2);
+            }
         }
         elseif($accion == "e"){
-            $this->Cabasistencia_model->modificar($codigo,$data);
+            $resultado = $this->Cabasistencia_model->modificar($codigo,$data);
         }
+        return $resultado;
     }
     
     public function eliminar()
     {
         $resultado = true;
         $codigo  = $this->input->post('codigo');
+        $this->Asistencia_model->eliminarCab($codigo);        
         $this->Cabasistencia_model->eliminar($codigo);
         echo json_encode($resultado);
     }

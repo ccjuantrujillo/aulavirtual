@@ -76,5 +76,9 @@ class Asistencia_model extends CI_Model{
     public function eliminar($codigo){
         $this->db->delete($this->table,array('ASISTP_Codigo'=>$codigo));        
     }
+    
+    public function eliminarCab($codigo){
+        $this->db->delete($this->table,array('CABASISTP_Codigo'=>$codigo));        
+    }    
 }
 ?>

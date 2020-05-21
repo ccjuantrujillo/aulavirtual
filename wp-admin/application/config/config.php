@@ -23,7 +23,7 @@ $config['empresa']     = 1;
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/aulavirtual/wp-admin/';
+$config['base_url'] = 'http://localhost/web/aulavirtual/wp-admin/';
 
 /*
 |--------------------------------------------------------------------------
