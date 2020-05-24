@@ -39,7 +39,18 @@
                         <a class="dropdown-item" href="#">Mis datos</a>
                         <!--a class="dropdown-item" href="#">Activity Log</a-->
                         <!--div class="dropdown-divider"></div-->
-                        <a class="dropdown-item" href="<?php echo base_url();?>inicio/salir">Salir</a>
+                        <?php
+                        if($_SESSION["empresa"]==3){
+                            ?>
+                            <a class="dropdown-item" href="<?php echo base_url();?>stevejobs/salir">Salir</a>
+                            <?php
+                        }else{
+                            ?>
+                            <a class="dropdown-item" href="<?php echo base_url();?>inicio/salir">Salir</a>
+                            <?php
+                        }
+                        ?>
+                        
                     </div>
                 </li>
             </ul>

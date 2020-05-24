@@ -15,7 +15,7 @@
               <h3 class="card-title"><?php echo $value->ARCHIVC_Nombre;?></h3>
               <div class="row">
                 <div class="col-lg-2 col-md-3 col-sm-4">
-                  <a href="<?php echo base_url()."administrador/files/".$value->ARCHIVC_Adjunto;?>" target="blank"><img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg" alt="Barca" class="img-responsive" height="200px" width="350px"/></a>
+                  <a href="<?php echo dirname(base_url())."/wp-admin/files/".$value->ARCHIVC_Adjunto;?>" target="blank"><img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg" alt="Barca" class="img-responsive" height="200px" width="350px"/></a>
                   </div>
                 <div class="col-lg-10 col-md-9 col-sm-8"><p class="card-text"><?php echo $value->ARCHIVC_Descripcion;?></p></div>                  
               </div>
@@ -33,7 +33,7 @@
               <h3 class="card-title"><?php echo $value->ARCHIVC_Nombre;?></h3>
               <div class="row">
                 <div class="col-lg-2 col-md-3 col-sm-4">
-                  <a href="<?php echo base_url()."administrador/files/".$value->ARCHIVC_Adjunto;?>" target="blank"><img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg" alt="Barca" class="img-responsive" height="200px" width="350px"/></a>
+                  <a href="<?php echo dirname(base_url())."/wp-admin/files/".$value->ARCHIVC_Adjunto;?>" target="blank"><img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg" alt="Barca" class="img-responsive" height="200px" width="350px"/></a>
                   </div>
                 <div class="col-lg-10 col-md-9 col-sm-8"><p class="card-text"><?php echo $value->ARCHIVC_Descripcion;?></p></div>                  
               </div>

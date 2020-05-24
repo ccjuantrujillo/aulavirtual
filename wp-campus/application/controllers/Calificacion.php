@@ -5,6 +5,10 @@ require_once 'LayoutAdmin.php';
 class Calificacion extends LayoutAdmin{
     var $menu;
     
+    public function index(){
+            echo "chau";
+    }    
+    
     public function __construct(){
         parent::__construct();                
         $this->load->model("Calificacion_model");

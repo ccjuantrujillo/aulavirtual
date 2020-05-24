@@ -1,8 +1,8 @@
 <div class="container-fluid">
     <h3 class="mt-4">
         <a href="<?php echo base_url();?>curso/inicio/<?php echo $leccion->CURSOP_Codigo;?>"><?php echo $leccion->CURSOC_Nombre;?></a>
-        /<?php echo $leccion->LECCIONC_Orden." ".$leccion->LECCIONC_Nombre;?>
     </h3>
+    <h4><?php echo $leccion->LECCIONC_Orden." ".$leccion->LECCIONC_Nombre;?></h4>
     <?php
     if(trim($leccion->LECCIONC_Video)!=""){
         ?>
@@ -34,35 +34,42 @@
     ?>  
     <!--h3 class="mt-4" style="color:#007bff;">ARCHIVOS</h3-->    
     <div>
-        <?php
-        if(count($archivos)>0){
-            foreach($archivos as $value){
-            ?>
-              <div class="card">
-                <div class="card-body">
-                  <h3 class="card-title"><?php echo $value->ARCHIVC_Nombre;?></h3>
-                  <div class="row">
-                    <div class="col-lg-2 col-md-3 col-sm-4">
-                      <a href="<?php echo dirname(base_url())."/wp-admin/files/".$value->ARCHIVC_Adjunto;?>" target="blank"><img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg" alt="Barca" class="img-responsive" height="200px" width="350px"/></a>
-                      </div>
-                    <div class="col-lg-10 col-md-9 col-sm-8"><p class="card-text"><?php echo $value->ARCHIVC_Descripcion;?></p></div>                  
-                  </div>
-                </div>
-                <div class="card-footer text-muted">
-                  Publicado el 01 Enero 2018 
-                </div>
-              </div>     
-             <?php
-             }
-        }
-        else{
-            ?>
-            <div class="row">
-                <h4>NO EXISTEN ARCHIVOS PARA ESTA LECCION</h4>
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped table-valign-middle">
+                  <tbody>
+                  <?php
+                    if(count($archivos)>0){
+                        foreach($archivos as $value){  
+                        ?>
+                        <tr>
+                          <td>
+                              <a href="<?php echo dirname(base_url())."/wp-admin/files/".$value->ARCHIVC_Adjunto;?>" target="_blank">
+                                <img src="<?php echo base_url();?>img/archivo.svg" alt="Product 1" class="img-circle img-size-32 mr-2">
+                                <?php echo $value->ARCHIVC_Nombre;?>                                  
+                              </a>
+                          </td>
+                          <td class="text-right">
+                              <a href="#" class="text-muted">Publicado el <?php echo substr($value->LECCIONC_FechaRegistro,0,10);?>
+                              <i class="fas fa-search"></i> 
+                            </a>
+                          </td>
+                        </tr>
+                        <?php
+                        }
+                    }
+                    else{
+                        ?>
+                        <div class="row">
+                            <h4>NO EXISTEN ARCHIVOS PARA ESTA LECCION</h4>
+                        </div>
+                        <?php
+                    }
+                    ?> 
+                  </tbody>
+                </table>
             </div>
-            <?php
-        }
-        ?>  
+        </div>
     </div>
     <?php
     if($sgtelec!=""){

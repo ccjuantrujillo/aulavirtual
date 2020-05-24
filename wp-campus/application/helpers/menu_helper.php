@@ -73,9 +73,6 @@ if ( ! function_exists('menu_izq'))
             }
             $menu .= "</nav>";
             $menu .= "</div>";
-            $menu .= "<a class='nav-link' href='".base_url()."archivos/index/".$cursos->CURSOP_Codigo."'>";
-            $menu .= "<div class='sb-nav-link-icon'><i class='fas fa-chart-area'></i></div>ARCHIVOS";
-            $menu .= "</a>";
             $menu .= "<a class='nav-link' href='".base_url()."alumno/inicio/".$cursos->CURSOP_Codigo."'>";
             $menu .= "<div class='sb-nav-link-icon'><i class='fas fa-table'></i></div>PARTICIPANTES";
             $menu .= "</a>";            

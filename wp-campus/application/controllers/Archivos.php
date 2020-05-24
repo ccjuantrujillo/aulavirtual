@@ -35,8 +35,9 @@ class Archivos extends LayoutAdmin{
     public function index($curso){
         $filter = new stdClass();
         $filter->curso = $curso;
-        $objArchivos      = new Archivos_model();				
-        $data["archivos"] = $objArchivos->read($filter);
+        $objArchivos      = new Archivos_model();		
+        $campos = array("e.SECCIONC_Descripcion","e.SECCIONC_Orden","c.ARCHIVC_Nombre","c.ARCHIVC_Adjunto","c.ARCHIVC_Descripcion");
+        $data["archivos"] = $objArchivos->read($filter,$campos);
         $data['menuizq']  = menu_izq($curso);
         $this->load_layout('archivos/index',$data);		
     }
