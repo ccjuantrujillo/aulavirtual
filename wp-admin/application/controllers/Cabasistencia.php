@@ -5,8 +5,7 @@ class Cabasistencia extends CI_Controller
     public $configuracion;
     public $codigo;
 
-    public function __construct()
-    {
+    public function __construct(){
         parent::__construct(); 
         if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");
         $this->load->model('Cabasistencia_model');

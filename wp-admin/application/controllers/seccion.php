@@ -26,7 +26,7 @@ class Seccion extends CI_Controller {
         $menu       = get_menu($filter);     
         $filter     = new stdClass();
         $filter_not = new stdClass(); 
-        $filter->order_by    = array("p.CURSOC_Nombre"=>"asc","c.SECCIONC_Orden"=>"asc");
+        $filter->order_by    = array("q.PERIODC_DESCRIPCION"=>"asc","c.SECCIONC_Orden"=>"asc");
         $registros = count($this->Seccion_model->listar($filter,$filter_not));
         $productoatrib = $this->Seccion_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
@@ -35,7 +35,6 @@ class Seccion extends CI_Controller {
             foreach($productoatrib as $indice=>$valor){  
                 $lista[$indice]               = new stdClass();
                 $lista[$indice]->codigo       = $valor->SECCIONP_Codigo;
-                $lista[$indice]->curso        = $valor->CURSOC_Nombre;
                 $lista[$indice]->descripcion  = $valor->SECCIONC_Descripcion;
                 $lista[$indice]->periodo      = $valor->PERIODC_DESCRIPCION;
                 $lista[$indice]->orden        = $valor->SECCIONC_Orden;
@@ -45,7 +44,7 @@ class Seccion extends CI_Controller {
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/almacen/semana/listar";
+        $configuracion['base_url']    = base_url()."index.php/seccion/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);        
         /*Datos para la vista*/ 
@@ -65,20 +64,20 @@ class Seccion extends CI_Controller {
             $filter             = new stdClass();
             $filter->seccion    = $codigo;
             $secciones          = $this->Seccion_model->obtener($filter);
+            $lista->codigo      = $secciones->SECCIONP_Codigo;
             $lista->descripcion = $secciones->SECCIONC_Descripcion;
             $lista->orden       = $secciones->SECCIONC_Orden;
             $lista->finicio     = date_sql($secciones->SECCIONC_FechaInicio);
             $lista->ffin        = date_sql($secciones->SECCIONC_FechaFin);
-            $lista->curso       = $secciones->CURSOP_Codigo; 
             $lista->estado      = $secciones->SECCIONC_FlagEstado; 	
             $lista->periodo     = $secciones->PERIODP_Codigo; 
         }
         elseif($accion == "n"){
+            $lista->codigo       = "";
             $lista->descripcion  = "";
             $lista->orden        = "";
             $lista->finicio      = "";
             $lista->ffin         = "";
-            $lista->curso        = 0;
             $lista->estado       = 1;			
             $lista->periodo      = 0;	
         }
@@ -87,12 +86,9 @@ class Seccion extends CI_Controller {
         $data['form_open']   = form_open('',array("name"=>"frmPersona","id"=>"frmPersona","onsubmit"=>"","method"=>"post","enctype"=>"multipart/form-data"));
         $data['form_close']  = form_close();
 	$data['selestado']   = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
-        $data['lista']	     = $lista;
+        $data['lista']	     = $lista;    
         $filter = new stdClass();
-        $filter->estado = 1;
-        $data['selcurso']    = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");     
-        $filter = new stdClass();
-        $data['selperiodo']  = form_dropdown('periodo',$this->Periodo_model->seleccionar('0',$filter),$lista->periodo,"id='periodo' class='comboGrande'");          $data['oculto']      = form_hidden(array('accion'=>$accion,'codigo'=>$codigo));
+        $data['selperiodo']  = form_dropdown('periodo',$this->Periodo_model->seleccionar('0',$filter),$lista->periodo,"id='periodo' class='comboGrande'");          $data['oculto']      = form_hidden(array('accion'=>$accion));
         $this->load->view('seccion/seccion_nuevo',$data);
     }  
     
@@ -102,7 +98,6 @@ class Seccion extends CI_Controller {
         $data   = array(
                         "SECCIONC_Descripcion" => $this->input->post('descripcion'),
                         "SECCIONC_Orden"     => $this->input->post('orden'),
-                        "CURSOP_Codigo"      => $this->input->post('curso'),
                         "SECCIONC_FechaInicio" => date_sql_ret($this->input->post('finicio')),
                         "SECCIONC_FechaFin"   => date_sql_ret($this->input->post('ffin')),
                         "SECCIONC_FlagEstado" => $this->input->post('estado'),						

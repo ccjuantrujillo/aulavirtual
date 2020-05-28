@@ -26,7 +26,7 @@ class Leccion_model extends CI_Model{
         $this->db->select('*');
         $this->db->from($this->table." as c",$number_items,$offset);  
         $this->db->join($this->table_seccion.' as d','d.SECCIONP_Codigo=c.SECCIONP_Codigo','inner');
-        $this->db->join($this->table_curso.' as e','e.CURSOP_Codigo=d.CURSOP_Codigo','inner');        
+        $this->db->join($this->table_curso.' as e','e.CURSOP_Codigo=c.CURSOP_Codigo','inner');        
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa)); 
         if(isset($filter->leccion))  $this->db->where(array("c.LECCIONP_Codigo"=>$filter->leccion));    
         if(isset($filter->seccion))  $this->db->where(array("c.SECCIONP_Codigo"=>$filter->seccion));   

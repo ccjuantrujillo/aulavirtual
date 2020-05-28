@@ -12,12 +12,6 @@ if ( ! function_exists('menu_izq'))
         if($curso!=""){
             $objCurso         = new Curso_model();		   	
             $cursos           = $objCurso->get($curso);
-            //Obtenemos las leccioes
-            $filter           = new stdClass();
-            $filter->curso    = $curso;
-            $filter->order_by = array("c.SECCIONC_Orden"=>"asc");		
-            $objSeccion       = new Seccion_model();	
-            $secciones        = $objSeccion->read($filter);	
             //Construimos el menu
             $menu .= "<div class='nav'>";
             $menu .= "<p></p>";
@@ -31,46 +25,20 @@ if ( ! function_exists('menu_izq'))
             $menu .= "</a>";
             $menu .= "<div class='collapse ".($secc!=""?"show":"")."' id='collapsePages' aria-labelledby='headingTwo' data-parent='#sidenavAccordion'>";
             $menu .= "<nav class='sb-sidenav-menu-nested nav accordion' id='sidenavAccordionPages'>";
-            $valor_ant = "";
-            $tipo = 2;
-            if($tipo==1){
-                foreach($secciones as $indice=>$value){
-                     $menu.= "<a class='nav-link ' href='#' data-toggle='collapse' accesskey='' data-target='#pagesCollapseAuth".$indice."' "
-                             . "aria-expanded='false' aria-controls='pagesCollapseAuth".$indice."'>".
-                             $value->SECCIONC_Orden.'. '.$value->SECCIONC_Descripcion;
-                     $menu.= "<div class='sb-sidenav-collapse-arrow'><i class='fas fa-angle-down'></i></div>";
-                     $menu.= "</a>";
-                     $filter2           = new stdClass();
-                     $filter2->curso    = $curso;
-                     $filter2->seccion  = $value->SECCIONP_Codigo;
-                     $objLeccion       = new Leccion_model();
-                     $lecciones        = $objLeccion->read($filter2);
-                     if(count($lecciones)>0){
-                         $menu .= "<div class='collapse ".($secc==$value->SECCIONP_Codigo?"show":"")."' id='pagesCollapseAuth".$indice."' aria-labelledby='headingOne' "
-                                 . "data-parent='#sidenavAccordionPages'>";
-                         $menu .= "<nav class='sb-sidenav-menu-nested nav'>";
-                         foreach($lecciones as $ind=>$val){
-                             $menu .= "<a class='nav-link' href='".base_url()."leccion/inicio/".$val->LECCIONP_Codigo."'>".$val->LECCIONC_Orden." ".$val->LECCIONC_Nombre."</a>";
-                         }
-                         $menu .= "</nav>";
-                         $menu .= "</div>";                    
-                     }
-                 }
-            }
-            elseif($tipo==2){
-                $filter2           = new stdClass();
-                $filter2->curso    = $curso;
-                $filter2->order_by = array("c.LECCIONC_Orden"=>"asc");
-                $objLeccion        = new Leccion_model();
-                $lecciones         = $objLeccion->read($filter2);                
-                if(count($lecciones)>0){
-                    foreach($lecciones as $ind=>$val){
-                        $menu.= "<a class='nav-link ' href='".base_url()."leccion/inicio/".$val->LECCIONP_Codigo."'>".
-                                $val->LECCIONC_Orden.'. '.$val->LECCIONC_Nombre;
-                        $menu.= "</a>";
-                    }
+            //Obtrenemos las lecciones
+            $filter2           = new stdClass();
+            $filter2->curso    = $curso;
+            $filter2->order_by = array("c.LECCIONC_Orden"=>"asc");
+            $objLeccion        = new Leccion_model();
+            $lecciones         = $objLeccion->read($filter2);                
+            if(count($lecciones)>0){
+                foreach($lecciones as $ind=>$val){
+                    $menu.= "<a class='nav-link ' href='".base_url()."leccion/inicio/".$val->LECCIONP_Codigo."'>".
+                            $val->LECCIONC_Orden.'. '.$val->LECCIONC_Nombre;
+                    $menu.= "</a>";
                 }
             }
+            //Fin de lecciones
             $menu .= "</nav>";
             $menu .= "</div>";
             $menu .= "<a class='nav-link' href='".base_url()."alumno/inicio/".$cursos->CURSOP_Codigo."'>";

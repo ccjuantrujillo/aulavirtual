@@ -13,9 +13,17 @@
         <?php echo $form_open;?>        
             <table style="background-color: #f4f7ff">
                 <tr>
+                  <td width="50%" bgcolor="#d5e2f2">Codigo</td>
+                  <td class="formss"><input type="text" class="cajaReducida" name="codigo" id="codigo" value="<?php echo $lista->codigo;?>" readonly="readonly"></td>
+                </tr>                 
+                <tr>
                   <td width="50%" bgcolor="#d5e2f2">Curso</td>
                   <td class="formss"><?php echo $selcurso;?></td>
-                </tr>                 
+                </tr>    
+                <tr>
+                  <td width="50%" bgcolor="#d5e2f2">Periodo</td>
+                  <td class="formss"><?php echo $selperiodo;?></td>
+                </tr>                
                 <tr>
                   <td width="50%" bgcolor="#d5e2f2">Seccion</td>
                   <td class="formss"><?php echo $selseccion;?></td>

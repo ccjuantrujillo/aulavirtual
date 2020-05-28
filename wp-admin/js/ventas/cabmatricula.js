@@ -1,0 +1,6 @@
+$(function(){
+    $("#nuevo").click(function(){
+        
+    });
+});
+

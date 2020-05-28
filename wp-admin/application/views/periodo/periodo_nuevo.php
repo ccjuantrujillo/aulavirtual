@@ -22,11 +22,7 @@
             <tr>
               <td width="50%" bgcolor="#d5e2f2">Codigo:</td>
               <td class="formss"><input name="codigo" id="codigo" type="text" value="<?php echo $lista->codigo;?>" readonly="readonly" class="cajaMinima" style="background-color: #E6E6E6"/></td>
-            </tr>
-            <tr>
-              <td bgcolor="#d5e2f2">Ciclo</td>
-              <td class="formss"><?php echo $selciclo;?></td>
-            </tr>              
+            </tr>             
             <tr>
               <td bgcolor="#d5e2f2">Descripcion:</td>
               <td class="formss"><input name="descripcion" id="descripcion" type="text" value="<?php echo $lista->descripcion;?>" class="cajaGrande"/></td>

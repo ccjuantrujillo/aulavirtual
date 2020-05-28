@@ -8,10 +8,11 @@ class Leccion extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");          
+        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");
         $this->load->model('Leccion_model');
         $this->load->model('Seccion_model');
         $this->load->model('Curso_model');
+        $this->load->model('Periodo_model');
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
         $this->login   = $this->session->userdata('login');
@@ -66,18 +67,22 @@ class Leccion extends CI_Controller
             $filter             = new stdClass();
             $filter->leccion    = $codigo;
             $lecciones          = $this->Leccion_model->obtener($filter);
+            $lista->codigo      = $lecciones->LECCIONP_Codigo;
             $lista->descripcion = $lecciones->LECCIONC_Descripcion;
             $lista->nombre      = $lecciones->LECCIONC_Nombre;
             $lista->video       = $lecciones->LECCIONC_Video;
             $lista->seccion     = $lecciones->SECCIONP_Codigo;
+            $lista->periodo     = $lecciones->PERIODP_Codigo;
             $lista->curso       = $lecciones->CURSOP_Codigo;
             $lista->orden       = $lecciones->LECCIONC_Orden;
         }
         elseif($accion == "n"){
+            $lista->codigo       = "";
             $lista->descripcion  = "";
             $lista->nombre       = "";
             $lista->video        = "";
             $lista->seccion      = 0;
+            $lista->periodo      = 0;
             $lista->curso        = 0;
             $lista->orden        = "";
         }
@@ -89,9 +94,14 @@ class Leccion extends CI_Controller
         $filter->estado = 1;
         $filter->curso  = $lista->curso;    
         $filter->order_by = array("c.SECCIONC_Orden"=>"asc","c.SECCIONC_Descripcion"=>"asc");
-        $data['selseccion']  = form_dropdown('seccion',$this->Seccion_model->seleccionar('0',$filter),$lista->seccion,"id='seccion' class='comboGrande'");          $filter->estado   = 1;
-        $filter->curso    = $lista->curso;  
-        $data['selcurso'] = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");                     $data['oculto']   = form_hidden(array('accion'=>$accion,'codigo'=>$codigo));
+        $data['selseccion']  = form_dropdown('seccion',$this->Seccion_model->seleccionar('0',$filter),$lista->seccion,"id='seccion' class='comboGrande'");          
+        $filter = new stdClass();
+        $filter->estado   = 1;
+        $data['selcurso'] = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");                     
+        $filter = new stdClass();
+        $filter->periodo    = $lista->periodo; 
+        $data['selperiodo'] = form_dropdown('periodo',$this->Periodo_model->seleccionar('0',$filter),$lista->periodo,"id='periodo' class='comboGrande'");                             
+        $data['oculto']   = form_hidden(array('accion'=>$accion));
         $this->load->view('leccion/leccion_nuevo',$data);
     }
      
@@ -104,6 +114,8 @@ class Leccion extends CI_Controller
                         "SECCIONP_Codigo"      => $this->input->post('seccion'),
                         "LECCIONC_Video"       => $this->input->post('video'),
                         "LECCIONC_Orden"       => $this->input->post('orden'),
+                        "CURSOP_Codigo"        => $this->input->post('curso'),
+                        "PERIODP_Codigo"       => $this->input->post('periodo'),
                        );
         if($accion == "n"){
             $codigo = $this->Leccion_model->insertar($data);            

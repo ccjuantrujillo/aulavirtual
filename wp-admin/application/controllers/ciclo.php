@@ -22,7 +22,7 @@ class Ciclo extends CI_Controller
         $menu       = get_menu($filter);  
         $filter     = new stdClass();
         $filter_not = new stdClass();
-        $filter->order_by    = array("c.CICLOC_DESCRIPCION"=>"desc");
+        $filter->order_by    = array("c.CICLOC_DESCRIPCION"=>"asc");
         $registros = count($this->Ciclo_model->listar($filter,$filter_not));
         $personas  = $this->Ciclo_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;

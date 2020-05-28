@@ -41,6 +41,7 @@ class Tarea extends CI_Controller {
                 $lista[$indice]->numero   = $value->TAREAC_Numero;
                 $lista[$indice]->nombre   = $value->TAREAC_Nombre;
                 $lista[$indice]->tipo     = $value->TIPOTAREAC_Nombre;
+                $lista[$indice]->periodo  = $value->PERIODC_DESCRIPCION;
                 $lista[$indice]->curso    = $value->CURSOC_Nombre;
                 $lista[$indice]->leccion  = $value->LECCIONC_Nombre;
             }

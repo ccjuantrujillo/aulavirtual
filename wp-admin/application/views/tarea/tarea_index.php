@@ -26,10 +26,11 @@
             <td width="50">Codigo</td>
             <td width="100">Nombre</td>
             <td width="80">Leccion</td>
-            <td width="60">Curso</td>
-            <td width="80">Tipo</td>          
-            <td width="50">Editar</td>
-            <td width="50">Eliminar</td>
+            <td width="70">Curso</td>
+            <td width="50">Periodo</td>
+            <td width="50">Tipo</td>          
+            <td width="30">Editar</td>
+            <td width="30">Eliminar</td>
           </tr>
           <?php
           if(count($lista)>0){
@@ -41,6 +42,7 @@
                 <td><?php echo $value->nombre;?></td>            
                 <td><?php echo $value->leccion;?></td>
                 <td><?php echo $value->curso;?></td>
+                <td><?php echo $value->periodo;?></td> 
                 <td><?php echo $value->tipo;?></td>                  
                 <td><a href="#" class="editar"><img src="<?php echo img;?>editar.jpg"/></a></td>
                 <td><a href="#" class="eliminar"><img src="<?php echo img;?>eliminar.jpg"/></a></td>

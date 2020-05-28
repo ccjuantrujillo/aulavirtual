@@ -3,11 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require_once 'LayoutAdmin.php';
 
 class Calificacion extends LayoutAdmin{
-    var $menu;
-    
-    public function index(){
-            echo "chau";
-    }    
+    var $menu; 
     
     public function __construct(){
         parent::__construct();                
@@ -15,8 +11,13 @@ class Calificacion extends LayoutAdmin{
         $this->load->model("Tarea_model");
         $this->load->model("Curso_model");        
         $this->load->helper('menu_helper');
-        $this->load->helper('date_helper');        
+        $this->load->helper('date_helper');      
+        $this->script = "<script src='".base_url()."js/calificacion.js'></script>";        
     }
+    
+    public function index(){
+            echo "chau";
+    }       
     
     public function inicio($curso){
         //Cabecera de la tabla
@@ -63,8 +64,15 @@ class Calificacion extends LayoutAdmin{
         $fila.="</tr>";
         $data["columna"] = $columna;
         $data["fila"]    = $fila;
+        $filter = new stdClass();
+        $filter->curso = $curso;
+        $data["seltarea"] = form_dropdown("tarea",$this->Tarea_model->seleccionar($filter),0,"id='tarea' class='form-control'");
         $data['menuizq'] = menu_izq($curso);
         $data['curso']   = $this->Curso_model->get($curso);        
         $this->load_layout("calificacion/inicio",$data);
+    }
+    
+    public function editar(){
+        
     }
 }

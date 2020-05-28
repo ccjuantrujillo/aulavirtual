@@ -19,41 +19,6 @@ class Curso extends LayoutAdmin{
             echo "chau";
     }
 
-    public function inicio($curso)
-    {
-        $filter = new stdClass();
-        $filter->curso = $curso;
-        $filter->order_by = array("c.SECCIONC_Orden"=>"asc");
-        $secciones = $this->Seccion_model->read($filter);
-        $menu = "";
-        if(count($secciones)>0){
-            foreach ($secciones as $value){
-                $menu .= "<li class='mt'>".$value->SECCIONC_Descripcion;
-                $filter2 = new stdClass();
-                $filter2->curso = $curso;
-                $filter2->seccion = $value->SECCIONP_Codigo;
-                $filter2->order_by = array("c.LECCIONC_Orden"=>"asc");
-                $lecciones = $this->Leccion_model->read($filter2);        
-                if(count($lecciones)>0){
-                    foreach ($lecciones as $val){
-                        $menu .= "<ul>";
-                        $menu .= "<li class='mt'><a href='".base_url()."leccion/inicio/".$val->LECCIONP_Codigo."/1'>".
-                                $val->LECCIONC_Orden." ".$val->LECCIONC_Nombre."</a></li>";
-                        $menu .= "</ul>";                        
-                    }
-                }
-                $menu .= "</li>";
-            }
-        }
-        $data['menu']      = $menu;
-        $data['menuizq']   = menu_izq($curso);
-        
-        //$data['lecciones'] = $this->Leccion_model->read($filter);
-        //$data['secciones'] = $this->Seccion_model->read($filter);
-        $data['curso']     = $this->Curso_model->get($curso);        
-        $this->load_layout('curso/inicio',$data);
-    }	
-
     public function read(){
         if($_SESSION["rolusu"]==1){//alumno
             $filter = new stdClass();
@@ -73,4 +38,34 @@ class Curso extends LayoutAdmin{
         $data['menuizq']   = menu_izq();
         $this->load_layout('curso/read',$data);
     }	
+    
+   public function inicio($curso)
+    {
+       $filter = new stdClass();
+       $secciones = $this->Seccion_model->read($filter);
+       $menu = "";
+       if(count($secciones)>0){
+          foreach($secciones as $value){
+             $menu .= "<li class='mt'>".$value->SECCIONC_Descripcion;
+             $filtro = new stdClass();
+             $filtro->curso   = $curso;
+             $filtro->seccion = $value->SECCIONP_Codigo;
+             $filtro->order_by = array("c.LECCIONC_Orden"=>"asc");
+             $lecciones = $this->Leccion_model->read($filtro);
+             if(count($lecciones)>0){
+                 foreach($lecciones as $val){
+                    $menu .= "<ul>";
+                    $menu .= "<li class='mt'><a href='".base_url()."leccion/inicio/".$val->LECCIONP_Codigo."/1'>".
+                            $val->LECCIONC_Orden." ".$val->LECCIONC_Nombre."</a></li>";
+                    $menu .= "</ul>";  
+                 }
+             }
+             $menu .= "</li>";
+          }
+       }
+       $data['menu']      = $menu;
+       $data['menuizq']   = menu_izq($curso);
+       $data['curso']     = $this->Curso_model->get($curso);        
+       $this->load_layout('curso/inicio',$data);
+    }	    
 }

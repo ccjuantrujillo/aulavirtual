@@ -33,7 +33,6 @@ class Periodo extends CI_Controller
                 $lista[$indice]         = new stdClass();
                 $lista[$indice]->codigo = $value->PERIODP_Codigo;
                 $lista[$indice]->descripcion  = $value->PERIODC_DESCRIPCION;
-                $lista[$indice]->ciclo        = $value->CICLOC_DESCRIPCION;
             }
         }
         $configuracion = $this->configuracion;
@@ -57,19 +56,14 @@ class Periodo extends CI_Controller
              $periodos           = $this->Periodo_model->obtener($filter);
              $lista->descripcion = $periodos->PERIODC_DESCRIPCION;
              $lista->codigo      = $periodos->PERIODP_Codigo;
-             $lista->ciclo       = $periodos->CICLOP_Codigo;
          }
          elseif($accion == "n"){
              $lista->descripcion = "";
              $lista->codigo      = "";
-             $lista->ciclo       = "";
          }
          $data['titulo']       = $accion=="e"?"Editar Periodo":"Crear Periodo";
          $data['form_open']    = form_open('',array("name"=>"frmPersona","id"=>"frmPersona","onsubmit"=>"return valida_guiain();"));
-         $data['form_close']   = form_close();
-         $filter = new stdClass();
-         $filter->estado = 1;
-         $data['selciclo']     = form_dropdown('ciclo',$this->Ciclo_model->seleccionar("",$filter),$lista->ciclo,"id='ciclo' class='comboMedio'");         
+         $data['form_close']   = form_close();       
          $data['lista']	       = $lista;
          $data['oculto']       = form_hidden(array("accion"=>$accion));
          $this->load->view("periodo/periodo_nuevo",$data);
@@ -77,11 +71,8 @@ class Periodo extends CI_Controller
      
     public function grabar(){
         $accion = $this->input->get_post('accion');
-		$codigo = $this->input->get_post('codigo');
-        $data   = array(
-                        "CICLOP_Codigo"        => $this->input->post('ciclo'),
-                        "PERIODC_DESCRIPCION"  => strtoupper($this->input->post('descripcion'))
-                       );
+	$codigo = $this->input->get_post('codigo');
+        $data   = array("PERIODC_DESCRIPCION"  => strtoupper($this->input->post('descripcion')));
         if($accion == "n"){
             $codigo = $this->Periodo_model->insertar($data);
         }

@@ -11,8 +11,9 @@ class Tarea_model extends CI_Model{
         $this->table_tipotarea = "ant_tipotarea";        
         $this->table_leccion   = "ant_leccion";    
         $this->table_seccion   = "ant_seccion";    
-        $this->table_ciclo = "ant_ciclo";
-        $this->table_curso = "ant_curso";
+        $this->table_ciclo   = "ant_ciclo";
+        $this->table_curso   = "ant_curso";
+        $this->table_periodo = "ant_periodo";
         $this->empresa     = $this->session->userdata('empresa');
     }
 	
@@ -29,10 +30,11 @@ class Tarea_model extends CI_Model{
     public function listar($filter,$filter_not="",$number_items='',$offset=''){
         $this->db->select('*');
         $this->db->from($this->table." as c");
-        $this->db->join($this->table_tipotarea.' as d','d.TIPOTAREAP_Codigo=c.TIPOTAREAP_Codigo','inner');    
         $this->db->join($this->table_leccion.' as e','e.LECCIONP_Codigo=c.LECCIONP_Codigo','inner'); 
         $this->db->join($this->table_seccion.' as f','f.SECCIONP_Codigo=e.SECCIONP_Codigo','inner'); 
-        $this->db->join($this->table_curso.' as g','g.CURSOP_Codigo=f.CURSOP_Codigo','inner'); 
+        $this->db->join($this->table_curso.' as g','g.CURSOP_Codigo=e.CURSOP_Codigo','inner'); 
+        $this->db->join($this->table_periodo.' as h','h.PERIODP_Codigo=e.PERIODP_Codigo','inner'); 
+        $this->db->join($this->table_tipotarea.' as d','d.TIPOTAREAP_Codigo=c.TIPOTAREAP_Codigo','inner');    
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));   
         if(isset($filter->tarea) && $filter->tarea!='')       $this->db->where(array("c.TAREAP_Codigo"=>$filter->tarea));
         if(isset($filter->curso) && $filter->curso!='')       $this->db->where(array("g.CURSOP_Codigo"=>$filter->curso));
