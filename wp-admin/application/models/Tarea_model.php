@@ -74,8 +74,12 @@ class Tarea_model extends CI_Model{
         $this->db->update($this->table,$data);
     }
 	
-    public function eliminar($codigo){
-        $this->db->delete($this->table,array('TAREAP_Codigo' => $codigo));        
+    public function eliminar($data){
+        $resultado = false;
+        if(count($data)>0){
+            $resultado = $this->db->delete($this->table,$data);            
+        }
+        return $resultado;
     }
 }
 ?>

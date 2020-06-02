@@ -21,6 +21,7 @@ class Permiso_model extends CI_Model{
         $this->db->from($this->table." as p",$number_items,$offset);
         $this->db->join($this->tableref." as m",'m.MENU_Codigo=p.MENU_Codigo');
         $this->db->where($where);
+        
         if(isset($filter->order_by) && is_array($filter->order_by)){
             foreach($filter->order_by as $indice=>$value) $this->db->order_by($indice,$value);
         }  

@@ -71,8 +71,9 @@ jQuery(document).ready(function(){
         });  
     });    
     
+    //Eliminar CabAsistencia
     $("body").on("click",".eliminar",function(){
-       if(confirm('Esta seguro desea eliminar este registro?')){
+       if(confirm('Esta accion borrara las marcaciones de este dia.\n¿Esta seguro desea eliminar este registro?')){
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigo="+coddetalle;
             url = base_url+"index.php/cabasistencia/eliminar";

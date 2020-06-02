@@ -9,6 +9,7 @@ $(function(){
         $("#frmAsistencia").submit();
     });
     
+    //Grabar asistencias
     $(".onoffswitch-checkbox").change(function(){
         var chk = this.checked;
         var id = $(this).parent().parent().parent().attr("id");

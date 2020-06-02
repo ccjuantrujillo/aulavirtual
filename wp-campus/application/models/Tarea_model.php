@@ -7,6 +7,7 @@ class Tarea_model extends CI_Model{
     public function __construct(){
         parent::__construct();
         $this->table     = "tarea";
+        $this->table_tip = "tipotarea";
         $this->table_lec = "leccion";
         $this->table_sec = "seccion";
         $this->table_cur = "curso";
@@ -38,6 +39,7 @@ class Tarea_model extends CI_Model{
         $this->db->join($this->table_sec." as e","e.SECCIONP_Codigo=d.SECCIONP_Codigo","inner");
         $this->db->join($this->table_cur." as f","f.CURSOP_Codigo=d.CURSOP_Codigo","inner");
         $this->db->join($this->table_per." as g","g.PERIODP_Codigo=d.PERIODP_Codigo","inner");
+        $this->db->join($this->table_tip." as h","h.TIPOTAREAP_Codigo=c.TIPOTAREAP_Codigo","inner");
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
         if(isset($filter->tarea))    $this->db->where(array("c.TAREAP_Codigo"=>$filter->tarea));  
         if(isset($filter->leccion))  $this->db->where(array("d.LECCIONP_Codigo"=>$filter->leccion));  

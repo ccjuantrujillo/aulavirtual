@@ -36,11 +36,11 @@ class Curso_model extends CI_Model{
         if(isset($filter->ciclo) && $filter->ciclo!='')    $this->db->where(array("c.CICLOP_Codigo"=>$filter->ciclo));
         if(isset($filter->estado) && $filter->estado!='')  $this->db->where(array("c.CURSOC_FlagEstado"=>$filter->estado));
         if(isset($filter->curso) && $filter->curso!='')    $this->db->where(array("c.CURSOP_Codigo"=>$filter->curso));
-        /*if(isset($filter->order_by) && count($filter->order_by)>0){
+        if(isset($filter->order_by) && count($filter->order_by)>0){
             foreach($filter->order_by as $indice=>$value){
                 $this->db->order_by($indice,$value);
             }
-        } */      
+        } 
         $this->db->limit($number_items, $offset); 
         $query = $this->db->get();
         $resultado = array();

@@ -29,7 +29,7 @@ class Curso extends CI_Controller {
         $menu       = get_menu($filter);
         $filter     = new stdClass();   
         $filter_not = new stdClass(); 
-        $filter->order_by = array("e.CICLOC_DESCRIPCION"=>"asc","c.CURSOC_Nombre"=>"asc");
+        $filter->order_by = array("e.CICLOC_DESCRIPCION"=>"asc","h.AREAC_Descripcion"=>"asc","c.CURSOC_Nombre"=>"asc");
         $registros = count($this->Curso_model->listar($filter,$filter_not));
         $productos = $this->Curso_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
@@ -75,7 +75,7 @@ class Curso extends CI_Controller {
             $lista->ciclo          = $productos->CICLOP_Codigo;
             $lista->nombre         = $productos->CURSOC_Nombre;  
             $lista->descripcion    = $productos->CURSOC_DescripcionBreve;  
-            $lista->imagen         = $productos->CURSOC_Imagen==""?"no_disponible.jpg":$productos->PROD_Imagen;
+            $lista->imagen         = $productos->CURSOC_Imagen==""?"no_disponible.jpg":$productos->CURSOC_Imagen;
             $lista->imagenpdf      = $productos->CURSOC_Silabus!=""?"pdf.png":"";  
             $lista->silabus        = $productos->CURSOC_Silabus;
             $lista->especificacion = $productos->CURSOC_EspecificacionPDF;  
@@ -165,8 +165,9 @@ class Curso extends CI_Controller {
         /*Subimos imagen*/
         if(isset($_FILES['imagen']['name']) && trim($_FILES['imagen']['name'])!=""){
             //$upload_folder  = "D:/Dropbox/script/php/puertosaber/img";
-            $upload_folder  = "img";
+            $upload_folder  = "./img";
             $nombre_archivo = $_FILES["imagen"]["name"];
+            $nombre_archivo = date("YmdHis").str_replace(" ","_",$nombre_archivo);            
             $tmp_archivo    = $_FILES["imagen"]["tmp_name"];
             $archivador     = $upload_folder."/".$nombre_archivo;
             $mensaje["subimage"] = true;

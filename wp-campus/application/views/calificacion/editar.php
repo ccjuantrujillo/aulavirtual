@@ -18,13 +18,13 @@
           <div class="card card-primary card-outline">
             <!-- /.card-header -->
             <div class="card-body p-0">
-                <h3 class="section-title" style="margin-top: 8px;">Registro de Asistencia</h3>
+                <h3 class="section-title" style="margin-top: 8px;">Registro de notas</h3>
                 <div class="card mb-4">
                      <div class="form-group row">
-                         <h5 class="col-sm-3">Seleccione fecha: </h5>
+                         <h5 class="col-sm-2">Seleccione fecha: </h5>
                          <div class="col-sm-2">
-                             <form id="frmAsistencia" method="post">
-                                 <?php echo $selcabasis;?>   
+                             <form id="frmCalificacion" method="post">
+                                 <?php echo $seltareas;?>   
                                  <input type="hidden" name="curso" id="curso" value="<?php echo $curso->CURSOP_Codigo?>">
                              </form>
                          </div>
@@ -34,11 +34,11 @@
                              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                  <thead>
                                      <tr style="text-align:center;">
-                                         <th>No</th>
-                                         <th>Codigo</th>
-                                         <th>Apellidos</th>
-                                         <th>Nombres</th>
-                                         <th>Asistencia</th>
+                                         <th width="5%">No</th>
+                                         <th width="5%">Codigo</th>
+                                         <th width="40%">Apellidos</th>
+                                         <th width="40%">Nombres</th>
+                                         <th width="10%">Nota</th>
                                      </tr>
                                  </thead>
                                  <tbody>
@@ -47,10 +47,10 @@
                              </table>
                          </div>
                          <div class="text-right">
-                             <a class="btn btn-success" id="btnGrabar" href="<?php echo base_url()."asistencia/inicio/".$curso->CURSOP_Codigo;?>">Guardar</a>
+                             <a class="btn btn-success" id="btnGuardar" href="<?php echo base_url()."calificacion/inicio/".$curso->CURSOP_Codigo;?>">Guardar</a>
                          </div>
                      </div>
-                 </div>                                             
+                 </div>                                            
               <!-- /.mail-box-messages -->
             </div>
             <!-- /.card-body -->
@@ -61,5 +61,5 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
-    </section>    
+    </section>  
 </div>

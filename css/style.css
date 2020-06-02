@@ -640,7 +640,7 @@ header {
 	top: 0;
 }
 .fade-carousel .slides .slide-1 {
-	background-image: url(../images/banner.jpg);
+	background-image: url(../images/ceccos_banner.png);
 }
 .fade-carousel .slides .slide-2 {
 	background-image: url(../images/banner1.jpg);
@@ -726,7 +726,7 @@ header {
 ================================================
 */
 .about-us {
-	padding:100px 0 105px;
+	padding:40px 0 105px;
 	width:100%;
 	float:left;
 }
@@ -1315,7 +1315,10 @@ header {
 	margin: 0;
 	padding: 0 0 5px;
 	line-height: 24px;
-	font-size: 14px;
+	font-size: 14px;	
+}
+.news-cnt p{
+	text-indent:2em;
 }
 .inner-wrapper .inner-wrapper-main {
 	width: 100%;

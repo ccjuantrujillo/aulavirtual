@@ -25,10 +25,10 @@ class Matricula extends CI_Controller {
         $filter->order_by = array("m.MENU_Orden"=>"asc");
         $menu       = get_menu($filter);           
         $filter     = new stdClass();
-        //$filter->order_by = array("f.PROD_Nombre"=>"asc","e.PERSC_ApellidoPaterno"=>"asc","e.PERSC_ApellidoMaterno"=>"asc");
+        $filter->order_by = array("e.CURSOC_Nombre"=>"asc","g.PERSC_ApellidoPaterno"=>"asc","g.PERSC_ApellidoMaterno"=>"asc","g.PERSC_Nombre"=>"asc");
         $filter_not = new stdClass(); 
-        $registros = count($this->Matricula_model->listar($filter,$filter_not));
-        $ordenes   = $this->Matricula_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
+        $registros = count($this->Matricula_model->listar($filter));
+        $ordenes   = $this->Matricula_model->listar($filter,"",$this->configuracion['per_page'],$j);
         $item      = 1;
         $lista     = array();
         if(count($ordenes)>0){
@@ -89,9 +89,6 @@ class Matricula extends CI_Controller {
             $lista->observacion= "";
         } 
         $arrEstado          = array("0"=>"::Seleccione::","1"=>"ACTIVO","2"=>"INACTIVO");
-        $filter   = new stdClass();
-        $filter->curso = $lista->curso;
-        $curso    = $this->Curso_model->obtener($filter);
         $lista->cantidad   = 0;
         $lista->intentos   = 0;
         $data['titulo']     = $accion=="e"?"Editar Matricula":"Nueva Matricula"; 
@@ -100,7 +97,9 @@ class Matricula extends CI_Controller {
         $data['lista']	    = $lista;  
         $data['accion']	    = $accion;  
         $data['txtobservacion'] = form_textarea('observacion', '');
-        $data['selcurso']   = form_dropdown('curso',$this->Curso_model->seleccionar('0'),$lista->curso,"id='curso' class='comboMedio'");         
+        $filter = new stdClass();
+        $filter->order_by = array("e.CICLOC_DESCRIPCION"=>"asc","c.CURSOC_Nombre"=>"asc");
+        $data['selcurso']   = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboMedio'");          
         $data['selaula']  = form_dropdown('aula',$this->Aula_model->seleccionar('0'),$lista->aula,"id='aula' class='comboMedio'");
         $data['oculto']     = form_hidden(array("accion"=>$accion,"codigo"=>$codigo));
 	$this->load->view("matricula/matricula_nuevo",$data);

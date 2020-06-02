@@ -10,6 +10,8 @@ class Tarea extends CI_Controller {
         $this->load->model('Leccion_model');        
         $this->load->model('Tarea_model');
         $this->load->model('Tipotarea_model'); 
+        $this->load->model('Matricula_model'); 
+        $this->load->model('Calificacion_model'); 
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
         $this->login   = $this->session->userdata('login');
@@ -26,7 +28,7 @@ class Tarea extends CI_Controller {
         $filter->order_by = array("m.MENU_Orden"=>"asc");
         $menu       = get_menu($filter);             
         $filter     = new stdClass();        
-        $filter->order_by = array("c.TAREAC_Fecha"=>"desc","c.TAREAC_Numero"=>"desc");
+        $filter->order_by = array("h.PERIODP_Codigo"=>"asc","c.TIPOTAREAP_Codigo"=>"asc","c.TAREAC_Nombre"=>"asc","c.TAREAC_Fecha"=>"desc","c.TAREAC_Numero"=>"desc");
         $filter_not = new stdClass(); 
         $registros = count($this->Tarea_model->listar($filter,$filter_not));
         $tareas   = $this->Tarea_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
@@ -110,9 +112,21 @@ class Tarea extends CI_Controller {
                         "TAREAC_Instrucciones" => $this->input->post('instrucciones'),
 			"TAREAC_Fecha"         => date_sql_ret($this->input->post('fecha')),
                         "TAREAC_FechaEntrega"  => date_sql_ret($this->input->post('fechaentrega'))
-                       );
+                       );      
         if($accion == "n"){
-            $resultado = $codigo = $this->Tarea_model->insertar($data);                      
+            $resultado  = $codigo = $this->Tarea_model->insertar($data);
+            //Creamos una calificacion
+            $filter = new stdClass();
+            $filter->curso = $this->input->post('curso');
+            $alumnos = $this->Matricula_model->listar($filter);
+            foreach($alumnos as $value){
+                $data = array(
+                    "TAREAP_Codigo"=>$codigo,
+                    "MATRICP_Codigo"=>$value->MATRICP_Codigo,
+                    "CALIFICAC_Puntaje"=>""
+                );              
+                $this->Calificacion_model->insertar($data); 
+            }
         }
         elseif($accion == "e"){
             $resultado = $this->Tarea_model->modificar($codigo,$data);                                
@@ -127,11 +141,14 @@ class Tarea extends CI_Controller {
     }
     
     public function eliminar(){
+        $resultado = false;        
         $codigo = $this->input->post('codigo');
-        $resultado = false;
-        $filter = new stdClass();
-        $filter->tarea = $codigo;
-        $this->Tarea_model->eliminar($codigo);
+        //Elimino calificaciones
+        $data = array("TAREAP_Codigo"=>$codigo);
+        $this->Calificacion_model->eliminar($data);
+        //Elimino la tarea
+        $data = array("TAREAP_Codigo"=>$codigo);
+        $this->Tarea_model->eliminar($data);
         $resultado = true;
         echo json_encode($resultado);
     }

@@ -96,6 +96,7 @@ class Asistencia extends LayoutAdmin{
         $filter->curso = $curso;          
         $data['selcabasis'] = form_dropdown("selcabasistencia",$arrAsistencia,0,"id='selcabasistencia' class='form-control'");
         $data['menuizq']    = menu_izq($curso);
+        $data['menucent']   = menu_cent($curso);
         $data['curso']      = $this->Curso_model->get($curso);        
         $this->load_layout('asistencia/inicio',$data);
     }	
@@ -109,7 +110,8 @@ class Asistencia extends LayoutAdmin{
         $fila = "";
         foreach ($asistencia as $item=>$value){
             $fila.="<tr id='".$value->ASISTP_Codigo."'>";
-            $fila.="<td class='text-center'>".($item+1)."</td>";
+            $fila.="<td class='text-center'>";
+            $fila.=($item+1)."</td>";
             $fila.="<td class='text-center'>".$value->ALUMP_Codigo."</td>";
             $fila.="<td>".$value->PERSC_ApellidoPaterno." ".$value->PERSC_ApellidoMaterno."</td>";
             $fila.="<td>".$value->PERSC_Nombre."</td>";
@@ -130,7 +132,8 @@ class Asistencia extends LayoutAdmin{
         $cabAsistencia = $this->Cabasistencia_model->seleccionar($filter,"0");           
         $data["fila"]  = $fila;
         $data['selcabasis'] = form_dropdown("selcabasistencia",$cabAsistencia,$_POST["selcabasistencia"],"id='selcabasistencia' class='form-control'");
-        $data['menuizq']    = menu_izq($curso);        
+        $data['menuizq']    = menu_izq($curso); 
+        $data['menucent']   = menu_cent($curso);
         $data['curso']      = $this->Curso_model->get($curso);  
         $this->load_layout('asistencia/editar',$data);
     }

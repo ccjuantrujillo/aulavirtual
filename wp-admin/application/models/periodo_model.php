@@ -6,7 +6,6 @@ class Periodo_model extends CI_Model{
     public function __construct(){
         parent::__construct();
         $this->table       = "ant_periodo";
-        $this->table_ciclo = "ant_ciclo";
         $this->empresa     = $this->session->userdata('empresa');  
     }
 	
@@ -24,7 +23,6 @@ class Periodo_model extends CI_Model{
     public function listar($filter="",$filter_not='',$number_items='',$offset=''){
         $this->db->select('*');
         $this->db->from($this->table." as c",$number_items,$offset);  
-        $this->db->join($this->table_ciclo.' as e','e.CICLOP_Codigo=c.CICLOP_Codigo','inner');
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));        
         $this->db->where(array("c.PERIODC_FLAGESTADO"=>1));  
         if(isset($filter->estado) && $filter->estado!='')  $this->db->where(array("c.PERIODC_FLAGESTADO"=>$filter->estado));  

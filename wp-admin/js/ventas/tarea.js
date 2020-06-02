@@ -82,8 +82,9 @@ jQuery(document).ready(function(){
         });            
     });    
     
+    //Eliminar tareas
     $("body").on("click",".eliminar",function(){
-       if(confirm('Esta seguro desea eliminar este registro?')){
+       if(confirm('Este accion borrará todas las tareas\n¿Esta seguro desea eliminar este registro?')){
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigo="+coddetalle;
             url = base_url+"index.php/tarea/eliminar";

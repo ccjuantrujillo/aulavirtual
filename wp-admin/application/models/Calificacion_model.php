@@ -64,8 +64,11 @@ class Calificacion_model extends CI_Model{
         return $this->db->update($this->table,$data);
     }
     
-    public function eliminar($codigo){
-        $data = array("CALIFICAP_Codigo"=>$codigo);
-        return $this->db->delete($this->table,$data);
+    public function eliminar($data){
+        $resultado = false;
+        if(count($data)>0){
+            $resultado = $this->db->delete($this->table,$data);            
+        }
+        return $resultado;
     }
 }

@@ -65,6 +65,7 @@ class Curso extends LayoutAdmin{
        }
        $data['menu']      = $menu;
        $data['menuizq']   = menu_izq($curso);
+       $data['menucent']  = menu_cent($curso);
        $data['curso']     = $this->Curso_model->get($curso);        
        $this->load_layout('curso/inicio',$data);
     }	    

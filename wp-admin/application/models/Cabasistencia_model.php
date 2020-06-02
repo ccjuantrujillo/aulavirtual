@@ -7,6 +7,8 @@ class Cabasistencia_model extends CI_Model{
         parent::__construct();
         $this->usuario     = $this->session->userdata('codusu');
         $this->table       = "ant_cabasistencia";
+        $this->table_prof  = "ant_profesor";
+        $this->table_per   = "ant_persona";
         $this->table_curs  = "ant_curso";
         $this->empresa     = $this->session->userdata('empresa');
     }
@@ -26,6 +28,8 @@ class Cabasistencia_model extends CI_Model{
         $this->db->select('*');
         $this->db->from($this->table." as c");
         $this->db->join($this->table_curs.' as d','d.CURSOP_Codigo=c.CURSOP_Codigo','inner');
+        $this->db->join($this->table_prof.' as e','e.PROP_Codigo=d.PROP_Codigo','inner');
+        $this->db->join($this->table_per.' as f','f.PERSP_Codigo=e.PERSP_Codigo','inner');
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
         if(isset($filter->asistencia))    $this->db->where(array("c.ASISTP_Codigo"=>$filter->asistencia));
         if(isset($filter->cabasistencia)) $this->db->where(array("c.CABASISTP_Codigo"=>$filter->cabasistencia));

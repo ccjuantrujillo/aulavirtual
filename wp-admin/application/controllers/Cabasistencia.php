@@ -21,7 +21,7 @@ class Cabasistencia extends CI_Controller
         $filter->order_by = array("m.MENU_Orden"=>"asc");
         $menu       = get_menu($filter);    
         $filter     = new stdClass();
-        $filter->order_by = array("c.CABASISTC_Fecha"=>"desc");
+        $filter->order_by = array("f.PERSC_ApellidoPaterno"=>"asc","f.PERSC_ApellidoMaterno"=>"asc","f.PERSC_Nombre"=>"asc","c.CABASISTC_Fecha"=>"desc");
         $registros = count($this->Cabasistencia_model->listar($filter));
         $asistencias = $this->Cabasistencia_model->listar($filter,"",$this->configuracion['per_page'],$j);
         $item      = 1;
@@ -33,6 +33,7 @@ class Cabasistencia extends CI_Controller
                 $lista[$indice]->curso       = $value->CURSOC_Nombre;
                 $lista[$indice]->fecha       = $value->CABASISTC_Fecha;              
                 $lista[$indice]->descripcion = $value->CABASISTC_Descripcion;     
+                $lista[$indice]->profesor    = $value->PERSC_ApellidoPaterno." ".$value->PERSC_ApellidoMaterno; 
             }
         }
         $configuracion = $this->configuracion;
@@ -71,7 +72,9 @@ class Cabasistencia extends CI_Controller
          $data['descripcion']  = form_input(array( 'name'  => 'descripcion','id' => 'descripcion','value' => $lista->descripcion,'maxlength' => '100','class' => 'cajaGrande'));
          $data['form_close']   = form_close();
          $data['lista']	       = $lista;
-         $data['selcurso']     = form_dropdown('curso',$this->Curso_model->seleccionar('0'),$lista->curso,"id='curso' class='comboMedio'");                
+         $filter = new stdClass();
+         $filter->order_by = array("c.CURSOC_Nombre"=>"asc");
+         $data['selcurso']     = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboMedio'");                
          $data['oculto']       = form_hidden(array("accion"=>$accion,"codigo"=>$codigo));
          $this->load->view("cabasistencia/cabasistencia_nuevo",$data);
     }
@@ -97,7 +100,7 @@ class Cabasistencia extends CI_Controller
                 $data2 = array(
                     "CABASISTP_Codigo" => $this->codigo,
                     "MATRICP_Codigo"   => $value->MATRICP_Codigo,
-                    "ASISTC_Marcacion" => NULL,//falto
+                    "ASISTC_Marcacion" => NULL,//0:Falto,1:Asistio,2:Tardanza
                     "ASISTC_Fecha"     => $fecha
                 );
                 $this->Asistencia_model->insertar($data2);
@@ -113,57 +116,11 @@ class Cabasistencia extends CI_Controller
     {
         $resultado = true;
         $codigo  = $this->input->post('codigo');
+        //Eliminamos asistencias
         $this->Asistencia_model->eliminarCab($codigo);        
+        //Eliminamos cabasistencia
         $this->Cabasistencia_model->eliminar($codigo);
         echo json_encode($resultado);
-    }
-    public function ver($codigo)
-    {
-
-        $datos_fabricante       = $this->fabricante_model->obtener($codigo);
-        $data['nombre_fabricante']= $datos_fabricante[0]->FABRIC_Descripcion;
-        $data['fabricante']    = $datos_fabricante[0]->FABRIP_Codigo;
-        $data['titulo']        = "VER FABRICANTE";
-        $data['oculto']        = form_hidden(array('base_url'=>base_url()));
-        $this->load->view('almacen/fabricante_ver',$data);
-    }
-
-    public function buscar($j=0)
-    {
-
-        $nombre_fabricante = $this->input->post('nombre_fabricante');
-        $filter = new stdClass();
-        $filter->FABRIC_Descripcion = $nombre_fabricante;
-        $data['registros']      = count($this->aula_model->buscar($filter));
-        $conf['base_url']       = site_url('maestros/almacen/buscar/');
-        $conf['total_rows']     = $data['registros'];
-        $conf['per_page']       = 10;
-        $conf['num_links']      = 3;
-        $conf['first_link']     = "&lt;&lt;";
-        $conf['last_link']      = "&gt;&gt;";
-        $offset                 = (int)$this->uri->segment(4);
-        $listado                = $this->aula_model->buscar($filter,$conf['per_page'],$offset);
-        $item                   = $j+1;
-        $lista                  = array();
-        if(count($listado)>0){
-            foreach($listado as $indice=>$valor){
-                $codigo       = $valor->FABRIP_Codigo;
-                $editar       = "<a href='#' onclick='editar_fabricante(".$codigo.")' target='_parent'><img src='".base_url()."images/modificar.png' width='16' height='16' border='0' title='Modificar'></a>";
-                $ver          = "<a href='#' onclick='ver_fabricante(".$codigo.")' target='_parent'><img src='".base_url()."images/ver.png' width='16' height='16' border='0' title='Modificar'></a>";
-                $eliminar     = "<a href='#' onclick='eliminar_fabricante(".$codigo.")' target='_parent'><img src='".base_url()."images/eliminar.png' width='16' height='16' border='0' title='Modificar'></a>";
-                $lista[]      = array($item++,$valor->FABRIC_Descripcion,$valor->FABRIC_CodigoUsuario,$editar,$ver,$eliminar);
-            }
-        }
-        $data['titulo_tabla']    = "RESULTADO DE BUSQUEDA de FABRICANTES";
-        $data['titulo_busqueda'] = "BUSCAR FABRICANTE";
-        $data['nombre_fabricante']  = form_input(array( 'name'  => 'nombre_fabricante','id' => 'nombre_fabricante','value' => $nombre_fabricante,'maxlength' => '100','class' => 'cajaMedia'));
-        $data['form_open']       = form_open(base_url().'index.php/almacen/fabricante/buscar',array("name"=>"form_busquedaFabricante","id"=>"form_busquedaFabricante"));
-        $data['form_close']      = form_close();
-        $data['lista']           = $lista;
-        $data['oculto']          = form_hidden(array('base_url'=>base_url()));
-        $this->pagination->initialize($conf);
-        $data['paginacion'] = $this->pagination->create_links();
-        $this->load->view('maestros/aula_index',$data);
     }
     
     public function obtener(){

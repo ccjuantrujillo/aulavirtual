@@ -112,53 +112,6 @@ class Asistencia extends CI_Controller
         $this->Asistencia_model->eliminar($codigo);
         echo json_encode($resultado);
     }
-    public function ver($codigo)
-    {
-
-        $datos_fabricante       = $this->fabricante_model->obtener($codigo);
-        $data['nombre_fabricante']= $datos_fabricante[0]->FABRIC_Descripcion;
-        $data['fabricante']    = $datos_fabricante[0]->FABRIP_Codigo;
-        $data['titulo']        = "VER FABRICANTE";
-        $data['oculto']        = form_hidden(array('base_url'=>base_url()));
-        $this->load->view('almacen/fabricante_ver',$data);
-    }
-
-    public function buscar($j=0)
-    {
-        $nombre_fabricante = $this->input->post('nombre_fabricante');
-        $filter = new stdClass();
-        $filter->FABRIC_Descripcion = $nombre_fabricante;
-        $data['registros']      = count($this->aula_model->buscar($filter));
-        $conf['base_url']       = site_url('maestros/almacen/buscar/');
-        $conf['total_rows']     = $data['registros'];
-        $conf['per_page']       = 10;
-        $conf['num_links']      = 3;
-        $conf['first_link']     = "&lt;&lt;";
-        $conf['last_link']      = "&gt;&gt;";
-        $offset                 = (int)$this->uri->segment(4);
-        $listado                = $this->aula_model->buscar($filter,$conf['per_page'],$offset);
-        $item                   = $j+1;
-        $lista                  = array();
-        if(count($listado)>0){
-            foreach($listado as $indice=>$valor){
-                $codigo       = $valor->FABRIP_Codigo;
-                $editar       = "<a href='#' onclick='editar_fabricante(".$codigo.")' target='_parent'><img src='".base_url()."images/modificar.png' width='16' height='16' border='0' title='Modificar'></a>";
-                $ver          = "<a href='#' onclick='ver_fabricante(".$codigo.")' target='_parent'><img src='".base_url()."images/ver.png' width='16' height='16' border='0' title='Modificar'></a>";
-                $eliminar     = "<a href='#' onclick='eliminar_fabricante(".$codigo.")' target='_parent'><img src='".base_url()."images/eliminar.png' width='16' height='16' border='0' title='Modificar'></a>";
-                $lista[]      = array($item++,$valor->FABRIC_Descripcion,$valor->FABRIC_CodigoUsuario,$editar,$ver,$eliminar);
-            }
-        }
-        $data['titulo_tabla']    = "RESULTADO DE BUSQUEDA de FABRICANTES";
-        $data['titulo_busqueda'] = "BUSCAR FABRICANTE";
-        $data['nombre_fabricante']  = form_input(array( 'name'  => 'nombre_fabricante','id' => 'nombre_fabricante','value' => $nombre_fabricante,'maxlength' => '100','class' => 'cajaMedia'));
-        $data['form_open']       = form_open(base_url().'index.php/almacen/fabricante/buscar',array("name"=>"form_busquedaFabricante","id"=>"form_busquedaFabricante"));
-        $data['form_close']      = form_close();
-        $data['lista']           = $lista;
-        $data['oculto']          = form_hidden(array('base_url'=>base_url()));
-        $this->pagination->initialize($conf);
-        $data['paginacion'] = $this->pagination->create_links();
-        $this->load->view('maestros/aula_index',$data);
-    }
     
     public function obtener(){
         $obj    = $this->input->post('objeto');

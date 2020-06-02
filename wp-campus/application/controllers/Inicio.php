@@ -69,6 +69,7 @@ class Inicio extends Layout{
                                     'codalu'   => isset($usuario->ALUMP_Codigo)?$usuario->ALUMP_Codigo:0,
                                     'codprofe' => isset($usuario->PROP_Codigo)?$usuario->PROP_Codigo:0,
                                     'rolusu'   => isset($usuario->ALUMP_Codigo)?1:2,
+                                    'codrol'   => isset($usuario->ALUMP_Codigo)?6:7,
                                     'empresa'  => $usuario->EMPRP_Codigo
                                      );
                         $this->session->set_userdata($dataSession);
@@ -94,6 +95,7 @@ class Inicio extends Layout{
                         'codalu'   => 5,
                         'codprofe' => 0,
                         'rolusu'   => 3,//anonimo
+                        'codrol'   => 6,
                         'empresa'  => 2
                          );
             if($curso==108 || $curso==122){
@@ -104,6 +106,7 @@ class Inicio extends Layout{
                         'codalu'   => 123,
                         'codprofe' => 0,
                         'rolusu'   => 1,//alumno
+                        'codrol'   => 6,
                         'empresa'  => 3
                          );
             }

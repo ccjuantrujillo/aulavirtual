@@ -12,7 +12,9 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li><a href="index.php">Inicio</a></li>
-              <li><a href="cursos.php" class="dropdown-toggle">Cursos</a></li>
+			  <li><a href="investigacion.php" class="dropdown-toggle">Investigación</a></li>
+              <li><a href="cursos.php" class="dropdown-toggle">Capacitación</a></li>
+			  <li><a href="comunicacion.php" class="dropdown-toggle">Comunicación Social</a></li>
               <li><a href="contactenos.php">Contactenos</a></li>
             </ul>
           </div>
@@ -29,32 +31,32 @@
     <!-- Overlay -->
     <div class="overlay"></div>
     <!-- Indicators -->
-    <ol class="carousel-indicators">
+    <!--ol class="carousel-indicators">
       <li data-target="#bs-carousel" data-slide-to="0" class="active"></li>
       <li data-target="#bs-carousel" data-slide-to="1"></li>
-      <li data-target="#bs-carousel" data-slide-to="2"></li>
-    </ol>
+      <li data-target="#bs-carousel" data-slide-to="2" class="active"></li>
+    </ol-->
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
-      <div class="item slides active">
+      <!--div class="item slides active">
         <div class="slide-1"></div>
         <div class="hero">
           <h1 class="animated1">CECCOS</h1>
-          <h3 class="animated2">Circulo de Estudios, capacitacion y comunicacion social</h3>
+          <h3 class="animated2">Circulo de Estudio, Capacitación y Comunicación Social</h3>
         </div>
       </div>
       <div class="item slides">
         <div class="slide-2"></div>
         <div class="hero">
           <h1 class="animated1">CECCOS</h1>
-          <h3 class="animated2">Circulo de Estudios, capacitacion y comunicacion social</h3>
+          <h3 class="animated2">Circulo de Estudio, Capacitación y Comunicación Social</h3>
         </div>
-      </div>
-      <div class="item slides">
+      </div-->
+      <div class="item slides active">
         <div class="slide-3"></div>
         <div class="hero">
           <h1 class="animated1">CECCOS</h1>
-          <h3 class="animated2">Circulo de Estudios, capacitacion y comunicacion social</h3>
+          <h3 class="animated2">Circulo de Estudio, Capacitación y Comunicación Social</h3>
         </div>
       </div>
     </div>

@@ -29,6 +29,7 @@
             <td width="70">Curso</td>
             <td width="50">Periodo</td>
             <td width="50">Tipo</td>          
+            <td width="50">Fecha</td>    
             <td width="30">Editar</td>
             <td width="30">Eliminar</td>
           </tr>
@@ -44,6 +45,7 @@
                 <td><?php echo $value->curso;?></td>
                 <td><?php echo $value->periodo;?></td> 
                 <td><?php echo $value->tipo;?></td>                  
+                <td><?php echo $value->fecha;?></td>  
                 <td><a href="#" class="editar"><img src="<?php echo img;?>editar.jpg"/></a></td>
                 <td><a href="#" class="eliminar"><img src="<?php echo img;?>eliminar.jpg"/></a></td>
               </tr>  

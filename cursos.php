@@ -35,10 +35,12 @@ $contactenos = "";
             <div class="col-sm-4">
               <div class="courses">
                 <div class="course-thumb">
-                    <a href="./wp-campus/inicio/valida/<?php echo $value['CURSOP_Codigo'];?>" target="blank"><img src="images/class-img1.jpg" alt="Course Image"></a></div>
+                    <a href="./wp-campus/inicio/valida/<?php echo $value['CURSOP_Codigo'];?>" target="blank">
+                        <img width="450" src="./wp-admin/img/<?php echo $value['CURSOC_Imagen']!=''?$value['CURSOC_Imagen']:'class-img1.jpg';?>" alt="Course Image"></a>
+                </div>
                 <div class="course-cnt">
-                  <h3><a href="./wp-campus/inicio/valida/<?php echo $value['CURSOP_Codigo'];?>" target="blank"><?php echo $value['CURSOC_Nombre'];?></a></h3>
-                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                    <h3 class="text-center"><a href="./wp-campus/inicio/valida/<?php echo $value['CURSOP_Codigo'];?>" target="blank"><?php echo $value['CURSOC_Nombre'];?></a></h3>
+                  <!--p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p-->
                 </div>
               </div>
             </div>

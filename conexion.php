@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $user = "root";
-$password = "950162";
+$password = "123456";
 $dbname   = "aulavirtual";
 //$empresa  = 1;
 $link     = mysqli_connect($host,$user,$password,$dbname);

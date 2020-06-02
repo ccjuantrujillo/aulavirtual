@@ -83,8 +83,8 @@ class Calificacion extends CI_Controller{
     }
     
     public function eliminar(){
-        $filter = (object)$_REQUEST;
-        $resultado = $this->Calificacion_model->eliminar($filter->calificacion);
+        $data = array("CALIFICAP_Codigo"=>$_REQUEST["calificacion"]);
+        $resultado = $this->Calificacion_model->eliminar($data);
         echo json_encode($resultado);
     }
 }

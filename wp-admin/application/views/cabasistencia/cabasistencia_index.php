@@ -25,12 +25,13 @@
     <div class="tabla">
         <table>
           <tr class="list1">
-            <td width="100">Codigo</td>
-            <td width="100">Fecha</td>
-            <td width="100">Curso</td>                  
+            <td width="30">Codigo</td>
+            <td width="30">Fecha</td>
+            <td width="80">Curso</td>                  
             <td width="100">Descripcion</td>   
-            <td width="50">Editar</td>
-            <td width="50">Eliminar</td>
+            <td width="100">Profesor</td>   
+            <td width="20">Editar</td>
+            <td width="20">Eliminar</td>
           </tr>
           <?php
           if(count($lista)>0){
@@ -42,6 +43,7 @@
                 <td align="center"><?php echo date_sql($value->fecha);?></td>
                 <td align="center"><?php echo $value->curso;?></td>
                 <td align="center"><?php echo $value->descripcion;?></td>
+                <td align="center"><?php echo $value->profesor;?></td>
                 <td align="center"><a href="#" class="editar"><img src="<?php echo img;?>editar.jpg"/></a></td>
                 <td align="center"><a href="#" class="eliminar"><img src="<?php echo img;?>eliminar.jpg"/></a></td>
                 </td>

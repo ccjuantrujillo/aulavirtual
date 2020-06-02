@@ -7,6 +7,7 @@ class Leccion extends LayoutAdmin{
         parent::__construct();
         $this->load->model('Archivos_model');        
         $this->load->model('Leccion_model');
+        $this->load->model('Curso_model');
         $this->load->helper('menu_helper');
         $this->load->helper('lecciones_helper');
     }
@@ -29,8 +30,10 @@ class Leccion extends LayoutAdmin{
         $data['sgtelec']  = sgte_leccion($lec);
         $data['indice']   = $indice;
         $data['menulecc'] = menu_lecciones($seccion);
+        $data['menucent']   = menu_cent($curso); 
         $data['menuizq']  = menu_izq($curso,$seccion);
-        $data['menuhorz'] = menu_horiz_lecc($lec,$indice);        
+        $data['menuhorz'] = menu_horiz_lecc($lec,$indice);      
+        $data['curso']   = $this->Curso_model->get($curso);
         $this->load_layout('leccion/inicio',$data);
     }
 
