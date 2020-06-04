@@ -12,7 +12,7 @@ if ( ! function_exists('menu_izq'))
         $menu = "";
         $objPermiso         = new Permiso_model();		   	
         $filter = new stdClass();
-        $rol = $_SESSION["codrol"];
+        $rol = $_SESSION["rolusu"];
         $filter->rol = $rol;
         $filter->codigo_padre = 1;
         $filter->order_by = array("d.MENU_Orden"=>"asc");

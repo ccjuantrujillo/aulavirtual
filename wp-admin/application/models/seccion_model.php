@@ -7,7 +7,8 @@ class Seccion_model extends CI_Model{
         parent::__construct();
         $this->table         = "ant_seccion";
         $this->table_periodo = "ant_periodo";
-        $this->empresa     = $this->session->userdata('empresa');
+        $this->table_curso   = "ant_curso";
+        $this->empresa       = $this->session->userdata('empresa');
     }
 	
     public function seleccionar($default='',$filter='',$filter_not='',$number_items='',$offset=''){
@@ -24,9 +25,11 @@ class Seccion_model extends CI_Model{
     public function listar($filter,$filter_not="",$number_items='',$offset=''){
         $this->db->select('*,DATE_FORMAT(c.SECCIONC_FechaRegistro,"%d/%m/%Y") AS fechareg',FALSE);
         $this->db->from($this->table.' as c');
-        $this->db->join($this->table_periodo.' as q','q.PERIODP_Codigo=c.PERIODP_Codigo','inner');
+        $this->db->join($this->table_periodo.' as d','d.PERIODP_Codigo=c.PERIODP_Codigo','inner');
+        $this->db->join($this->table_curso.' as e','e.CURSOP_Codigo=c.CURSOP_Codigo','inner');
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));          		
         if(isset($filter->seccion))  $this->db->where(array("c.SECCIONP_Codigo"=>$filter->seccion));	
+        if(isset($filter->curso))    $this->db->where(array("c.CURSOP_Codigo"=>$filter->curso));
         if(isset($filter->order_by) && count($filter->order_by)>0){
             foreach($filter->order_by as $indice=>$value){
                 $this->db->order_by($indice,$value);

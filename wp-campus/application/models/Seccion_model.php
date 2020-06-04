@@ -10,6 +10,7 @@ class Seccion_model extends CI_Model {
 
     public function __construct(){
         $this->tabla = "seccion";
+        $this->tabla_curso = "curso";
         $this->empresa =  $_SESSION["empresa"];
     }
 
@@ -17,7 +18,9 @@ class Seccion_model extends CI_Model {
     {
         $this->db->select('*',FALSE);
         $this->db->from($this->tabla." as c");
+        $this->db->join($this->tabla_curso." as d","d.CURSOP_Codigo=c.CURSOP_Codigo","inner");
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
+        if(isset($filter->curso))   $this->db->where(array("d.CURSOP_Codigo"=>$filter->curso));
         if(isset($filter->order_by) && count($filter->order_by)>0){
             foreach($filter->order_by as $indice=>$value){
                 $this->db->order_by($indice,$value);

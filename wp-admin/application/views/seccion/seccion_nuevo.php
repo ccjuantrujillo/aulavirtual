@@ -15,6 +15,10 @@
             <tr>
               <td bgcolor="#d5e2f2">Codigo</td>
               <td class="formss"><input type="text" class="cajaReducida" name="codigo" id="codigo" value="<?php echo $lista->codigo;?>" readonly="readonly"></td>
+            </tr>     
+            <tr>
+              <td width="50%" bgcolor="#d5e2f2">Curso</td>
+              <td class="formss"><?php echo $selcurso;?></td>
             </tr>              
             <tr>
               <td width="50%" bgcolor="#d5e2f2">Periodo</td>

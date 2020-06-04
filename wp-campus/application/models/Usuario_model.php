@@ -37,7 +37,7 @@ class Usuario_model extends CI_Model {
             return $resultado;
         }        
 
-        public function ingresar($filter)
+        public function login($filter)
         {
             $this->db->select('*',FALSE);
             $this->db->from($this->tabla." as c");
@@ -45,6 +45,7 @@ class Usuario_model extends CI_Model {
             if(isset($filter->usuario))    $this->db->where(array("c.USUAC_usuario"=>$filter->usuario));
             if(isset($filter->clave))      $this->db->where(array("c.USUAC_Password"=>$filter->clave));
             if(isset($filter->empresa))    $this->db->where(array("c.EMPRP_Codigo"=>$filter->empresa));
+            if(isset($filter->rol))        $this->db->where(array("c.ROL_Codigo"=>$filter->rol));
             $query = $this->db->get();
             $listado = $query->result();
             if(count($listado)>1)

@@ -16,28 +16,25 @@ class Alumno_model extends CI_Model{
         
     }
     
-    public function login($filter){
+    public function read($filter){
         $this->db->select("*",FALSE);
         $this->db->from($this->table." as c");
         $this->db->join($this->table_per." as d","d.PERSP_Codigo=c.PERSP_Codigo","inner");
-        if(isset($filter->empresa))   $this->db->where(array("c.EMPRP_Codigo"=>$filter->empresa));
-        if(isset($filter->usuario))   $this->db->where(array("c.ALUMC_Usuario"=>$filter->usuario));
-        if(isset($filter->clave))     $this->db->where(array("c.ALUMC_Password"=>$filter->clave));
+        $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
+        if(isset($filter->persona))  $this->db->where(array("d.PERSP_Codigo"=>$filter->persona));
+        if(isset($filter->alumno))   $this->db->where(array("c.ALUMP_Codigo"=>$filter->alumno));
         $query = $this->db->get();
         return $query->result();
     }
     
-    public function read($filter){
-        $this->db->select("*",FALSE);
-        $this->db->from($this->table." as c");
-        $this->db->join($this->table_per." as d","d.ALUMP_Codigo=c.ALUMP_Codigo","inner");
-        $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
-        if(isset($filter->persona))   $this->db->where(array("d.PERSP_Codigo"=>$this->empresa));
-        if(isset($filter->usuario))   $this->db->where(array("d.PERSP_Codigo"=>$this->usuario));
-        if(isset($filter->clave))     $this->db->where(array("d.PERSP_Codigo"=>$this->clave));
-        $query = $this->db->get();
-        return $query->result();
-    }
+    public function get($filter){
+        $resultado = new stdClass();
+        $alumno = $this->read($filter);
+        if(count($alumno)==1){
+            $resultado = $alumno[0];
+        }
+        return $resultado;
+    }    
     
     public function insert(){
         
@@ -48,10 +45,6 @@ class Alumno_model extends CI_Model{
     }
     
     public function delete(){
-        
-    }
-    
-    public function get(){
         
     }
 }

@@ -12,6 +12,8 @@ class Curso extends LayoutAdmin{
         $this->load->model('Leccion_model');
         $this->load->model('Seccion_model');
         $this->load->model('Matricula_model');
+        $this->load->model('Profesor_model');
+        $this->load->model('Alumno_model');
         $this->load->helper('menu_helper');
     }
 
@@ -20,17 +22,25 @@ class Curso extends LayoutAdmin{
     }
 
     public function read(){
-        if($_SESSION["rolusu"]==1){//alumno
+        $filter = new stdClass();
+        $filter->persona = $_SESSION["codper"];    
+        if($_SESSION["rolusu"]==6){//alumno
+            $alumno = $this->Alumno_model->get($filter);
             $filter = new stdClass();
-            $filter->alumno = $_SESSION["codalu"];
+            $filter->alumno = $alumno->ALUMP_Codigo;
             $cursos = $this->Matricula_model->listar($filter);
         }
-        elseif($_SESSION["rolusu"]==2){//profesor
+        elseif($_SESSION["rolusu"]==7){//profesor
+            $profesor = $this->Profesor_model->get($filter);
             $filter = new stdClass();
-            $filter->profesor = $_SESSION["codprofe"];
+            $filter->profesor = $profesor->PROP_Codigo;
             $cursos = $this->Curso_model->read($filter);
         }
         elseif($_SESSION["rolusu"]==3){//usuario anonimo
+            $filter = new stdClass();
+            $cursos = $this->Curso_model->read($filter);
+        }
+        elseif($_SESSION["rolusu"]==4){//Administador
             $filter = new stdClass();
             $cursos = $this->Curso_model->read($filter);
         }
@@ -42,6 +52,7 @@ class Curso extends LayoutAdmin{
    public function inicio($curso)
     {
        $filter = new stdClass();
+       $filter->curso = $curso;
        $secciones = $this->Seccion_model->read($filter);
        $menu = "";
        if(count($secciones)>0){

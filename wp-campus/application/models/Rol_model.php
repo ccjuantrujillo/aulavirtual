@@ -22,6 +22,11 @@ class Rol_model extends CI_Model {
         $this->db->select('*',FALSE);
         $this->db->from($this->tabla." as c");
         if(isset($filter->rol))        $this->db->where(array("c.ROL_Codigo"=>$filter->rol));
+        if(isset($filter->order_by) && count($filter->order_by)>0){
+            foreach($filter->order_by as $indice=>$value){
+                $this->db->order_by($indice,$value);
+            }
+        }         
         $query = $this->db->get();
         return $query->result();
     }

@@ -26,10 +26,12 @@
     <div class="tabla">
         <table>
           <tr class="list1">
-            <td width="15%">Descripcion</td>
-            <td width="15%">Periodo</td>            
+            <td width="5%">Codigo</td>
+            <td width="10%">Descripcion</td>
+            <td width="10%">Periodo</td>            
             <td width="6%">F.Inicio</td>
             <td width="6%">F.Fin</td>	
+            <td width="10%">Curso</td>	
             <td width="7%">Estado</td>								
             <td width="5%">Editar</td>
             <td width="5%">Eliminar</td>
@@ -42,10 +44,12 @@
                 $clase = ($item%2)==0?"list_a":"list_b";
                ?>
               <tr class="<?php echo $clase;?>">
-                <td align="center" style="text-align:left;"><?php echo $value->descripcion;?></td>
+                <td align="center" style="text-align:center;"><?php echo $value->codigo;?></td>
+                <td align="left"><?php echo $value->descripcion;?></td>
                 <td align="left"><?php echo $value->periodo;?></td>
                 <td align="left"><?php echo $value->finicio;?></td>
-                <td align="left"><?php echo $value->ffin;?></td>		
+                <td align="left"><?php echo $value->ffin;?></td>
+                <td align="left"><?php echo $value->curso;?></td>
                 <td><img src="<?php echo img.($flgestado==1?"check.jpg":"uncheck.jpg");?>" width="20px" height="20px"/><?php echo $estado;?></td>										
                 <td><a href="#" onclick='editar("<?php echo $value->codigo;?>")'><img src="<?php echo img;?>editar.jpg"/></a></td>
                 <td><a href="#" onclick='eliminar("<?php echo $value->codigo;?>")'><img src="<?php echo img;?>eliminar.jpg"/></a></td>

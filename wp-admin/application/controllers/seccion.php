@@ -26,7 +26,7 @@ class Seccion extends CI_Controller {
         $menu       = get_menu($filter);     
         $filter     = new stdClass();
         $filter_not = new stdClass(); 
-        $filter->order_by    = array("q.PERIODC_DESCRIPCION"=>"asc","c.SECCIONC_Orden"=>"asc");
+        $filter->order_by    = array("e.CURSOC_Nombre"=>"asc","d.PERIODC_DESCRIPCION"=>"asc","c.SECCIONC_Orden"=>"asc");
         $registros = count($this->Seccion_model->listar($filter,$filter_not));
         $productoatrib = $this->Seccion_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
@@ -39,6 +39,7 @@ class Seccion extends CI_Controller {
                 $lista[$indice]->periodo      = $valor->PERIODC_DESCRIPCION;
                 $lista[$indice]->orden        = $valor->SECCIONC_Orden;
                 $lista[$indice]->estado       = $valor->SECCIONC_FlagEstado;
+                $lista[$indice]->curso        = $valor->CURSOC_Nombre;
                 $lista[$indice]->finicio      = date_sql($valor->SECCIONC_FechaInicio);
                 $lista[$indice]->ffin         = date_sql($valor->SECCIONC_FechaFin);   
             }
@@ -67,6 +68,7 @@ class Seccion extends CI_Controller {
             $lista->codigo      = $secciones->SECCIONP_Codigo;
             $lista->descripcion = $secciones->SECCIONC_Descripcion;
             $lista->orden       = $secciones->SECCIONC_Orden;
+            $lista->curso       = $secciones->CURSOP_Codigo;
             $lista->finicio     = date_sql($secciones->SECCIONC_FechaInicio);
             $lista->ffin        = date_sql($secciones->SECCIONC_FechaFin);
             $lista->estado      = $secciones->SECCIONC_FlagEstado; 	
@@ -76,6 +78,7 @@ class Seccion extends CI_Controller {
             $lista->codigo       = "";
             $lista->descripcion  = "";
             $lista->orden        = "";
+            $lista->curso        = "";
             $lista->finicio      = "";
             $lista->ffin         = "";
             $lista->estado       = 1;			
@@ -88,7 +91,10 @@ class Seccion extends CI_Controller {
 	$data['selestado']   = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
         $data['lista']	     = $lista;    
         $filter = new stdClass();
-        $data['selperiodo']  = form_dropdown('periodo',$this->Periodo_model->seleccionar('0',$filter),$lista->periodo,"id='periodo' class='comboGrande'");          $data['oculto']      = form_hidden(array('accion'=>$accion));
+        $data['selperiodo']  = form_dropdown('periodo',$this->Periodo_model->seleccionar('0',$filter),$lista->periodo,"id='periodo' class='comboGrande'");  
+        $filter = new stdClass();        
+        $data['selcurso']    = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");                  
+        $data['oculto']      = form_hidden(array('accion'=>$accion));
         $this->load->view('seccion/seccion_nuevo',$data);
     }  
     
@@ -97,11 +103,12 @@ class Seccion extends CI_Controller {
         $codigo = $this->input->get_post('codigo');
         $data   = array(
                         "SECCIONC_Descripcion" => $this->input->post('descripcion'),
-                        "SECCIONC_Orden"     => $this->input->post('orden'),
+                        "SECCIONC_Orden"       => $this->input->post('orden'),
+                        "CURSOP_Codigo"        => $this->input->post('curso'),
                         "SECCIONC_FechaInicio" => date_sql_ret($this->input->post('finicio')),
-                        "SECCIONC_FechaFin"   => date_sql_ret($this->input->post('ffin')),
-                        "SECCIONC_FlagEstado" => $this->input->post('estado'),						
-                        "PERIODP_Codigo"      => $this->input->post('periodo')
+                        "SECCIONC_FechaFin"    => date_sql_ret($this->input->post('ffin')),
+                        "SECCIONC_FlagEstado"  => $this->input->post('estado'),						
+                        "PERIODP_Codigo"       => $this->input->post('periodo')
                        );
         if($accion == "n"){
             $codigo = $this->Seccion_model->insertar($data);            
