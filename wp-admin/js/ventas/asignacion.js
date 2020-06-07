@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
     
     $("body").on("click","#nuevo",function(){
         dataString = "";
-        url = base_url+"index.php/ventas/asignacion/editar/n";
+        url = base_url+"ventas/asignacion/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -13,7 +13,7 @@ jQuery(document).ready(function(){
     });
     
    $("body").on("click","#pdf",function(){
-        url = base_url+"index.php/ventas/asignacion/export_pdf/rpt_asignacion_aulas";
+        url = base_url+"ventas/asignacion/export_pdf/rpt_asignacion_aulas";
         ciclo = $("#ciclo_rpt").val();
         curso = $("#curso_rpt").val();
         if(ciclo == 0){
@@ -37,7 +37,7 @@ jQuery(document).ready(function(){
            alert("Seleccione el curso");
        }
        else{
-        url = base_url+"index.php/ventas/asignacion/export_pdf/rpt_horario_curso";
+        url = base_url+"ventas/asignacion/export_pdf/rpt_horario_curso";
         $("#frmReporte").attr("action",url);
         $("#frmReporte").attr("target","framereporte");
         $("#frmReporte").submit();           
@@ -62,7 +62,7 @@ jQuery(document).ready(function(){
         course_id = $("#course_id").val();
         flagdetalle = $("#flagdetalle").val();
         if(profesor!="" && course_id!="" && flagdetalle==0){
-            url = base_url+"index.php/ventas/modulo/obtenerdetalle2";
+            url = base_url+"ventas/modulo/obtenerdetalle2";
             objMod = new Object();
             objMod.curso = curso;
             objMod.modulo = codmodulo;
@@ -97,7 +97,7 @@ jQuery(document).ready(function(){
     });
     
     $("body").on('click',"#ver_profesor",function(){
-        url = base_url+"index.php/ventas/profesor/buscar";
+        url = base_url+"ventas/profesor/buscar";
         if($("#ciclo").val()!="0"){
             window.open(url,"_blank","width=700,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");              
         }
@@ -107,7 +107,7 @@ jQuery(document).ready(function(){
     });
     
     $("body").on('click',"#ver_cursos",function(){
-        url = base_url+"index.php/chamilo/course/buscar";
+        url = base_url+"chamilo/course/buscar";
         win = window.open('',"mywin","width=900,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");    
         $("#frmPersona").attr("action",url);
         $("#frmPersona").attr("target","mywin");
@@ -118,7 +118,7 @@ jQuery(document).ready(function(){
        accion      = $("#accion").val();
        codigo      = $("#codigo").val();
        dataString  = $('#frmPersona').serialize();
-       url = base_url+"index.php/ventas/asignacion/editar/"+accion+"/"+codigo;
+       url = base_url+"ventas/asignacion/editar/"+accion+"/"+codigo;
        $.post(url,dataString,function(data){
            $('#mensaje').html(data);
        });             
@@ -126,12 +126,12 @@ jQuery(document).ready(function(){
     
     $("body").on('click',"#imprimir",function(){
         codigo   = $("#codigo").val();
-        url = base_url+"index.php/ventas/asignacion/ver/"+codigo;
+        url = base_url+"ventas/asignacion/ver/"+codigo;
         window.open(url, this.target, 'width=800,height=400,top=150,left=200');
     });    
     
     $("body").on('click',"#cancelar",function(){
-        url = base_url+"index.php/ventas/asignacion/listar";
+        url = base_url+"ventas/asignacion/listar";
         location.href = url;
     });
     
@@ -139,11 +139,11 @@ jQuery(document).ready(function(){
        if(confirm('Esta seguro desea eliminar este registro?')){
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigo="+coddetalle;
-            url = base_url+"index.php/ventas/asignacion/eliminar";
+            url = base_url+"ventas/asignacion/eliminar";
             $.post(url,dataString,function(data){
                 if(data=="true"){
                     //alert('Operacion realizada con exito');  
-                    url = base_url+"index.php/ventas/asignacion/listar";
+                    url = base_url+"ventas/asignacion/listar";
                     location.href = url;
                 }
                 else if(data=="false"){
@@ -156,7 +156,7 @@ jQuery(document).ready(function(){
    $("body").on("click",".editar",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "codigo="+codigo;    
-        url = base_url+"index.php/ventas/asignacion/editar/e/"+codigo;
+        url = base_url+"ventas/asignacion/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -164,7 +164,7 @@ jQuery(document).ready(function(){
     });     
     
     $("body").on('click',"#grabar",function(){
-        url         = base_url+"index.php/ventas/asignacion/grabar";
+        url         = base_url+"ventas/asignacion/grabar";
         flagdetalle = $("#flagdetalle").val();
         $('#estado').removeAttr('disabled');
         $('#ciclo').removeAttr('disabled');
@@ -173,7 +173,7 @@ jQuery(document).ready(function(){
             $.post(url,dataString,function(data){
                 if(data=="true"){
                     alert('Operacion realizada con exito');    
-                    location.href = base_url+"index.php/ventas/asignacion/listar";
+                    location.href = base_url+"ventas/asignacion/listar";
                 }
                 else if(data=="false"){
                     alert('El usuario ya esta matriculado en el curso');
@@ -189,14 +189,14 @@ jQuery(document).ready(function(){
         if(confirm('Esta seguro desea eliminar este registro?')){
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigodetalle="+coddetalle;
-            url = base_url+"index.php/ventas/asignacion/eliminardetalle";
+            url = base_url+"ventas/asignacion/eliminardetalle";
             $.post(url,dataString,function(data){
                 if(data=="true"){
                    alert('Operacion realizada con exito');  
                     accion      = $("#accion").val();
                     codigo      = $("#codigo").val();
                     dataString  = $('#frmPersona').serialize();
-                    url = base_url+"index.php/ventas/asignacion/editar/"+accion+"/"+codigo;
+                    url = base_url+"ventas/asignacion/editar/"+accion+"/"+codigo;
                     $.post(url,dataString,function(data2){
                         $('#mensaje').html(data2);
                     });  
@@ -212,7 +212,7 @@ jQuery(document).ready(function(){
        tr = $(this).parent().parent();  
        n  = tr.children("td")[0].innerHTML - 1;    
        codigodetalle = $(this).parent().parent().attr("id"); 
-       url = base_url+"index.php/ventas/asignacion/obtenerdetalle";
+       url = base_url+"ventas/asignacion/obtenerdetalle";
        objRes = new Object();
        objRes.asignaciondetalle = codigodetalle;
        dataString   = {objeto: JSON.stringify(objRes)};       
@@ -243,7 +243,7 @@ jQuery(document).ready(function(){
 });
 
 function selecciona_profesor(codigo){
-    url    = base_url+"index.php/ventas/profesor/obtener/";
+    url    = base_url+"ventas/profesor/obtener/";
     objRes = new Object();
     objRes.profesor = codigo;
     dataString   = {objeto: JSON.stringify(objRes)};
@@ -263,7 +263,7 @@ function selecciona_profesor(codigo){
 }
 
 function selecciona_curso(codigo){
-    url    = base_url+"index.php/chamilo/course/obtener/";
+    url    = base_url+"chamilo/course/obtener/";
     objRes = new Object();
     objRes.course = codigo;
     dataString   = {objeto: JSON.stringify(objRes)};
@@ -292,7 +292,7 @@ function selectDia(n,valor){
 function selectTipoEstudio(n,valor){
     valor = (valor) ? valor : null;
     a      = "tipoestudiociclo["+n+"]";
-    url    = base_url+"index.php/maestros/tipoestudiociclo/obtener";
+    url    = base_url+"maestros/tipoestudiociclo/obtener";
     selecttipo = document.getElementById(a);
     objRes = new Object();
     objRes.ciclo = $("#ciclo").val();
@@ -311,7 +311,7 @@ function selectTipoEstudio(n,valor){
 function selectLocal(n,valor){
     valor = (valor) ? valor : null;
     a      = "local["+n+"]";
-    url    = base_url+"index.php/maestros/local/obtener";
+    url    = base_url+"maestros/local/obtener";
     selectloc = document.getElementById(a);
     objRes = new Object();
     dataString   = {objeto: JSON.stringify(objRes)};
@@ -332,7 +332,7 @@ function selectAula(n,idlocal,valor){
     a      = "aula["+n+"]";
     b      = "local["+n+"]";
     c      = "tipoestudiociclo["+n+"]";
-    url    = base_url+"index.php/ventas/apertura/obtener";
+    url    = base_url+"ventas/apertura/obtener";
     selectaula = document.getElementById(a);
     selectaula.options.length=0;
     objRes = new Object();

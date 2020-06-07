@@ -1,12 +1,12 @@
-var base_url  = "http://localhost/web/aulavirtual/wp-admin/";
+var base_url  = "http://localhost/aulavirtual/wp-admin/";
 jQuery(document).ready(function(){
    $("#cerrar").click(function(){
-       url = base_url+"index.php/inicio/salir";
+       url = base_url+"inicio/salir";
        location.href = url;
    });   
     
     $("body").on("click","#logo",function(){
-        url = base_url+"index.php/inicio/principal";
+        url = base_url+"inicio/principal";
         location.href = url;
     });  
 });

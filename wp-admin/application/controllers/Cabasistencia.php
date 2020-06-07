@@ -37,7 +37,7 @@ class Cabasistencia extends CI_Controller
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/cabasistencia/listar";
+        $configuracion['base_url']    = base_url()."cabasistencia/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         $data['lista']           = $lista;

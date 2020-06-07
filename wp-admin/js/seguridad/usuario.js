@@ -7,7 +7,7 @@ jQuery(document).ready(function(){
      
     $("#nuevo").click(function(){
         dataString = "";
-        url = base_url+"index.php/usuario/editar/n";
+        url = base_url+"usuario/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -15,12 +15,12 @@ jQuery(document).ready(function(){
     });	
     
     $("#grabar").click(function(){
-        url = base_url+"index.php/usuario/grabar";
+        url = base_url+"usuario/grabar";
         dataString  = $('#form1').serialize();
         $.post(url,dataString,function(data){
             if(data[0]){
                 alert('Operacion realizada con exito');
-                location.href = base_url+"index.php/usuario/listar";
+                location.href = base_url+"usuario/listar";
             }
             else{
                 alert(data[1]);
@@ -29,14 +29,14 @@ jQuery(document).ready(function(){
     });    
     
     $("#limpiar").click(function(){
-        url = base_url+"index.php/usuario/listar";
+        url = base_url+"usuario/listar";
         $("#nombre_unidadmedida").val('');
         $("#simbolo").val('');
         location.href=url;
     });
     
     $("#cancelar").click(function(){
-        url = base_url+"index.php/usuario/listar";
+        url = base_url+"usuario/listar";
         location.href = url;
     });  
     
@@ -59,11 +59,11 @@ jQuery(document).ready(function(){
        if(confirm('Esta seguro desea eliminar este registro?')){
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigo="+coddetalle;
-            url = base_url+"index.php/usuario/eliminar";
+            url = base_url+"usuario/eliminar";
             $.post(url,dataString,function(data){
                 if(data=="true"){
 //                    alert('Operacion realizada con exito');  
-                    url = base_url+"index.php/usuario/listar";
+                    url = base_url+"usuario/listar";
                     location.href = url;                                        
                 }
                 else if(data=="false"){
@@ -76,7 +76,7 @@ jQuery(document).ready(function(){
    $("body").on("click",".editar",function(){
         coddetalle = $(this).parent().parent().attr("id");
         dataString = "codigo="+coddetalle;
-        url = base_url+"index.php/usuario/editar/e/"+coddetalle;
+        url = base_url+"usuario/editar/e/"+coddetalle;
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -85,7 +85,7 @@ jQuery(document).ready(function(){
    
     $("body").on('click',"#ver_profesor",function(){
         dataString = "flgcoordinador=1";
-        url = base_url+"index.php/persona/buscar/";   
+        url = base_url+"persona/buscar/";   
         window.open("","popup","width=700,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");          
         $("#form1").attr("target","popup");
         $("#form1").attr("method","post");
@@ -95,7 +95,7 @@ jQuery(document).ready(function(){
 });
 
 function selecciona_persona(codigo){
-    url    = base_url+"index.php/persona/obtener/";
+    url    = base_url+"persona/obtener/";
     objRes = new Object();
     objRes.persona = codigo;
     dataString   = {objeto: JSON.stringify(objRes)};

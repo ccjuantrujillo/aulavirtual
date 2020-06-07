@@ -18,7 +18,7 @@
         <div class="frmlogin">
             <div class="frmlog">
               <p style="text-align: center;font-size: 15px;font-weight:bold;margin-bottom:5px;padding-left: 25px;">
-                <?php echo strtoupper($empresa->EMPRC_RazonSocial);?>
+                INGRESO AL SISTEMA
               </p>
               <form>
                 <p class="frmcamp">

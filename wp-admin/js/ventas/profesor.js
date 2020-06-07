@@ -2,7 +2,7 @@ jQuery(document).ready(function(){
     /*Nuevo*/
     $("#nuevo").click(function(){
         dataString = "";
-        url = base_url+"index.php/profesor/editar/n";
+        url = base_url+"profesor/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
 
    $("body").on("click","#nueva_experiencia",function(){
         dataString = "";
-        url = base_url+"index.php/experiencia/editar/n/1/2";
+        url = base_url+"experiencia/editar/n/1/2";
         $.post(url,dataString,function(data){
             $('.tab_experiencia').show();
             $('.tab_experiencia').html(data);
@@ -20,7 +20,7 @@ jQuery(document).ready(function(){
     
     $("body").on('click',"#nuevo_idioma",function(){
         dataString = "";
-        url = base_url+"index.php/estudioidiomas/editar/n/1/2";
+        url = base_url+"estudioidiomas/editar/n/1/2";
         $.post(url,dataString,function(data){
             $('.tab_idiomas').show();
             $('.tab_idiomas').html(data);
@@ -29,7 +29,7 @@ jQuery(document).ready(function(){
     
     $("body").on('click',"#nuevo_estudio",function(){
         dataString = "";
-        url = base_url+"index.php/estudio/editar/n/1/2";
+        url = base_url+"estudio/editar/n/1/2";
         $.post(url,dataString,function(data){
             $('.tab_estudios').show();
             $('.tab_estudios').html(data);
@@ -38,7 +38,7 @@ jQuery(document).ready(function(){
     
     $("body").on('click',"#nueva_conferencia",function(){
         dataString = "";
-        url = base_url+"index.php/conferencia/editar/n/1/2";
+        url = base_url+"conferencia/editar/n/1/2";
         $.post(url,dataString,function(data){
             $('.tab_conferencias').show();
             $('.tab_conferencias').html(data);
@@ -47,7 +47,7 @@ jQuery(document).ready(function(){
 
     $("body").on('click',"#nueva_sociedad",function(){
         dataString = "";
-        url = base_url+"index.php/profesorsociedad/editar/n/1/2";
+        url = base_url+"profesorsociedad/editar/n/1/2";
         $.post(url,dataString,function(data){
             $('.tab_sociedad').show();
             $('.tab_sociedad').html(data);
@@ -56,7 +56,7 @@ jQuery(document).ready(function(){
 
     $("body").on('click',"#nuevo_trabajo",function(){
         dataString = "";
-        url = base_url+"index.php/trabajo/editar/n/1/2";
+        url = base_url+"trabajo/editar/n/1/2";
         $.post(url,dataString,function(data){
             $('.tab_empresa').show();
             $('.tab_empresa').html(data);
@@ -67,7 +67,7 @@ jQuery(document).ready(function(){
    $("body").on("click",".editar",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "";    
-        url = base_url+"index.php/profesor/editar/e/"+codigo;
+        url = base_url+"profesor/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -77,7 +77,7 @@ jQuery(document).ready(function(){
     $("body").on('click',".editar_experiencia",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "";    
-        url = base_url+"index.php/experiencia/editar/e/"+codigo;
+        url = base_url+"experiencia/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('.tab_experiencia').show();
             $('.tab_experiencia').html(data); 
@@ -87,7 +87,7 @@ jQuery(document).ready(function(){
      $("body").on('click',".editar_estudio",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "";
-        url = base_url+"index.php/estudio/editar/e/"+codigo;
+        url = base_url+"estudio/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('.tab_estudios').show();
             $('.tab_estudios').html(data);
@@ -97,7 +97,7 @@ jQuery(document).ready(function(){
     $("body").on('click',".editar_idioma",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "";    
-        url = base_url+"index.php/estudioidiomas/editar/e/"+codigo;
+        url = base_url+"estudioidiomas/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('.tab_idiomas').show();
             $('.tab_idiomas').html(data); 
@@ -107,7 +107,7 @@ jQuery(document).ready(function(){
     $("body").on('click',".editar_conferencia",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "";
-        url = base_url+"index.php/conferencia/editar/e/"+codigo;
+        url = base_url+"conferencia/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('.tab_conferencias').show();
             $('.tab_conferencias').html(data);
@@ -117,7 +117,7 @@ jQuery(document).ready(function(){
     $("body").on('click',".editar_sociedad",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "";
-        url = base_url+"index.php/profesorsociedad/editar/e/"+codigo;
+        url = base_url+"profesorsociedad/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('.tab_sociedad').show();
             $('.tab_sociedad').html(data);
@@ -127,7 +127,7 @@ jQuery(document).ready(function(){
     $("body").on('click',".editar_trabajo",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "";
-        url = base_url+"index.php/trabajo/editar/e/"+codigo;
+        url = base_url+"trabajo/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('.tab_empresa').show();
             $('.tab_empresa').html(data);
@@ -135,7 +135,7 @@ jQuery(document).ready(function(){
     });         
     
     $('body').on('click',"#cancelar",function(){
-        url = base_url+"index.php/profesor/listar";
+        url = base_url+"profesor/listar";
         location.href = url;
     });
 
@@ -153,12 +153,12 @@ jQuery(document).ready(function(){
         curso  = $("#curso").val();
         sexo   = $("#sexo").val();
         numero = $("#numero").val();
-        url = base_url+"index.php/profesor/grabar";
+        url = base_url+"profesor/grabar";
         dataString  = $('#frmPersona').serialize();
         if(curso!=0 && sexo!=0 && numero!=0){
             $.post(url,dataString,function(data){
                 alert('Operacion realizada con exito');
-                location.href = base_url+"index.php/profesor/listar/";  
+                location.href = base_url+"profesor/listar/";  
             });            
         }
         else if(curso==0){
@@ -173,7 +173,7 @@ jQuery(document).ready(function(){
     });
 
     $("body").on('click',"#grabar_experiencia",function(){
-        url = base_url+"index.php/experiencia/grabar";
+        url = base_url+"experiencia/grabar";
         profesor    = $("#codigo").val();
         universidad = $("#universidad").val();
         mesi        = $("#mesi").val();
@@ -194,7 +194,7 @@ jQuery(document).ready(function(){
         else{
             $.post(url,dataString,function(data){
                 //alert('Operacion realizada con exito');
-                url2 = base_url+"index.php/experiencia/listar/"+profesor;
+                url2 = base_url+"experiencia/listar/"+profesor;
                 $.post(url2,"",function(data2){
                     $('#experiencia').html(data2); 
                 });
@@ -203,7 +203,7 @@ jQuery(document).ready(function(){
     });
 
     $("body").on('click',"#grabar_estudio",function(){
-        url = base_url+"index.php/estudio/grabar";
+        url = base_url+"estudio/grabar";
         profesor = $("#codigo").val();
         universidad = $("#universidadestudio").val();
         grado       = $("#grado").val();
@@ -228,7 +228,7 @@ jQuery(document).ready(function(){
         else{
             $.post(url,dataString,function(data){
                 //alert('Operacion realizada con exito');
-                url2 = base_url+"index.php/estudio/listar/"+profesor;
+                url2 = base_url+"estudio/listar/"+profesor;
                 $.post(url2,"",function(data2){
                     $('#estudios').html(data2); 
                 });
@@ -237,7 +237,7 @@ jQuery(document).ready(function(){
     });
 
     $("body").on('click',"#grabar_idioma",function(){
-        url = base_url+"index.php/estudioidiomas/grabar";
+        url = base_url+"estudioidiomas/grabar";
         profesor    = $("#codigo").val();
         idioma      = $("#idioma").val();
         nivel       = $("#nivel").val();
@@ -262,7 +262,7 @@ jQuery(document).ready(function(){
         else{
             $.post(url,dataString,function(data){
                 //alert('Operacion realizada con exito');
-                url2 = base_url+"index.php/estudioidiomas/listar/"+profesor;
+                url2 = base_url+"estudioidiomas/listar/"+profesor;
                 $.post(url2,"",function(data2){
                     $('#idiomas').html(data2); 
                 });
@@ -271,13 +271,13 @@ jQuery(document).ready(function(){
     });
 
     $("body").on('click',"#grabar_conferencia",function(){
-        url = base_url+"index.php/conferencia/grabar";
+        url = base_url+"conferencia/grabar";
         profesor = $("#codigo").val();
         dataString  = $('#frm_conferencia').serialize();
         dataString  = dataString+"&profesor="+profesor;
         $.post(url,dataString,function(data){
             //alert('Operacion realizada con exito');
-            url2 = base_url+"index.php/conferencia/listar/"+profesor;
+            url2 = base_url+"conferencia/listar/"+profesor;
             $.post(url2,"",function(data2){
                 $('#conferencias').html(data2); 
             });
@@ -285,13 +285,13 @@ jQuery(document).ready(function(){
     });
 
     $("body").on('click',"#grabar_sociedad",function(){
-        url = base_url+"index.php/profesorsociedad/grabar";
+        url = base_url+"profesorsociedad/grabar";
         profesor = $("#codigo").val();
         dataString  = $('#frm_sociedades').serialize();
         dataString  = dataString+"&profesor="+profesor;
         $.post(url,dataString,function(data){
             //alert('Operacion realizada con exito');
-            url2 = base_url+"index.php/ventas/profesorsociedad/listar/"+profesor;
+            url2 = base_url+"ventas/profesorsociedad/listar/"+profesor;
             $.post(url2,"",function(data2){
                 $('#sociedades').html(data2); 
             });
@@ -299,7 +299,7 @@ jQuery(document).ready(function(){
     });
 
     $("body").on('click',"#grabar_trabajo",function(){
-        url = base_url+"index.php/trabajo/grabar";
+        url = base_url+"trabajo/grabar";
         profesor = $("#codigo").val();
         empresa  = $("#empresa").val();
         mesi     = $("#mesi").val();
@@ -317,7 +317,7 @@ jQuery(document).ready(function(){
         else{
             $.post(url,dataString,function(data){
                 //alert('Operacion realizada con exito');
-                url2 = base_url+"index.php/trabajo/listar/"+profesor;
+                url2 = base_url+"trabajo/listar/"+profesor;
                 $.post(url2,"",function(data2){
                     $('#empresa').html(data2); 
                 });
@@ -330,11 +330,11 @@ jQuery(document).ready(function(){
        if(confirm('Esta seguro desea eliminar este profesor?, \ntodos los registros asociados al profesor seran borrados.')){
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigo="+coddetalle;
-            url = base_url+"index.php/profesor/eliminar";
+            url = base_url+"profesor/eliminar";
             $.post(url,dataString,function(data){
     //            if(data=="true"){
                     //alert("El profesor se borro correctamente");
-                    url = base_url+"index.php/profesor/listar";
+                    url = base_url+"profesor/listar";
                     location.href = url;
     //            }
     //            else{
@@ -347,13 +347,13 @@ jQuery(document).ready(function(){
     $("body").on('click',".eliminar_experiencia",function(){
         if(confirm('Esta seguro desea eliminar esta experiencia?')){
             codigo = $(this).parent().parent().attr("id");  
-            url = base_url+"index.php/experiencia/eliminar/";
+            url = base_url+"experiencia/eliminar/";
             profesor = $("#codigo").val();
             objRes = new Object();
             objRes.experiencia = codigo;
             dataString   = {objeto: JSON.stringify(objRes)};             
             $.post(url,dataString,function(data){
-                url2 = base_url+"index.php/experiencia/listar/"+profesor;
+                url2 = base_url+"experiencia/listar/"+profesor;
                 $.post(url2,"",function(data2){
                     $('#experiencia').html(data2); 
                 });
@@ -364,13 +364,13 @@ jQuery(document).ready(function(){
     $("body").on('click',".eliminar_estudio",function(){
         if(confirm('Esta seguro desea eliminar este estudio?')){
             codigo = $(this).parent().parent().attr("id");  
-            url = base_url+"index.php/estudio/eliminar/";
+            url = base_url+"estudio/eliminar/";
             profesor = $("#codigo").val();
             objRes = new Object();
             objRes.estudio = codigo;
             dataString   = {objeto: JSON.stringify(objRes)};             
             $.post(url,dataString,function(data){
-                url2 = base_url+"index.php/estudio/listar/"+profesor;
+                url2 = base_url+"estudio/listar/"+profesor;
                 $.post(url2,"",function(data2){
                     $('#estudios').html(data2); 
                 });
@@ -381,13 +381,13 @@ jQuery(document).ready(function(){
     $("body").on('click',".eliminar_idioma",function(){
         if(confirm('Esta seguro desea eliminar este idioma?')){
             codigo = $(this).parent().parent().attr("id");  
-            url = base_url+"index.php/estudioidiomas/eliminar/";
+            url = base_url+"estudioidiomas/eliminar/";
             profesor = $("#codigo").val();
             objRes = new Object();
             objRes.estudioidioma = codigo;
             dataString   = {objeto: JSON.stringify(objRes)};             
             $.post(url,dataString,function(data){
-                url2 = base_url+"index.php/estudioidiomas/listar/"+profesor;
+                url2 = base_url+"estudioidiomas/listar/"+profesor;
                 $.post(url2,"",function(data2){
                     $('#idiomas').html(data2); 
                 });
@@ -398,13 +398,13 @@ jQuery(document).ready(function(){
     $("body").on('click',".eliminar_conferencia",function(){
         if(confirm('Esta seguro desea eliminar esta conferencia?')){
             codigo = $(this).parent().parent().attr("id");  
-            url = base_url+"index.php/conferencia/eliminar/";
+            url = base_url+"conferencia/eliminar/";
             profesor = $("#codigo").val();
             objRes = new Object();
             objRes.conferencia = codigo;
             dataString   = {objeto: JSON.stringify(objRes)};             
             $.post(url,dataString,function(data){
-                url2 = base_url+"index.php/conferencia/listar/"+profesor;
+                url2 = base_url+"conferencia/listar/"+profesor;
                 $.post(url2,"",function(data2){
                     $('#conferencias').html(data2); 
                 });
@@ -415,13 +415,13 @@ jQuery(document).ready(function(){
     $("body").on('click',".eliminar_sociedad",function(){
         if(confirm('Esta seguro desea eliminar esta sociedad?')){
             codigo = $(this).parent().parent().attr("id");  
-            url = base_url+"index.php/profesorsociedad/eliminar/";
+            url = base_url+"profesorsociedad/eliminar/";
             profesor = $("#codigo").val();
             objRes = new Object();
             objRes.profesorsociedad = codigo;
             dataString   = {objeto: JSON.stringify(objRes)};             
             $.post(url,dataString,function(data){
-                url2 = base_url+"index.php/profesorsociedad/listar/"+profesor;
+                url2 = base_url+"profesorsociedad/listar/"+profesor;
                 $.post(url2,"",function(data2){
                     $('#sociedades').html(data2); 
                 });
@@ -432,13 +432,13 @@ jQuery(document).ready(function(){
     $("body").on('click',".eliminar_trabajo",function(){
         if(confirm('Esta seguro desea eliminar esta empresa?')){
             codigo = $(this).parent().parent().attr("id");  
-            url = base_url+"index.php/trabajo/eliminar/";
+            url = base_url+"trabajo/eliminar/";
             profesor = $("#codigo").val();
             objRes = new Object();
             objRes.trabajo = codigo;
             dataString   = {objeto: JSON.stringify(objRes)};             
             $.post(url,dataString,function(data){
-                url2 = base_url+"index.php/trabajo/listar/"+profesor;
+                url2 = base_url+"trabajo/listar/"+profesor;
                 $.post(url2,"",function(data2){
                     $('#empresa').html(data2); 
                 });
@@ -447,7 +447,7 @@ jQuery(document).ready(function(){
     });     
 
     $("body").on("click","#logo",function(){
-        url = base_url+"index.php/inicio/principal";
+        url = base_url+"inicio/principal";
         location.href = url;
     });
  
@@ -488,7 +488,7 @@ jQuery(document).ready(function(){
        accion      = $("#accion").val();
        codigo      = $("#codigo").val();
        dataString  = $('#frmPersona').serialize();
-       url = base_url+"index.php/profesor/editar/"+accion+"/"+codigo;
+       url = base_url+"profesor/editar/"+accion+"/"+codigo;
        $.post(url,dataString,function(data){
            $('#mensaje').html(data);
        });             
@@ -497,7 +497,7 @@ jQuery(document).ready(function(){
 
 function abrir_formulario_ubigeo(){
 	ubigeo = $("#cboNacimiento").val();
-	url = base_url+"index.php/maestros/ubigeo/formulario_ubigeo/"+ubigeo;
+	url = base_url+"maestros/ubigeo/formulario_ubigeo/"+ubigeo;
 	window.open(url,'Formulario Ubigeo','menubar=no,resizable=no,width=200,height=180');
 }
 

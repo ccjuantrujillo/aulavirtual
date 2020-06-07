@@ -41,7 +41,7 @@ class Rol extends Controller{
                     $item++;
                 }
             }
-            $data['action']          = base_url()."index.php/seguridad/rol/buscar_roles";
+            $data['action']          = base_url()."seguridad/rol/buscar_roles";
             $data['titulo_busqueda'] = "BUSCAR ROL";
             $data['titulo_tabla']    = "RELACI&Oacute;N de ROLES";
             $data['lista']           = $lista;
@@ -114,7 +114,7 @@ class Rol extends Controller{
                $filter->CICLOP_Codigo = $this->somevar['compania'];
                $this->rol_model->insertar($filter,$checkO);
             }
-            header("location:".base_url()."index.php/seguridad/rol/listar");
+            header("location:".base_url()."seguridad/rol/listar");
         }
               
       }
@@ -158,7 +158,7 @@ class Rol extends Controller{
                     $item++;
                 }
             }
-            $data['action']         = base_url()."index.php/seguridad/rol/buscar_roles";
+            $data['action']         = base_url()."rol/buscar_roles";
             $data['titulo_tabla']   = "RESULTADO DE BUSQUEDA de ROLES";
             $data['titulo_busqueda']= "BUSCAR ROLES";
             $data['lista']      = $lista;

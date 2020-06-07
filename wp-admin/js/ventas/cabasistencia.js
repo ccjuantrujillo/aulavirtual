@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
     $("#nuevo").click(function(){
         dataString = "";
-        url = base_url+"index.php/cabasistencia/editar/n";
+        url = base_url+"cabasistencia/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -9,31 +9,31 @@ jQuery(document).ready(function(){
     });
 
     $("body").on('click',"#ver_profesor",function(){
-        url = base_url+"index.php/profesor/buscar";
+        url = base_url+"profesor/buscar";
         window.open(url,"_blank","width=700,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");          
     }); 
 
     $("body").on('click',"#ver_reemplazo",function(){
-        url = base_url+"index.php/profesor/buscar2";
+        url = base_url+"profesor/buscar2";
         window.open(url,"_blank","width=700,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");          
     });     
 
     $('body').on('click',"#cancelar",function(){
-        url = base_url+"index.php/cabasistencia/listar";
+        url = base_url+"cabasistencia/listar";
         location.href = url;
     });
 
     $("body").on('click',"#grabar",function(){
-        url = base_url+"index.php/cabasistencia/grabar";
+        url = base_url+"cabasistencia/grabar";
         dataString  = $('#frmPersona').serialize();
         $.post(url,dataString,function(data){
             alert('Operacion realizada con exito');
-            location.href = base_url+"index.php/cabasistencia/listar";
+            location.href = base_url+"cabasistencia/listar";
         });
     });
 
     $("body").on("click","#logo",function(){
-        url = base_url+"index.php/inicio/principal";
+        url = base_url+"inicio/principal";
         location.href = url;
     });
 
@@ -46,7 +46,7 @@ jQuery(document).ready(function(){
     });  
     
      $("body").on('change',"#local",function(){
-        url    = base_url+"index.php/aula/obtener/";
+        url    = base_url+"aula/obtener/";
         objRes = new Object();
         objRes.local = $("#local").val();
         dataString   = {objeto: JSON.stringify(objRes)};
@@ -64,7 +64,7 @@ jQuery(document).ready(function(){
    $("body").on("click",".editar",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "";    
-        url = base_url+"index.php/cabasistencia/editar/e/"+codigo;
+        url = base_url+"cabasistencia/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -76,10 +76,10 @@ jQuery(document).ready(function(){
        if(confirm('Esta accion borrara las marcaciones de este dia.\n¿Esta seguro desea eliminar este registro?')){
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigo="+coddetalle;
-            url = base_url+"index.php/cabasistencia/eliminar";
+            url = base_url+"cabasistencia/eliminar";
             $.post(url,dataString,function(data){
                 if(data=="true"){
-                    url = base_url+"index.php/cabasistencia/listar";
+                    url = base_url+"cabasistencia/listar";
                     location.href = url;
                 }
                 else if(data=="false"){
@@ -94,7 +94,7 @@ jQuery(document).ready(function(){
         objRes = new Object();
         objRes.curso = $("#curso").val();
         dataString   = {objeto: JSON.stringify(objRes)};
-        url = base_url+"index.php/asistencia/obtener";
+        url = base_url+"asistencia/obtener";
         $.post(url,dataString,function(data){
             $.each(data, function(item,value){
                 fila   = "<tr>";
@@ -113,7 +113,7 @@ jQuery(document).ready(function(){
 });
 function abrir_formulario_ubigeo(){
 	ubigeo = $("#cboNacimiento").val();
-	url = base_url+"index.php/ubigeo/formulario_ubigeo/"+ubigeo;
+	url = base_url+"ubigeo/formulario_ubigeo/"+ubigeo;
 	window.open(url,'Formulario Ubigeo','menubar=no,resizable=no,width=200,height=180');
 }
 
@@ -123,7 +123,7 @@ function selecciona_familia(codigo){
 }
 
 function selecciona_profesor(codigo){
-    url    = base_url+"index.php/profesor/obtener/";
+    url    = base_url+"profesor/obtener/";
     objRes = new Object();
     objRes.profesor = codigo;
     dataString   = {objeto: JSON.stringify(objRes)};
@@ -137,7 +137,7 @@ function selecciona_profesor(codigo){
 }
 
 function selecciona_profesor2(codigo){
-    url    = base_url+"index.php/profesor/obtener/";
+    url    = base_url+"profesor/obtener/";
     objRes = new Object();
     objRes.profesor = codigo;
     dataString   = {objeto: JSON.stringify(objRes)};

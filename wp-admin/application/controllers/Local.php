@@ -35,7 +35,7 @@ class Local extends CI_Controller
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/maestros/local/listar";
+        $configuracion['base_url']    = base_url()."maestros/local/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/
@@ -150,7 +150,7 @@ class Local extends CI_Controller
         $data['titulo_tabla']    = "RESULTADO DE BUSQUEDA de FABRICANTES";
         $data['titulo_busqueda'] = "BUSCAR FABRICANTE";
         $data['nombre_fabricante']  = form_input(array( 'name'  => 'nombre_fabricante','id' => 'nombre_fabricante','value' => $nombre_fabricante,'maxlength' => '100','class' => 'cajaMedia'));
-        $data['form_open']       = form_open(base_url().'index.php/almacen/fabricante/buscar',array("name"=>"form_busquedaFabricante","id"=>"form_busquedaFabricante"));
+        $data['form_open']       = form_open(base_url().'almacen/fabricante/buscar',array("name"=>"form_busquedaFabricante","id"=>"form_busquedaFabricante"));
         $data['form_close']      = form_close();
         $data['lista']           = $lista;
         $data['oculto']          = form_hidden(array('base_url'=>base_url()));

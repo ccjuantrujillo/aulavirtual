@@ -55,7 +55,7 @@ class Tareo extends CI_Controller {
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/ventas/orden/listar";
+        $configuracion['base_url']    = base_url()."ventas/orden/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/

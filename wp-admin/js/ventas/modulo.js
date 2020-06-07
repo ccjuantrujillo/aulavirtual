@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
     
     $("body").on("click","#nuevo",function(){
         dataString = "";
-        url = base_url+"index.php/modulo/editar/n";
+        url = base_url+"modulo/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -13,14 +13,14 @@ jQuery(document).ready(function(){
     });
     
    $("body").on("click","#pdf",function(){
-        url = base_url+"index.php/modulo/export_pdf/rpt_modulo_aulas";
+        url = base_url+"modulo/export_pdf/rpt_modulo_aulas";
         $("#frmReporte").attr("action",url);
         $("#frmReporte").attr("target","framereporte");
         $("#frmReporte").submit();
     });  
     
    $("body").on("click","#pdf_horario",function(){
-        url = base_url+"index.php/modulo/export_pdf/rpt_horario_curso";
+        url = base_url+"modulo/export_pdf/rpt_horario_curso";
         $("#frmReporte").attr("action",url);
         $("#frmReporte").attr("target","framereporte");
         $("#frmReporte").submit();
@@ -39,12 +39,12 @@ jQuery(document).ready(function(){
     
     $("body").on('click',"#imprimir",function(){
         codigo   = $("#codigo").val();
-        url = base_url+"index.php/modulo/ver/"+codigo;
+        url = base_url+"modulo/ver/"+codigo;
         window.open(url, this.target, 'width=800,height=400,top=150,left=200');
     });    
     
     $("body").on('click',"#cancelar",function(){
-        url = base_url+"index.php/modulo/listar";
+        url = base_url+"modulo/listar";
         location.href = url;
     });
     
@@ -52,11 +52,11 @@ jQuery(document).ready(function(){
        if(confirm('Esta seguro desea eliminar este registro?')){
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigo="+coddetalle;
-            url = base_url+"index.php/modulo/eliminar";
+            url = base_url+"modulo/eliminar";
             $.post(url,dataString,function(data){
                 if(data=="true"){
                     //alert('Operacion realizada con exito');  
-                    url = base_url+"index.php/modulo/listar";
+                    url = base_url+"modulo/listar";
                     location.href = url;
                 }
                 else if(data=="false"){
@@ -69,7 +69,7 @@ jQuery(document).ready(function(){
    $("body").on("click",".editar",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "codigo="+codigo;    
-        url = base_url+"index.php/modulo/editar/e/"+codigo;
+        url = base_url+"modulo/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -77,7 +77,7 @@ jQuery(document).ready(function(){
     });     
     
     $("body").on('click',"#grabar",function(){
-        url        = base_url+"index.php/modulo/grabar";
+        url        = base_url+"modulo/grabar";
         clave      = $("#clave").val();
         $('#estado').removeAttr('disabled');
         $('#ciclo').removeAttr('disabled');
@@ -86,7 +86,7 @@ jQuery(document).ready(function(){
             $.post(url,dataString,function(data){
                 if(data=="true"){
                     alert('Operacion realizada con exito');    
-                    location.href = base_url+"index.php/modulo/listar";
+                    location.href = base_url+"modulo/listar";
                 }
                 else if(data=="false"){
                     alert('El usuario ya esta matriculado en el curso');

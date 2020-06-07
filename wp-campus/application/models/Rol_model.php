@@ -10,7 +10,6 @@ class Rol_model extends CI_Model {
     }
 
     public function seleccionar($filter=''){
-       $arreglo = array(""=>':: Seleccione ::');
        foreach($this->read($filter) as $indice=>$valor){
             $arreglo[$valor->ROL_Codigo] = $valor->ROL_Descripcion;
        }

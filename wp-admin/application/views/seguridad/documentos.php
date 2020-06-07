@@ -23,7 +23,7 @@
                     <span class="cajatitle">
                         <h2>  LECCIONES</h2>
                         <h3>quí se podrán subir las imágenes tipo preview para el menú que contenga un e</h3>
-                        <a href="<?php echo base_url();?>index.php/almacen/producto/listar">Ingresar</a> 
+                        <a href="<?php echo base_url();?>almacen/producto/listar">Ingresar</a> 
                     </span>
                  </span>
             </li>
@@ -33,7 +33,7 @@
                     <span class="cajatitle">
                         <h2>ARCHIVOS</h2>
                         <h3>quí se podrán subir las imágenes tipo preview para el menú que contenga un e</h3>
-                        <a href="<?php echo base_url();?>index.php/almacen/producto/listar">Ingresar</a> 
+                        <a href="<?php echo base_url();?>almacen/producto/listar">Ingresar</a> 
                     </span>
                  </span>
             </li>  
@@ -43,7 +43,7 @@
                     <span class="cajatitle">
                         <h2>VIDEOS</h2>
                         <h3>quí se podrán subir las imágenes tipo preview para el menú que contenga un e</h3>
-                        <a href="<?php echo base_url();?>index.php/almacen/productoatributo/listar">Ingresar</a> 
+                        <a href="<?php echo base_url();?>almacen/productoatributo/listar">Ingresar</a> 
                     </span>
                  </span>
             </li>   
@@ -53,7 +53,7 @@
                     <span class="cajatitle">
                         <h2>PREGUNTAS</h2>
                         <h3>quí se podrán subir las imágenes tipo preview para el menú que contenga un e</h3>
-                        <a href="<?php echo base_url();?>index.php/almacen/productoatributodetalle/listar">Ingresar</a> 
+                        <a href="<?php echo base_url();?>almacen/productoatributodetalle/listar">Ingresar</a> 
                     </span>
                  </span>
             </li>             
@@ -63,7 +63,7 @@
                     <span class="cajatitle">
                         <h2>ENLACES</h2>
                         <h3>quí se podrán subir las imágenes tipo preview para el menú que contenga un e</h3>
-                        <a href="<?php echo base_url();?>index.php/almacen/producto/listar">Ingresar</a> 
+                        <a href="<?php echo base_url();?>almacen/producto/listar">Ingresar</a> 
                     </span>
                  </span>
             </li>
@@ -73,7 +73,7 @@
                     <span class="cajatitle">
                         <h2>CURSO</h2>
                         <h3>quí se podrán subir las imágenes tipo preview para el menú que contenga un e</h3>
-                        <a href="<?php echo base_url();?>index.php/almacen/curso/listar">Ingresar</a>
+                        <a href="<?php echo base_url();?>almacen/curso/listar">Ingresar</a>
                     </span>
                  </span>
             </li>

@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
 
     $("body").on("click","#nuevo",function(){
         dataString = "";
-        url = base_url+"index.php/tarea/editar/n";
+        url = base_url+"tarea/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -17,7 +17,7 @@ jQuery(document).ready(function(){
         datos.append("curso",this.value);
         $("#seccion").append("<option value='0'>:: Seleccione ::</option>");
         $.ajax({
-            url:base_url+"index.php/seccion/obtener/",
+            url:base_url+"seccion/obtener/",
             method:"post",
             data:datos,
             dataType:"json",
@@ -43,7 +43,7 @@ jQuery(document).ready(function(){
         $("#leccion").append("<option value='0'>:: Seleccione ::</option>");
         $("#leccion").children("option").remove();
         $.ajax({
-            url:base_url+"index.php/leccion/obtener/",
+            url:base_url+"leccion/obtener/",
             method:"post",
             data:datos,
             dataType:"json",
@@ -64,17 +64,17 @@ jQuery(document).ready(function(){
    });     
     
     $("body").on('click',"#cancelar",function(){
-        url = base_url+"index.php/tarea/listar";
+        url = base_url+"tarea/listar";
         location.href = url;
     });      
     
     $("body").on('click',"#grabar",function(){
-        url        = base_url+"index.php/tarea/grabar";
+        url        = base_url+"tarea/grabar";
         dataString = $('#frmPersona').serialize();
         $.post(url,dataString,function(data){
             if(data!=""){
                 alert('Operacion realizada con exito');    
-                location.href = base_url+"index.php/tarea/listar";
+                location.href = base_url+"tarea/listar";
             }
             else if(data){
                 alert('Ocurrio un error durante la grabacion');
@@ -87,10 +87,10 @@ jQuery(document).ready(function(){
        if(confirm('Este accion borrará todas las tareas\n¿Esta seguro desea eliminar este registro?')){
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigo="+coddetalle;
-            url = base_url+"index.php/tarea/eliminar";
+            url = base_url+"tarea/eliminar";
             $.post(url,dataString,function(data){
                 if(data!=""){
-                    url = base_url+"index.php/tarea/listar";
+                    url = base_url+"tarea/listar";
                     location.href = url;
                 }
                 else{
@@ -102,7 +102,7 @@ jQuery(document).ready(function(){
     
    $("body").on("click",".editar",function(){
         codigo = $(this).parent().parent().attr("id");
-        url = base_url+"index.php/tarea/editar/e/"+codigo;
+        url = base_url+"tarea/editar/e/"+codigo;
         $.post(url,"",function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);

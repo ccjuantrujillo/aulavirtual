@@ -9,7 +9,7 @@ $(function(){
         var form = $("#frmPersona")[0];
         var datos = new FormData(form);
         $.ajax({
-            url:base_url+"index.php/calificacion/grabar",
+            url:base_url+"calificacion/grabar",
             method:"post",
             data:datos,
             dataType:"json",
@@ -17,7 +17,7 @@ $(function(){
             processData:false,
             success:function(data){
                 if(data){
-                    location.href=base_url+"index.php/calificacion/listar";
+                    location.href=base_url+"calificacion/listar";
                 }
                 else{
                     alert("No se guardo ningun registro");
@@ -39,7 +39,7 @@ $(function(){
         var datos = new FormData();
         datos.append("calificacion",id);
         $.ajax({
-            url:base_url+"index.php/calificacion/editar/",
+            url:base_url+"calificacion/editar/",
             data:datos,
             method:"post",
             dataType:"json",
@@ -67,14 +67,14 @@ $(function(){
         datos.append("calificacion",id);
         if(confirm("¿Esta seguro que desea eliminar este registro?")){
             $.ajax({
-                url:base_url+"index.php/calificacion/eliminar",
+                url:base_url+"calificacion/eliminar",
                 method:"post",
                 data:datos,
                 contentType:false,
                 processData:false,
                 success:function(data){
                     if(data){
-                        location.href=base_url+"index.php/calificacion/listar";      
+                        location.href=base_url+"calificacion/listar";      
                     }
                     else{
                         alert("Ocurrio un error 2");
@@ -89,7 +89,7 @@ $(function(){
     
     //Cancelar
     $(document).on("click","#cancelar",function(){
-       location.href = base_url+"index.php/calificacion/listar" 
+       location.href = base_url+"calificacion/listar" 
     });
     
     //Cambio de curso
@@ -108,7 +108,7 @@ $(function(){
     
     function listar_alumnos(datos,valor=''){
         $.ajax({
-            url:base_url+"index.php/matricula/obtener",
+            url:base_url+"matricula/obtener",
             method:"post",
             data:datos,
             dataType:"json",
@@ -131,7 +131,7 @@ $(function(){
     
     function listar_tareas(datos,valor=''){
         $.ajax({
-            url:base_url+"index.php/tarea/obtener",
+            url:base_url+"tarea/obtener",
             method:"post",
             data:datos,
             dataType:"json",

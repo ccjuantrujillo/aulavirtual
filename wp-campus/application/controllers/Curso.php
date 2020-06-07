@@ -21,7 +21,7 @@ class Curso extends LayoutAdmin{
             echo "chau";
     }
 
-    public function read(){
+    public function listar(){
         $filter = new stdClass();
         $filter->persona = $_SESSION["codper"];    
         if($_SESSION["rolusu"]==6){//alumno

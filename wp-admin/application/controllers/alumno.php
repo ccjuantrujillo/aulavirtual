@@ -47,7 +47,7 @@ class Alumno extends Persona
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/alumno/listar";
+        $configuracion['base_url']    = base_url()."alumno/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/
@@ -149,7 +149,7 @@ class Alumno extends Persona
         $filter     = new stdClass();
         $filter_not = new stdClass();
         $filter->status = 5;
-        //$filter->order_by    = array("d.PERSC_ApellidoPaterno"=>"asc","d.PERSC_ApellidoMaterno"=>"asc","d.PERSC_Nombre"=>"asc");
+        $filter->order_by    = array("PERSC_ApellidoPaterno"=>"asc","PERSC_ApellidoMaterno"=>"asc","PERSC_Nombre"=>"asc");
         $registros = count($this->Alumno_model->listar($filter,$filter_not));
         $alumnos  = $this->Alumno_model->listar($filter,$filter_not);
         $item      = 1;
@@ -169,7 +169,7 @@ class Alumno extends Persona
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/alumno/buscar";
+        $configuracion['base_url']    = base_url()."alumno/buscar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/

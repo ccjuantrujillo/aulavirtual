@@ -39,7 +39,7 @@ class Modulo extends CI_Controller {
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/modulo/listar";
+        $configuracion['base_url']    = base_url()."modulo/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/

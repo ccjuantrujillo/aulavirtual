@@ -44,7 +44,7 @@ class Usuario extends Persona{
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/seguridad/usuario/listar";
+        $configuracion['base_url']    = base_url()."seguridad/usuario/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/

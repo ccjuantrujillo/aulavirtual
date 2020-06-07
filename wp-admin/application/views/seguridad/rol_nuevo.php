@@ -18,7 +18,7 @@ $menus_base=$CI->rol_model->obtener_rol_permiso();
             <div id="tituloForm" class="header"><?php echo $titulo;?></div>
             <div id="frmBusqueda">
                 <?php echo validation_errors("<div class='error'>",'</div>');?>
-                <form id="<?php echo $formulario;?>" method="post" action="<?php echo base_url();?>index.php/seguridad/rol/grabar">
+                <form id="<?php echo $formulario;?>" method="post" action="<?php echo base_url();?>seguridad/rol/grabar">
                     <div id="datosGenerales">
                         <table class="fuente8" width="98%" cellspacing=0 cellpadding="6" border="0">
                             <?php

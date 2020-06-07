@@ -46,7 +46,7 @@ class Linea extends controller
         $data['lista']            = $lista;
         $data['titulo_busqueda']  = "BUSCAR LINEA";
         $data['nombre_linea'] = form_input(array( 'name'  => 'nombre_linea','id' => 'nombre_linea','value' => '','maxlength' => '100','class' => 'cajaMedia'));
-        $data['form_open']        = form_open(base_url().'index.php/almacen/linea/buscar',array("name"=>"form_busquedaLinea","id"=>"form_busquedaLinea"));
+        $data['form_open']        = form_open(base_url().'almacen/linea/buscar',array("name"=>"form_busquedaLinea","id"=>"form_busquedaLinea"));
         $data['form_close']       = form_close();
         $data['titulo_tabla']     = "Relaci&oacute;n DE LINEAS";
         $data['oculto']           = form_hidden(array('accion'=>"",'codigo'=>"",'modo'=>"insertar",'base_url'=>base_url()));
@@ -61,7 +61,7 @@ class Linea extends controller
         $nombre_linea   = form_input(array( 'name'  => 'nombre_linea','id' => 'nombre_linea','value' => '','maxlength' => '100','class' => 'cajaMedia'));
         $codigo_usuario         = form_input(array( 'name'  => 'codigo_usuario','id' => 'codigo_usuario','value' => '','maxlength' => '20','class' => 'cajaPequena'));
         $data['titulo']     = "REGISTRAR LINEA";
-        $data['form_open']  = form_open(base_url().'index.php/almacen/linea/grabar',array("name"=>"frmLinea","id"=>"frmLinea"));
+        $data['form_open']  = form_open(base_url().'almacen/linea/grabar',array("name"=>"frmLinea","id"=>"frmLinea"));
         $data['form_close'] = form_close();
         $data['campos']     = array($lblDescripcion, $lblCodigoUsuario);
         $data['valores']    = array($nombre_linea, $codigo_usuario);
@@ -77,7 +77,7 @@ class Linea extends controller
         $lblCodigoUsuario       = form_label("Código","CodigoUsuario");
         $nombre_linea       = form_input(array( 'name'  => 'nombre_linea','id' => 'nombre_linea','value' => $oLinea[0]->LINC_Descripcion,'maxlength' => '100','class' => 'cajaMedia'));
         $codigo_usuario         = form_input(array( 'name'  => 'codigo_usuario','id' => 'codigo_usuario','value' => $oLinea[0]->LINC_CodigoUsuario,'maxlength' => '20','class' => 'cajaPequena'));
-        $data['form_open']      = form_open(base_url().'index.php/almacen/linea/grabar/',array("name"=>"frmLinea","id"=>"frmLinea"));
+        $data['form_open']      = form_open(base_url().'almacen/linea/grabar/',array("name"=>"frmLinea","id"=>"frmLinea"));
         $data['campos']         = array($lblDescripcion, $lblCodigoUsuario);
         $data['valores']        = array($nombre_linea, $codigo_usuario);
         $data['oculto']         = form_hidden(array('codigo'=>"",'base_url'=>base_url(),'linea_id'=>$id));
@@ -105,7 +105,7 @@ class Linea extends controller
             else{
                $this->linea_model->insertar($filter);
             }
-            header("location:".base_url()."index.php/almacen/linea/listar");
+            header("location:".base_url()."almacen/linea/listar");
         }
     }
     public function eliminar()
@@ -152,7 +152,7 @@ class Linea extends controller
         $data['titulo_tabla']    = "RESULTADO DE BUSQUEDA de LINEAS";
         $data['titulo_busqueda'] = "BUSCAR LINEA";
         $data['nombre_linea']  = form_input(array( 'name'  => 'nombre_linea','id' => 'nombre_linea','value' => $nombre_linea,'maxlength' => '100','class' => 'cajaMedia'));
-        $data['form_open']       = form_open(base_url().'index.php/almacen/linea/buscar',array("name"=>"form_busquedaLinea","id"=>"form_busquedaLinea"));
+        $data['form_open']       = form_open(base_url().'almacen/linea/buscar',array("name"=>"form_busquedaLinea","id"=>"form_busquedaLinea"));
         $data['form_close']      = form_close();
         $data['lista']           = $lista;
         $data['oculto']          = form_hidden(array('base_url'=>base_url()));

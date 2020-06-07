@@ -38,7 +38,7 @@ class Asistencia extends CI_Controller
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/asistencia/listar";
+        $configuracion['base_url']    = base_url()."asistencia/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         $data['lista']           = $lista;

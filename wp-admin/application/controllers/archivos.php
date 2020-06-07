@@ -46,7 +46,7 @@ class Archivos extends CI_Controller {
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/almacen/archivo/listar";
+        $configuracion['base_url']    = base_url()."almacen/archivo/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);        
         /*Datos para la vista*/
@@ -93,7 +93,7 @@ class Archivos extends CI_Controller {
             $lista->adjunto     = "";
         }  
         $data['titulo']     = $titulo;        
-        $data['form_open']  = form_open_multipart(base_url()."index.php/archivos/grabar",array("name"=>"frmPersona","id"=>"frmPersona","method"=>"post"));
+        $data['form_open']  = form_open_multipart(base_url()."archivos/grabar",array("name"=>"frmPersona","id"=>"frmPersona","method"=>"post"));
         $data['form_close'] = form_close();
         $data['lista']	    = $lista;
         $filter = new stdClass();

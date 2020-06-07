@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
     
     $("body").on("click","#nuevo",function(){
         dataString = "";
-        url = base_url+"index.php/ventas/vigilancia/editar/n";
+        url = base_url+"ventas/vigilancia/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -25,7 +25,7 @@ jQuery(document).ready(function(){
     });   
     
      $("body").on('change',"#curso",function(){
-        url    = base_url+"index.php/ventas/profesor/obtener/";
+        url    = base_url+"ventas/profesor/obtener/";
         objRes = new Object();
         objRes.curso = $("#curso").val();
         objRes.flgcoordinador = 1;
@@ -43,23 +43,23 @@ jQuery(document).ready(function(){
     
    $("body").on("click",".ver",function(){
         codigo = $(this).parent().parent().attr("id");
-        url = base_url+"index.php/ventas/vigilancia/ver/"+codigo;
+        url = base_url+"ventas/vigilancia/ver/"+codigo;
         window.open(url,"_blank","width=800,height=400,top=150,left=200");
     }); 
     
     $("body").on('click',"#imprimir",function(){
         codigo   = $("#codigo").val();
-        url = base_url+"index.php/ventas/vigilancia/ver/"+codigo;
+        url = base_url+"ventas/vigilancia/ver/"+codigo;
         window.open(url, this.target, 'width=800,height=400,top=150,left=200');
     });    
     
     $("body").on('click',"#cancelar",function(){
-        url = base_url+"index.php/ventas/vigilancia/listar";
+        url = base_url+"ventas/vigilancia/listar";
         location.href = url;
     });      
     
     $("body").on('click',"#grabar",function(){
-        url         = base_url+"index.php/ventas/vigilancia/grabar";
+        url         = base_url+"ventas/vigilancia/grabar";
         $('#responsable').removeAttr('disabled');
         $('#tipoestudiociclo').removeAttr('disabled');
         dataString = $('#frmPersona').serialize();
@@ -82,7 +82,7 @@ jQuery(document).ready(function(){
             $.post(url,dataString,function(data){
                 if(data==true){
                     alert('Operacion realizada con exito');    
-                    location.href = base_url+"index.php/ventas/vigilancia/listar";
+                    location.href = base_url+"ventas/vigilancia/listar";
                 }
                 else if(data==false){
                     alert('El usuario ya esta vigilanciado en el curso');
@@ -96,7 +96,7 @@ jQuery(document).ready(function(){
             tr = $(this).parent().parent();
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigo="+coddetalle;
-            url = base_url+"index.php/ventas/vigilancia/eliminardetalle";
+            url = base_url+"ventas/vigilancia/eliminardetalle";
             if(coddetalle!=""){
                 $.post(url,dataString,function(data){
                     if(data==true){
@@ -117,7 +117,7 @@ jQuery(document).ready(function(){
     tr = $(this).parent().parent();  
     n  = tr.children("td")[0].innerHTML - 1;        
     codigodetalle = $(this).parent().parent().attr("id"); 
-    url = base_url+"index.php/ventas/vigilancia/obtenerdetalle";
+    url = base_url+"ventas/vigilancia/obtenerdetalle";
     objRes = new Object();
     objRes.vigilanciadetalle = codigodetalle;
     dataString   = {objeto: JSON.stringify(objRes)}; 
@@ -136,11 +136,11 @@ jQuery(document).ready(function(){
        if(confirm('Esta seguro desea eliminar este registro?')){
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigo="+coddetalle;
-            url = base_url+"index.php/ventas/vigilancia/eliminar";
+            url = base_url+"ventas/vigilancia/eliminar";
             $.post(url,dataString,function(data){
                 if(data=="true"){
                     //alert('Operacion realizada con exito');  
-                    url = base_url+"index.php/ventas/vigilancia/listar";
+                    url = base_url+"ventas/vigilancia/listar";
                     location.href = url;
                 }
                 else if(data=="false"){
@@ -153,7 +153,7 @@ jQuery(document).ready(function(){
    $("body").on("click",".editar",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "";    
-        url = base_url+"index.php/ventas/vigilancia/editar/e/"+codigo;
+        url = base_url+"ventas/vigilancia/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -192,7 +192,7 @@ function selectProfesor(n,valor){
     objRes = new Object();
     objRes.curso = val_curso;
     dataString   = {objeto: JSON.stringify(objRes)};
-    url    = base_url+"index.php/ventas/profesor/obtener";
+    url    = base_url+"ventas/profesor/obtener";
     $.post(url,dataString,function(data){
         $.each(data, function(item,value){
             opt_a       = document.createElement('option');
@@ -208,7 +208,7 @@ function selectProfesor(n,valor){
 function selectCurso(n,valor){
     val_curso = ($.isPlainObject(valor)) ? valor["PROD_Codigo"] : null;
     b      = "curso["+n+"]";
-    url    = base_url+"index.php/almacen/curso/obtener";
+    url    = base_url+"almacen/curso/obtener";
     select_b = document.getElementById(b);
     objRes = new Object();
     dataString   = {objeto: JSON.stringify(objRes)};

@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
     
     $("body").on("click","#nuevo",function(){
         dataString = "";
-        url = base_url+"index.php/ventas/apertura/editar/n";
+        url = base_url+"ventas/apertura/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -34,7 +34,7 @@ jQuery(document).ready(function(){
         textciclo = textciclo.substring(11,15).replace("-","");
         texttipoestudiociclo = $("#tipoestudiociclo option:selected").text();
         if(tipoestudiociclo!=0 && aula!=0 && turno!=0){
-            url = base_url+"index.php/almacen/cursociclo/obtener";
+            url = base_url+"almacen/cursociclo/obtener";
             objeto = new Object();
             objeto.ciclo = ciclo;
             dataString   = {objeto: JSON.stringify(objeto)};   
@@ -62,7 +62,7 @@ jQuery(document).ready(function(){
     });       
     
     $("body").on('click',"#ver_profesor",function(){
-        url = base_url+"index.php/ventas/profesor/buscar";
+        url = base_url+"ventas/profesor/buscar";
         window.open(url,"_blank","width=700,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");          
     });       
    
@@ -70,7 +70,7 @@ jQuery(document).ready(function(){
        accion      = $("#accion").val();
        codigo      = $("#codigo").val();
        dataString  = $('#frmPersona').serialize();
-       url = base_url+"index.php/ventas/apertura/editar/"+accion+"/"+codigo;
+       url = base_url+"ventas/apertura/editar/"+accion+"/"+codigo;
        $.post(url,dataString,function(data){
            $('#mensaje').html(data);
        });             
@@ -78,12 +78,12 @@ jQuery(document).ready(function(){
     
     $("body").on('click',"#imprimir",function(){
         codigo   = $("#codigo").val();
-        url = base_url+"index.php/ventas/apertura/ver/"+codigo;
+        url = base_url+"ventas/apertura/ver/"+codigo;
         window.open(url, this.target, 'width=800,height=400,top=150,left=200');
     });    
     
     $("body").on('click',"#cancelar",function(){
-        url = base_url+"index.php/ventas/apertura/listar";
+        url = base_url+"ventas/apertura/listar";
         location.href = url;
     });
     
@@ -91,11 +91,11 @@ jQuery(document).ready(function(){
        if(confirm('Esta seguro desea eliminar este registro?')){
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigo="+coddetalle;
-            url = base_url+"index.php/ventas/apertura/eliminar";
+            url = base_url+"ventas/apertura/eliminar";
             $.post(url,dataString,function(data){
                 if(data=="true"){
                     //alert('Operacion realizada con exito');  
-                    url = base_url+"index.php/ventas/apertura/listar";
+                    url = base_url+"ventas/apertura/listar";
                     location.href = url;
                 }
                 else if(data=="false"){
@@ -108,7 +108,7 @@ jQuery(document).ready(function(){
    $("body").on("click",".editar",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "codigo="+codigo;    
-        url = base_url+"index.php/ventas/apertura/editar/e/"+codigo;
+        url = base_url+"ventas/apertura/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -116,7 +116,7 @@ jQuery(document).ready(function(){
     });     
     
     $("body").on('click',"#grabar",function(){
-        url        = base_url+"index.php/ventas/apertura/grabar";
+        url        = base_url+"ventas/apertura/grabar";
         clave      = $("#clave").val();
         $('#estado').removeAttr('disabled');
         $('#ciclo').removeAttr('disabled');
@@ -130,7 +130,7 @@ jQuery(document).ready(function(){
             $.post(url,dataString,function(data){
                 if(data=="1"){
                     alert('Operacion realizada con exito');    
-                    location.href = base_url+"index.php/ventas/apertura/listar";
+                    location.href = base_url+"ventas/apertura/listar";
                 }
                 else if(data=="0"){
                     alert('Esta aula para este turno ya está aperturada');
@@ -146,14 +146,14 @@ jQuery(document).ready(function(){
         if(confirm('Esta seguro desea eliminar este registro?')){
             course = $(this).parent().parent().attr("id");
             dataString = "";
-            url = base_url+"index.php/ventas/apertura/eliminardetalle/"+course;
+            url = base_url+"ventas/apertura/eliminardetalle/"+course;
             $.post(url,dataString,function(data){
 //                if(data=="true"){
 //                    alert('Operacion realizada con exito');  
                     accion      = $("#accion").val();
                     codigo      = $("#codigo").val();
                     dataString  = $('#frmPersona').serialize();
-                    url = base_url+"index.php/ventas/apertura/editar/"+accion+"/"+codigo;
+                    url = base_url+"ventas/apertura/editar/"+accion+"/"+codigo;
                     $.post(url,dataString,function(data2){
                         $('#mensaje').html(data2);
                     });  
@@ -169,7 +169,7 @@ jQuery(document).ready(function(){
        tr = $(this).parent().parent();  
        n  = tr.children("td")[0].innerHTML-1;        
        course_id = $(this).parent().parent().attr("id"); 
-       url = base_url+"index.php/ventas/apertura/obtenerdetalle";
+       url = base_url+"ventas/apertura/obtenerdetalle";
        objRes = new Object();
        objRes.course = course_id;
        dataString   = {objeto: JSON.stringify(objRes)};       
@@ -221,7 +221,7 @@ function selectDia(n,valor){
 function selectTipoEstudio(n,valor){
     valor = (valor) ? valor : null;
     a      = "tipoestudiociclo["+n+"]";
-    url    = base_url+"index.php/maestros/tipoestudiociclo/obtener";
+    url    = base_url+"maestros/tipoestudiociclo/obtener";
     selecttipo = document.getElementById(a);
     objRes = new Object();
     objRes.ciclo = $("#ciclo").val();
@@ -240,7 +240,7 @@ function selectTipoEstudio(n,valor){
 function selectLocal(n,valor){
     valor = (valor) ? valor : null;
     a      = "local["+n+"]";
-    url    = base_url+"index.php/maestros/local/obtener";
+    url    = base_url+"maestros/local/obtener";
     selectloc = document.getElementById(a);
     objRes = new Object();
     dataString   = {objeto: JSON.stringify(objRes)};
@@ -260,7 +260,7 @@ function selectAula(n,idlocal,valor){
     idlocal = (idlocal) ? idlocal : null;
     a      = "aula["+n+"]";
     b      = "local["+n+"]";
-    url    = base_url+"index.php/maestros/aula/obtener";
+    url    = base_url+"maestros/aula/obtener";
     selectaula = document.getElementById(a);
     selectaula.options.length=0;
     objRes = new Object();

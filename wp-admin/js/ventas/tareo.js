@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
     
     $("body").on("click","#nuevo",function(){
         dataString = "";
-        url = base_url+"index.php/ventas/tareo/editar/n";
+        url = base_url+"ventas/tareo/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -30,7 +30,7 @@ jQuery(document).ready(function(){
     });    
     
     $("body").on('click',"#ver_cliente",function(){
-        url = base_url+"index.php/ventas/alumno/buscar";
+        url = base_url+"ventas/alumno/buscar";
         window.open(url,"_blank","width=700,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");          
     });    
     
@@ -38,7 +38,7 @@ jQuery(document).ready(function(){
        accion      = $("#accion").val();
        codigo      = $("#codigo").val();
        dataString  = $('#frmPersona').serialize();
-       url = base_url+"index.php/ventas/tareo/editar/"+accion+"/"+codigo;
+       url = base_url+"ventas/tareo/editar/"+accion+"/"+codigo;
        $.post(url,dataString,function(data){
            $('#mensaje').html(data);
        });             
@@ -46,17 +46,17 @@ jQuery(document).ready(function(){
     
     $("body").on('click',"#imprimir",function(){
         codigo   = $("#codigo").val();
-        url = base_url+"index.php/ventas/tareo/ver/"+codigo;
+        url = base_url+"ventas/tareo/ver/"+codigo;
         window.open(url, this.target, 'width=800,height=400,top=150,left=200');
     });    
     
     $("body").on('click',"#cancelar",function(){
-        url = base_url+"index.php/ventas/tareo/listar";
+        url = base_url+"ventas/tareo/listar";
         location.href = url;
     });        
     
     $("body").on('click',"#grabar",function(){
-        url        = base_url+"index.php/ventas/tareo/grabar";
+        url        = base_url+"ventas/tareo/grabar";
         dataString = $('#frmPersona').serialize();
         $.post(url,dataString,function(data){
             if(data=="true"){
@@ -73,7 +73,7 @@ jQuery(document).ready(function(){
         if(confirm('Esta seguro desea eliminar este registro?')){
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigo="+coddetalle;
-            url = base_url+"index.php/ventas/tareo/eliminar";
+            url = base_url+"ventas/tareo/eliminar";
             $.post(url,dataString,function(data){
                 if(data=="true"){
 //                   alert('Operacion realizada con exito');  
@@ -90,7 +90,7 @@ jQuery(document).ready(function(){
         tr = $(this).parent().parent();  
         n  = tr.children("td")[0].innerHTML - 1;        
         codigodetalle = $(this).parent().parent().attr("id"); 
-        url = base_url+"index.php/ventas/tareo/obtener";
+        url = base_url+"ventas/tareo/obtener";
         objRes = new Object();
         objRes.tareo = codigodetalle;
         dataString   = {objeto: JSON.stringify(objRes)};        
@@ -124,7 +124,7 @@ jQuery(document).ready(function(){
 function selectProfesor(n,valor){
     valor = (valor) ? valor : null;
     a      = "profesor["+n+"]";
-    url    = base_url+"index.php/ventas/profesor/obtener";
+    url    = base_url+"ventas/profesor/obtener";
     select_a = document.getElementById(a);
     objRes = new Object();
     objRes.curso = $("#curso").val();
@@ -144,7 +144,7 @@ function selectProfesor(n,valor){
 function selectReemplazo(n,valor){
     valor = (valor) ? valor : null;
     b      = "reemplazo["+n+"]";
-    url    = base_url+"index.php/ventas/profesor/obtener";
+    url    = base_url+"ventas/profesor/obtener";
     select_b = document.getElementById(b);
     objRes = new Object();
     //objRes.curso = $("#curso").val();
@@ -164,7 +164,7 @@ function selectReemplazo(n,valor){
 function selectTipo(n,valor){
     valor = (valor) ? valor : null;
     c      = "tipo["+n+"]";
-    url    = base_url+"index.php/maestros/tipoasistencia/obtener";
+    url    = base_url+"maestros/tipoasistencia/obtener";
     selecttipo = document.getElementById(c);
     objRes = new Object();
     dataString   = {objeto: JSON.stringify(objRes)};

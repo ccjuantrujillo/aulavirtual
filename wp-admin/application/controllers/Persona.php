@@ -50,7 +50,7 @@ class Persona extends CI_Controller{
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/maestros/persona/listar";
+        $configuracion['base_url']    = base_url()."maestros/persona/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/
@@ -239,7 +239,7 @@ class Persona extends CI_Controller{
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/persona/buscar";
+        $configuracion['base_url']    = base_url()."persona/buscar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/

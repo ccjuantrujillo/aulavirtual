@@ -40,7 +40,7 @@ class Calificacion extends CI_Controller{
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/calificacion/listar";
+        $configuracion['base_url']    = base_url()."calificacion/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/

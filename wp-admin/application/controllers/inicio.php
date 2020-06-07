@@ -20,7 +20,7 @@ class Inicio extends CI_Controller {
     }
 
     public function index(){
-        $data['form_open']  = form_open(base_url().'index.php/inicio/ingresar',array("name"=>"frmInicio","id"=>"frmInicio"));
+        $data['form_open']  = form_open(base_url().'inicio/ingresar',array("name"=>"frmInicio","id"=>"frmInicio"));
         $filter = new stdClass();
         $filter->empresa    = $this->empresa;
         $data['empresa']    = $this->Empresa_model->obtener($filter);
@@ -55,10 +55,7 @@ class Inicio extends CI_Controller {
                             'empresa'  => $usuarios->EMPRP_Codigo
                              );
                 $this->session->set_userdata($data);
-                /*Graba acceso*/
-                //$data = array("PERSP_Codigo" => $usuarios->PERSP_Codigo,"ACCESOC_Fecha"=>date("Y-m-d h:i:s",time()));
-                //$this->acceso_model->insertar($data);
-                redirect("inicio/principal");                
+                redirect(base_url()."inicio/principal");                
             }
             else{
                 $msgError = "<br><div align='center' class='error'>Usuario99 y/o contrasena no valido para esta empresa.</div>";
@@ -98,7 +95,7 @@ class Inicio extends CI_Controller {
     
     public function salir(){
         session_destroy();
-        redirect('inicio/index');
+        redirect(base_url().'inicio/index');
     }
     
     public function contrasena_mensaje(){

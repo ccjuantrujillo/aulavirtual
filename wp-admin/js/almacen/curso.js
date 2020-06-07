@@ -2,7 +2,7 @@ jQuery(document).ready(function(){
      
     $("body").on("click","#nuevo",function(){
         dataString = "";
-        url = base_url+"index.php/curso/editar/n";
+        url = base_url+"curso/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -18,24 +18,24 @@ jQuery(document).ready(function(){
     });	    
 
     $("body").on("click","#limpiar",function(){
-        url = base_url+"index.php/curso/listar";
+        url = base_url+"curso/listar";
         location.href=url;
     });
  
     $("body").on("click","#cancelar",function(){
-        url = base_url+"index.php/curso/listar";
+        url = base_url+"curso/listar";
         location.href = url;
     });        
 });
 
 function ver_familia(){
-    url           = base_url+"index.php/familia/nuevo";
+    url           = base_url+"familia/nuevo";
     window.open(url,"_blank","width=500,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");
 }
 
 function editar(codigo){
     dataString = "codigo="+codigo;    
-    url = base_url+"index.php/curso/editar/e/"+codigo;
+    url = base_url+"curso/editar/e/"+codigo;
     $.post(url,dataString,function(data){
         $('#basic-modal-content').modal();
         $('#mensaje').html(data);
@@ -45,12 +45,12 @@ function editar(codigo){
 function eliminar(codigo){
     if(confirm('Esta seguro desea eliminar este curso?')){
         dataString = "codigo="+codigo;
-        url = base_url+"index.php/curso/eliminar";
+        url = base_url+"curso/eliminar";
         $.post(url,dataString,function(data){
             obj = jQuery.parseJSON(data);
             if(obj){
                 alert('Operacion realizada con exito');  
-                url = base_url+"index.php/curso/listar";
+                url = base_url+"curso/listar";
                 location.href = url;                
             }
             else{

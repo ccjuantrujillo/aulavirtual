@@ -11,18 +11,18 @@ jQuery(document).ready(function(){
     });
     
 //    $("#cerrar").click(function(){
-//        url = base_url+"index.php/inicio/index";
+//        url = base_url+"inicio/index";
 //        location.href = url;
 //    });    
 //    
 //    $("#logo").click(function(){
-//        url = base_url+"index.php/inicio/principal";
+//        url = base_url+"inicio/principal";
 //        location.href = url;
 //    }); 
 //    
     $("#contrasena_mensaje").click(function(){
         dataString = "";
-        url = base_url+"index.php/inicio/contrasena_mensaje";
+        url = base_url+"inicio/contrasena_mensaje";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal({closeHTML: "<a href='#' title='Close' class='modal-close'>x</a>"});
             $('#mensaje').html(data);

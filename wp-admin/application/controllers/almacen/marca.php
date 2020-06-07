@@ -46,7 +46,7 @@ class Marca extends controller
         $data['lista']            = $lista;
         $data['titulo_busqueda']  = "BUSCAR MARCA";
         $data['nombre_marca'] = form_input(array( 'name'  => 'nombre_marca','id' => 'nombre_marca','value' => '','maxlength' => '100','class' => 'cajaMedia'));
-        $data['form_open']        = form_open(base_url().'index.php/almacen/marca/buscar',array("name"=>"form_busquedaMarca","id"=>"form_busquedaMarca"));
+        $data['form_open']        = form_open(base_url().'almacen/marca/buscar',array("name"=>"form_busquedaMarca","id"=>"form_busquedaMarca"));
         $data['form_close']       = form_close();
         $data['titulo_tabla']     = "Relaci&oacute;n DE MARCAS";
         $data['oculto']           = form_hidden(array('accion'=>"",'codigo'=>"",'modo'=>"insertar",'base_url'=>base_url()));
@@ -61,7 +61,7 @@ class Marca extends controller
         $nombre_marca   = form_input(array( 'name'  => 'nombre_marca','id' => 'nombre_marca','value' => '','maxlength' => '100','class' => 'cajaMedia'));
         $codigo_usuario         = form_input(array( 'name'  => 'codigo_usuario','id' => 'codigo_usuario','value' => '','maxlength' => '20','class' => 'cajaPequena'));
         $data['titulo']     = "REGISTRAR MARCA";
-        $data['form_open']  = form_open(base_url().'index.php/almacen/marca/grabar',array("name"=>"frmMarca","id"=>"frmMarca"));
+        $data['form_open']  = form_open(base_url().'almacen/marca/grabar',array("name"=>"frmMarca","id"=>"frmMarca"));
         $data['form_close'] = form_close();
         $data['campos']     = array($lblDescripcion, $lblCodigoUsuario);
         $data['valores']    = array($nombre_marca, $codigo_usuario);
@@ -77,7 +77,7 @@ class Marca extends controller
         $lblCodigoUsuario       = form_label("Código","CodigoUsuario");
         $nombre_marca       = form_input(array( 'name'  => 'nombre_marca','id' => 'nombre_marca','value' => $oMarca[0]->MARCC_Descripcion,'maxlength' => '100','class' => 'cajaMedia'));
         $codigo_usuario         = form_input(array( 'name'  => 'codigo_usuario','id' => 'codigo_usuario','value' => $oMarca[0]->MARCC_CodigoUsuario,'maxlength' => '20','class' => 'cajaPequena'));
-        $data['form_open']      = form_open(base_url().'index.php/almacen/marca/grabar/',array("name"=>"frmMarca","id"=>"frmMarca"));
+        $data['form_open']      = form_open(base_url().'almacen/marca/grabar/',array("name"=>"frmMarca","id"=>"frmMarca"));
         $data['campos']         = array($lblDescripcion, $lblCodigoUsuario);
         $data['valores']        = array($nombre_marca, $codigo_usuario);
         $data['oculto']         = form_hidden(array('codigo'=>"",'base_url'=>base_url(),'marca_id'=>$id));
@@ -105,7 +105,7 @@ class Marca extends controller
             else{
                $this->marca_model->insertar($filter);
             }
-            header("location:".base_url()."index.php/almacen/marca/listar");
+            header("location:".base_url()."almacen/marca/listar");
         }
     }
     public function eliminar()
@@ -152,7 +152,7 @@ class Marca extends controller
         $data['titulo_tabla']    = "RESULTADO DE BUSQUEDA de MARCAS";
         $data['titulo_busqueda'] = "BUSCAR MARCA";
         $data['nombre_marca']  = form_input(array( 'name'  => 'nombre_marca','id' => 'nombre_marca','value' => $nombre_marca,'maxlength' => '100','class' => 'cajaMedia'));
-        $data['form_open']       = form_open(base_url().'index.php/almacen/marca/buscar',array("name"=>"form_busquedaMarca","id"=>"form_busquedaMarca"));
+        $data['form_open']       = form_open(base_url().'almacen/marca/buscar',array("name"=>"form_busquedaMarca","id"=>"form_busquedaMarca"));
         $data['form_close']      = form_close();
         $data['lista']           = $lista;
         $data['oculto']          = form_hidden(array('base_url'=>base_url()));

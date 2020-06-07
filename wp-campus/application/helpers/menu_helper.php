@@ -28,7 +28,7 @@ if ( ! function_exists('menu_izq'))
                 $submenu = $objPermiso->listar($filter); 
                 if(count($submenu)>0){
                     foreach($submenu as $val2){
-                        $menu .= "<a class='nav-link' href='".base_url().$val2->MENU_Url2."'>";
+                        $menu .= "<a class='nav-link' href='".base_url().$val2->MENU_Url."'>";
                         $menu .= "<div class='sb-nav-link-icon'><i class='fas fa-tachometer-alt'></i></div>";
                         $menu .= $val2->MENU_Descripcion;
                         $menu .= "</a>";

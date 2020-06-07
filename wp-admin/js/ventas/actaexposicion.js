@@ -1,6 +1,6 @@
 jQuery(document).ready(function(){     
     'use strict';
-    var url = base_url+'index.php/ventas/actaexposicion/upload',
+    var url = base_url+'ventas/actaexposicion/upload',
         uploadButton = $('<button/>').addClass('btn btn-primary').prop('disabled', true).text('Processing...').on('click', function () {
             var $this = $(this),data = $this.data();
             $this.off('click').text('Abort').on('click', function () {
@@ -23,9 +23,9 @@ jQuery(document).ready(function(){
            var coddetalle = $(this).parent().parent().attr("id");
            $(this).parent().parent().remove();
            var dataString = "codigo="+coddetalle;
-           url = base_url+"index.php/ventas/actaexposicion/eliminar";
+           url = base_url+"ventas/actaexposicion/eliminar";
            $.post(url,dataString,function(data){
-               var url2 = base_url+"index.php/ventas/actaexposicion/editar/"+acta+"/"+curso;   
+               var url2 = base_url+"ventas/actaexposicion/editar/"+acta+"/"+curso;   
                location.href = url2;
            });
        }        
@@ -37,7 +37,7 @@ jQuery(document).ready(function(){
        var tr    = $(this).parent().parent();
        var n     = tr.children("td")[0].innerHTML-1;   
        var actaexposicion = $(this).parent().parent().attr("id"); 
-       var url = base_url+"index.php/ventas/actaexposicion/obtener";
+       var url = base_url+"ventas/actaexposicion/obtener";
        var objRes = new Object();
        objRes.actaexposicion = actaexposicion;
        var dataString   = {objeto: JSON.stringify(objRes)};       

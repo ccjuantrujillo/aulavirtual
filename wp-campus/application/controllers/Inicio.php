@@ -36,10 +36,11 @@ class Inicio extends Layout{
             $this->load->view('inicio/index',$data);
 	}
 
-	public function ingresar(){
+	public function ingresar(){        
             $this->form_validation->set_rules('usuario','Nombre de Usuario','required|max_length[20]');
             $this->form_validation->set_rules('clave','Clave de Usuario','required|max_length[15]'); 
             $this->form_validation->set_rules('empresa','Empresa','required'); 
+
             if($this->form_validation->run() == FALSE){
                 redirect('inicio/index');
             }            
@@ -64,7 +65,7 @@ class Inicio extends Layout{
                                     'empresa'  => $datos->EMPRP_Codigo
                                      );
                         $this->session->set_userdata($dataSession);
-                        redirect(base_url()."curso/read");  
+                        redirect(base_url()."curso/listar");  
                     }
                     else{
                         $msgError = "<br><div align='center' class='error'>Existen 2 registros para el usuario, favor contactarse con el administrador</div>";

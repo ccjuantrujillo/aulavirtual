@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
      
     $("body").on("click","#nuevo",function(){
         dataString = "";
-        url = base_url+"index.php/almacen/cursociclo/editar/n";
+        url = base_url+"almacen/cursociclo/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -20,22 +20,22 @@ jQuery(document).ready(function(){
     });	
 
     $("body").on("click","#limpiar",function(){
-        url = base_url+"index.php/almacen/cursociclo/listar";
+        url = base_url+"almacen/cursociclo/listar";
         location.href=url;
     });
     
     $("body").on("click","#grabar",function(){
-        url = base_url+"index.php/almacen/cursociclo/grabar";
+        url = base_url+"almacen/cursociclo/grabar";
         dataString  = $('#frmPersona').serialize();
         $.post(url,dataString,function(data){
             alert('Operacion realizada con exito');
-            location.href = base_url+"index.php/almacen/cursociclo/listar";
+            location.href = base_url+"almacen/cursociclo/listar";
         });        
         
     });    
     
     $("body").on("click","#cancelar",function(){
-        url = base_url+"index.php/almacen/cursociclo/listar";
+        url = base_url+"almacen/cursociclo/listar";
         location.href = url;
     }); 
 
@@ -44,13 +44,13 @@ jQuery(document).ready(function(){
 });
 
 function ver_familia(){
-    url           = base_url+"index.php/almacen/familia/nuevo";
+    url           = base_url+"almacen/familia/nuevo";
     window.open(url,"_blank","width=500,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");
 }
 
 function editar(codigo){
     dataString = "codigo="+codigo;    
-    url = base_url+"index.php/almacen/cursociclo/editar/e/"+codigo;
+    url = base_url+"almacen/cursociclo/editar/e/"+codigo;
     $.post(url,dataString,function(data){
         $('#basic-modal-content').modal();
         $('#mensaje').html(data);
@@ -60,12 +60,12 @@ function editar(codigo){
 function eliminar(codigo){
     if(confirm('Esta seguro desea eliminar este curso?')){
         dataString = "codigo="+codigo;
-        url = base_url+"index.php/almacen/cursociclo/eliminar";
+        url = base_url+"almacen/cursociclo/eliminar";
         $.post(url,dataString,function(data){
             obj = jQuery.parseJSON(data);
             if(obj){
                 alert('Operacion realizada con exito');  
-                url = base_url+"index.php/almacen/cursociclo/listar";
+                url = base_url+"almacen/cursociclo/listar";
                 location.href = url;                
             }
             else{

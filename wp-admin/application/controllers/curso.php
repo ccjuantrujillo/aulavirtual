@@ -48,7 +48,7 @@ class Curso extends CI_Controller {
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/almacen/curso/listar";
+        $configuracion['base_url']    = base_url()."almacen/curso/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/       
@@ -118,7 +118,7 @@ class Curso extends CI_Controller {
     public function editar_principal($lista){
         $arrEstado          = array("0"=>"::Seleccione::","1"=>"ACTIVO","2"=>"INACTIVO");
         $data['titulo']     = $lista->accion=="e"?"Modificar Curso":"Nuevo Curso";
-        $data['form_open']  = form_open(base_url()."index.php/curso/grabar",array("name"=>"frmBusqueda","id"=>"frmBusqueda","class"=>"formulario","enctype"=>"multipart/form-data"));
+        $data['form_open']  = form_open(base_url()."curso/grabar",array("name"=>"frmBusqueda","id"=>"frmBusqueda","class"=>"formulario","enctype"=>"multipart/form-data"));
         $data['form_close']  = form_close();    
         $data['lista']	     = $lista;
         $data['selestado']   = form_dropdown('estado',$arrEstado,$lista->estado,"id='estado' class='comboMedio'");
@@ -127,7 +127,7 @@ class Curso extends CI_Controller {
         $data['selciclo']    = form_dropdown('ciclo',$this->Ciclo_model->seleccionar(),$lista->ciclo,"id='ciclo' class='comboMedio'");
         $data['selprofesor'] = form_dropdown('profesor',$this->Profesor_model->seleccionar(),$lista->profesor,"id='profesor' class='comboMedio'");        
         $data['oculto']      = form_hidden(array('accion'=>$lista->accion,'codigo'=>$lista->codigo));
-        $data['links']       = array("urlprod"=>base_url()."index.php/almacen/curso/editar/".$lista->accion."/".$lista->codigo,"urlatrib"=>base_url()."index.php/almacen/semana/listar/".$lista->accion."/".$lista->codigo,"urlcomp"=>"");
+        $data['links']       = array("urlprod"=>base_url()."almacen/curso/editar/".$lista->accion."/".$lista->codigo,"urlatrib"=>base_url()."almacen/semana/listar/".$lista->accion."/".$lista->codigo,"urlcomp"=>"");
         return $this->load->view('curso/curso_nuevo_principal',$data,true);
 	}
 	
@@ -196,7 +196,7 @@ class Curso extends CI_Controller {
             $this->Curso_model->modificar($codigo,$data);
         }
         //echo json_encode($mensaje);
-		echo "<script>alert('Operacion realizada con exito.');location.href='".base_url()."index.php/curso/listar';</script>";
+		echo "<script>alert('Operacion realizada con exito.');location.href='".base_url()."curso/listar';</script>";
     }
     
     public function eliminar(){

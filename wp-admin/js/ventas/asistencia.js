@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
     $("#nuevo").click(function(){
         dataString = "";
-        url = base_url+"index.php/asistencia/editar/n";
+        url = base_url+"asistencia/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -9,21 +9,21 @@ jQuery(document).ready(function(){
     });  
 
     $('body').on('click',"#cancelar",function(){
-        url = base_url+"index.php/asistencia/listar";
+        url = base_url+"asistencia/listar";
         location.href = url;
     });
 
     $("body").on('click',"#grabar",function(){
-        url = base_url+"index.php/asistencia/grabar";
+        url = base_url+"asistencia/grabar";
         dataString  = $('#frmPersona').serialize();
         $.post(url,dataString,function(data){
             alert('Operacion realizada con exito');
-            location.href = base_url+"index.php/asistencia/listar";
+            location.href = base_url+"asistencia/listar";
         });
     });
 
     $("body").on("click","#logo",function(){
-        url = base_url+"index.php/inicio/principal";
+        url = base_url+"inicio/principal";
         location.href = url;
     });
 
@@ -37,7 +37,7 @@ jQuery(document).ready(function(){
     
      $("body").on('change',"#curso",function(){
         //Cargamos el combo matricula         
-        url    = base_url+"index.php/matricula/obtener/";
+        url    = base_url+"matricula/obtener/";
         objRes = new Object();
         objRes.curso = $("#curso").val();
         dataString   = {objeto: JSON.stringify(objRes)};
@@ -51,7 +51,7 @@ jQuery(document).ready(function(){
            });
        },"json");             
        //Cargamos el combo cabasistencia
-        url    = base_url+"index.php/cabasistencia/obtener/";
+        url    = base_url+"cabasistencia/obtener/";
         objRes = new Object();
         objRes.curso = $("#curso").val();
         dataString   = {objeto: JSON.stringify(objRes)};
@@ -69,7 +69,7 @@ jQuery(document).ready(function(){
    $("body").on("click",".editar",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "";    
-        url = base_url+"index.php/asistencia/editar/e/"+codigo;
+        url = base_url+"asistencia/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -80,10 +80,10 @@ jQuery(document).ready(function(){
        if(confirm('Esta seguro desea eliminar este registro?')){
             coddetalle = $(this).parent().parent().attr("id");
             dataString = "codigo="+coddetalle;
-            url = base_url+"index.php/asistencia/eliminar";
+            url = base_url+"asistencia/eliminar";
             $.post(url,dataString,function(data){
                 if(data=="true"){
-                    url = base_url+"index.php/asistencia/listar";
+                    url = base_url+"asistencia/listar";
                     location.href = url;
                 }
                 else if(data=="false"){
@@ -99,7 +99,7 @@ jQuery(document).ready(function(){
         objRes.curso = $("#curso").val();
         objRes.fecha = $("#fecha").val();
         dataString   = {objeto: JSON.stringify(objRes)};
-        url = base_url+"index.php/asistencia/obtener";
+        url = base_url+"asistencia/obtener";
         $.post(url,dataString,function(data){
             $.each(data, function(item,value){
                 fila   = "<tr>";
@@ -118,7 +118,7 @@ jQuery(document).ready(function(){
 });
 function abrir_formulario_ubigeo(){
 	ubigeo = $("#cboNacimiento").val();
-	url = base_url+"index.php/ubigeo/formulario_ubigeo/"+ubigeo;
+	url = base_url+"ubigeo/formulario_ubigeo/"+ubigeo;
 	window.open(url,'Formulario Ubigeo','menubar=no,resizable=no,width=200,height=180');
 }
 
@@ -128,7 +128,7 @@ function selecciona_familia(codigo){
 }
 
 function selecciona_profesor(codigo){
-    url    = base_url+"index.php/profesor/obtener/";
+    url    = base_url+"profesor/obtener/";
     objRes = new Object();
     objRes.profesor = codigo;
     dataString   = {objeto: JSON.stringify(objRes)};
@@ -142,7 +142,7 @@ function selecciona_profesor(codigo){
 }
 
 function selecciona_profesor2(codigo){
-    url    = base_url+"index.php/profesor/obtener/";
+    url    = base_url+"profesor/obtener/";
     objRes = new Object();
     objRes.profesor = codigo;
     dataString   = {objeto: JSON.stringify(objRes)};

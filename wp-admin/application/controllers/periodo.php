@@ -36,7 +36,7 @@ class Periodo extends CI_Controller
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/maestros/periodo/listar";
+        $configuracion['base_url']    = base_url()."maestros/periodo/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/

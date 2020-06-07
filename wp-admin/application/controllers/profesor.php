@@ -45,7 +45,7 @@ class Profesor extends Persona
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/ventas/profesor/listar";
+        $configuracion['base_url']    = base_url()."ventas/profesor/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);
         /*Enviamos los datos a la vista*/

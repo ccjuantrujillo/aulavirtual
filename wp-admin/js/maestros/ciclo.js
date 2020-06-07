@@ -2,7 +2,7 @@ jQuery(document).ready(function(){
     //NUEVO
     $("#nuevo").click(function(){
         dataString = "";
-        url = base_url+"index.php/ciclo/editar/n";
+        url = base_url+"ciclo/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -12,17 +12,17 @@ jQuery(document).ready(function(){
 
     //CANCELAR
     $('body').on('click',"#cancelar",function(){
-        url = base_url+"index.php/ciclo/listar";
+        url = base_url+"ciclo/listar";
         location.href = url;
     });
 
     //GRABAR
     $("body").on('click',"#grabar",function(){
-        url = base_url+"index.php/ciclo/grabar";
+        url = base_url+"ciclo/grabar";
         dataString  = $('#frmPersona').serialize();
         $.post(url,dataString,function(data){
             alert('Operacion realizada con exito');
-            location.href = base_url+"index.php/ciclo/listar";
+            location.href = base_url+"ciclo/listar";
         });
     });
 
@@ -32,14 +32,14 @@ jQuery(document).ready(function(){
         var datos = new FormData();
         datos.append("ciclo",id);
         $.ajax({
-            url:base_url+"index.php/ciclo/seleccionar",
+            url:base_url+"ciclo/seleccionar",
             method:"post",
             data:datos,
             contentType:false,
             processData:false,
             success:function(data){
                 if(data){
-                    location.href=base_url+"index.php/ciclo/listar";
+                    location.href=base_url+"ciclo/listar";
                 }
             },
             error:function(){
@@ -49,7 +49,7 @@ jQuery(document).ready(function(){
     });
 
     $("body").on("click","#logo",function(){
-        url = base_url+"index.php/inicio/principal";
+        url = base_url+"inicio/principal";
         location.href = url;
     });
 
@@ -72,7 +72,7 @@ jQuery(document).ready(function(){
 
 function editar(codigo){
     dataString = "codigo="+codigo;
-    url = base_url+"index.php/ciclo/editar/e/"+codigo;
+    url = base_url+"ciclo/editar/e/"+codigo;
     $.post(url,dataString,function(data){
         $('#basic-modal-content').modal();
         $('#mensaje').html(data);
@@ -82,11 +82,11 @@ function editar(codigo){
 function eliminar(codigo){
     if(confirm('Esta seguro desea eliminar este ciclo?')){
         dataString = "codigo="+codigo;
-        url = base_url+"index.php/ciclo/eliminar";
+        url = base_url+"ciclo/eliminar";
         $.post(url,dataString,function(data){
 //            if(data=="true"){
                 alert("El ciclo se borro correctamente");
-                url = base_url+"index.php/ciclo/listar";
+                url = base_url+"ciclo/listar";
                 location.href = url;
 //            }
 //            else{

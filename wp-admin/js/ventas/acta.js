@@ -5,7 +5,7 @@ jQuery(document).ready(function(){
     
     $("body").on("click","#nuevo",function(){
         dataString = "";
-        url = base_url+"index.php/ventas/acta/editar/n";
+        url = base_url+"ventas/acta/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -34,12 +34,12 @@ jQuery(document).ready(function(){
     });      
     
     $("body").on('click',"#cancelar",function(){
-        url = base_url+"index.php/ventas/acta/listar";
+        url = base_url+"ventas/acta/listar";
         location.href = url;
     });      
     
     $("body").on('click',"#grabar",function(){
-        url        = base_url+"index.php/ventas/acta/grabar";
+        url        = base_url+"ventas/acta/grabar";
         $('#profesor').removeAttr('disabled');
         $('#tipoestudio').removeAttr('disabled');
         dataString = $('#frmPersona').serialize();
@@ -65,7 +65,7 @@ jQuery(document).ready(function(){
             $.post(url,dataString,function(data){
                 if(data==true){
                     alert('Operacion realizada con exito');    
-                    location.href = base_url+"index.php/ventas/acta/listar";
+                    location.href = base_url+"ventas/acta/listar";
                 }
                 else if(data==false){
                     alert('El usuario ya esta actado en el curso');
@@ -77,7 +77,7 @@ jQuery(document).ready(function(){
    $("body").on("click",".editar",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "";    
-        url = base_url+"index.php/ventas/acta/editar/e/"+codigo;
+        url = base_url+"ventas/acta/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -86,25 +86,25 @@ jQuery(document).ready(function(){
     
    $("body").on("click",".ver",function(){
         codigo = $(this).parent().parent().attr("id");
-        url = base_url+"index.php/ventas/acta/ver/"+codigo;
+        url = base_url+"ventas/acta/ver/"+codigo;
         window.open(url,"_blank","width=800,height=400,top=150,left=200");
     }); 
     
     $("body").on('click',"#imprimir",function(){
         codigo   = $("#codigo").val();
-        url = base_url+"index.php/ventas/acta/ver/"+codigo;
+        url = base_url+"ventas/acta/ver/"+codigo;
         window.open(url, this.target, 'width=800,height=400,top=150,left=200');
     });      
     
     $("body").on("click",".eliminar",function(){
        if(confirm('Esta seguro desea eliminar este registro?')){
             coddetalle = $(this).parent().parent().attr("id");
-            url = base_url+"index.php/ventas/acta/eliminar";
+            url = base_url+"ventas/acta/eliminar";
             dataString = "codigo="+coddetalle;
             $.post(url,dataString,function(data){
                 if(data==true){
                     //alert('Operacion realizada con exito');  
-                    url = base_url+"index.php/ventas/acta/listar";
+                    url = base_url+"ventas/acta/listar";
                     location.href = url;
                 }
                 else if(data==false){
@@ -118,7 +118,7 @@ jQuery(document).ready(function(){
         if($('#codigo').val()!=""){
             curso = $("#curso").val();
             acta  = $("#codigo").val();
-            url = base_url+"index.php/ventas/actaprofesor/editar/"+acta+"/"+curso;
+            url = base_url+"ventas/actaprofesor/editar/"+acta+"/"+curso;
             window.open(url,"_blank","width=850,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");                      
         }
         else{
@@ -130,7 +130,7 @@ jQuery(document).ready(function(){
         if($('#codigo').val()!=""){
             curso = $("#curso").val();
             acta  = $("#codigo").val();
-            url = base_url+"index.php/ventas/actaexposicion/editar/"+acta+"/"+curso;
+            url = base_url+"ventas/actaexposicion/editar/"+acta+"/"+curso;
             window.open(url,"_blank","width=850,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0");                      
         }
         else{
@@ -139,7 +139,7 @@ jQuery(document).ready(function(){
     });      
     
     $("body").on('change',"#ciclo",function(){
-        url    = base_url+"index.php/maestros/tipoestudiociclo/obtener/";
+        url    = base_url+"maestros/tipoestudiociclo/obtener/";
         objRes = new Object();
         objRes.ciclo = $("#ciclo").val();
         dataString   = {objeto:JSON.stringify(objRes)};
@@ -155,7 +155,7 @@ jQuery(document).ready(function(){
     });
    
      $("body").on('change',"#curso",function(){
-        url    = base_url+"index.php/ventas/profesor/obtener/";
+        url    = base_url+"ventas/profesor/obtener/";
         objRes = new Object();
         objRes.curso = $("#curso").val();
         objRes.flgcoordinador = 1;
@@ -176,7 +176,7 @@ jQuery(document).ready(function(){
             tr = $(this).parent().parent();
             coddetalle = tr.attr("id");
             dataString = "codigo="+coddetalle;
-            url = base_url+"index.php/ventas/acta/eliminardetalle";
+            url = base_url+"ventas/acta/eliminardetalle";
             if(coddetalle!=""){
                 $.post(url,dataString,function(data){
                     if(data==true){  
@@ -197,7 +197,7 @@ jQuery(document).ready(function(){
         tr = $(this).parent().parent();  
         n  = tr.children("td")[0].innerHTML - 1;        
         codigodetalle = $(this).parent().parent().attr("id"); 
-        url = base_url+"index.php/ventas/acta/obtenerdetalle";
+        url = base_url+"ventas/acta/obtenerdetalle";
         objRes = new Object();
         objRes.actadetalle = codigodetalle;
         dataString   = {objeto: JSON.stringify(objRes)}; 

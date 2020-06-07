@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
     
     $("body").on("click","#nuevo",function(){
         dataString = "";
-        url = base_url+"index.php/leccion/editar/n";
+        url = base_url+"leccion/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -16,27 +16,27 @@ jQuery(document).ready(function(){
     }); 
 
     $("body").on("click","#limpiar",function(){
-        url = base_url+"index.php/leccion/listar";
+        url = base_url+"leccion/listar";
         location.href=url;
     });
     
     $("body").on("click","#grabar",function(){
-        url = base_url+"index.php/leccion/grabar";
+        url = base_url+"leccion/grabar";
         dataString  = $('#frmPersona').serialize();
         $.post(url,dataString,function(data){
             alert('Operacion realizada con exito');
-            location.href = base_url+"index.php/leccion/listar";
+            location.href = base_url+"leccion/listar";
         });        
         
     });
     
     $("body").on("click","#cancelar",function(){
-        url = base_url+"index.php/leccion/listar";
+        url = base_url+"leccion/listar";
         location.href = url;
     });  
 
     $("body").on('change',"#curso",function(){
-        url    = base_url+"index.php/seccion/obtener/";
+        url    = base_url+"seccion/obtener/";
         objRes = new Object();
         objRes.curso = $("#curso").val();
         dataString   = {objeto:JSON.stringify(objRes)};
@@ -71,7 +71,7 @@ jQuery(document).ready(function(){
 
 function editar(codigo){
     dataString = "codigo="+codigo;    
-    url = base_url+"index.php/leccion/editar/e/"+codigo;
+    url = base_url+"leccion/editar/e/"+codigo;
     $.post(url,dataString,function(data){
         $('#basic-modal-content').modal();
         $('#mensaje').html(data);
@@ -81,12 +81,12 @@ function editar(codigo){
 function eliminar(codigo){
     if(confirm('Esta seguro desea eliminar esta semana?')){
         dataString = "codigo="+codigo;
-        url = base_url+"index.php/leccion/eliminar";
+        url = base_url+"leccion/eliminar";
         $.post(url,dataString,function(data){
             obj = jQuery.parseJSON(data);
             if(obj){
                 alert('Operacion realizada con exito');  
-                url = base_url+"index.php/leccion/listar";
+                url = base_url+"leccion/listar";
                 location.href = url;                
             }
             else{

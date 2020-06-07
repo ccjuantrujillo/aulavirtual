@@ -25,7 +25,7 @@ class Familia extends Controller{
                 
                 $listar_familias    = $this->familia_model->listar_familias($j);		
 		$data['titulo_busqueda'] = "BUSCAR FAMILIAS";
-                $data['action']          = base_url()."index.php/almacen/familia/buscar_familias";
+                $data['action']          = base_url()."almacen/familia/buscar_familias";
 		$url_familia             = "<a href='#' onclick='abrir_familia(0);'>FAMILIAS</a>";
 		$data['titulo_tabla']= $j=='0'?"FAMILIAS":$url_familia." :::: ".$this->nombre_familia($j);
 		$data['registros']   = count($this->familia_model->listar_familias($j));
@@ -157,7 +157,7 @@ class Familia extends Controller{
                 
                 $listar_familias    = $this->familia_model->buscar_familias($j, $filter);		
 		$data['titulo_busqueda'] = "BUSCAR FAMILIAS";
-                $data['action']          = base_url()."index.php/almacen/familia/buscar_familias";
+                $data['action']          = base_url()."almacen/familia/buscar_familias";
 		$url_familia             = "<a href='#' onclick='abrir_familia(0);'>FAMILIAS</a>";
 		$data['titulo_tabla']= $j=='0'?"FAMILIAS":$url_familia." :::: ".$this->nombre_familia($j);
 		$data['registros']   = count($this->familia_model->buscar_familias($j, $filter));

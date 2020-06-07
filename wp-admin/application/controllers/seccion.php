@@ -45,7 +45,7 @@ class Seccion extends CI_Controller {
             }
         }
         $configuracion = $this->configuracion;
-        $configuracion['base_url']    = base_url()."index.php/seccion/listar";
+        $configuracion['base_url']    = base_url()."seccion/listar";
         $configuracion['total_rows']  = $registros;
         $this->pagination->initialize($configuracion);        
         /*Datos para la vista*/ 

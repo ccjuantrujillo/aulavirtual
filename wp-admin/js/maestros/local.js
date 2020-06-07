@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
     $("#nuevo").click(function(){
         dataString = "";
-        url = base_url+"index.php/local/editar/n";
+        url = base_url+"local/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -11,31 +11,31 @@ jQuery(document).ready(function(){
 
 //    $("#imprimir").click(function(){
 //        codigo   = $("#codigo").val();
-//        url = base_url+"index.php/ventas/cliente/ver/"+codigo;
+//        url = base_url+"ventas/cliente/ver/"+codigo;
 //        window.open(url, this.target, 'width=800,height=400,top=150,left=200');
 //    });
 
     $('body').on('click',"#cancelar",function(){
-        url = base_url+"index.php/local/listar";
+        url = base_url+"local/listar";
         location.href = url;
     });
 
 //    $("#cerrar").click(function(){
-//        url = base_url+"index.php/inicio/index";
+//        url = base_url+"inicio/index";
 //        location.href = url;
 //    });
 
     $("body").on('click',"#grabar",function(){
-        url = base_url+"index.php/local/grabar";
+        url = base_url+"local/grabar";
         dataString  = $('#frmPersona').serialize();
         $.post(url,dataString,function(data){
             alert('Operacion realizada con exito');
-            location.href = base_url+"index.php/local/listar";
+            location.href = base_url+"local/listar";
         });
     });
 
     $("body").on("click","#logo",function(){
-        url = base_url+"index.php/inicio/principal";
+        url = base_url+"inicio/principal";
         location.href = url;
     });
 
@@ -50,7 +50,7 @@ jQuery(document).ready(function(){
 
 function editar(codigo){
     dataString = "codigo="+codigo;
-    url = base_url+"index.php/local/editar/e/"+codigo;
+    url = base_url+"local/editar/e/"+codigo;
     $.post(url,dataString,function(data){
         $('#basic-modal-content').modal();
         $('#mensaje').html(data);
@@ -60,11 +60,11 @@ function editar(codigo){
 function eliminar(codigo){
     if(confirm('Esta seguro desea eliminar este local?')){
         dataString = "codigo="+codigo;
-        url = base_url+"index.php/local/eliminar";
+        url = base_url+"local/eliminar";
         $.post(url,dataString,function(data){
 //            if(data=="true"){
                 alert("El local se borro correctamente");
-                url = base_url+"index.php/local/listar";
+                url = base_url+"local/listar";
                 location.href = url;
 //            }
 //            else{
@@ -76,7 +76,7 @@ function eliminar(codigo){
 
 function abrir_formulario_ubigeo(){
 	ubigeo = $("#cboNacimiento").val();
-	url = base_url+"index.php/ubigeo/formulario_ubigeo/"+ubigeo;
+	url = base_url+"ubigeo/formulario_ubigeo/"+ubigeo;
 	window.open(url,'Formulario Ubigeo','menubar=no,resizable=no,width=200,height=180');
 }
 

@@ -2,7 +2,7 @@ jQuery(document).ready(function(){
     
     $("body").on("click","#nuevo",function(){
         dataString = "";
-        url = base_url+"index.php/empresa/editar/n";
+        url = base_url+"empresa/editar/n";
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -12,7 +12,7 @@ jQuery(document).ready(function(){
    $("body").on("click",".editar",function(){
         codigo = $(this).parent().parent().attr("id");
         dataString = "";    
-        url = base_url+"index.php/empresa/editar/e/"+codigo;
+        url = base_url+"empresa/editar/e/"+codigo;
         $.post(url,dataString,function(data){
             $('#basic-modal-content').modal();
             $('#mensaje').html(data);
@@ -22,27 +22,27 @@ jQuery(document).ready(function(){
     $("body").on("click",".eliminar",function(){
        if(confirm('Esta seguro desea eliminar esta empresa?')){
             codigo = $(this).parent().parent().attr("id");
-            url = base_url+"index.php/empresa/eliminar";
+            url = base_url+"empresa/eliminar";
             objRes = new Object();
             objRes.empresa = codigo;
             dataString   = {objeto: JSON.stringify(objRes)};                
             $.post(url,dataString,function(data){
-                location.href = base_url+"index.php/empresa/listar";
+                location.href = base_url+"empresa/listar";
             });         
        }        
     });     
     
     $('body').on('click',"#cancelar",function(){
-        url = base_url+"index.php/empresa/listar";
+        url = base_url+"empresa/listar";
         location.href = url;
     });  
 
     $("body").on('click',"#grabar",function(){
-        url = base_url+"index.php/empresa/grabar";
+        url = base_url+"empresa/grabar";
         dataString  = $('#frmEmpresa').serialize();
         $.post(url,dataString,function(data){
             alert('Operacion realizada con exito');
-            location.href = base_url+"index.php/empresa/listar/";  
+            location.href = base_url+"empresa/listar/";  
         });
     });
  
