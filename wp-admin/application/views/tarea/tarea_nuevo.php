@@ -18,14 +18,14 @@
                 <td width='38%' colspan="3" class="formss">
                     <input type='text' name="codigo" id="codigo" value="<?php echo $lista->tarea;?>" class="cajaReducida" onkeydown="return numbersonly(this,event,'.');" readonly="readonly"/>
                 </td>
-                <td align="right">Fecha&nbsp;</td>
+                <td align="right">Fecha de entrega;</td>
                 <td width='29%' class="formss"><input type="text" name="fecha" id="fecha" style="width:60px" readonly value="<?php echo $lista->fecha;?>" class="cajaMinima" maxlength="10"></td>
             </tr>
             <tr>
                 <td align="right">Curso:</td>
                 <td align="left" colspan="3" class="formss"><?php echo $selcurso;?></td>
-                <td align="right">Fecha Compromiso:</td>
-                <td align="left" class="formss"><input type="text" name="fechaentrega" id="fechaentrega" style="width:60px" readonly value="<?php echo $lista->fechaentrega;?>" class="cajaMinima" maxlength="10"></td>                
+                <td align="right"></td>
+                <td align="left" class="formss"></td>                
             </tr>                
             <tr>
                 <td align="right">Seccion:</td>

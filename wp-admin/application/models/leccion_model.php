@@ -7,6 +7,7 @@ class Leccion_model extends CI_Model{
         parent::__construct();
         $this->table   = "ant_leccion";
         $this->table_seccion = "ant_seccion";
+        $this->table_periodo = "ant_periodo";
         $this->table_curso   = "ant_curso";
         $this->empresa     = $this->session->userdata('empresa'); 
     }
@@ -27,6 +28,7 @@ class Leccion_model extends CI_Model{
         $this->db->from($this->table." as c",$number_items,$offset);  
         $this->db->join($this->table_seccion.' as d','d.SECCIONP_Codigo=c.SECCIONP_Codigo','inner');
         $this->db->join($this->table_curso.' as e','e.CURSOP_Codigo=c.CURSOP_Codigo','inner');        
+        $this->db->join($this->table_periodo.' as f','f.PERIODP_Codigo=c.PERIODP_Codigo','inner');    
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa)); 
         if(isset($filter->leccion))  $this->db->where(array("c.LECCIONP_Codigo"=>$filter->leccion));    
         if(isset($filter->seccion))  $this->db->where(array("c.SECCIONP_Codigo"=>$filter->seccion));   

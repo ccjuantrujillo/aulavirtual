@@ -26,7 +26,7 @@ class Seccion extends CI_Controller {
         $menu       = get_menu($filter);     
         $filter     = new stdClass();
         $filter_not = new stdClass(); 
-        $filter->order_by    = array("e.CURSOC_Nombre"=>"asc","d.PERIODC_DESCRIPCION"=>"asc","c.SECCIONC_Orden"=>"asc");
+        $filter->order_by    = array("e.CURSOC_Nombre"=>"asc","c.SECCIONC_Descripcion"=>"desc","d.PERIODC_DESCRIPCION"=>"asc");
         $registros = count($this->Seccion_model->listar($filter,$filter_not));
         $productoatrib = $this->Seccion_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
         $item      = 1;
@@ -93,6 +93,7 @@ class Seccion extends CI_Controller {
         $filter = new stdClass();
         $data['selperiodo']  = form_dropdown('periodo',$this->Periodo_model->seleccionar('0',$filter),$lista->periodo,"id='periodo' class='comboGrande'");  
         $filter = new stdClass();        
+        $filter->order_by = array("c.CURSOC_Nombre"=>"asc");
         $data['selcurso']    = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");                  
         $data['oculto']      = form_hidden(array('accion'=>$accion));
         $this->load->view('seccion/seccion_nuevo',$data);
@@ -119,8 +120,7 @@ class Seccion extends CI_Controller {
     }   
     
     public function obtener(){
-        $obj    = $this->input->post('objeto');
-        $filter = json_decode($obj);
+        $filter = (Object)$_REQUEST;      
         $cursos  = $this->Seccion_model->listar($filter);
         $resultado = json_encode($cursos);
         echo $resultado;

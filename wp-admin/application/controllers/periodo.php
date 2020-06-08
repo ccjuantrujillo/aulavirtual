@@ -88,8 +88,7 @@ class Periodo extends CI_Controller
     }
   
     public function obtener(){
-        $obj    = $this->input->post('objeto');
-        $filter = json_decode($obj);
+        $filter = (Object)$_REQUEST;
         $periodos  = $this->Periodo_model->listar($filter);
         $resultado = json_encode($periodos);
         echo $resultado;

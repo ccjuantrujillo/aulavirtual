@@ -15,7 +15,7 @@ class Curso_model extends CI_Model{
 	
     public function seleccionar($default='',$filter='',$filter_not='',$number_items='',$offset=''){
         if($default!="") $arreglo = array($default=>':: Seleccione ::');
-        if($filter=="")  {$filter=new stdClass();$filter->order_by=array("p.PROD_Nombre"=>"asc");}
+        if($filter=="")  {$filter=new stdClass();$filter->order_by=array("c.CURSOC_Nombre"=>"asc");}
         foreach($this->listar($filter,$filter_not,$number_items,$offset) as $indice=>$valor){
             $indice1   = $valor->CURSOP_Codigo;
             $valor1    = $valor->CURSOC_Nombre;

@@ -30,6 +30,7 @@ class Seccion_model extends CI_Model{
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));          		
         if(isset($filter->seccion))  $this->db->where(array("c.SECCIONP_Codigo"=>$filter->seccion));	
         if(isset($filter->curso))    $this->db->where(array("c.CURSOP_Codigo"=>$filter->curso));
+        if(isset($filter->periodo))    $this->db->where(array("c.PERIODP_Codigo"=>$filter->periodo));
         if(isset($filter->order_by) && count($filter->order_by)>0){
             foreach($filter->order_by as $indice=>$value){
                 $this->db->order_by($indice,$value);

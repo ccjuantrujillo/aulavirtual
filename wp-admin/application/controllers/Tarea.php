@@ -28,7 +28,7 @@ class Tarea extends CI_Controller {
         $filter->order_by = array("m.MENU_Orden"=>"asc");
         $menu       = get_menu($filter);             
         $filter     = new stdClass();        
-        $filter->order_by = array("h.PERIODP_Codigo"=>"asc","c.TIPOTAREAP_Codigo"=>"asc","c.TAREAC_Nombre"=>"asc","c.TAREAC_Fecha"=>"desc","c.TAREAC_Numero"=>"desc");
+        $filter->order_by = array("g.CURSOC_Nombre"=>"asc","h.PERIODC_DESCRIPCION"=>"desc","c.TIPOTAREAP_Codigo"=>"asc","c.TAREAC_Nombre"=>"asc","c.TAREAC_Nombre"=>"desc");
         $filter_not = new stdClass(); 
         $registros = count($this->Tarea_model->listar($filter,$filter_not));
         $tareas   = $this->Tarea_model->listar($filter,$filter_not,$this->configuracion['per_page'],$j);
@@ -39,7 +39,6 @@ class Tarea extends CI_Controller {
                 $lista[$indice]           = new stdClass();
                 $lista[$indice]->codigo   = $value->TAREAP_Codigo;
                 $lista[$indice]->fecha    = date_sql($value->TAREAC_Fecha);
-                $lista[$indice]->fechaentrega = date_sql($value->TAREAC_FechaEntrega);
                 $lista[$indice]->numero   = $value->TAREAC_Numero;
                 $lista[$indice]->nombre   = $value->TAREAC_Nombre;
                 $lista[$indice]->tipo     = $value->TIPOTAREAC_Nombre;
@@ -70,7 +69,6 @@ class Tarea extends CI_Controller {
             $filter->tarea      = $codigo;
             $tarea              = $this->Tarea_model->obtener($filter);   
             $lista->fecha       = date_sql($tarea->TAREAC_Fecha);  
-            $lista->fechaentrega = date_sql($tarea->TAREAC_FechaEntrega); 
             $lista->tarea       = $tarea->TAREAP_Codigo;
             $lista->tipotarea   = $tarea->TIPOTAREAP_Codigo;
             $lista->nombre      = $tarea->TAREAC_Nombre;
@@ -80,7 +78,6 @@ class Tarea extends CI_Controller {
         }
         elseif($accion == "n"){ 
             $lista->fecha       = date("d/m/Y",time());
-            $lista->fechaentrega = "__/__/__";
             $lista->tarea       = "";
             $lista->tipotarea   = 0;
             $lista->nombre      = "";
@@ -93,8 +90,10 @@ class Tarea extends CI_Controller {
         $data['form_open']     = form_open('',array("name"=>"frmPersona","id"=>"frmPersona","onsubmit"=>"return valida_guiain();"));     
         $data['form_close']    = form_close();         
         $data['lista']	       = $lista;   
-        $data['accion']	       = $accion;               
-        $data['selcurso']      = form_dropdown('curso',$this->Curso_model->seleccionar('0',new stdClass()),$lista->curso,"id='curso' class='comboGrande'");         
+        $data['accion']	       = $accion;   
+        $filter = new stdClass();
+        $filter->order_by = array("c.CURSOC_Nombre"=>"asc");
+        $data['selcurso']      = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");         
         $data['selseccion']    = form_dropdown('seccion',array(),0,"id='seccion' class='comboGrande'");         
         $data['selleccion']    = form_dropdown('leccion',$this->Leccion_model->seleccionar('0',new stdClass()),$lista->leccion,"id='leccion' class='comboGrande'"); 
         $data['seltipotarea']  = form_dropdown('tipotarea',$this->Tipotarea_model->seleccionar('0',new stdClass()),$lista->tipotarea,"id='tipotarea' class='comboGrande'"); 
@@ -111,7 +110,6 @@ class Tarea extends CI_Controller {
                         "TAREAC_Nombre"        => $this->input->post('nombre'),            
                         "TAREAC_Instrucciones" => $this->input->post('instrucciones'),
 			"TAREAC_Fecha"         => date_sql_ret($this->input->post('fecha')),
-                        "TAREAC_FechaEntrega"  => date_sql_ret($this->input->post('fechaentrega'))
                        );      
         if($accion == "n"){
             $resultado  = $codigo = $this->Tarea_model->insertar($data);

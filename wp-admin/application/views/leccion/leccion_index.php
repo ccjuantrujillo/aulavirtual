@@ -27,6 +27,7 @@
         <table>
           <tr class="list1">
             <td width="25%">Nombre</td>
+            <td width="23%">Periodo</td>   
             <td width="23%">Seccion</td>            
             <td width="23%">Curso</td>
             <td width="2%">Video</td>            
@@ -40,6 +41,7 @@
                ?>
               <tr class="<?php echo $clase;?>">
                 <td align="center" style="text-align: left;"><?php echo $value->orden." ".$value->nombre;?></td>
+                <td align="left"><?php echo $value->periodo;?></td>
                 <td align="left"><?php echo $value->seccion;?></td>
                 <td align="left"><?php echo $value->curso;?></td>                
                 <td align="center"><?php echo $value->video;?></td>  

@@ -15,6 +15,7 @@ jQuery(document).ready(function(){
      $("body").on('change',"#curso",function(){
         var datos = new FormData();
         datos.append("curso",this.value);
+        $("#seccion").empty();
         $("#seccion").append("<option value='0'>:: Seleccione ::</option>");
         $.ajax({
             url:base_url+"seccion/obtener/",
@@ -40,8 +41,8 @@ jQuery(document).ready(function(){
     $("body").on('change',"#seccion",function(){
         var datos = new FormData();
         datos.append("seccion",this.value);
+        $("#leccion").empty();
         $("#leccion").append("<option value='0'>:: Seleccione ::</option>");
-        $("#leccion").children("option").remove();
         $.ajax({
             url:base_url+"leccion/obtener/",
             method:"post",

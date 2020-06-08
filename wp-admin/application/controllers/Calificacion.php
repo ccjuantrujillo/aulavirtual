@@ -48,7 +48,8 @@ class Calificacion extends CI_Controller{
         $data['menu']         = $menu;
         $data['form_open']    = form_open('',array("name"=>"frmPersona","id"=>"frmPersona"));     
         $data['titulo']       = "Nueva Calificacion";
-        $data['selcurso']     = form_dropdown('curso',$this->Curso_model->seleccionar('0'),0,"id='curso' class='comboGrande'");        
+        $filter = new stdClass();
+        $data['selcurso']     = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),0,"id='curso' class='comboGrande'");        
         $data['oculto']       = form_hidden(array("accion"=>"n"));
         $data['form_close']   = form_close();         
         $data['j']            = $j;

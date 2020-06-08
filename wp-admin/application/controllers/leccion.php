@@ -43,6 +43,7 @@ class Leccion extends CI_Controller
                 $lista[$indice]->descripcion  = $valor->LECCIONC_Descripcion;
                 $lista[$indice]->curso        = $valor->CURSOC_Nombre;
                 $lista[$indice]->orden        = $valor->LECCIONC_Orden;
+                $lista[$indice]->periodo      = $valor->PERIODC_DESCRIPCION;
                 $lista[$indice]->video        = trim($valor->LECCIONC_Video)!=""?"Si":"<span style='color:#FF0000'>No</span>";
             }
         }
@@ -126,11 +127,9 @@ class Leccion extends CI_Controller
     }
 
     public function obtener(){
-        $obj    = $this->input->post('objeto');
-        $filter = json_decode($obj);
-        $lecciones  = $this->Leccion_model->listar($filter);
-        $resultado = json_encode($lecciones);
-        echo $resultado;
+        $filter = (Object)$_REQUEST;
+        $resultado  = $this->Leccion_model->listar($filter);
+        echo json_encode($resultado);
     }       
     
     public function eliminar()

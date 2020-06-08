@@ -36,21 +36,62 @@ jQuery(document).ready(function(){
     });  
 
     $("body").on('change',"#curso",function(){
-        url    = base_url+"seccion/obtener/";
-        objRes = new Object();
-        objRes.curso = $("#curso").val();
-        dataString   = {objeto:JSON.stringify(objRes)};
-        $("#seccion").empty()
-        $.post(url,dataString,function(data){
-            $("#seccion").append("<option value='0'>:: Seleccione ::</option>");
-            $.each(data,function(item,value){
-                opt      = document.createElement('option');
-                opt.value = value.SECCIONP_Codigo;
-                opt.appendChild(document.createTextNode(value.SECCIONC_Orden+' - '+value.SECCIONC_Descripcion));
-                $("#seccion").append(opt);
-            });
-        },"json");
-    });        
+        url    = base_url+"periodo/obtener/";
+        var datos   = new FormData();
+        datos.append("curso",this.value); 
+        $("#periodo").empty();
+        $("#periodo").append("<option value='0'>:: Seleccione ::</option>");
+        $.ajax({
+            url:url,
+            method:"post",
+            data:datos,
+            dataType:"json",
+            contentType:false,
+            processData:false,
+            success:function(data){
+                $.each(data,function(item,value){
+                    opt      = document.createElement('option');
+                    opt.value = value.PERIODP_Codigo;
+                    opt.appendChild(document.createTextNode(value.PERIODC_DESCRIPCION));
+                    $("#periodo").append(opt);
+                });
+            },
+            error:function(){
+                alert("Ocurrio un error");
+            }
+        });
+    });  
+
+    $("body").on('change','#periodo',function(){
+        var datos = new FormData();
+        datos.append("periodo",this.value);
+        datos.append("curso",$("#curso").val());
+        $("#seccion").empty();
+        $("#seccion").append("<option value='0'>:: Seleccione ::</option>");
+        $.ajax({
+            url:base_url+"seccion/obtener/",
+            data:datos,
+            method:"post",
+            dataType:"json",
+            contentType:false,
+            processData:false,
+            success:function(data){
+                $.each(data,function(item,value){
+                   opt       = document.createElement('option');
+                   opt.value = value.SECCIONP_Codigo;
+                   opt.appendChild(document.createTextNode(value.SECCIONC_Descripcion));
+                   $('#seccion').append(opt);
+                });
+            },
+            error:function(){
+                alert('Ocurrio un error');
+            }
+        });
+    });
+    
+    $("body").on('change','#periodo_',function(){
+        url = base_url+"";
+    });
    
     $("body").on('focus',"#finicio",function(){
          $(this).datepicker({
