@@ -79,7 +79,7 @@ jQuery(document).ready(function(){
                 $.each(data,function(item,value){
                    opt       = document.createElement('option');
                    opt.value = value.SECCIONP_Codigo;
-                   opt.appendChild(document.createTextNode(value.SECCIONC_Descripcion));
+                   opt.appendChild(document.createTextNode(value.SECCIONC_Orden+' - '+value.SECCIONC_Descripcion));
                    $('#seccion').append(opt);
                 });
             },

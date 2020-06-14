@@ -32,7 +32,7 @@ class Curso extends LayoutAdmin{
         }
         elseif($_SESSION["rolusu"]==7){//profesor
             $profesor = $this->Profesor_model->get($filter);
-            $filter = new stdClass();
+            $filter = new stdClass();         
             $filter->profesor = $profesor->PROP_Codigo;
             $cursos = $this->Curso_model->read($filter);
         }
@@ -46,18 +46,19 @@ class Curso extends LayoutAdmin{
         }
         $data['cursos']    = $cursos;
         $data['menuizq']   = menu_izq();
-        $this->load_layout('curso/read',$data);
+        $this->load_layout('curso/listar',$data);
     }	
     
    public function inicio($curso)
     {
        $filter = new stdClass();
        $filter->curso = $curso;
+       $filter->order_by = array("c.SECCIONC_Orden"=>"asc");
        $secciones = $this->Seccion_model->read($filter);
        $menu = "";
        if(count($secciones)>0){
           foreach($secciones as $value){
-             $menu .= "<li class='mt'>".$value->SECCIONC_Descripcion;
+             $menu .= "<li class='mt list-inline text-left'>".$value->SECCIONC_Descripcion;
              $filtro = new stdClass();
              $filtro->curso   = $curso;
              $filtro->seccion = $value->SECCIONP_Codigo;
@@ -67,7 +68,7 @@ class Curso extends LayoutAdmin{
                  foreach($lecciones as $val){
                     $menu .= "<ul>";
                     $menu .= "<li class='mt'><a href='".base_url()."leccion/inicio/".$val->LECCIONP_Codigo."/1'>".
-                            $val->LECCIONC_Orden." ".$val->LECCIONC_Nombre."</a></li>";
+                            $val->LECCIONC_Nombre."</a></li>";
                     $menu .= "</ul>";  
                  }
              }

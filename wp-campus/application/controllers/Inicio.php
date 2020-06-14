@@ -97,13 +97,13 @@ class Inicio extends Layout{
                         'codper'   => 521,
                         'codalu'   => 123,
                         'codprofe' => 0,
-                        'rolusu'   => 1,//alumno
+                        'rolusu'   => 3,//anonimo
                         'codrol'   => 6,
                         'empresa'  => 3
                          );
             }
             $this->session->set_userdata($dataSession);
-            redirect(base_url()."curso/read");  
+            redirect(base_url()."curso/listar");  
         }
         
         public function salir(){

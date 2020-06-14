@@ -18,8 +18,9 @@ class Stevejobs extends Layout{
 	public function index()
 	{
             $filter = new stdClass();
-            $arrRol = array("0"=>"::Seleccione::","1"=>"Alumno","2"=>"Profesor"); 
-            $data['selrol']     = form_dropdown('rol',$arrRol,0,"id='rol' class='form-control'");
+            $filter_not = new stdClass();
+            $filter_not->rol = 4;
+            $data['selrol'] = form_dropdown('rol',$this->Rol_model->seleccionar($filter,$filter_not,"0"),0,"id='rol' class='form-control'");
             $this->load->view('stevejobs/index',$data);
 	}
 
@@ -33,32 +34,26 @@ class Stevejobs extends Layout{
             else{
                 $usuario = $this->input->post('usuario');
                 $clave   = $this->input->post('clave');
-                $empresa = $this->input->post('empresa');
                 $rol     = $this->input->post('rol');
                 $filter  = new stdClass();
                 $filter->usuario = $usuario;
                 $filter->clave   = md5($clave);
-                $filter->empresa = $empresa;                
-                if($rol=="1"){//Alumno
-                    $datos = $this->Alumno_model->login($filter);
-                }
-                elseif($rol=="2"){//Profesor
-                    $datos = $this->Profesor_model->login($filter);
-                }
+                $filter->empresa = 3;   
+                $filter->rol     = $rol;//6:Alumno,7:Profesor,4:Administrador
+                print_r($filter);
+                $datos = $this->Usuario_model->login($filter);
+                print_r($datos);
                 if(!empty($datos)){
-                    if(count($datos)==1){
-                        $usuario = $datos[0];
+                    if(isset($datos->USUAP_Codigo)){
                         $dataSession = array(
-                                    'nomper'   => $usuario->PERSC_Nombre." ".$usuario->PERSC_ApellidoPaterno,
-                                    'login'    => isset($usuario->ALUMC_Usuario)?$usuario->ALUMC_Usuario:$usuario->PROC_Usuario,
-                                    'codper'   => $usuario->PERSP_Codigo,
-                                    'codalu'   => isset($usuario->ALUMP_Codigo)?$usuario->ALUMP_Codigo:0,
-                                    'codprofe' => isset($usuario->PROP_Codigo)?$usuario->PROP_Codigo:0,
-                                    'rolusu'   => isset($usuario->ALUMP_Codigo)?1:2,
-                                    'empresa'  => $usuario->EMPRP_Codigo
+                                    'nomper'   => $datos->PERSC_Nombre." ".$datos->PERSC_ApellidoPaterno,
+                                    'login'    => $datos->USUAC_usuario,
+                                    'codper'   => $datos->PERSP_Codigo,
+                                    'rolusu'   => $datos->ROL_Codigo,//6:Alumno,7:Profesor,4:Administrador
+                                    'empresa'  => $datos->EMPRP_Codigo
                                      );
                         $this->session->set_userdata($dataSession);
-                        redirect(base_url()."curso/read");  
+                        redirect(base_url()."curso/listar");  
                     }
                     else{
                         $msgError = "<br><div align='center' class='error'>Existen 2 registros para el usuario, favor contactarse con el administrador</div>";

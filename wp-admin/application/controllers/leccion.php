@@ -98,6 +98,7 @@ class Leccion extends CI_Controller
         $data['selseccion']  = form_dropdown('seccion',$this->Seccion_model->seleccionar('0',$filter),$lista->seccion,"id='seccion' class='comboGrande'");          
         $filter = new stdClass();
         $filter->estado   = 1;
+        $filter->order_by = array("c.CURSOC_Nombre"=>"asc");
         $data['selcurso'] = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");                     
         $filter = new stdClass();
         $filter->periodo    = $lista->periodo; 

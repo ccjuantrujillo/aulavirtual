@@ -9,18 +9,19 @@ class Rol_model extends CI_Model {
         $this->tabla = "rol";
     }
 
-    public function seleccionar($filter=''){
-       foreach($this->read($filter) as $indice=>$valor){
+    public function seleccionar($filter='',$filter_not=''){
+       foreach($this->read($filter,$filter_not) as $indice=>$valor){
             $arreglo[$valor->ROL_Codigo] = $valor->ROL_Descripcion;
        }
        return $arreglo;
     }
 
-    public function read($filter="")
+    public function read($filter="",$filter_not="")
     {
         $this->db->select('*',FALSE);
         $this->db->from($this->tabla." as c");
         if(isset($filter->rol))        $this->db->where(array("c.ROL_Codigo"=>$filter->rol));
+        if(isset($filter_not->rol))    $this->db->where(array("c.ROL_Codigo!="=>$filter_not->rol));
         if(isset($filter->order_by) && count($filter->order_by)>0){
             foreach($filter->order_by as $indice=>$value){
                 $this->db->order_by($indice,$value);

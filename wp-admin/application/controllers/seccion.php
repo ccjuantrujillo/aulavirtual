@@ -120,7 +120,8 @@ class Seccion extends CI_Controller {
     }   
     
     public function obtener(){
-        $filter = (Object)$_REQUEST;      
+        $filter = (Object)$_REQUEST;     
+        $filter->order_by = array("c.SECCIONC_Orden"=>"asc");
         $cursos  = $this->Seccion_model->listar($filter);
         $resultado = json_encode($cursos);
         echo $resultado;
