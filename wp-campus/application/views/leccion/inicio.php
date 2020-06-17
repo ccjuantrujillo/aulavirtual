@@ -59,7 +59,7 @@
                                      ?>
                                      <tr>
                                        <td>
-                                           <a href="<?php echo dirname(base_url())."/wp-admin/files/".$value->ARCHIVC_Adjunto;?>" target="_blank">
+                                           <a href="<?php echo dirname(base_url())."/wp-campus/files/".$value->ARCHIVC_Adjunto;?>" target="_blank">
                                              <img src="<?php echo base_url();?>img/archivo.svg" alt="Product 1" class="img-circle img-size-32 mr-2">
                                              <?php echo $value->ARCHIVC_Nombre;?>                                  
                                            </a>

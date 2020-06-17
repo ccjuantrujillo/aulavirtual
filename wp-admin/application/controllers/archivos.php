@@ -98,14 +98,15 @@ class Archivos extends CI_Controller {
         $data['lista']	    = $lista;
         $filter = new stdClass();
         $filter->estado = 1; 
-        $data['selcurso']    = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboSuperGrande'");  
+        $filter->order_by = array("c.CURSOC_Nombre"=>"asc");
+        $data['selcurso']    = form_dropdown('curso',$this->Curso_model->seleccionar('0',$filter),$lista->curso,"id='curso' class='comboGrande'");  
         $filter = new stdClass();
         $filter->curso  = $lista->curso;  
-        $data['selseccion']  = form_dropdown('seccion',$this->Seccion_model->seleccionar('0',$filter),$lista->seccion,"id='seccion' class='comboSuperGrande'"); 
+        $data['selseccion']  = form_dropdown('seccion',$this->Seccion_model->seleccionar('0',$filter),$lista->seccion,"id='seccion' class='comboGrande'"); 
         $filter = new stdClass();
         $filter->seccion  = $lista->seccion;  
         //print_r($this->Leccion_model->seleccionar('0',$filter));
-        $data['selleccion']    = form_dropdown('leccion',$this->Leccion_model->seleccionar('0',$filter),$lista->leccion,"id='leccion' class='comboSuperGrande'");          
+        $data['selleccion']    = form_dropdown('leccion',$this->Leccion_model->seleccionar('0',$filter),$lista->leccion,"id='leccion' class='comboGrande'");          
         $data['oculto']      = form_hidden(array('accion'=>$accion,'codigo'=>$codigo));
         $this->load->view('archivos/archivo_nuevo',$data);
     }  
@@ -121,7 +122,8 @@ class Archivos extends CI_Controller {
                        );    
         //Subimos los archivos
         if(isset($_FILES['adjunto']['name']) && trim($_FILES['adjunto']['name'])!=""){
-            $upload_folder  = "./files";
+            $rutas = $_SERVER["DOCUMENT_ROOT"]."/wp-campus";
+            $upload_folder  = $rutas."/files";
             $nombre_archivo = $_FILES["adjunto"]["name"];
             $nombre_archivo = date("YmdHis").str_replace(" ","_",$nombre_archivo);
             $tmp_archivo    = $_FILES["adjunto"]["tmp_name"];

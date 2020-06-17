@@ -39,37 +39,55 @@ jQuery(document).ready(function(){
    });*/ 
 
     $("body").on('change',"#curso",function(){
-        url    = base_url+"seccion/obtener/";
-        objRes = new Object();
-        objRes.curso = $("#curso").val();
-        dataString   = {objeto:JSON.stringify(objRes)};
+        var datos = new FormData();
+        datos.append("curso",this.value);
         $("#seccion").empty()
-        $.post(url,dataString,function(data){
-            $("#seccion").append("<option value='0'>:: Seleccione ::</option>");
-            $.each(data,function(item,value){
-                opt      = document.createElement('option');
-                opt.value = value.SECCIONP_Codigo;
-                opt.appendChild(document.createTextNode(value.SECCIONC_Orden+' - '+value.SECCIONC_Descripcion));
-                $("#seccion").append(opt);
-            });
-        },"json");
+        $.ajax({
+            url:base_url+"seccion/obtener/",
+            method:"post",
+            data:datos,
+            dataType:"json",
+            contentType:false,
+            processData:false,
+            success:function(data){
+                $("#seccion").append("<option value='0'>:: Seleccione ::</option>");
+                $.each(data,function(item,value){
+                    opt      = document.createElement('option');
+                    opt.value = value.SECCIONP_Codigo;
+                    opt.appendChild(document.createTextNode(value.SECCIONC_Orden+' - '+value.SECCIONC_Descripcion));
+                    $("#seccion").append(opt);
+                });
+            },
+            error:function(){
+                alert("Ocurrió un error.");
+            }
+        });
     }); 
 
     $("body").on('change','#seccion',function(){
-        url    = base_url+"leccion/obtener/";
-        objRes = new Object();
-        objRes.seccion = $("#seccion").val();
-        dataString   = {objeto:JSON.stringify(objRes)};
-        $("#leccion").empty()
-        $.post(url,dataString,function(data){
-            $("#leccion").append("<option value='0'>:: Seleccione ::</option>");
-            $.each(data,function(item,value){
-                opt      = document.createElement('option');
-                opt.value = value.LECCIONP_Codigo;
-                opt.appendChild(document.createTextNode(value.LECCIONC_Nombre));
-                $("#leccion").append(opt);
-            });
-        },"json");
+        var datos = new FormData();
+        datos.append("seccion",this.value);
+        $("#leccion").empty();        
+        $.ajax({
+            url:base_url+"leccion/obtener/",
+            method:"post",
+            data:datos,
+            dataType:"json",
+            contentType:false,
+            processData:false,
+            success:function(data){
+                $("#leccion").append("<option value='0'>:: Seleccione ::</option>");
+                $.each(data,function(item,value){
+                    opt      = document.createElement('option');
+                    opt.value = value.LECCIONP_Codigo;
+                    opt.appendChild(document.createTextNode(value.LECCIONC_Nombre));
+                    $("#leccion").append(opt);
+                });
+            },
+            error:function(){
+                alert("Ocurrió un error");
+            }
+        });
     });
 
 });
