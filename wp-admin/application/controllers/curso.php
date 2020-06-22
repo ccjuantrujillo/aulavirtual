@@ -164,8 +164,8 @@ class Curso extends CI_Controller {
                        );     
         /*Subimos imagen*/
         if(isset($_FILES['imagen']['name']) && trim($_FILES['imagen']['name'])!=""){
-            //$upload_folder  = "D:/Dropbox/script/php/puertosaber/img";
-            $upload_folder  = "./img";
+            $rutas = $_SERVER["DOCUMENT_ROOT"]."/wp-campus";
+            $upload_folder  = $rutas."/img";
             $nombre_archivo = $_FILES["imagen"]["name"];
             $nombre_archivo = date("YmdHis").str_replace(" ","_",$nombre_archivo);            
             $tmp_archivo    = $_FILES["imagen"]["tmp_name"];

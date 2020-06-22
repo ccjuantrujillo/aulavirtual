@@ -11,10 +11,10 @@
                         <a class="small text-white stretched-link" href="#">
                             <?php
                             if($value->CURSOC_Imagen==""){
-                                $imagen = dirname(base_url())."/wp-admin/img/sincurso_red.png";
+                                $imagen = base_url()."img/sincurso_red.png";
                             }
                             else{
-                                $imagen = dirname(base_url())."/wp-admin/img/".$value->CURSOC_Imagen;
+                                $imagen = base_url()."img/".$value->CURSOC_Imagen;
                             }
                             ?>
                             <img src="<?php echo $imagen;?>" alt="Barca" class="img-responsive img-fluid" style="height: auto;max-width: 100%"/>   

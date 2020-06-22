@@ -39,7 +39,7 @@
                         <a class="dropdown-item" href="#">Mis datos</a>
                         <!--a class="dropdown-item" href="#">Activity Log</a-->
                         <!--div class="dropdown-divider"></div-->
-                        <a class="dropdown-item" href="<?php echo base_url();?>inicio/salir">Salir</a>      
+                        <a class="dropdown-item" href="<?php echo base_url();?>instituto/salir">Salir</a>      
                     </div>
                 </li>
             </ul>
