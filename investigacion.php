@@ -7,11 +7,13 @@
 <!-- Pre Loader -->
 <div id="dvLoading"></div>
 <?php require_once "menu.php";?>
+
 <section class="inner-wrapper">
   <div class="container">
     <div class="row">
       <div class="inner-wrapper-main news">
         <div class="col-sm-7 col-md-8">
+        
         <!--Articulo 1-->
           <div class="news-info">
             <div class="news-cnt">
