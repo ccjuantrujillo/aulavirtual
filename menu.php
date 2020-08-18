@@ -12,10 +12,10 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
               <li><a href="index.php">Inicio</a></li>
-              <li><a href="quienes.php">Quienes somos</a></li>
-			        <li><a href="investigacion.php" class="dropdown-toggle">Investigación</a></li>
-              <li><a href="cursos.php" class="dropdown-toggle">Capacitación</a></li>
-			        <li><a href="comunicacion.php" class="dropdown-toggle">Comunicación Social</a></li>
+              <li><a href="cursos.php" class="dropdown-toggle">Capacitación</a></li>			  
+			  <li><a href="investigacion.php" class="dropdown-toggle">Investigación</a></li>
+			  <li><a href="comunicacion.php" class="dropdown-toggle">Comunicación Social</a></li>
+              <li><a href="productos.php">Productos</a></li>			  
               <li><a href="contactenos.php">Contactenos</a></li>
             </ul>
           </div>
