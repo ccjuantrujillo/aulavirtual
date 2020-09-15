@@ -27,9 +27,13 @@
                                     <div class="card-body">
                                         <form action="<?php echo base_url();?>inicio/ingresar" method="POST">
                                             <div class="form-group">
+                                                <label class="small mb-1" for="Empresa">Empresa: </label>
+                                                <?php echo $selempresa;?>
+                                            </div>     
+                                            <div class="form-group">
                                                 <label class="small mb-1" for="inputEmailAddress">Rol</label>
                                                 <?php echo $selrol;?>
-                                            </div>                                             
+                                            </div>                                            
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputEmailAddress">Usuario</label>
                                                 <input class="form-control py-4" name="usuario" id="usuario" type="text" placeholder="Ingrese su usuario" />
@@ -41,7 +45,6 @@
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="#"></a>
                                                 <input class="btn btn-primary" type="submit" name="Ingresar" value="Ingresar">
-                                                <?php echo $oculto;?>
                                         </form>
                                     </div>
                                 </div>

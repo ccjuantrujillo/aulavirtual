@@ -29,11 +29,12 @@ class Inicio extends Layout{
         
 	public function index()
 	{
-            $filter = new stdClass();
-            $data['selrol']     = form_dropdown('rol',$this->Rol_model->seleccionar($filter,"0"),0,"id='rol' class='form-control'");
-            $data['selempresa'] = form_dropdown('empresa',$this->Empresa_model->seleccionar($filter),0,"id='empresa' class='form-control'");
-            //$data['datosempresa'] = $this->Empresa_model->get($this->empresa);
-            $this->load->view('inicio/index',$data);
+        $filter = new stdClass();
+        $filter_not = new stdClass();
+        $filter_not->rol = 4;
+        $data['selrol']     = form_dropdown('rol',$this->Rol_model->seleccionar($filter,$filter_not),0,"id='rol' class='form-control'");
+        $data['oculto']  = form_hidden(array('empresa'=>1));
+        $this->load->view('inicio/index',$data);
 	}
 
 	public function ingresar(){        

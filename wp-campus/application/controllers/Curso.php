@@ -23,7 +23,7 @@ class Curso extends LayoutAdmin{
 
     public function listar(){
         $filter = new stdClass();
-        $filter->persona = $_SESSION["codper"];    
+        $filter->persona = $_SESSION["codper"];  
         if($_SESSION["rolusu"]==6){//alumno
             $alumno = $this->Alumno_model->get($filter);
             $filter = new stdClass();
