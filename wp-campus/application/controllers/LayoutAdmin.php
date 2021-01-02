@@ -8,9 +8,12 @@ abstract class LayoutAdmin  extends CI_Controller {
     public function __construct () {
         parent::__construct();
         $this->load->helper('url');
-        if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");
+        //if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");
+        if(!isset($_SESSION['login'])) redirect('inicio/index');
         $this->load->model('Empresa_model');
-        $this->empresa = $_SESSION['empresa'];    
+        $this->load->model('Usuarioempresa_model');
+        $this->empresa = $this->session->userdata('empresa');
+        $this->user    = $this->session->userdata('user');
     }
 
     public function load_layout($view, $params = null)
@@ -18,6 +21,9 @@ abstract class LayoutAdmin  extends CI_Controller {
         $data['script']  = $this->script;
         $data['empresa'] = $this->Empresa_model->get($this->empresa);
         $data['content'] = $this->load->view($view, $params, true);
+        $filter          = new stdClass();
+        $filter->usuario = $this->user;
+        $data['lista_compania'] = $this->Usuarioempresa_model->read($filter);
         $this->load->view('layoutadmin/load_layout',$data, false);
  
     }

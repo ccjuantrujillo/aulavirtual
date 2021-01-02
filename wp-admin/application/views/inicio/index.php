@@ -22,14 +22,6 @@
               </p>
               <form>
                 <p class="frmcamp">
-                    <span>Empresa</span> 
-                    <?php echo $selempresa;?>
-                </p>                  
-                <!--p class="frmcamp">
-                    <span>Rol</span> 
-                    < ?php echo $selrol;?>
-                </p-->
-                <p class="frmcamp">
                     <span>Usuario</span> 
                     <input name="txtUsuario" type="text" id="txtUsuario" class="cajaMedia minus"/>
                 </p>

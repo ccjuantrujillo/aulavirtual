@@ -1,4 +1,9 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+/* *********************************************************************************
+Autor: Martín Trujillo
+Dev: 
+/* ******************************************************************************** */
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Cabasistencia_model extends CI_Model{
     var $usuario;
     var $table;
@@ -7,6 +12,8 @@ class Cabasistencia_model extends CI_Model{
         parent::__construct();
         $this->usuario     = $this->session->userdata('codusu');
         $this->table       = "cabasistencia";
+        $this->table_prof  = "profesor";
+        $this->table_per   = "persona";
         $this->table_curs  = "curso";
         $this->empresa     =  $_SESSION["empresa"];
     }
@@ -26,6 +33,8 @@ class Cabasistencia_model extends CI_Model{
         $this->db->select('*');
         $this->db->from($this->table." as c");
         $this->db->join($this->table_curs.' as d','d.CURSOP_Codigo=c.CURSOP_Codigo','inner');
+        $this->db->join($this->table_prof.' as e','e.PROP_Codigo=d.PROP_Codigo','inner');
+        $this->db->join($this->table_per.' as f','f.PERSP_Codigo=e.PERSP_Codigo','inner');        
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
         if(isset($filter->curso))         $this->db->where(array("c.CURSOP_Codigo"=>$filter->curso));
         if(isset($filter->asistencia))    $this->db->where(array("c.ASISTP_Codigo"=>$filter->asistencia));
@@ -35,7 +44,7 @@ class Cabasistencia_model extends CI_Model{
                 $this->db->order_by($indice,$value);
             }
         }     
-        //$this->db->limit($number_items, $offset); 
+        $this->db->limit($number_items, $offset); 
         $query = $this->db->get();
         $resultado = array();
         //if($query->num_rows>0){

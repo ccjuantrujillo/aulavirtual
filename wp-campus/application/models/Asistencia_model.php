@@ -1,4 +1,9 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+/* *********************************************************************************
+Autor: Martín Trujillo
+Dev: 
+/* ******************************************************************************** */
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Asistencia_model extends CI_Model{
     var $usuario;
     var $table;
@@ -42,8 +47,7 @@ class Asistencia_model extends CI_Model{
                 $this->db->order_by($indice,$value);
             }
         }     
-
-        //$this->db->limit($number_items, $offset); 
+        $this->db->limit($number_items, $offset); 
         $query = $this->db->get();
         $resultado = array();
         //if($query->num_rows>0){
@@ -77,5 +81,9 @@ class Asistencia_model extends CI_Model{
     public function eliminar($codigo){
         $this->db->delete($this->table,array('ASISTP_Codigo'=>$codigo));        
     }
+    
+    public function eliminarCab($codigo){
+        $this->db->delete($this->table,array('CABASISTP_Codigo'=>$codigo));        
+    }      
 }
 ?>

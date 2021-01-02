@@ -1,4 +1,9 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+/* *********************************************************************************
+Autor: Martín Trujillo
+Dev: 
+/* ******************************************************************************** */
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Tarea_model extends CI_Model{
     var $table;
@@ -10,10 +15,21 @@ class Tarea_model extends CI_Model{
         $this->table_tip = "tipotarea";
         $this->table_lec = "leccion";
         $this->table_sec = "seccion";
+        $this->table_ciclo  = "ciclo";
         $this->table_cur = "curso";
         $this->table_per = "periodo";
         $this->empresa = $_SESSION["empresa"];
     }
+    
+    public function select($default='',$filter='',$filter_not='',$number_items='',$offset=''){
+        if($default!="") $arreglo = array($default=>':: Seleccione ::');
+        foreach($this->listar($filter,$filter_not,$number_items,$offset) as $indice=>$valor){
+            $indice1   = $valor->TAREAP_Codigo;
+            $valor1    = $valor->TAREAC_Nombre;
+            $arreglo[$indice1] = $valor1;
+        }
+        return $arreglo;
+    }    
     
     public function seleccionar($filter,$default=""){
         $arreglo = array();
@@ -60,19 +76,33 @@ class Tarea_model extends CI_Model{
         return $resultado;         
     }
     
-    public function obtener(){
-        
+    public function get($filter,$filter_not='',$number_items='',$offset=''){
+        $listado = $this->listar($filter,$filter_not='',$number_items='',$offset='');
+        if(count($listado)>1)
+            $resultado = $listado;
+        else if(count($listado)==1)
+            $resultado = (object)$listado[0];
+        else
+            $resultado = new stdClass ();
+        return $resultado;
     }
+
+    public function insert($data){
+       $data["EMPRP_Codigo"] = $this->empresa;
+       $this->db->insert($this->table,$data);
+       return $this->db->insert_id();
+    }    
     
-    public function insertar(){
-        
+    public function update($codigo,$data){
+        $this->db->where("TAREAP_Codigo",$codigo);
+        $this->db->update($this->table,$data);
     }
-    
-    public function editar(){
-        
-    }
-    
-    public function eliminar(){
-        
+	
+    public function delete($data){
+        $resultado = false;
+        if(count($data)>0){
+            $resultado = $this->db->delete($this->table,$data);            
+        }
+        return $resultado;
     }
 }

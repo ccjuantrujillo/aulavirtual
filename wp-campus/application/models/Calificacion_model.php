@@ -1,4 +1,10 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+/* *********************************************************************************
+Autor: Martín Trujillo
+Dev: 
+/* ******************************************************************************** */
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 class Calificacion_model extends CI_Model{
     var $tabla;
     var $empresa;
@@ -36,7 +42,7 @@ class Calificacion_model extends CI_Model{
                 $this->db->order_by($indice,$value);
             }
         }
-        //$this->db->limit($number_items, $offset);         
+        $this->db->limit($number_items, $offset);         
         $query = $this->db->get();
         $resultado = array();
         //if($query->num_rows > 0){
@@ -45,12 +51,20 @@ class Calificacion_model extends CI_Model{
         return $resultado; 
     }
     
-    public function obtener(){
-        
+    public function get($filter,$filter_not='',$number_items='',$offset=''){
+        $listado = $this->listar($filter,$filter_not='',$number_items='',$offset='');
+        if(count($listado)>1)
+            $resultado = $listado;
+        elseif(count($listado)==1)
+            $resultado = (object)$listado[0];
+        else
+            $resultado = new stdClass ();
+        return $resultado;
     }
     
-    public function insertar(){
-        
+    public function insertar($data){
+        $data["EMPRP_Codigo"] = $this->empresa;
+        return $this->db->insert($this->table,$data);
     }
     
     public function modificar($codigo,$data){
@@ -61,4 +75,12 @@ class Calificacion_model extends CI_Model{
     public function eliminar($codigo){
         $this->db->delete($this->table,array('CALIFICAP_Codigo'=>$codigo));  
     }
+    
+    public function eliminar2($data){
+        $resultado = false;
+        if(count($data)>0){
+            $resultado = $this->db->delete($this->table,$data);            
+        }
+        return $resultado;
+    }    
 }

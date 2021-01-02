@@ -9,10 +9,10 @@ class Inicio extends Layout{
             parent::__construct();
             $this->load->model('Empresa_model');
             $this->load->model('Usuario_model');
+            $this->load->model('Usuarioempresa_model');
             $this->load->model('Profesor_model');
             $this->load->model('Alumno_model');
             $this->load->model('Rol_model');
-            $this->empresa = $this->config->item('empresa');
 	}
 
         public function directo($curso){
@@ -29,47 +29,46 @@ class Inicio extends Layout{
         
 	public function index()
 	{
-        $filter = new stdClass();
-        $filter_not = new stdClass();
-        $filter_not->rol = 4;
-        $data['selrol']     = form_dropdown('rol',$this->Rol_model->seleccionar($filter,$filter_not),0,"id='rol' class='form-control'");
-        $data['oculto']  = form_hidden(array('empresa'=>1));
-        $this->load->view('inicio/index',$data);
+            $this->load->view('inicio/index');
 	}
 
 	public function ingresar(){        
             $this->form_validation->set_rules('usuario','Nombre de Usuario','required|max_length[20]');
             $this->form_validation->set_rules('clave','Clave de Usuario','required|max_length[15]'); 
-            $this->form_validation->set_rules('empresa','Empresa','required'); 
-
             if($this->form_validation->run() == FALSE){
                 redirect('inicio/index');
             }            
             else{
                 $usuario = $this->input->post('usuario');
                 $clave   = $this->input->post('clave');
-                $empresa = $this->input->post('empresa');
-                $rol     = $this->input->post('rol');
                 $filter  = new stdClass();
                 $filter->usuario = $usuario;
                 $filter->clave   = md5($clave);
-                $filter->empresa = $empresa;   
-                $filter->rol     = $rol;//6:Alumno,7:Profesor,4:Administrador
-                $datos = $this->Usuario_model->login($filter);
-                if(!empty($datos)){
-                    if(isset($datos->USUAP_Codigo)){
+                $usuarios = $this->Usuario_model->login($filter);
+                if(!empty($usuarios)){
+                    $filter  = new stdClass();
+                    $filter->usuario = $usuario;    
+                    $filter->defecto = 1;  
+                    $usuarioempresa = $this->Usuarioempresa_model->read($filter);                   
+                    if(!is_null($usuarioempresa)){
+                        $rol     = $usuarioempresa[0]->ROL_Codigo;
+                        $empresa = $usuarioempresa[0]->EMPRP_Codigo;
                         $dataSession = array(
-                                    'nomper'   => $datos->PERSC_Nombre." ".$datos->PERSC_ApellidoPaterno,
-                                    'login'    => $datos->USUAC_usuario,
-                                    'codper'   => $datos->PERSP_Codigo,
-                                    'rolusu'   => $datos->ROL_Codigo,//6:Alumno,7:Profesor,4:Administrador
-                                    'empresa'  => $datos->EMPRP_Codigo
-                                     );
+                                    'nomper'   => $usuarios->PERSC_Nombre." ".$usuarios->PERSC_ApellidoPaterno,
+                                    'login'    => $usuarios->USUAC_usuario,
+                                    'codper'   => $usuarios->PERSP_Codigo,
+                                    'rolusu'   => $rol,
+                                    'empresa'  => $empresa,
+                                    'user'     => $usuarios->USUAC_usuario,
+                                    'persona'  => $usuarios->PERSP_Codigo,
+                                    'nombre_persona'  => $usuarios->PERSC_Nombre." ".$usuarios->PERSC_ApellidoPaterno,
+                                    'rol'      => $rol
+                                     );                          
                         $this->session->set_userdata($dataSession);
-                        redirect(base_url()."curso/listar");  
+                        redirect(base_url()."curso/listar");                          
                     }
                     else{
-                        $msgError = "<br><div align='center' class='error'>Existen 2 registros para el usuario, favor contactarse con el administrador</div>";
+                        $msgError = "<br><div align='center' class='error'>No existen permisos para el usuario/div>";
                     }
                 }
                 else{
@@ -105,6 +104,30 @@ class Inicio extends Layout{
             }
             $this->session->set_userdata($dataSession);
             redirect(base_url()."curso/listar");  
+        }
+        
+        public function cambiar_sesion(){
+            $empresa = $this->input->post('empresa');
+            $filter  = new stdClass();
+            $filter->usuario = $_SESSION["user"];;    
+            $filter->empresa = $empresa;  
+            $usuarioempresa = $this->Usuarioempresa_model->read($filter);                  
+            if(!is_null($usuarioempresa)){
+                $rol     = $usuarioempresa[0]->ROL_Codigo;
+                $empresa = $usuarioempresa[0]->EMPRP_Codigo;
+                $dataSession = array(
+                            'rolusu'   => $rol,
+                            'empresa'  => $empresa,
+                            'rol'      => $rol
+                             );   
+                $this->session->set_userdata($dataSession);
+                $json = array("result" => "success", "message" => 'Cambio completo, actualice la página.');               
+            }
+            else{
+                $json = array("result" => "success", "message" => 'Datos de la empresa no disponible.');
+            }
+            echo json_encode($json);
+            die;
         }
         
         public function salir(){

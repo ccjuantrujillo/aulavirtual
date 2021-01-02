@@ -25,6 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $config['base_url'] = 'http://localhost/aulavirtual/wp-campus/';
 
+//$config['base_url'] = 'http://www.ceccos.org/wp-campus/';
 /*
 |--------------------------------------------------------------------------
 | Index File

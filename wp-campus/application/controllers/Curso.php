@@ -15,15 +15,16 @@ class Curso extends LayoutAdmin{
         $this->load->model('Profesor_model');
         $this->load->model('Alumno_model');
         $this->load->helper('menu_helper');
+        $this->persona = $this->config->item('codper');
     }
 
     public function index(){
-            echo "chau";
+        $this->listar();
     }
 
     public function listar(){
         $filter = new stdClass();
-        $filter->persona = $_SESSION["codper"];  
+        $filter->persona = $this->persona;  
         if($_SESSION["rolusu"]==6){//alumno
             $alumno = $this->Alumno_model->get($filter);
             $filter = new stdClass();
@@ -43,6 +44,7 @@ class Curso extends LayoutAdmin{
         elseif($_SESSION["rolusu"]==4){//Administador
             $filter = new stdClass();
             $cursos = $this->Curso_model->read($filter);
+
         }
         $data['cursos']    = $cursos;
         $data['menuizq']   = menu_izq();

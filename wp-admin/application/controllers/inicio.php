@@ -7,6 +7,7 @@ class Inicio extends CI_Controller {
     public function __construct(){
         parent::__construct();          
         $this->load->model('Usuario_model');
+        $this->load->model('Usuarioempresa_model');
         $this->load->model('Persona_model');    
         $this->load->model('Permiso_model');  
         $this->load->model('Menu_model');
@@ -21,15 +22,9 @@ class Inicio extends CI_Controller {
 
     public function index(){
         $data['form_open']  = form_open(base_url().'inicio/ingresar',array("name"=>"frmInicio","id"=>"frmInicio"));
-        $filter = new stdClass();
-        $filter->empresa    = $this->empresa;
-        $data['empresa']    = $this->Empresa_model->obtener($filter);
         $data['form_close'] = form_close(); 
         $data['onload']     = "onload=\"$('#txtUsuario').focus();\"";   
-        $data['header']     = get_header();
-        $filter = new stdClass();
-        $data['selempresa'] = form_dropdown('empresa',$this->Empresa_model->seleccionar('',$filter),"","id='empresa' class='comboMedio'");        
-        //$data['selrol']     = form_dropdown('rol',$this->Rol_model->seleccionar('',$filter),"","id='rol' class='comboMedio'");        
+        $data['header']     = get_header();    
         $this->load->view("inicio/index",$data);
     }
     
@@ -42,26 +37,37 @@ class Inicio extends CI_Controller {
         //else{
             $txtUsuario = $this->input->post('txtUsuario');
             $txtClave   = $this->input->post('txtClave');
-            $rol        = 4;
-            $empresa    = $this->input->post('empresa');
-            $usuarios   = $this->Usuario_model->ingresar(trim($txtUsuario),md5(trim($txtClave)),$rol,$empresa);
-            if(count((array)$usuarios)>0){
-                $data = array(
-                            'login'    => $usuarios->USUAC_usuario,
-                            'codusu'   => $usuarios->USUAP_Codigo,
-                            'rolusu'   => $usuarios->ROL_Codigo,
-                            'acceso'   => $usuarios->ROL_FlagAcceso,
-                            'estado'   => $usuarios->USUAC_FlagEstado,
-                            'empresa'  => $usuarios->EMPRP_Codigo
-                             );
-                $this->session->set_userdata($data);
-                redirect(base_url()."inicio/principal");                
+            $usuarios   = $this->Usuario_model->ingresar(trim($txtUsuario),md5(trim($txtClave)));
+            if(!empty($usuarios)){
+                $filter  = new stdClass();
+                $filter  = new stdClass();
+                $filter->usuario = $txtUsuario;    
+                $filter->defecto = 1;  
+                $usuarioempresa = $this->Usuarioempresa_model->read($filter);                   
+                if(!is_null($usuarioempresa)){
+                    $rol     = $usuarioempresa[0]->ROL_Codigo;
+                    $empresa = $usuarioempresa[0]->EMPRP_Codigo;
+                    $dataSession = array(
+                                'login'    => $usuarios->USUAC_usuario,
+                                'codusu'   => $usuarios->USUAP_Codigo,
+                                'rolusu'   => $rol,
+                                'acceso'   => $usuarios->ROL_FlagAcceso,
+                                'estado'   => $usuarios->USUAC_FlagEstado,
+                                'empresa'  => $empresa                            
+                                 );                          
+                    $this->session->set_userdata($dataSession);
+                    redirect(base_url()."curso/listar");                          
+                }
+                else{
+                    $msgError = "<br><div align='center' class='error'>No existen permisos para el usuario/div>";
+                } 
             }
             else{
                 $msgError = "<br><div align='center' class='error'>Usuario99 y/o contrasena no valido para esta empresa.</div>";
                 echo $msgError;
                 $this->index();
             }
+
         //}
     }
     
