@@ -5,7 +5,7 @@ class Area_model extends CI_Model{
     public function __construct(){
         parent::__construct();
         $this->table   = "ant_area";
-        $this->empresa = $this->config->item('empresa');  
+        $this->empresa     = $this->session->userdata('empresa');  
     }
     
     public function seleccionar($filter,$default="",$value=''){
