@@ -36,5 +36,24 @@ class Leccion extends LayoutAdmin{
         $data['curso']   = $this->Curso_model->get($curso);
         $this->load_layout('leccion/inicio',$data);
     }
+	
+	public function page($lec,$indice=""){
+        //Obtenemos las lecciones
+        $filter = new stdClass();
+        $filter->leccion = $lec;
+        $leccion = $this->Leccion_model->get($filter);
+		$page = $leccion->LECCIONC_Url;
+		$curso   = $leccion->CURSOP_Codigo;
+        $seccion = $leccion->SECCIONP_Codigo;
+		$data['leccion']  = $leccion; 
+        $data['indice']   = $indice;
+        $data['menulecc'] = menu_lecciones($seccion);
+        $data['menucent']   = menu_cent($curso); 
+        $data['menuizq']  = menu_izq($curso,$seccion);
+        $data['menuhorz'] = menu_horiz_lecc($lec,$indice);      
+        $data['curso']   = $this->Curso_model->get($curso);
+		$this->load_layout('courses/'.$page,$data);
+		
+	}
 
 }

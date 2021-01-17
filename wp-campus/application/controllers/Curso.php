@@ -68,10 +68,17 @@ class Curso extends LayoutAdmin{
              $lecciones = $this->Leccion_model->read($filtro);
              if(count($lecciones)>0){
                  foreach($lecciones as $val){
-                    $menu .= "<ul>";
-                    $menu .= "<li class='mt'><a href='".base_url()."leccion/inicio/".$val->LECCIONP_Codigo."/1'>".
-                            $val->LECCIONC_Nombre."</a></li>";
-                    $menu .= "</ul>";  
+					$tipo  = $val->TIPOLECP_Codigo;
+					$menu .= "<ul>";					
+					if($tipo==2){//Tipo de leccion page
+						$menu .= "<li class='mt'><a href='".base_url()."leccion/page/".$val->LECCIONP_Codigo."/1'>".
+								$val->LECCIONC_Nombre."</a></li>";
+					}
+					else{
+						$menu .= "<li class='mt'><a href='".base_url()."leccion/inicio/".$val->LECCIONP_Codigo."/1'>".
+								$val->LECCIONC_Nombre."</a></li>";
+					}
+					$menu .= "</ul>";  
                  }
              }
              $menu .= "</li>";
