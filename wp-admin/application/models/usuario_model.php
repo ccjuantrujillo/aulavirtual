@@ -6,8 +6,10 @@ class Usuario_model extends CI_Model{
     {
         parent::__construct();
         $this->table     = "ant_usuario";
+        $this->table_usuarioempresa     = "ant_usuarioempresa";
         $this->table_persona = "ant_persona";
-        $this->empresa     = $this->session->userdata('empresa');
+        $this->table_rol     = "ant_rol";
+        $this->empresa       = $this->session->userdata('empresa');
     }
 
     public function ingresar($user,$clave)
@@ -40,8 +42,11 @@ class Usuario_model extends CI_Model{
     public function listar($filter='',$filter_not='',$number_items='',$offset=''){
         $this->db->select('*');
         $this->db->from($this->table." as c");
+        $this->db->from($this->table_usuarioempresa." as ue","ue.USUAP_Codigo = c.USUAP_Codigo");
+        //$this->db->from($this->table_rol." as r","r.ROL_Codigo = ue.ROL_Codigo");
+
         $this->db->join($this->table_persona.' as p','p.PERSP_Codigo=c.PERSP_Codigo','inner');        
-        $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
+        $this->db->where(array("ue.EMPRP_Codigo"=>$this->empresa));
         if(isset($filter->usuario))            $this->db->where(array("c.USUAP_Codigo"=>$filter->usuario));         
         if(isset($filter->order_by) && count($filter->order_by)>0){
             foreach($filter->order_by as $indice=>$value){
@@ -87,7 +92,6 @@ class Usuario_model extends CI_Model{
     }
 
     public function insertar($data){
-       $data["EMPRP_Codigo"] = $this->empresa;
        $this->db->insert($this->table,$data);
        return $this->db->insert_id();    
     }

@@ -13,6 +13,7 @@ class Usuarioempresa_model extends CI_Model {
         $this->tabla = "usuarioempresa";
         $this->tabla_usuario = "usuario";
         $this->tabla_empresa = "empresa";
+        $this->empresa     = $this->session->userdata('empresa'); 
     }
 
     public function read($filter="")
@@ -42,12 +43,11 @@ class Usuarioempresa_model extends CI_Model {
         return $resultado;
     }               
 
-    public function insert()
+    public function insert($data)
     {
-        $this->title    = $_POST['title']; // please read the below note
-        $this->content  = $_POST['content'];
-        $this->date     = time();
-        $this->db->insert('entries', $this);
+       $data["EMPRP_Codigo"] = $this->empresa;       
+       $this->db->insert($this->tabla,$data);
+       return $this->db->insert_id(); 
     }
 
     public function update()

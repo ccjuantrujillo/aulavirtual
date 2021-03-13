@@ -31,14 +31,14 @@ class Alumno_model extends CI_Model{
         $this->db->from($this->table." as c");
         $this->db->join($this->table_per." as d","d.PERSP_Codigo=c.PERSP_Codigo","inner");
         $this->db->where(array("c.EMPRP_Codigo"=>$this->empresa));
-        if(isset($filter->persona))  $this->db->where(array("d.PERSP_Codigo"=>$filter->persona));
-        if(isset($filter->alumno))   $this->db->where(array("c.ALUMP_Codigo"=>$filter->alumno));
+        if(isset($filter->persona))  $this->db->where(array("d.PERSP_Codigo" => trim($filter->persona)));
+        if(isset($filter->alumno))   $this->db->where(array("c.ALUMP_Codigo" => $filter->alumno));
         if(isset($filter->order_by) && count($filter->order_by)>0){
             foreach($filter->order_by as $indice=>$value){
                 $this->db->order_by($indice,$value);
             }
         }
-        $this->db->limit($number_items, $offset);        
+        //$this->db->limit($number_items, $offset);        
         $query = $this->db->get();
         return $query->result();
     }
@@ -46,6 +46,7 @@ class Alumno_model extends CI_Model{
     public function get($filter){
         $resultado = new stdClass();
         $alumno = $this->read($filter);
+
         if(count($alumno)==1){
             $resultado = $alumno[0];
         }

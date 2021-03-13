@@ -9,6 +9,7 @@ class Usuario extends Persona{
         parent::__construct();
         if(!isset($_SESSION['login'])) die("Sesion terminada. <a href='".  base_url()."'>Registrarse e ingresar.</a> ");          
         $this->load->model('Usuario_model');          
+        $this->load->model('Usuarioempresa_model');  
         $this->load->model('Rol_model');     
         $this->load->helper('menu');
         $this->configuracion = $this->config->item('conf_pagina');
@@ -103,17 +104,26 @@ class Usuario extends Persona{
     public function grabar(){
         $accion    = $this->input->get_post('accion');
         $codigo    = $this->input->get_post('codigo');
-        $clave   = trim($this->input->post('clave'));
+        $clave     = trim($this->input->post('clave'));
+        $rol       = trim($this->input->post('rol'));
         $resultado = true;	
         $data    = array(
                         "USUAC_usuario"    => trim($this->input->post('login')),
                         "USUAC_Password"   => $clave!=""?md5($clave):"",
-                        "USUAC_FlagEstado" => $this->input->post('estado'),
-                        "ROL_Codigo"       => $this->input->post('rol')
+                        "USUAC_FlagEstado" => $this->input->post('estado')
                        ); 
         if($accion == "n"){
+            //Datos de usuario
             $data["PERSP_Codigo"] = $this->input->get_post('codigo_padre');
-            $this->Usuario_model->insertar($data);            
+            $usuario = $this->Usuario_model->insertar($data);            
+
+            //Datos de empresa
+            $dataEmp = array(
+                            "USUAP_Codigo" => $usuario,
+                            "ROL_Codigo"   => $rol,
+                            "CARGP_Codigo" => 1,
+            );
+            $this->Usuarioempresa_model->insert($dataEmp);                        
         }
         elseif($accion == "e"){
             $this->Usuario_model->modificar($codigo,$data);

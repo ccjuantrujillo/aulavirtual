@@ -15,7 +15,8 @@ class Curso extends LayoutAdmin{
         $this->load->model('Profesor_model');
         $this->load->model('Alumno_model');
         $this->load->helper('menu_helper');
-        $this->persona = $this->config->item('codper');
+        //$this->persona = $this->config->item('codper');
+        $this->persona = $this->session->userdata('codper'); 
     }
 
     public function index(){
@@ -24,7 +25,8 @@ class Curso extends LayoutAdmin{
 
     public function listar(){
         $filter = new stdClass();
-        $filter->persona = $this->persona;  
+        $filter->persona = $this->persona; 
+
         if($_SESSION["rolusu"]==6){//alumno
             $alumno = $this->Alumno_model->get($filter);
             $filter = new stdClass();
@@ -66,6 +68,7 @@ class Curso extends LayoutAdmin{
              $filtro->seccion = $value->SECCIONP_Codigo;
              $filtro->order_by = array("c.LECCIONC_Orden"=>"asc");
              $lecciones = $this->Leccion_model->read($filtro);
+
              if(count($lecciones)>0){
                  foreach($lecciones as $val){
 					$tipo  = $val->TIPOLECP_Codigo;

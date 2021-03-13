@@ -1,19 +1,17 @@
 <div class="container-fluid">
     <section class="content">
       <div class="row">
-        <div class="col-md-3">
+
+        <!--div class="col-md-3">
           <div class="card">
             <div class="card-header">
               <h4 class="card-title"><?php echo $curso->CURSOC_Nombre;?></h4>
             </div>
             <div class="card-body p-0"><?php echo $menucent;?></div>
-            <!-- /.card-body -->
           </div>
-          <!-- /.card -->
-          <!-- /.card -->
-        </div>
-        <!-- /.col -->
-        <div class="col-md-9">
+        </div-->
+
+        <div class="col-md-12">
           <div class="card card-primary card-outline">
             <!-- /.card-header -->
             <div class="card-body p-0">

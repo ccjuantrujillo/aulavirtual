@@ -45,11 +45,13 @@ class Inicio extends Layout{
                 $filter->usuario = $usuario;
                 $filter->clave   = md5($clave);
                 $usuarios = $this->Usuario_model->login($filter);
+
                 if(!empty($usuarios)){
                     $filter  = new stdClass();
                     $filter->usuario = $usuario;    
                     $filter->defecto = 1;  
-                    $usuarioempresa = $this->Usuarioempresa_model->read($filter);                   
+                    $usuarioempresa = $this->Usuarioempresa_model->read($filter);
+
                     if(!is_null($usuarioempresa)){
                         $rol     = $usuarioempresa[0]->ROL_Codigo;
                         $empresa = $usuarioempresa[0]->EMPRP_Codigo;

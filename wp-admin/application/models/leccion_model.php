@@ -1,4 +1,9 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+/* *********************************************************************************
+Autor: Martín Trujillo
+Dev: 
+/* ******************************************************************************** */
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Leccion_model extends CI_Model{
     var $table;

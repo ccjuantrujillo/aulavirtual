@@ -30,24 +30,31 @@ $contactenos = "";
           <!--Fila1-->
           <div class="row"> 
           <?php
-          foreach($listacursos as $value){
+          foreach($listacursos as $index => $value){
             ?>
-            <div class="col-sm-4">
+
+            <div class="col-sm-4 col-md-4">
               <div class="courses">
                 <div class="course-thumb">
-                    <a href="./wp-campus/inicio/valida/<?php echo $value['CURSOP_Codigo'];?>" target="blank">
-                        <img width="450" src="./wp-admin/img/<?php echo $value['CURSOC_Imagen']!=''?$value['CURSOC_Imagen']:'class-img1.jpg';?>" alt="Course Image"></a>
+                    <a href="./wp-campus/inicio" target="_blank">
+                        <img width="400" src="./wp-admin/img/<?php echo $value['CURSOC_Imagen']!=''?$value['CURSOC_Imagen']:'class-img1.jpg';?>" alt="Course Image"></a>
                 </div>
                 <div class="course-cnt">
-                    <h3 class="text-center"><a href="./wp-campus/inicio/valida/<?php echo $value['CURSOP_Codigo'];?>" target="blank"><?php echo $value['CURSOC_Nombre'];?></a></h3>
+                    <h3 class="text-center">
+                      <a href="./wp-campus/inicio" target="_blank"><?php echo $value['CURSOC_Nombre'];?></a></h3>
                   <!--p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p-->
                 </div>
               </div>
             </div>
+            <?php  
+              if(($index+1)%3==0) echo "</div><div class='row'> ";
+            ?>
+
             <?php
             }
-          ?>
-          </div>
+            ?>
+
+          
           <!--Fin de Fila1-->
           <!--Fila2-->
       
