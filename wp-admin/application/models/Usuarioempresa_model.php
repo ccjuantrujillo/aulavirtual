@@ -13,7 +13,8 @@ class Usuarioempresa_model extends CI_Model {
         $this->tabla = "ant_usuarioempresa";
         $this->tabla_usuario = "ant_usuario";
         $this->tabla_empresa = "ant_empresa";
-        $this->empresa     = $this->session->userdata('empresa'); 
+        $this->tabla_rol     = "ant_rol";
+        $this->empresa       = $this->session->userdata('empresa'); 
     }
 
     public function read($filter="")
@@ -22,7 +23,11 @@ class Usuarioempresa_model extends CI_Model {
         $this->db->from($this->tabla." as c");
         $this->db->join($this->tabla_usuario.' as d','d.USUAP_Codigo=c.USUAP_Codigo','inner');
         $this->db->join($this->tabla_empresa.' as e','e.EMPRP_Codigo=c.EMPRP_Codigo','inner');
+
+        $this->db->join($this->tabla_rol.' as f','f.ROL_Codigo=c.ROL_Codigo','inner');
+
         if(isset($filter->usuario))    $this->db->where(array("d.USUAC_usuario"=>$filter->usuario));
+
         if(isset($filter->clave))      $this->db->where(array("d.USUAC_Password"=>$filter->clave));
         if(isset($filter->rol))        $this->db->where(array("c.ROL_Codigo"=>$filter->rol));
         if(isset($filter->empresa))    $this->db->where(array("c.EMPRP_Codigo"=>$filter->empresa));

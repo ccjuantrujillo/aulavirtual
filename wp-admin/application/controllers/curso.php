@@ -58,6 +58,7 @@ class Curso extends CI_Controller {
         $data['registros']  = $registros;
         $data['j']          = $j;
         $data['paginacion'] = $this->pagination->create_links();
+
         $this->load->view('curso/curso_index',$data);
     }
 

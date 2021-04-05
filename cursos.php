@@ -1,6 +1,12 @@
 <?php
 require_once 'conexion.php';
-$query = "select * from ant_curso where CURSOC_FlagEstado=1 and EMPRP_Codigo in (2,3) order by EMPRP_Codigo";
+$query = "select * 
+          from ant_curso c
+          inner join ant_area a on a.AREAP_Codigo = c.AREAP_Codigo
+          where c.CURSOC_FlagEstado=1 and 
+          c.EMPRP_Codigo in (2) 
+          order by c.EMPRP_Codigo,c.AREAP_Codigo";
+
 $rs = mysqli_query($link,$query);
 $listacursos = mysqli_fetch_all($rs,MYSQLI_ASSOC);
 //Recuperamos datos de la empresa
@@ -29,25 +35,35 @@ $contactenos = "";
         <div class="col-sm-12">
           <!--Fila1-->
           <div class="row"> 
+            <h3>MUSICA</h3>
           <?php
+          $area_ant = 0;
           foreach($listacursos as $index => $value){
+            $area = $value['AREAP_Codigo'];
+            if($area_ant != $area && $area_ant != 0){
+              echo "</div>
+                    <div class='row'> 
+                    <div><h3 class='pl-3'>".$value['AREAC_Descripcion']."</h3></div>
+                    ";
+            } 
             ?>
-
-            <div class="col-sm-4 col-md-4">
-              <div class="courses">
-                <div class="course-thumb">
-                    <a href="./wp-campus/inicio" target="_blank">
-                        <img width="400" src="./wp-admin/img/<?php echo $value['CURSOC_Imagen']!=''?$value['CURSOC_Imagen']:'class-img1.jpg';?>" alt="Course Image"></a>
-                </div>
-                <div class="course-cnt">
-                    <h3 class="text-center">
-                      <a href="./wp-campus/inicio" target="_blank"><?php echo $value['CURSOC_Nombre'];?></a></h3>
-                  <!--p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p-->
+              <div class="col-sm-4 col-md-4">
+                <div class="courses">
+                  <div class="course-thumb">
+                      <a href="./wp-campus/inicio" target="_blank">
+                          <img width="400" src="./wp-admin/img/<?php echo $value['CURSOC_Imagen']!=''?$value['CURSOC_Imagen']:'class-img1.jpg';?>" alt="Course Image"></a>
+                  </div>
+                  <div class="course-cnt">
+                      <h3 class="text-center">
+                        <a href="./wp-campus/inicio" target="_blank"><?php echo $value['CURSOC_Nombre'];?></a></h3>
+                    <!--p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p-->
+                  </div>
                 </div>
               </div>
-            </div>
+
             <?php  
               if(($index+1)%3==0) echo "</div><div class='row'> ";
+              $area_ant = $area;
             ?>
 
             <?php

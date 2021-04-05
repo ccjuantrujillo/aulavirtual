@@ -43,18 +43,18 @@ class Inicio extends CI_Controller {
                 $filter  = new stdClass();
                 $filter->usuario = $txtUsuario;    
                 $filter->defecto = 1;  
-                $usuarioempresa = $this->Usuarioempresa_model->read($filter);                   
+                $usuarioempresa = $this->Usuarioempresa_model->read($filter);    
+         
                 if(!is_null($usuarioempresa)){
-                    $rol     = $usuarioempresa[0]->ROL_Codigo;
-                    $empresa = $usuarioempresa[0]->EMPRP_Codigo;
                     $dataSession = array(
                                 'login'    => $usuarios->USUAC_usuario,
                                 'codusu'   => $usuarios->USUAP_Codigo,
-                                'rolusu'   => $rol,
-                                'acceso'   => $usuarios->ROL_FlagAcceso,
-                                'estado'   => $usuarios->USUAC_FlagEstado,
-                                'empresa'  => $empresa                            
-                                 );                          
+                                'rolusu'   => $usuarioempresa[0]->ROL_Codigo,
+                                'acceso'   => $usuarioempresa[0]->ROL_FlagAcceso,
+                                'estado'   => $usuarioempresa[0]->USUAC_FlagEstado,
+                                'empresa'  => $usuarioempresa[0]->EMPRP_Codigo                           
+                                 );     
+
                     $this->session->set_userdata($dataSession);
                     redirect(base_url()."curso/listar");                          
                 }
